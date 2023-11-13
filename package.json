@@ -1,0 +1,17 @@
+{
+  "name": "progetto-web-2023",
+  "version": "1.0.0",
+  "description": "- [Introduction](#introduction)\r - [Features](#features)\r - [Getting Started](#getting-started)\r - [Technologies Used](#technologies-used)\r - [Project Structure](#project-structure)\r - [API Endpoints](#api-endpoints)\r - [Database](#database)\r - [Color Accessibility](#color-accessibility)\r - [Contributing](#contributing)\r - [License](#license)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^20.9.0",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.2.2"
+  }
+}
