@@ -22,6 +22,8 @@ finalizzare il pagamento e acquistare definitivamente un biglietto, e di consegu
 Se invece ad effettuare il login è l'amministratore, allora sarà disponibile una seconda versione dell'applicazione in cui sarà possibile
 modificare i campi presenti, come per esempio i film disponibili, gli orari e le date.
 
+Questo progetto è stato realizzato con Vue.js, Express.js, TypeScript e PHP.
+
 It's built using Vue.js for the frontend, Express.js with TypeScript for the backend, and optionally integrates PHP for specific server-side functionality.
 
 ## Features
