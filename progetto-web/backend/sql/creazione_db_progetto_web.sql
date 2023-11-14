@@ -116,15 +116,15 @@ CREATE TABLE IF NOT EXISTS `cinema`.`utente` (
 CREATE TABLE IF NOT EXISTS `cinema`.`biglietti` (
   `idbiglietto` INT NOT NULL AUTO_INCREMENT,
   `tipo_pagamento` VARCHAR(100)  NOT NULL,
-  `idproiezione` INT NOT NULL,
+  `idproiezione1` INT NOT NULL,
   `idutente` INT NOT NULL,
   `idposto` INT NOT NULL,
   `importo` FLOAT(6) NOT NULL,
   `rating` INT(5)  NOT NULL,
   PRIMARY KEY (`idbiglietto`),
-  INDEX `fk_cinema_idproizione_idx` (`idproiezione` ASC),
-  CONSTRAINT `fk_cinema_idproiezione`
-    FOREIGN KEY (`idproiezione`)
+  INDEX `fk_cinema_idproizione1_idx` (`idproiezione1` ASC),
+  CONSTRAINT `fk_cinema_idproiezione1`
+    FOREIGN KEY (`idproiezione1`)
     REFERENCES `cinema`.`proiezioni` (`idproiezione`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
@@ -137,7 +137,7 @@ CREATE TABLE IF NOT EXISTS `cinema`.`biglietti` (
   INDEX `fk_cinema_idposto_idx` (`idposto` ASC),
   CONSTRAINT `fk_cinema_idposto`
     FOREIGN KEY (`idposto`)
-    REFERENCES `cinema`.`proiezioni` (`idposto`)
+    REFERENCES `cinema`.`posti_proiezione` (`idposto`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
   ENGINE = InnoDB;
