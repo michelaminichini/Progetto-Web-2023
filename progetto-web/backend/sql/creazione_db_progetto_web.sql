@@ -144,7 +144,7 @@ CREATE TABLE IF NOT EXISTS `cinema`.`biglietti` (
   
  -- Table `cinema`.`tariffe`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `cinema`.`biglietti` (
+CREATE TABLE IF NOT EXISTS `cinema`.`tariffe` (
   `idtariffa` INT NOT NULL AUTO_INCREMENT,
   `tipo_tariffa` VARCHAR(100)  NOT NULL,
   `descrizione` VARCHAR (100),
