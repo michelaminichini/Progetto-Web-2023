@@ -39,7 +39,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `cinema`.`sale` (
   `idsala` INT NOT NULL AUTO_INCREMENT,
-  `descrizione` MEDIUMTEXT NOT NULL,
+  `descrizione` MEDIUMTEXT,
   `posti` INT NOT NULL,
   `posti_speciali` INT NOT NULL,
   `tecnologia` VARCHAR(100),
@@ -54,7 +54,7 @@ CREATE TABLE IF NOT EXISTS `cinema`.`proiezioni` (
   `idproiezione` INT NOT NULL AUTO_INCREMENT,
   `idfilm`INT NOT NULL,
   `idsala` INT NOT NULL,
-  `nomecategoria` VARCHAR(50) NOT NULL,
+  `nomecategoria` VARCHAR(50),
   `datap` DATE NOT NULL,
   `orario` TIME NOT NULL,
   PRIMARY KEY (`idproiezione`),
@@ -148,7 +148,7 @@ CREATE TABLE IF NOT EXISTS `cinema`.`tariffe` (
   `idtariffa` INT NOT NULL AUTO_INCREMENT,
   `tipo_tariffa` VARCHAR(100)  NOT NULL,
   `descrizione` VARCHAR (100),
-  `validità` VARCHAR(100),
+  `validità` VARCHAR(100) NOT NULL,
   `prezzo` FLOAT(6) NOT NULL, 
   PRIMARY KEY (`idtariffa`))
   ENGINE = InnoDB; 
