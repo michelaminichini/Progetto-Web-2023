@@ -152,29 +152,6 @@ CREATE TABLE IF NOT EXISTS `cinema`.`tariffe` (
   PRIMARY KEY (`idtariffa`))
   ENGINE = InnoDB; 
 
--- ------------------------------------------------------------
--- Table `cinema`.`pagamenti`
--- -----------------------------------------------------------
-CREATE TABLE IF NOT EXISTS `cinema`.`pagamenti` (
-  `idpagamento` INT NOT NULL AUTO_INCREMENT,
-  `idtipo_pagamento` INT  NOT NULL,
-  `idbiglietto1` INT NOT NULL,
-  `importo` FLOAT NOT NULL, 
-  PRIMARY KEY (`idpagamento`),
-  INDEX `fk_cinema_idbiglietto1_idx` (`idbiglietto1` ASC),
-  CONSTRAINT `fk_cinema_idbiglietto1`
-    FOREIGN KEY (`idbiglietto1`)
-    REFERENCES `cinema`.`biglietti` (`idbiglietto`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-    INDEX `fk_cinema_idtipo_pagamento_idx` (`idtipo_pagamento` ASC),
-  CONSTRAINT `fk_cinema_idtipo_pagamento`
-    FOREIGN KEY (`idtipo_pagamento`)
-    REFERENCES `cinema`.`tipo_pagamenti` (`idtipo_pagamento`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-  ENGINE = InnoDB; 
-
 -- ------------------------------------------------------------------------
   -- Table `cinema`.`tipo_pagamenti`
 -- ------------------------------------------------------------------------
@@ -184,6 +161,31 @@ CREATE TABLE IF NOT EXISTS `cinema`.`tipo_pagamenti` (
   `Circuito`VARCHAR(100), 
   PRIMARY KEY (`idtipo_pagamento`))
 ENGINE = InnoDB; 
+
+-- ------------------------------------------------------------
+-- Table `cinema`.`pagamenti`
+-- -----------------------------------------------------------
+CREATE TABLE IF NOT EXISTS `cinema`.`pagamenti` (
+  `idpagamento` INT NOT NULL AUTO_INCREMENT,
+  `idtipo_pagamento1` INT  NOT NULL,
+  `idbiglietto1` INT NOT NULL,
+  `importo` FLOAT NOT NULL, 
+  PRIMARY KEY (`idpagamento`),
+  INDEX `fk_cinema_idbiglietto1_idx` (`idbiglietto1` ASC),
+  CONSTRAINT `fk_cinema_idbiglietto1`
+    FOREIGN KEY (`idbiglietto1`)
+    REFERENCES `cinema`.`biglietti` (`idbiglietto`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+    INDEX `fk_cinema_idtipo_pagamento1_idx` (`idtipo_pagamento1` ASC),
+  CONSTRAINT `fk_cinema_idtipo_pagamento`
+    FOREIGN KEY (`idtipo_pagamento1`)
+    REFERENCES `cinema`.`tipo_pagamenti` (`idtipo_pagamento`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+  ENGINE = InnoDB; 
+
+
 
 
 
