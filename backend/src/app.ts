@@ -1,4 +1,5 @@
 import express, {Express} from "express"
+import filmRouter from "./routes/film-router"
 import history from "connect-history-api-fallback"
 
 const app: Express = express()
@@ -8,6 +9,7 @@ app.use(history())
 app.use(express.static("public"))
 //app.use(express.static("dist-frontend"))
 
+app.use(filmRouter)
 
 
 app.use(function(req, res, next) {
