@@ -31,14 +31,15 @@ export default defineComponent({
         <div id="app">
             <div v-for= "film in datiFilm" :key="film.idfilm" class="cineContainer">
                 <div class="filmContainer">
-                   <div class="locandina">
-                        <img style="height: 400px; width: 300px;" :src="'/img/' + film.locandina" alt=""/>
-                        <article>
-                            <h3>{{ film.titolo }}</h3>
-                            <p>Diretto da: {{ film.regista }}</p>
-                            <p>{{ film.descrizione }}</p>
-                        </article>
-                    </div>
+                    <img style="height: 400px; width: 300px;" :src="'/img/' + film.locandina" alt=""/>
+                    <article>
+                        <h3>{{ film.titolo }}</h3>
+                        <p>Diretto da: {{ film.regista }}</p>
+                        <p>Anno di uscita: {{ film.anno }}</p>
+                        <p>Genere: {{ film.genere }}</p>
+                        <p>Durata: {{ film.durata }} min</p>
+                        <p>Lingua: {{ film.lingua }}</p>
+                    </article>
                 </div>
 
                 
