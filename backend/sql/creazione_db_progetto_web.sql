@@ -18,7 +18,7 @@ USE `cinema` ;
 -- Table `cinema `.`film`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `cinema`.`film` (
-  `idfilm` INT NOT NULL AUTO_INCREMENT,
+  `idfilm` INT (11) NOT NULL AUTO_INCREMENT,
   `titolo` VARCHAR(100) NOT NULL,
   `regista` VARCHAR(100) NOT NULL,
   `genere` VARCHAR(100) ,
@@ -54,7 +54,6 @@ CREATE TABLE IF NOT EXISTS `cinema`.`proiezioni` (
   `idproiezione` INT NOT NULL AUTO_INCREMENT,
   `idfilm`INT NOT NULL,
   `idsala` INT NOT NULL,
-  `nomecategoria` VARCHAR(50),
   `datap` DATE NOT NULL,
   `orario` TIME NOT NULL,
   PRIMARY KEY (`idproiezione`),
@@ -118,8 +117,7 @@ CREATE TABLE IF NOT EXISTS `cinema`.`biglietti` (
   `tipo_pagamento` VARCHAR(100)  NOT NULL,
   `idproiezione1` INT NOT NULL,
   `idutente` INT NOT NULL,
-  `idposto` INT NOT NULL,
-  `importo` FLOAT(6) NOT NULL,
+  `idposto1` INT NOT NULL,
   `rating` INT(5)  NOT NULL,
   PRIMARY KEY (`idbiglietto`),
   INDEX `fk_cinema_idproizione1_idx` (`idproiezione1` ASC),
@@ -134,14 +132,14 @@ CREATE TABLE IF NOT EXISTS `cinema`.`biglietti` (
     REFERENCES `cinema`.`utente` (`idutente`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  INDEX `fk_cinema_idposto_idx` (`idposto` ASC),
-  CONSTRAINT `fk_cinema_idposto`
-    FOREIGN KEY (`idposto`)
+  INDEX `fk_cinema_idposto1_idx` (`idposto` ASC),
+  CONSTRAINT `fk_cinema_idposto1`
+    FOREIGN KEY (`idposto1`)
     REFERENCES `cinema`.`posti_proiezione` (`idposto`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
   ENGINE = InnoDB;
-  
+-- ----------------------------------------------------- 
  -- Table `cinema`.`tariffe`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `cinema`.`tariffe` (
@@ -152,6 +150,39 @@ CREATE TABLE IF NOT EXISTS `cinema`.`tariffe` (
   `prezzo` FLOAT(6) NOT NULL, 
   PRIMARY KEY (`idtariffa`))
   ENGINE = InnoDB; 
+
+-- ------------------------------------------------------------
+-- Table `cinema`.`pagamenti`
+-- -----------------------------------------------------------
+CREATE TABLE IF NOT EXISTS `cinema`.`pagamenti` (
+  `idpagamento` INT NOT NULL AUTO_INCREMENT,
+  `idtipo_pagamento` INT  NOT NULL,
+  `idbiglietto` INT NOT NULL,
+  `importo` FLOAT NOT NULL, 
+  PRIMARY KEY (`idpagamento`),
+  INDEX `fk_cinema_idbiglietto1_idx` (`idbiglietto1` ASC),
+  CONSTRAINT `fk_cinema_idbiglietto1`
+    FOREIGN KEY (`idbiglietto1`)
+    REFERENCES `cinema`.`biglietti` (`idbiglietto`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+    INDEX `fk_cinema_idtipo_pagamento_idx` (`idtipo_pagamento` ASC),
+  CONSTRAINT `fk_cinema_idtipo_pagamento`
+    FOREIGN KEY (`idtipo_pagamento`)
+    REFERENCES `cinema`.`tipo_pagamenti` (`idtipo_pagamento`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+  ENGINE = InnoDB; 
+
+-- ------------------------------------------------------------------------
+  -- Table `cinema`.`tipo_pagamenti`
+-- ------------------------------------------------------------------------
+CREATE TABLE IF NOT EXISTS `cinema`.`tipo_pagamenti` (
+  `idtipo_pagamento` INT NOT NULL AUTO_INCREMENT,
+  `Descrizione` VARCHAR(100)  NOT NULL,
+  `Circuito`VARCHAR(100), 
+  PRIMARY KEY (`idtipo_pagamento`))
+ENGINE = InnoDB; 
 
 
 
