@@ -178,7 +178,7 @@ CREATE TABLE IF NOT EXISTS `cinema`.`pagamenti` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
     INDEX `fk_cinema_idtipo_pagamento1_idx` (`idtipo_pagamento1` ASC),
-  CONSTRAINT `fk_cinema_idtipo_pagamento`
+  CONSTRAINT `fk_cinema_idtipo_pagamento1`
     FOREIGN KEY (`idtipo_pagamento1`)
     REFERENCES `cinema`.`tipo_pagamenti` (`idtipo_pagamento`)
     ON DELETE NO ACTION
