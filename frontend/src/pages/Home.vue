@@ -40,9 +40,7 @@ export default defineComponent({
                         <p>Durata: {{ film.durata }} min</p>
                         <p>Lingua: {{ film.lingua }}</p>
                     </article>
-                </div>
-
-                
+                </div>  
             </div>
         </div>
 
