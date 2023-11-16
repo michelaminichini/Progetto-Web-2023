@@ -26,4 +26,5 @@
   color: rgb(219, 69, 83);
   background-color: #fff;
 }
+
 </style>

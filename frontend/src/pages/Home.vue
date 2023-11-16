@@ -26,16 +26,16 @@ export default defineComponent({
 <template>
     <h1>Film in programmazione</h1>
     <article v-for="film in datiFilm">
-        <h3>Titolo:{{ film.titolo }}</h3>
-        <img :src="'/img/' + film.locandina" alt=""/>
-        <p>regista: {{ film.regista }} - anno di uscita:{{ film.anno }}</p> 
+        <h3>{{ film.titolo }}</h3>
+        <img style="height: 400px; width: 300px;" :src="'/img/' + film.locandina" alt=""/>
+        <p>regista: {{ film.regista }} - anno di uscita: {{ film.anno }}</p> 
         <p>attori: {{ film.attori }}</p>
-        <p>genere: {{ film.genere }} - durata: {{ film.durata }}</p>
-        <p>luogo di produzione:{{ film.nazione }}</p>
+        <p>genere: {{ film.genere }} - durata: {{ film.durata }} min</p>
+        <p>luogo di produzione: {{ film.nazione }}</p>
         <p>Vedi trailer qui: {{ film.trailer }}</p>
-        <p>lingua: {{ film.lingua }}</p>
-        <p>{{ film.attivo }}</p>
+        <p>Lingua: {{ film.lingua }}</p>
         <a href="#">Leggi tutto</a>
     </article>
 
 </template>
+
