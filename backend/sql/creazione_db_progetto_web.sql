@@ -157,7 +157,7 @@ CREATE TABLE IF NOT EXISTS `cinema`.`tariffe` (
 CREATE TABLE IF NOT EXISTS `cinema`.`pagamenti` (
   `idpagamento` INT NOT NULL AUTO_INCREMENT,
   `idtipo_pagamento` INT  NOT NULL,
-  `idbiglietto` INT NOT NULL,
+  `idbiglietto1` INT NOT NULL,
   `importo` FLOAT NOT NULL, 
   PRIMARY KEY (`idpagamento`),
   INDEX `fk_cinema_idbiglietto1_idx` (`idbiglietto1` ASC),
