@@ -27,7 +27,7 @@ CREATE TABLE IF NOT EXISTS `cinema`.`film` (
   `anno` VARCHAR(10) ,
   `descrizione` VARCHAR(300) ,
   `trailer` VARCHAR(100) ,
-  `img` VARCHAR(100) ,
+  `locandina` VARCHAR(100) ,
   `lingua` VARCHAR(100) ,
   `attori` VARCHAR(100) ,
   `attivo` TINYINT NULL DEFAULT 0,
@@ -133,7 +133,7 @@ CREATE TABLE IF NOT EXISTS `cinema`.`biglietti` (
     REFERENCES `cinema`.`utente` (`idutente`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  INDEX `fk_cinema_idposto1_idx` (`idposto` ASC),
+  INDEX `fk_cinema_idposto1_idx` (`idposto1` ASC),
   CONSTRAINT `fk_cinema_idposto1`
     FOREIGN KEY (`idposto1`)
     REFERENCES `cinema`.`posti_proiezione` (`idposto`)
