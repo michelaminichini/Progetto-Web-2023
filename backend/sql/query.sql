@@ -22,5 +22,5 @@ FROM film JOIN proiezioni ON (film.idfilm = proiezioni.idfilm)
 -- --------------------------------------------------------------------
 SELECT idposto, occupato, speciale
 FROM posti_proiezione
-WHERE 
+ 
 
