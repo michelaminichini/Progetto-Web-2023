@@ -13,7 +13,7 @@ export default defineComponent({
     },
     methods: {
         getFilminLista(){
-            axios.get("/api/films").then(response=>this.datiFilm = response.data)
+            axios.get("/api/films").then(response => this.datiFilm = response.data)
         }
     },
     mounted(){

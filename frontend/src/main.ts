@@ -1,6 +1,6 @@
 import { createApp } from "vue"
 import {createRouter, createWebHistory, Router} from "vue-router"
-import './style.css'
+//import './style.css'
 import App from "./App.vue"
 import Home from "./pages/Home.vue"
 
@@ -12,4 +12,4 @@ const router:Router = createRouter({
 })
 
 
-createApp(App).use(router).mount('#app')
+createApp(App).use(router).mount("#app")
