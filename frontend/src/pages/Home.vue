@@ -3,7 +3,7 @@
 import {defineComponent} from "vue"
 import axios from "axios"
 import {Film} from "../types" //qui Film si riferisce al tipo di interfaccia da creare in un file types.ts
-
+//import listaFilm from "/pages/lists_of_films.php"
 
 export default defineComponent({
     data(){
@@ -17,25 +17,35 @@ export default defineComponent({
         }
     },
     mounted(){
-        this. getFilminLista()
+        this.getFilminLista()
    }
+
 })
+
 
 </script>
 
 <template>
     <h1>Film in programmazione</h1>
-    <article v-for="film in datiFilm">
-        <h3>{{ film.titolo }}</h3>
-        <img style="height: 400px; width: 300px;" :src="'/img/' + film.locandina" alt=""/>
-        <p>regista: {{ film.regista }} - anno di uscita: {{ film.anno }}</p> 
-        <p>attori: {{ film.attori }}</p>
-        <p>genere: {{ film.genere }} - durata: {{ film.durata }} min</p>
-        <p>luogo di produzione: {{ film.nazione }}</p>
-        <p>Vedi trailer qui: {{ film.trailer }}</p>
-        <p>Lingua: {{ film.lingua }}</p>
-        <a href="#">Leggi tutto</a>
-    </article>
+
+    <body>
+        <div id="app">
+            <div v-for= "film in datiFilm" :key="film.idfilm" class="cineContainer">
+                <div class="filmContainer">
+                   <div class="locandina">
+                        <img style="height: 400px; width: 300px;" :src="'/img/' + film.locandina" alt=""/>
+                        <article>
+                            <h3>{{ film.titolo }}</h3>
+                            <p>Diretto da: {{ film.regista }}</p>
+                            <p>{{ film.descrizione }}</p>
+                        </article>
+                    </div>
+                </div>
+
+                
+            </div>
+        </div>
+
+    </body>
 
 </template>
-
