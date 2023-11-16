@@ -27,6 +27,7 @@ CREATE TABLE IF NOT EXISTS `cinema`.`film` (
   `anno` VARCHAR(10) ,
   `descrizione` VARCHAR(300) ,
   `trailer` VARCHAR(100) ,
+  `img` VARCHAR(100) ,
   `lingua` VARCHAR(100) ,
   `attori` VARCHAR(100) ,
   `attivo` TINYINT NULL DEFAULT 0,
