@@ -1,0 +1,41 @@
+// @import "./variables";
+// @import "./mixins";
+
+
+header, footer{
+  margin: 0;
+  padding: 0;
+  background-color: rgb(26, 26, 255);
+  
+}
+
+body{
+  background-color: rgb(49, 49, 205);
+  
+}
+
+nav{
+  ul{
+    list-style: none;
+
+    li{
+      display: inline-block;
+      width: 20%;
+      margin: 10px 0 0;
+      text-align: center;
+      background-color: rgb(54, 54, 54);
+    }
+    a{
+      font-size: large;
+      color: white;
+    }
+    a:hover {
+      color: red;
+    }
+  }
+}
+
+div#app{
+  
+
+}
