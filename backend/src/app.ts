@@ -7,7 +7,7 @@ const port: number = 3000
 
 app.use(history())
 app.use(express.static("public"))
-//app.use(express.static("dist-frontend"))
+app.use(express.static("dist-frontend"))
 
 app.use(filmRouter)
 

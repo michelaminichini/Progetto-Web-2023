@@ -54,6 +54,11 @@ It's built using Vue.js for the frontend, Express.js with TypeScript for the bac
 - Vue Router
 - Axios
 
+## Pacchetti installati
+
+- connect-history-api-fallback (installato nel backend con il comando " npm i connect-history-api-fallback")
+- 
+
 ## Struttura del progetto
 
 - Backend realizzato con Express (e Mysql) e TypeScript
