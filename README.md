@@ -35,6 +35,7 @@ It's built using Vue.js for the frontend, Express.js with TypeScript for the bac
 
 ## Prerequisiti
 
+- XAMPP control panel
 - Node.js
 - npm
 - Vue
@@ -53,6 +54,7 @@ It's built using Vue.js for the frontend, Express.js with TypeScript for the bac
 - SCSS (Strass)
 - Vue Router
 - Axios
+- XAMPP control panel per poter avviare MySQL e accedere al database e Apache per avviare il web server
 
 ## Pacchetti installati
 
