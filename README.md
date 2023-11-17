@@ -2,15 +2,15 @@
 
 ## Table of Contents
 
-- [Introduction](#introduction)
+- [Introduzione](#introduzione)
 - [Features](#features)
-- [Technologies Used](#technologies-used)
-- [Project Structure](#project-structure)
+- [Prerequisiti](#prerequisiti)
+- [Tecnologie utilizzate](#tecnologie-utilizzate)
+- [Struttura del progetto](#struttura-del-progetto)
+- [Installazione](#installazione)
 - [API Endpoints](#api-endpoints)
 - [Database](#database)
 - [Color Accessibility](#color-accessibility)
-- [Contributing](#contributing)
-- [License](#license)
 
   ## Introduzione
 Benvenuti nel sito ufficiale Cinema Ticket Booking ! 
@@ -28,7 +28,7 @@ It's built using Vue.js for the frontend, Express.js with TypeScript for the bac
 ## Features
 - Esplora il sito alla ricerca di un film scegliendo data e orario
 - Per aiutarti nella scelta del film che più ti piace, naviga tra le varie sezioni dedicate in cui potrai scoprire i dettagli
-- Prenota un posto a sedere e acquista un biglietto una volta effettuato il login al tuo account personale
+- Scegli un posto a sedere e acquista un biglietto una volta effettuato il login al tuo account personale
 - Responsive design per tutti i devices
 
 ## Prerequisiti
@@ -51,5 +51,27 @@ It's built using Vue.js for the frontend, Express.js with TypeScript for the bac
 - Axios
 
 ## Struttura del progetto
-- Backend realizzato con Express e TypeScript
-- Frontend sfrutta Vue, Vite e TypeScript. Cartella "frontend" realizzata con Vite
+- Backend realizzato con Express (e Mysql) e TypeScript
+- Frontend sfrutta Vue, Vite, Axios e TypeScript. Cartella "frontend" realizzata con Vite
+
+## Installazione
+1) Clona il repository: 
+Nella bash
+   " git clone https://github.com/michelaminichini/Progetto-Web-2023.git
+   cd Progetto-Web-2023 "
+
+2) Installare le dipendenze in entrambe le cartelle frontend e backend con il comando " npm i"; eseguire il comando in ciascuna cartella eseguendo prima il comando " cd frontend " poi " cd backend "
+
+3) Eseguire l'applicazione web con il comando " npm run dev" in ciascuna cartella come specificato sopra. Una volta fatto ciò, visitare il link che viene mostrato per accedere all'app.
+
+## API Endpoints
+
+## Database
+Per realizzare questa applicazione web abbiamo creato un database denominato "cinema" su https://www.phpmyadmin.net/ .
+Il database consente di visualizzare tutti i dati relativi ai film disponibili come il titolo, la locandina e molto altro.
+Esso è composto di 9 diverse tabelle ciascuna con i propri attributi e collegate tra loro mediante "foreign key".
+
+I dati vengono letti dal database e visualizzati correttamente grazie alla connessione stabilita nel file "bd.ts" collocato all'intenro della cartella "utils" nella cartella "src" del backend.
+
+## Color accessibility
+
