@@ -50,7 +50,7 @@ It's built using Vue.js for the frontend, Express.js with TypeScript for the bac
 - Vue.js
 - Vite
 - TypeScript
-- SCSS
+- SCSS (Strass)
 - Vue Router
 - Axios
 
