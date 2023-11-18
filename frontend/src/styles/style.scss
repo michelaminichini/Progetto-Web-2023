@@ -4,23 +4,40 @@
 
 header, footer{
   margin: 0;
-  padding: 0;
-  background-color: rgb(26, 26, 255);
+  background-color: #001C38;
+  border-color: #001C38;
+  color: aliceblue; 
+  
   
 }
 
 body{
-  background-color: rgb(49, 49, 205);
+  margin: 0;
+  background-color: #001C38;
   
 }
 
+.flex-container{
+  display: flex;
+  background-color: aquamarine;
+  justify-content: space-evenly;
+}
+
+.flex-item {
+  background-color: none;
+  display: inline-block;
+  width: 45%;
+   
+}
+
+/*
 nav{
   ul{
     list-style: none;
 
     li{
       display: inline-block;
-      width: 20%;
+      width: 25%;
       margin: 10px 0 0;
       text-align: center;
       background-color: rgb(54, 54, 54);
@@ -33,4 +50,48 @@ nav{
       color: red;
     }
   }
+}  */
+
+nav {
+  margin: 0 5%;
+  
+  ul {
+    list-style: none;
+
+    li {    
+      display: inline-block;
+      width: 15%;
+      
+      margin: 0px 0;
+      padding: 20px;
+      text-align: center;
+      background-color: rgb(105, 21, 21);
+      
+      :nth-child(odd) {
+        margin-right: 1ch;
+      }
+      
+      a {
+        width: 100%;
+        height: 100%;
+        padding: 5px 0;
+        color: #fff;
+        font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+        text-decoration: none;  
+      }
+      a:hover {
+        color: rgb(219, 69, 83);
+      }
+      
+    }
+  }
 }
+ 
+
+
+
+
+
+
+
+

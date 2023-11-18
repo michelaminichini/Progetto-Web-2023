@@ -47,3 +47,13 @@ export default defineComponent({
     </body>
 
 </template>
+
+<style scoped>
+h1{
+    color:aliceblue;
+}
+
+article {
+    color: aliceblue;
+}
+</style>
