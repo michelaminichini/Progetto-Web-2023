@@ -51,6 +51,7 @@ export default defineComponent({
 <style scoped>
 h1{
     color:aliceblue;
+    margin-left: 10%;
 }
 
 article {
