@@ -56,4 +56,9 @@ h1{
 article {
     color:aliceblue;
 }
+
+#app{
+    margin-left: 10%;
+}
+
 </style>
