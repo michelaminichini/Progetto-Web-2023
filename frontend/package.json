@@ -15,6 +15,7 @@
   "devDependencies": {
     "@types/node": "^20.9.1",
     "@vitejs/plugin-vue": "^4.2.3",
+    "bootstrap-vue": "^2.23.1",
     "sass": "^1.69.5",
     "scss": "^0.2.4",
     "ts-node-dev": "^2.0.0",

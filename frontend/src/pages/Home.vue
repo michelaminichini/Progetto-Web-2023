@@ -54,6 +54,6 @@ h1{
 }
 
 article {
-    color: aliceblue;
+    color:aliceblue;
 }
 </style>
