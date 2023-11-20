@@ -185,9 +185,20 @@ CREATE TABLE IF NOT EXISTS `cinema`.`pagamenti` (
     ON UPDATE NO ACTION)
   ENGINE = InnoDB; 
 
-
-
-
+-- ------------------------------------------------------------
+-- Table `cinema`.`prossimamente`
+-- -----------------------------------------------------------
+CREATE TABLE IF NOT EXISTS `cinema`.`prossimamente` (
+  `id_film` INT (6) NOT NULL AUTO_INCREMENT,
+  `titolo_film` VARCHAR(100) NOT NULL,
+  `regista_film` VARCHAR(100) NOT NULL,
+  `genere_film` VARCHAR(100) ,
+  `anno_uscita` VARCHAR(10) ,
+  `descrizione` VARCHAR(300) ,
+  `trailer` VARCHAR(100) ,
+  `locandina` VARCHAR(100) ,
+  PRIMARY KEY (`id_film`))
+ ENGINE = InnoDB;
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
