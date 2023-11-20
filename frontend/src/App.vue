@@ -3,7 +3,8 @@
     <h1>GalaxyCineVerse</h1>
   </header>
   <body>
-     <nav>
+     
+    <!-- <nav>
         <ul>
           <li id="logo"><img  :src="'/img/logo2.png'" alt=""/></li>
           <li><router-link to="/">Home</router-link></li>
@@ -11,16 +12,13 @@
           <li><router-link to="/info">Info Cinema</router-link></li>
           <li id="login"><router-link to="/login">LOGIN</router-link></li>
         </ul>
-      </nav>
+      </nav> -->
     
 
   
-      <nav class="navbar navbar-expand-lg bg-light">
-  <div class="container-fluid">
+<nav class="navbar navbar-expand-lg bg-light">
+  <div id="nav" class="container-fluid">
     <a class="navbar-brand" href="#"><img src="/img/ImmLogo.png" alt="Logo" width="30" height="24" class="d-inline-block align-text-top"></a>
-    <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button> -->
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
         <li class="nav-item">
@@ -32,7 +30,6 @@
         <li class="nav-item">
           <router-link class="nav-link" to="Info Cinema">Info Cinema</router-link>
         </li>
-        
       </ul>
     </div>
   </div>
@@ -51,6 +48,10 @@
 </template>
 
 
-<!-- <style>
+<style>
 @import "./styles/style.scss";
+</style>
+
+<!-- <style>
+@import "-/styles/style.css";
 </style> -->
