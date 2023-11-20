@@ -32,7 +32,10 @@
         </li>
       </ul>
     </div>
-  </div>
+        <form class="d-flex">
+            <router-link to="/login"><button class="btn btn-outline-danger">LOGIN</button></router-link>
+        </form>
+    </div>
 </nav>  
            
     <main>

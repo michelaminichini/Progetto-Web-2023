@@ -2,7 +2,7 @@
     <h1>Benvenuti a GalaxyCineVerse: Dove i Sogni Cinematografici Prendono Vita!</h1>
 
     <body>
-        <div class="app">
+        <div id="app" class="app">
             <article>
                 <h2>Intraprendi un'odissea cinematografica con GalaxyCineVerse</h2>
 
@@ -41,6 +41,7 @@ article {
 #app{
     
     margin-left: 10%;
+    margin-right: 10%;
 }
 
 </style>
