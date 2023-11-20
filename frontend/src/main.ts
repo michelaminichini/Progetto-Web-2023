@@ -6,7 +6,7 @@ import "bootstrap/dist/css/bootstrap.min.css"
 import App from "./App.vue"
 import Home from "./pages/Home.vue"
 import Prossimamente from "./pages/Prossimamente.vue"
-import Info from "./pages/Info.vue"
+import InfoCinema from "./pages/Info.vue"
 import Login from "./pages/Login.vue"
 
 const router:Router = createRouter({
@@ -14,7 +14,7 @@ const router:Router = createRouter({
     routes: [
         { path: "/", component: Home },
         { path: "/prossimamente", component: Prossimamente },
-        { path: "/info", component: Info },
+        { path: "/info", component: InfoCinema },
         { path: "/login", component: Login }
     ]
 })

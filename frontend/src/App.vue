@@ -28,7 +28,7 @@
           <router-link class="nav-link" to="prossimamente">Prossimamente</router-link>
         </li>
         <li class="nav-item">
-          <router-link class="nav-link" to="Info Cinema">Info Cinema</router-link>
+          <router-link class="nav-link" to="Info">Info Cinema</router-link>
         </li>
       </ul>
     </div>
