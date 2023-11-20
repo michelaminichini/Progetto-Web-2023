@@ -104,7 +104,7 @@ nav{
 } */
 
 #nav {
-  padding: 10px;
+  padding: 0px;
   text-align: center;
 }
 
@@ -115,7 +115,7 @@ nav{
 
 #nav a.router-link-exact-active {
   color: whitesmoke;
-  background: crimson;
+  background: #F67F3C;
   border-radius: .5rem;
 }
 
