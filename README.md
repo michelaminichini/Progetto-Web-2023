@@ -6,6 +6,7 @@
 - [Features](#features)
 - [Prerequisiti](#prerequisiti)
 - [Tecnologie utilizzate](#tecnologie-utilizzate)
+- [Pacchetti Installati](#pacchetti-installati)
 - [Struttura del progetto](#struttura-del-progetto)
 - [Installazione](#installazione)
 - [API Endpoints](#api-endpoints)
@@ -14,17 +15,12 @@
 
   ## Introduzione
 
-Benvenuti nel sito ufficiale Cinema Ticket Booking ! 
-Questa applicazione web permette agli utenti di visionare una lista di film disponibili, selezionare quello che si desidera vedere, insieme ad una data e un orario, per poi proseguire con l'acquisto di un biglietto.
+Benvenuti nel sito ufficiale GalaxyCineVerse! 
+Questa applicazione web permette agli utenti di visionare una lista di film disponibili, selezionare quello che più interessa visionando i relativi dettagli come data e orario, per poi proseguire con la prenotazione di un posto e l'acquisto di un biglietto.
 Una volta riempiti tutti i campi in cui selezionare un film, l'utente può procedere ad effettuare il login al suo account personale per poter 
-finalizzare il pagamento e acquistare definitivamente un biglietto, e di conseguenza prenotare uno specifico posto a sedere.
+finalizzare il pagamento e acquistare definitivamente un biglietto.
 
-Se invece ad effettuare il login è l'amministratore, allora sarà disponibile una seconda versione dell'applicazione in cui sarà possibile
-modificare i campi presenti, come per esempio i film disponibili, gli orari e le date.
-
-Questo progetto è stato realizzato con Vue.js, Express.js, TypeScript e PHP.
-
-It's built using Vue.js for the frontend, Express.js with TypeScript for the backend, and optionally integrates PHP for specific server-side functionality.
+Se invece ad effettuare il login è l'amministratore, allora sarà disponibile una seconda versione dell'applicazione in cui sarà possibile modificare i campi presenti, come per esempio i film disponibili, gli orari e le date.
 
 ## Features
 
@@ -43,6 +39,7 @@ It's built using Vue.js for the frontend, Express.js with TypeScript for the bac
 - Express (e mysql2)
 - Estensione Volar per Visual Studio Code
 - (optional) PHP
+- Bootstrap
 
 ## Tecnologie utilizzate
 
@@ -51,15 +48,14 @@ It's built using Vue.js for the frontend, Express.js with TypeScript for the bac
 - Vue.js
 - Vite
 - TypeScript
-- SCSS (Strass)
 - Vue Router
 - Axios
 - XAMPP control panel per poter avviare MySQL e accedere al database e Apache per avviare il web server
+- Bootstrap per la realizzazione dello stile dell'applicazione web insieme a Strass (SCSS)
 
-## Pacchetti installati
+## Pacchetti Installati
 
 - connect-history-api-fallback (installato nel backend con il comando " npm i connect-history-api-fallback")
-- 
 
 ## Struttura del progetto
 
