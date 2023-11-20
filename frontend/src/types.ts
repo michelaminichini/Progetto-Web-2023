@@ -13,3 +13,14 @@ export interface Film{
     attori: string
     attivo: number
 }
+
+export interface Prox{
+    id_film: number
+    titolo_film: string
+    regista_film: string
+    genere_film: string
+    anno_uscita: string
+    descrizione: string
+    trailer: string
+    locandina: string
+}
