@@ -25,10 +25,10 @@
           <router-link class="nav-link active" aria-current="page" to="/">Home</router-link>
         </li>
         <li class="nav-item">
-          <router-link class="nav-link" to="prossimamente">Prossimamente</router-link>
+          <router-link class="nav-link" to="/prossimamente">Prossimamente</router-link>
         </li>
         <li class="nav-item">
-          <router-link class="nav-link" to="Info Cinema">Info Cinema</router-link>
+          <router-link class="nav-link" to="/info">Info Cinema</router-link>
         </li>
       </ul>
     </div>
