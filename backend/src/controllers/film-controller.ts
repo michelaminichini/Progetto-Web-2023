@@ -10,3 +10,13 @@ export async function allFilms(req:Request, res: Response) {
         }
     )
 }
+
+export async function prossimiFilm(req:Request, res: Response) {
+    connection.execute(
+        `SELECT id_film, titolo_film, regista_film, genere_film, anno_uscita, descrizione, trailer, locandina FROM prossimamente`,
+    [],
+    function (err, results, fields){
+        res.json(results)
+        }
+    )
+}
