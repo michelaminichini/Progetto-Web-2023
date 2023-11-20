@@ -1,6 +1,8 @@
 import { createApp } from "vue"
 import {createRouter, createWebHistory, Router} from "vue-router"
 //import './style.css'
+import 'bootstrap'
+import "bootstrap/dist/css/bootstrap.min.css"
 import App from "./App.vue"
 import Home from "./pages/Home.vue"
 import Prossimamente from "./pages/Prossimamente.vue"
