@@ -16,7 +16,10 @@
           <router-link class="nav-link" to="/prossimamente">Prossimamente</router-link>
         </li>
         <li class="nav-item">
-          <router-link class="nav-link" to="/schedafilm">Info Cinema</router-link>
+          <router-link class="nav-link" to="/schedafilm">Informazioni</router-link>
+        </li>
+        <li class="nav-item">
+          <router-link class="nav-link" to="/info">Scopri il nostro cinema</router-link>
         </li>
       </ul>
     </div>
