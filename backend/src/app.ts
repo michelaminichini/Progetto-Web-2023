@@ -5,11 +5,13 @@ import history from "connect-history-api-fallback"
 const app: Express = express()
 const port: number = 3000
 
+app.use(filmRouter)
+
 app.use(history())
 app.use(express.static("public"))
 app.use(express.static("dist-frontend"))
 
-app.use(filmRouter)
+
 
 
 app.use(function(req, res, next) {
