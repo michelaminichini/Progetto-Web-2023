@@ -9,6 +9,7 @@ import Prossimamente from "./pages/Prossimamente.vue"
 import InfoCinema from "./pages/Info.vue"
 import Login from "./pages/Login.vue"
 import SchedaFilm from"./pages/SchedaFilm.vue"
+import SeatBooking from"./pages/SeatBooking.vue"
 
 const router:Router = createRouter({
     history:createWebHistory(),
@@ -17,7 +18,8 @@ const router:Router = createRouter({
         { path: "/prossimamente", component: Prossimamente },
         { path: "/info", component: InfoCinema },
         { path: "/login", component: Login },
-        { path: "/schedafilm", component: SchedaFilm }
+        { path: "/schedafilm", component: SchedaFilm },
+        { path: "/seatbooking", component: SeatBooking}
     ]
 })
 
