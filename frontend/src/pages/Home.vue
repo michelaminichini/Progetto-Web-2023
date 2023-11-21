@@ -38,6 +38,7 @@ export default defineComponent({
                         <p>Genere: {{ film.genere }}</p>
                         <p>Durata: {{ film.durata }} min</p>
                         <p>Lingua: {{ film.lingua }}</p>
+                        <button @click="$router.push('schedafilm')" class="btn btn-sm btn-primary">Scheda film</button>
                 </article>
                 
             </div>
