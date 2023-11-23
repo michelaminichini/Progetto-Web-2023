@@ -24,3 +24,15 @@ export interface Prox{
     trailer: string
     locandina: string
 }
+
+export interface SchedaF{
+    idfilmF: number
+    titoloF: string
+    registaF: string
+    genereF: string
+    annoF: string
+    descrizioneF: string
+    locandinaF: string
+    datap: string
+    orario: string
+}

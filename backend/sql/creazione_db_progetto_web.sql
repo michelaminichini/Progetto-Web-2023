@@ -43,6 +43,8 @@ CREATE TABLE IF NOT EXISTS `cinema`.`sale` (
   `descrizione` MEDIUMTEXT,
   `posti` INT NOT NULL,
   `posti_speciali` INT NOT NULL,
+  `fila` INT NOT NULL,
+  `posti_fila` INT NOT NULL,
   `tecnologia` VARCHAR(100),
   PRIMARY KEY (`idsala`))
 ENGINE = InnoDB;

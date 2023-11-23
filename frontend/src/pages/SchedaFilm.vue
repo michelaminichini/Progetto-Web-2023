@@ -1,10 +1,58 @@
+<script lang="ts">
+
+import {defineComponent} from "vue"
+import axios from "axios"
+import {SchedaF} from "../types" // tipo di interfaccia creata nel file types.ts
+
+export default defineComponent({
+    data(){
+        return {
+        filmS: null as SchedaF | null
+        }
+    },
+    methods: {
+    getFilm() {
+        axios.get("/api/film/" + this.$route.params.idfilm)
+        .then(response => this.filmS = response.data[0])
+    }
+  },
+  mounted() {
+    this.getFilm()
+  }
+})
+</script>
+
 <template>
-    <h1>
-        scheda film
-    </h1>
+    <template v-if=filmS>
+      <h2>{{filmS.titoloF}}</h2>
+      <article>
+        <img :src="'/img/'" + filmS.locandinaF alt="" />
+        <h3>{{filmS.registaF}}</h3>
+        <p>{{filmS.annoF}} </p>
+        <p>{{filmS.genereF}}</p>
+      </article>
+    </template>
+  </template>
+  
+<!-- <template>
+    <div id="#app">
+    <h1>Scheda film: </h1>
     <body>
-        <div id="app">
-            <button @click="$router.push('seatbooking')" class="btn btn-sm btn-primary">Next</button>
-        </div>
-    </body>
-</template>
+        <article v-if="film">
+        <h2>Titolo:{{film.titolo}}</h2>
+            <img :src="'/img/' + film.locandina" alt="" />
+            <p>Regista:{{film.regista}}</p>
+
+        </article>
+    </body>    
+    </div>
+</template> -->
+
+
+
+<style>
+    h1, h2, p{
+        color:aliceblue;
+    }
+
+</style>

@@ -14,9 +14,22 @@ export async function allFilms(req:Request, res: Response) {
 export async function prossimiFilm(req:Request, res: Response) {
     connection.execute(
         `SELECT id_film, titolo_film, regista_film, genere_film, anno_uscita, descrizione, trailer, locandina FROM prossimamente`,
-    [],
-    function (err, results, fields){
-        res.json(results)
+        [],
+        function (err, results, fields){
+            res.json(results)
         }
     )
 }
+
+export async function scheda(req:Request, res:Response) {
+    connection.execute(
+        `SELECT idfilmF, titoloF, registaF, genereF, annoF, descrizioneF, trailerF, locandinaF, datap, orario
+        FROM film, proiezioni
+        WHERE idproiezione=proiezione AND idfilmF=?`, 
+        [req.params.idfilm],
+        function (err, results, fields){
+            res.json(results)
+        }
+    )
+}
+
