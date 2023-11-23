@@ -7,6 +7,7 @@ import App from "./App.vue"
 import Home from "./pages/Home.vue"
 import Prossimamente from "./pages/Prossimamente.vue"
 import InfoCinema from "./pages/Info.vue"
+import Admin from "./pages/Admin.vue"
 import Login from "./pages/Login.vue"
 import SchedaFilm from "./pages/SchedaFilm.vue"
 import SeatBooking from "./pages/SeatBooking.vue"
@@ -17,6 +18,7 @@ const router: Router = createRouter({
         { path: "/", component: Home },
         { path: "/prossimamente", component: Prossimamente },
         { path: "/info", component: InfoCinema },
+        { path: "/admin", component: Admin},
         { path: "/login", component: Login },
         { path: "/film/:idfilm", component: SchedaFilm },
         { path: "/seatbooking/:idproiezione", component: SeatBooking}

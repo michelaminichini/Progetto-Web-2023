@@ -36,3 +36,16 @@ export interface SchedaF{
     datap: string
     orario: string
 }
+
+export interface Film_admin {
+    //locandina:;
+    titolo: string;
+    genere: string;
+    regista: string;
+    anno: number;
+  }
+  
+  export interface FilmResponse {
+    data: Film_admin[];
+  }
+  

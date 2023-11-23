@@ -18,6 +18,9 @@
             <li class="nav-item">
               <router-link class="nav-link" to="/info">Info Cinema</router-link>
             </li>
+            <li class="nav-item">
+              <router-link class="nav-link" to="/admin">Admin Page</router-link>
+            </li>
           </ul>
         </div>
             <form class="d-flex">
