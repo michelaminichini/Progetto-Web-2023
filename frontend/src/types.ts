@@ -26,13 +26,13 @@ export interface Prox{
 }
 
 export interface SchedaF{
-    idfilmF: number
-    titoloF: string
-    registaF: string
-    genereF: string
-    annoF: string
-    descrizioneF: string
-    locandinaF: string
+    idfilm: number
+    titolo: string
+    regista: string
+    genere: string
+    anno: string
+    descrizione: string
+    locandina: string
     datap: string
     orario: string
 }

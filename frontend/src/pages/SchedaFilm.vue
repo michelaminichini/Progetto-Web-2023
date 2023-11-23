@@ -24,12 +24,12 @@ export default defineComponent({
 
 <template>
     <template v-if=filmS>
-      <h2>{{filmS.titoloF}}</h2>
+      <h2>{{filmS.titolo}}</h2>
       <article>
-        <img :src="'/img/'" + filmS.locandinaF alt="" />
-        <h3>{{filmS.registaF}}</h3>
-        <p>{{filmS.annoF}} </p>
-        <p>{{filmS.genereF}}</p>
+        <img :src="'/img/'" + filmS.locandina alt="" />
+        <h3>{{filmS.regista}}</h3>
+        <p>{{filmS.anno}} </p>
+        <p>{{filmS.genere}}</p>
       </article>
     </template>
   </template>
