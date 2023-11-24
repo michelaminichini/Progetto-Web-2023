@@ -25,28 +25,40 @@ export default defineComponent({
 </script>
 
 <template>
-    <h1>Film in programmazione</h1>
-
     <body>
         <div id="app">
-            <div v-for= "film in datiFilm" :key="film.idfilm" class="cineContainer">
+            <div v-for= "film in datiFilm" :key="film.idfilm" id="contenitore" class="cineContainer">
                 <article>
                     <h2>{{ film.titolo }}</h2>
                     <img style="height: 400px; width: 300px;" :src="'/img/' + film.locandina" alt=""/>
-                        <p>Diretto da: {{ film.regista }}</p>
-                        <p>Anno di uscita: {{ film.anno }}</p>
-                        <p>Genere: {{ film.genere }}</p>
-                        <p>Durata: {{ film.durata }} min</p>
-                        <p>Lingua: {{ film.lingua }}</p>
-                        <!-- <button @click="$router.push('schedafilm/'+film.idfilm) " class="btn btn-sm btn-primary">Scheda film</button> -->
-                        <RouterLink :to="'/film/' + film.idfilm">Scheda Film</RouterLink>
-                    </article>
-                
+                    <table>
+                        <tr>
+                            <th>Diretto da</th>
+                            <td>{{ film.regista }}</td>
+                        </tr>
+                        <tr>
+                            <th>Anno di uscita</th>
+                            <td>{{ film.anno }}</td>
+                        </tr>
+                        <tr>
+                            <th>Genere</th>
+                            <td>{{ film.genere }}</td>
+                        </tr>
+                        <tr>
+                            <th>Durata</th>
+                            <td>{{ film.durata }} min</td>
+                        </tr>
+                        <tr>
+                            <th>Lingua</th>
+                            <td>{{ film.lingua }}</td> 
+                        </tr>
+                    </table> 
+                </article>
+                <RouterLink :to="'/film/' + film.idfilm">Scheda Film</RouterLink>
+
             </div>
         </div>
-
     </body>
-
 </template>
 
 <style scoped>
@@ -63,4 +75,27 @@ article {
     margin-left: 10%;
 }
 
+#contenitore{
+    margin-bottom: 3%;
+    border-width: 10%;
+    border-color: white;
+}
+
+table {
+    display: inline;
+    margin-left: 10%;
+    width: 100%;
+    margin-top: 0px;
+}
+
+td {
+    width:150px;
+    border: 2px solid white;
+    padding: 2px;
+    text-align: center;
+}
+
+th {
+    background-color: transparent;
+}
 </style>
