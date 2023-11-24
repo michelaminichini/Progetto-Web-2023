@@ -21,6 +21,9 @@
             <li class="nav-item">
               <router-link class="nav-link" to="/admin">Admin Page</router-link>
             </li>
+            <li class="nav-item">
+              <router-link class="nav-link" to="/seatbooking">Seat Booking</router-link>
+            </li>
           </ul>
         </div>
             <form class="d-flex">
