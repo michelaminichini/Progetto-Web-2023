@@ -13,7 +13,7 @@ export default defineComponent({
     methods: {
     getFilm() {
         axios.get("/api/film/" + this.$route.params.idfilm)
-        .then(response => this.filmS = response.data[0])
+        .then(response => {this.filmS = response.data[0]; console.log(response.data)})
     }
   },
   mounted() {
@@ -26,7 +26,7 @@ export default defineComponent({
     <template v-if=filmS>
       <h2>{{filmS.titolo}}</h2>
       <article>
-        <img :src="'/img/'" + filmS.locandina alt="" />
+        <img style="height: 400px; width: 300px;" :src="'/img/' + filmS.locandina" alt=""/>
         <h3>{{filmS.regista}}</h3>
         <p>{{filmS.anno}} </p>
         <p>{{filmS.genere}}</p>
