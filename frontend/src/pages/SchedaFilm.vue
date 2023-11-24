@@ -24,35 +24,26 @@ export default defineComponent({
 
 <template>
     <template v-if=filmS>
-      <h2>{{filmS.titolo}}</h2>
       <article>
+        <h2>{{filmS.titolo}}</h2>
+        <h3>Regista: {{filmS.regista}}</h3>
         <img style="height: 400px; width: 300px;" :src="'/img/' + filmS.locandina" alt=""/>
-        <h3>{{filmS.regista}}</h3>
-        <p>{{filmS.anno}} </p>
-        <p>{{filmS.genere}}</p>
+        <p>Anno di uscita: {{filmS.anno}} </p>
+        <p>Genere: {{filmS.genere}}</p>
+        <p>{{filmS.descrizione}}</p>
+        <p>Data di programmazione: {{filmS.datap}}</p>
+        <p>Orario: {{filmS.orario}}</p>
       </article>
     </template>
   </template>
-  
-<!-- <template>
-    <div id="#app">
-    <h1>Scheda film: </h1>
-    <body>
-        <article v-if="film">
-        <h2>Titolo:{{film.titolo}}</h2>
-            <img :src="'/img/' + film.locandina" alt="" />
-            <p>Regista:{{film.regista}}</p>
+ 
 
-        </article>
-    </body>    
-    </div>
-</template> -->
+<style scoped>
 
-
-
-<style>
-    h1, h2, p{
-        color:aliceblue;
+    article{
+      color:aliceblue;
+      margin-left: 5%;
     }
+
 
 </style>

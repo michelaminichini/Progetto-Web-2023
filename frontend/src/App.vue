@@ -6,20 +6,22 @@
             
     <nav class="navbar navbar-expand-lg bg-transparent">
       <div id="nav" class="container-fluid">
-        <a class="navbar-brand" href="#"><img src="/img/ImmLogo.png" alt="Logo" width="30" height="24" class="d-inline-block align-text-top"></a>
+        <a title="GalaxyCineverse" class="navbar-brand" href="#">
+          <img src="/img/ImmLogo.png" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
+        </a>
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav">
             <li class="nav-item">
-              <router-link class="nav-link" aria-current="page" to="/">Home</router-link>
+              <router-link class="nav-link" aria-current="page" to="/">Programmazione</router-link>
             </li>
             <li class="nav-item">
               <router-link class="nav-link" to="/prossimamente">Prossimamente</router-link>
             </li>
             <li class="nav-item">
-              <router-link class="nav-link" to="/info">Info Cinema</router-link>
+              <router-link class="nav-link" to="/info">Info</router-link>
             </li>
             <li class="nav-item">
-              <router-link class="nav-link" to="/admin">Admin Page</router-link>
+              <router-link class="nav-link" to="/admin">Admin</router-link>
             </li>
           </ul>
         </div>
@@ -46,7 +48,3 @@
 <style>
 @import "./styles/style.scss";
 </style>
-
-<!-- <style>
-@import "-/styles/style.css";
-</style> -->

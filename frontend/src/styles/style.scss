@@ -9,6 +9,10 @@ header, footer{
   color: aliceblue; 
 }
 
+header{
+  margin-top: 2%;
+}
+
 // il footer è centrato in fondo alla pagina
 footer{
   margin-left: 40%;
@@ -104,13 +108,15 @@ nav{
 } */
 
 #nav {
-  padding: 0px;
+  padding: 1%;
   text-align: center;
+
 }
 
 #nav a {
   font-weight: bold;
   color: #0468BF;
+  margin-left: 4%;
 }
 
 #nav a.router-link-exact-active {
