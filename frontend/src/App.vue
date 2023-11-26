@@ -26,6 +26,9 @@
             <li class="nav-item">
               <router-link class="nav-link" to="/seatbooking">Seat Booking</router-link>
             </li>
+            <li class="nav-item">
+              <router-link class="nav-link" to="/pagamento">Pagamento</router-link>
+            </li>
           </ul>
         </div>
             <form class="d-flex">
