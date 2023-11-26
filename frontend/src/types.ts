@@ -33,19 +33,34 @@ export interface SchedaF{
     anno: string
     descrizione: string
     locandina: string
+    idproiezione: number
+    datap: string
+    orario: string
+}
+
+export interface DataOra {
     datap: string
     orario: string
 }
 
 export interface Film_admin {
     //locandina:;
-    titolo: string;
-    genere: string;
-    regista: string;
-    anno: number;
+    titolo: string
+    genere: string
+    regista: string
+    anno: number
   }
   
-  export interface FilmResponse {
+/*   export interface FilmResponse {
     data: Film_admin[];
-  }
+  } */
   
+export interface IDproiezioneSB {
+    idproiezione: number
+}
+
+export interface IDsala {
+    idsala: number
+    fila: number
+    posti_fila: number
+}
