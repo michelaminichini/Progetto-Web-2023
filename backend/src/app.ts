@@ -1,5 +1,6 @@
 import express, {Express} from "express"
 import filmRouter from "./routes/film-router"
+import proiezioneRouter from "./routes/proiezione-router"
 import history from "connect-history-api-fallback"
 
 //import { Request as ExpressRequest } from 'express';
@@ -28,17 +29,12 @@ const port: number = 3000
   //res.status(201).send('Film added successfully');
 //});
 
-
-
-
 app.use(filmRouter)
+app.use(proiezioneRouter)
 
 app.use(history())
 app.use(express.static("public"))
 app.use(express.static("dist-frontend"))
-
-
-
 
 app.use(function(req, res, next) {
     res.setHeader("Content-Type", "text/plain")
