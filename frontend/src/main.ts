@@ -9,7 +9,7 @@ import Prossimamente from "./pages/Prossimamente.vue"
 import InfoCinema from "./pages/Info.vue"
 import Login from "./pages/Login.vue"
 import SchedaFilm from "./pages/SchedaFilm.vue"
-import SeatBooking from "./pages/SeatBooking.vue"
+import PostiSala from "./pages/PostiSala.vue"
 import Pagamento from "./pages/Pagamento.vue"
 
 const router: Router = createRouter({
@@ -20,7 +20,7 @@ const router: Router = createRouter({
         { path: "/info", component: InfoCinema },
         { path: "/login", component: Login },
         { path: "/film/:idfilm", component: SchedaFilm },
-        { path: "/seatbooking/:idproiezione", component: SeatBooking},
+        { path: "/postisala/:idproiezione", component: PostiSala},
         { path: "/pagamento", component: Pagamento}
     ]
 })
