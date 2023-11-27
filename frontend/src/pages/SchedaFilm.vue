@@ -89,6 +89,7 @@ article > p{
 }
 
 div > h2{
+  display: inline;
   margin-top:2%;
   margin-bottom: 0;
   margin-left:5%;
@@ -96,8 +97,7 @@ div > h2{
 }
 
 div > select{
-  margin-left: 5%;
-  margin-top:2%;
+  display: inline;
 }
 
 table {
