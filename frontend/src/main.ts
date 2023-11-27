@@ -11,6 +11,7 @@ import Login from "./pages/Login.vue"
 import SchedaFilm from "./pages/SchedaFilm.vue"
 import SeatBooking from "./pages/SeatBooking.vue"
 import Pagamento from "./pages/Pagamento.vue"
+import PaginaAdmin from "./pages/PaginaAdmin.vue"
 
 const router: Router = createRouter({
     history:createWebHistory(),
@@ -21,7 +22,8 @@ const router: Router = createRouter({
         { path: "/login", component: Login },
         { path: "/film/:idfilm", component: SchedaFilm },
         { path: "/seatbooking/:idproiezione", component: SeatBooking},
-        { path: "/pagamento", component: Pagamento}
+        { path: "/pagamento", component: Pagamento},
+        { path:"/paginaAdmin", component: PaginaAdmin}
     ]
 })
 

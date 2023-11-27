@@ -14,6 +14,20 @@ export interface Film{
     attivo: number
 }
 
+export interface Modifica{
+    idfilm:number
+    titolo: string
+    regista: string
+    genere: string
+    durata: number
+    anno: string
+    descrizione: string
+    locandina: string
+    lingua: string
+    attori: string
+}
+
+
 export interface Prox{
     id_film: number
     titolo_film: string
