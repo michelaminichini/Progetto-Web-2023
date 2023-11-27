@@ -37,7 +37,7 @@ export default defineComponent({
                             <td>{{ film.regista }}</td>
                         </tr>
                         <tr>
-                            <th>Anno di uscita</th>
+                            <th>Anno uscita</th>
                             <td>{{ film.anno }}</td>
                         </tr>
                         <tr>
@@ -62,9 +62,10 @@ export default defineComponent({
 </template>
 
 <style scoped>
-h1{
-    color:aliceblue;
-    margin-left: 10%;
+
+body > div > div > article > h2{
+    padding:2%;
+    margin:0;
 }
 
 article {
@@ -75,12 +76,6 @@ article {
     margin-left: 10%;
 }
 
-#contenitore{
-    margin-bottom: 3%;
-    border-width: 10%;
-    border-color: white;
-}
-
 table {
     display: inline;
     margin-left: 10%;
@@ -89,7 +84,7 @@ table {
 }
 
 td {
-    width:150px;
+    width:300px;
     border: 2px solid white;
     padding: 2px;
     text-align: center;

@@ -30,7 +30,8 @@
 <style scoped>
 h1{
     color:aliceblue;
-    margin-left: 10%;
+    margin-top:2%;
+    margin-bottom: 0;
 }
 
 article {
@@ -39,9 +40,22 @@ article {
 }
 
 #app{
-    
-    margin-left: 10%;
-    margin-right: 10%;
+    margin-left:4%;
+    margin-right:2%;
 }
 
+
+div > article > h2 {
+    margin-top:2%;
+    margin-left:5%;
+    margin-bottom:0;
+    padding: 0;
+}
+
+div > article > p {
+    margin-left:5%;
+    margin-top:0;
+    margin-bottom:2%;
+    padding: 0;
+}
 </style>

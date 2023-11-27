@@ -34,10 +34,20 @@ export default defineComponent({
                 <article>
                     <h2>{{ film.titolo_film }}</h2>
                     <img style="height: 400px; width: 300px;" :src="'/img/' + film.locandina" alt=""/>
-                    <p>Diretto da: {{ film.regista_film }}</p>
-                    <p>Anno di uscita: {{ film.anno_uscita }}</p>
-                    <p>Genere: {{ film.genere_film }}</p>
-                    
+                    <table>
+                        <tr>
+                            <th>Diretto da</th>
+                            <td>{{ film.regista_film }}</td>
+                        </tr>
+                        <tr>
+                            <th>Anno uscita</th>
+                            <td>{{ film.anno_uscita }}</td>
+                        </tr>
+                        <tr>
+                            <th>Genere</th>
+                            <td>{{ film.genere_film }}</td>
+                        </tr>
+                    </table>  
                 </article>
             
             </div>
@@ -51,15 +61,39 @@ export default defineComponent({
 <style scoped>
 h1{
     color:aliceblue;
-    margin-left: 10%;
+    margin-top:2%;
+    margin-bottom:3%;
+}
+
+body > div > div > article > h2{
+    margin:0;
+    margin-bottom:2%;
 }
 
 article {
     color:aliceblue;
+    margin-bottom: 5%;
 }
 
 #app{
     margin-left: 10%;
 }
 
+table {
+    display: inline;
+    margin-left: 10%;
+    width: 100%;
+    margin-top: 0px;
+}
+
+td {
+    width:300px;
+    border: 2px solid white;
+    padding: 2px;
+    text-align: center;
+}
+
+th {
+    background-color: transparent;
+}
 </style>

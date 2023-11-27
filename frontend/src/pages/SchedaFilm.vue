@@ -37,12 +37,24 @@ export default defineComponent({
       <article>
         <h2>{{filmS.titolo}}</h2>
         <img style="height: 400px; width: 300px;" :src="'/img/' + filmS.locandina" alt=""/>
-        <p>Regista: {{filmS.regista}}</p>
-        <p>Anno di uscita: {{filmS.anno}} </p>
-        <!-- <p>Genere: {{filmS.genere}}</p> -->
-        <p>{{filmS.descrizione}}</p>
-        <!-- <p>Data di programmazione: {{filmS.datap.slice(0, 10)}}</p>
-        <p>Orario: {{filmS.orario.slice(0, 5)}}</p> -->
+        <table>
+          <tr>
+            <th>Regista</th>
+            <td>{{filmS.regista}}</td>
+          </tr>
+          <tr>
+            <th>Anno uscita</th>
+            <td>{{filmS.anno}}</td>
+          </tr>
+          <tr>
+            <th>Genere</th>
+            <td>{{filmS.genere}}</td>
+          </tr>
+          <tr>
+            <th>Descrizione</th>
+            <td>{{filmS.descrizione}}</td>
+          </tr>
+        </table>
       </article>
     </template>
     <!-- <div v-for="film in filmS"> -->
@@ -57,11 +69,51 @@ export default defineComponent({
  
 
 <style scoped>
+article{
+  color:aliceblue;
+  margin-left: 5%;
+}
 
-    article{
-      color:aliceblue;
-      margin-left: 5%;
-    }
+article > h2{
+  margin-left: 0;
+  margin-top:2%;
+  margin-bottom: 3%;
+}
+
+article > p{
+  padding:0;
+  margin:0;
+}
+
+div > h2{
+  margin-top:2%;
+  margin-bottom: 0;
+  margin-left:5%;
+  padding: 0;
+}
+
+div > select{
+  margin-left: 5%;
+  margin-top:2%;
+}
+
+table {
+    display: inline;
+    margin-left: 10%;
+    width: 100%;
+    margin-top: 0px;
+}
+
+td {
+    width:500px;
+    border: 2px solid white;
+    padding: 2px;
+    text-align: center;
+}
+
+th {
+    background-color: transparent;
+}
 
 
 </style>

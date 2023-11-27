@@ -1,21 +1,29 @@
 // @import "./variables";
 // @import "./mixins";
 
+header > h1{
+  margin-top:2%;
+  padding-bottom: 3%;
+  margin-bottom: 0;
+
+}
 
 header, footer{
-  margin-left: 8%;
   background-color: #001C38;
   border-color: hsl(210, 100%, 11%);
   color: aliceblue; 
 }
 
-header{
-  margin-top: 2%;
-}
-
 // il footer è centrato in fondo alla pagina
 footer{
+  margin-bottom:2%;
   margin-left: 40%;
+  padding-top:5%;
+}
+
+footer > p{
+  margin:0;
+  padding:0;
 }
 
 body{
@@ -107,16 +115,18 @@ nav{
   }
 } */
 
+
 #nav {
-  padding: 1%;
+  padding: 0;
   text-align: center;
+  margin-left:5%;
 
 }
 
 #nav a {
   font-weight: bold;
   color: #0468BF;
-  margin-left: 4%;
+  
 }
 
 #nav a.router-link-exact-active {
@@ -124,10 +134,3 @@ nav{
   background: #F67F3C;
   border-radius: .5rem;
 }
-
-
-
-
-
-
-
