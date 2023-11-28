@@ -24,7 +24,8 @@ const router: Router = createRouter({
         { path: "/film/:idfilm", component: SchedaFilm },
         { path: "/seatbooking/:idproiezione", component: SeatBooking},
         { path: "/pagamento", component: Pagamento},
-        { path:"/paginaAdmin", component: PaginaAdmin}
+        { path:"/paginaAdmin", component: PaginaAdmin},
+        { path: "/PostiSala/:idproiezione", component: PostiSala}
     ]
 })
 
