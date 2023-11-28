@@ -29,6 +29,9 @@
             <li class="nav-item">
               <router-link class="nav-link" to="/pagamento">Pagamento</router-link>
             </li>
+            <li class="nav-item">
+              <router-link class="nav-link" to="/paginaAdmin">Pagina Admin</router-link>
+            </li>
           </ul>
         </div>
             <form class="d-flex">
