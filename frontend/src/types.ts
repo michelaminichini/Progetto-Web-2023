@@ -64,3 +64,12 @@ export interface IDsala {
     fila: number
     posti_fila: number
 }
+
+export interface posto {
+    idposto: number
+    idproiezione: number
+    fila: string
+    numero: number
+    occupato: boolean
+    speciale: boolean
+}

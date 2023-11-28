@@ -23,3 +23,14 @@ export async function salaX(req:Request, res:Response) {
     }
     )
 }
+
+export async function postiX(req:Request, res:Response) {
+    connection.execute(
+        `SELECT idposto, idproiezione, fila, numero, occupato, speciale FROM posti_proiezione where idproiezione = ? AND fila = ?`, 
+        [req.params.id,req.params.fila],
+        function (err, results, fields){
+            console.log(results)
+            res.json(results)
+    }
+    )
+}
