@@ -14,6 +14,9 @@ import Pagamento from "./pages/Pagamento.vue"
 import PaginaAdmin from "./pages/PaginaAdmin.vue"
 import SeatBooking from "./pages/SeatBooking.vue"
 
+import UserProfile from "./pages/UserProfile.vue"
+
+
 const router: Router = createRouter({
     history:createWebHistory(),
     routes: [
@@ -25,7 +28,8 @@ const router: Router = createRouter({
         { path: "/seatbooking/:idproiezione", component: SeatBooking},
         { path: "/pagamento", component: Pagamento},
         { path:"/paginaAdmin", component: PaginaAdmin},
-        { path: "/PostiSala/:idproiezione", component: PostiSala}
+        { path: "/PostiSala/:idproiezione", component: PostiSala},
+        { path: "/profiloutente", component: UserProfile}
     ]
 })
 

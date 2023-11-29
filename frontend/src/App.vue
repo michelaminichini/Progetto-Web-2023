@@ -20,9 +20,9 @@
             <li class="nav-item">
               <router-link class="nav-link" to="/info">Info</router-link>
             </li>
-            <li class="nav-item">
+            <!--li class="nav-item">
               <router-link class="nav-link" to="/admin">Admin</router-link>
-            </li>
+            </li>-->
             <!-- <li class="nav-item">
               <router-link class="nav-link" to="/seatbooking">SeatBooking</router-link>
             </li> -->
