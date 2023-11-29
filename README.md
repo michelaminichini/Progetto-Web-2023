@@ -4,7 +4,6 @@
 
 - [Introduzione](#introduzione)
 - [Features](#features)
-- [Prerequisiti](#prerequisiti)
 - [Tecnologie utilizzate](#tecnologie-utilizzate)
 - [Pacchetti Installati](#pacchetti-installati)
 - [Struttura del progetto](#struttura-del-progetto)
@@ -29,29 +28,20 @@ Se invece ad effettuare il login è l'amministratore, allora sarà disponibile u
 - Scegli un posto a sedere e acquista un biglietto una volta effettuato il login al tuo account personale
 - Responsive design per tutti i devices
 
-## Prerequisiti
+## Tecnologie utilizzate
 
-- XAMPP control panel
+- XAMPP control panel (per poter avviare MySQL e accedere al database e Apache per avviare il web server)
 - Node.js
 - npm
-- Vue
+- Vue.js
+- Vite
+- Vue Router
+- Axios
 - TypeScript
 - Express (e mysql2)
 - Estensione Volar per Visual Studio Code
 - (optional) PHP
-- Bootstrap
-
-## Tecnologie utilizzate
-
-- Node.js
-- Express.js
-- Vue.js
-- Vite
-- TypeScript
-- Vue Router
-- Axios
-- XAMPP control panel per poter avviare MySQL e accedere al database e Apache per avviare il web server
-- Bootstrap per la realizzazione dello stile dell'applicazione web insieme a Strass (SCSS)
+- Bootstrap e SASS (SCSS)
 
 ## Pacchetti Installati
 
