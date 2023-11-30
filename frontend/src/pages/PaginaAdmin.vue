@@ -2,45 +2,49 @@
 
 import {defineComponent} from "vue"
 import axios from "axios"
-import {Modifica} from "../types" //qui Film si riferisce al tipo di interfaccia creata nel file types.ts
+import {Film} from "../types" 
 
-interface EditingCell{
-    rowIndex: number;
-    field: keyof Modifica;
-}
 
 export default defineComponent({
     data(){
         return {
-        filmDaModificare: [] as Modifica[],
-        editingCell: null as EditingCell| null,
+            films: [] as Film[],
+            filmDetails:{
+                titolo: '',
+                regista: '',
+                genere: '',
+                durata: 0,
+                nazione: '',
+                anno: '',
+                descrizione: '',
+                locandina: '',
+                lingua: '',
+                attori: ''
+            } as {[ key: string] : any}
         }
     },
     methods: {
         getFilminLista(){
-            axios.get("/api/films").then(response => this.filmDaModificare = response.data)
+            axios.get("/api/films").then(response => this.films = response.data)
         },
 
-        startEditing(rowIndex: number, field: keyof Modifica){
-            this.editingCell = { rowIndex, field};
+        toggleEdit<T extends keyof Film>(filmId: number, attribute: T){
+            const film = this.films.find((f: Film)=> f.idfilm === filmId);
+            if (film){
+                film.editing[attribute] = true;
+                this.filmDetails[attribute as string] = film[attribute] as any;
+            }
+            
+        },
+        saveChanges<T extends keyof Film>(filmId: number, attribute: T){
+            const film = this.films.find((f: Film)=> f.idfilm === filmId);
+            if (film){
+                film[attribute]=this.filmDetails[attribute as string] as any;
+                film.editing[attribute] = false;
+            }
+            
         },
 
-        stopEditing(){
-            this.editingCell = null;
-            //this.saveChanges();
-        },
-        /*
-        saveChanges(){
-            axios.post("/api/update-films", this.datiFilm).then((response) => {
-        console.log("Changes saved:", response.data);
-      }).catch((error) => {
-        console.error("Error saving changes:", error);
-      }); 
-        },*/
-
-        isEditing(rowIndex: number, field: string){
-            return this.editingCell !== null && this.editingCell.rowIndex === rowIndex && this.editingCell.field === field;
-        },
 
     },
     
@@ -56,24 +60,28 @@ export default defineComponent({
 <template>
     <body>
         <div id="app">
-            <div v-for= "(film, rowIndex) in filmDaModificare" :key="film.idfilm" id="contenitore" class="cineContainer">
-                <article>
-                    <!--<h2>{{ film.titolo }}</h2>-->
+            <div>
+                <article v-for= "film in films" :key="film.idfilm" class="cineContainer">
                     <img style="height: 400px; width: 300px;" :src="'/img/' + film.locandina" alt=""/>
                     <table contenteditable="true">
-                        
+                        <tbody>
+                            <tr v-for="field in Object.keys(film)" :key="field">
+                                <td>{{ field }}</td>
+                                <td v-if="!film.editing[field]">{{ film[field] }}</td>
+                                <td v-else>
+                                    <input v-if="field === 'length'" type="number" v-model="filmDetails[field]" />
+                                    <input v-else type="text" v-model="filmDetails[field]" />
+                                </td>
+                            </tr>
 
-                        <tr v-for="field in ['titolo', 'regista', 'anno', 'lingua']" :key="field">
-                            <th>{{ field }}</th>
-                            <td v-if="!isEditing(rowIndex, field)" @click="startEditing(rowIndex, field)">{{ film[field] }}</td>
-                            <td v-else>
-                                <input type="text" v-model="filmDaModificare[rowIndex][field]" @blur="stopEditing" />
-                            </td>
+                        </tbody>
+                    </table>
+                        <!--</tbody>
+                        <tr>
+                            <th>Titolo</th>
+                            <td>{{ film.anno }}</td>
                         </tr>
-
-
-                    
-                       <!-- <tr>
+                       <tr>
                             <th>Anno uscita</th>
                             <td>{{ film.anno }}</td>
                         </tr>
@@ -89,9 +97,10 @@ export default defineComponent({
                             <th>Lingua</th>
                             <td>{{ film.lingua }}</td> 
                         </tr> -->
-                    </table> 
+                    <button @click="toggleEdit(film.idfilm,field)" v-for="field in Object.keys(film)" :key="field">Edit {{ field }}</button>
+                    <button @click="saveChanges(film.idfilm,field)" v-for="field in Object.keys(film)" :key="field">Save {{ field }}</button>"
                 </article>
-                <RouterLink :to="'/film/' + film.idfilm">Scheda Film</RouterLink>
+               <!-- <RouterLink :to="'/film/' + film.idfilm">Scheda Film</RouterLink>-->
 
             </div>
         </div>
