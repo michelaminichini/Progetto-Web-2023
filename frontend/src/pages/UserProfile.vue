@@ -1,22 +1,18 @@
-<!--
 <script lang="ts">
-    //<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
-
-    const tabBtn = document.querySelectorAll(".tab");
-    const tab = document.querySelectorAll(".tabShow");
-
-    function tabs(panelIndex){
-        tab.forEach(function(node){
-            node.style.display = "none";
-        });
-        tab[panelIndex].style.display = "block";
-        
-    }
-    tabs(0)
+export default{
+    data(){
+        return {
+            activeDiv: null,
+        };
+    },
+    methods:{
+        toggleDiv(index: any){
+            this.activeDiv = this.activeDiv === index ? null: index;
+        },
+    },
+};
 
 </script>
--->
-
 
 <template>
     <head>
@@ -26,97 +22,86 @@
 
     <body>
         <div class="container">
-            <div class="leftbox">
+            <div class="nav-container">
                 <nav>
-                    <a onclick="tabs(0)" class="tab active">
-                        <i class="glyphicon glyphicon-user"></i> <!--INFORMAZIONI GENERALI SULL'UTENTE-->
+                    <a class="tab active" @click="toggleDiv(0)">
+                        <i class="glyphicon glyphicon-user"></i>
                     </a>
-                    <a onclick="tabs(1)" class="tab">
+                    <a class="tab" @click="toggleDiv(1)">
                         <i class="glyphicon glyphicon-credit-card"></i>
                     </a>
-                    <a onclick="tabs(2)" class="tab">
-                        <i class="glyphicon glyphicon-cog"></i> <!--IMPOSTAZIONI PROFILO-->
+                    <a class="tab" @click="toggleDiv(2)">
+                        <i class="glyphicon glyphicon-cog"></i> 
                     </a>
-                    <a onclick="tabs(3)" class="tab">
-                        <i class="glyphicon glyphicon-time"></i> <!--CRONOLOGIA BIGLIETTI ACQUISTATI-->
+                    <a class="tab" @click="toggleDiv(3)">
+                        <i class="glyphicon glyphicon-time"></i> 
                     </a>
                 </nav>
             </div>
 
-            <div class="rigthbox">
-                <div class="profile tabShow">
-                    <h1>Informazioni personali</h1>
-                    <h2>Nome e Cognome</h2>
-                    <input type="text" class="input" placeholder="Jane Doe">
+            <div v-show="activeDiv === 0" class="primo">
+                <h1>Informazioni personali</h1>
+                <h2>Nome e Cognome</h2>
+                <input type="text" class="input" placeholder="Jane Doe">
 
-                    <h2>Data di nascita</h2>
-                    <input type="text" class="input" placeholder="20 Aprile 1998">
+                <h2>Data di nascita</h2>
+                <input type="text" class="input" placeholder="20 Aprile 1998">
 
-                    <h2>Email</h2>
-                    <input type="text" class="input" placeholder="example@example.com">
+                <h2>Email</h2>
+                <input type="text" class="input" placeholder="example@example.com">
 
-                    <h2>Numero di Telefono</h2>
-                    <input type="text" class="input" placeholder="1111111111">
+                <h2>Numero di Telefono</h2>
+                <input type="text" class="input" placeholder="1111111111">
 
-                    <h2>Password</h2>
-                    <input type="password" class="input" placeholder="xxxxxxxxxx">
+                <h2>Data creazione account</h2>
+                <input type="date" class="input" placeholder="00-00-0000">
 
-                    <h2>Data creazione account</h2>
-                    <input type="date" class="input" placeholder="00-00-0000">
-
-                    <button class="btn">Salva</button>
-                </div>
-                <div class="payment tabShow">
-                    <h1>Informazioni Pagamento</h1>
-                    <h2>Metodo di pagamento</h2>
-                    <input type="text" class="input" placeholder="MasterCard">
-
-                    <h2>Numero carta</h2>
-                    <input type="text" class="input" placeholder="0000000000000000">
-
-                    <h2>Data di scadenza</h2>
-                    <input type="date" class="input" placeholder="00-0000">
-
-                    <h2>Indirizzo</h2>
-                    <input type="text" class="input" placeholder="via somestreet 0">
-
-                    <h2>Città</h2>
-                    <input type="text" class="input" placeholder="somecity">
-
-                    <button class="btn">Salva</button>
-                </div>
-
-                <!--QUI INSERIRE PER CREAZIONE CRONOLOGIA-->
-
-                <div class="privacy and settings tabShow">
-                    <h1>Impostazioni sulla Privacy e sul Tuo Account</h1>
-                    <h2>Gestisce notifiche email</h2><p></p>
-                    
-                    <h2>Gestisci impostazioni sulla privacy</h2><p></p>
-
-                    <h2>Vedi Termini e Condizioni</h2><p></p>
-                    
-                    <h2>Personalized Ad Experience</h2><p></p>
-
-                    <h2>Preoteggi il tuo account</h2><p></p>
-
-                    <button class="btn">Salva</button>
-                </div>
-                
+                <button class="btn">Salva</button>
+    
             </div>
 
+            <div v-show="activeDiv === 1" class="secondo">
+                <h1>Informazioni Pagamento</h1>
+                <h2>Metodo di pagamento</h2>
+                <input type="text" class="input" placeholder="MasterCard">
 
+                <h2>Numero carta</h2>
+                <input type="text" class="input" placeholder="0000000000000000">
 
+                <h2>Data di scadenza</h2>
+                <input type="date" class="input" placeholder="00-0000">
+
+                <h2>Indirizzo</h2>
+                <input type="text" class="input" placeholder="via somestreet 0">
+
+                <h2>Città</h2>
+                <input type="text" class="input" placeholder="somecity">
+
+                <button class="btn">Salva</button>
+            </div>
+
+            <div v-show="activeDiv === 2" class="terzo">
+                <h1>Impostazioni sulla Privacy e sul Tuo Account</h1>
+                <h2>Gestisce notifiche email</h2><p></p>
+                        
+                <h2>Gestisci impostazioni sulla privacy</h2><p></p>
+
+                <h2>Vedi Termini e Condizioni</h2><p></p>
+                        
+                <h2>Personalized Ad Experience</h2><p></p>
+
+                <h2>Preoteggi il tuo account</h2><p></p>
+
+                <button class="btn">Salva</button>
+            </div>
+                
         </div>
-
         
-        
-        
-        
-
     </body>
 
 </template>
+
+
 
 <style scoped>
 *{
@@ -124,9 +109,13 @@
     padding:0;
 }
 
+
 body {
-    /*background-color: linear-gradient(to right, rgb(40, 20, 173), rgb(9, 9, 103) 36, 249);*/
     overflow-x:hidden;
+    background-color: rgb(77, 77, 223);
+    margin-bottom: 6%;
+    height: 700px;
+
 }
 
 .container{
@@ -139,7 +128,7 @@ body {
     box-shadow: 2px 5px 20px rgba(119,119,119,.5);
 }
 
-.leftbox{
+.nav-container{
     float:left;
     top:-5%;
     left:5%;
@@ -174,9 +163,19 @@ nav a.active{
     color:#0d2f26;
 }
 
-.rightbox{
+.primo{
     width:60%;
-    margin-left: 27%;
+    margin-left:27%;
+}
+
+.secondo{
+    width:60%;
+    margin-left:27%;
+}
+
+.terzo{
+    width:60%;
+    margin-left:27%;
 }
 
 .tab{
@@ -185,18 +184,18 @@ nav a.active{
 }
 
 h1{
-    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    font-size: 1.2rem;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 2.3rem;
     color:rgb(32, 54, 72);
     margin-top:40px;
-    margin-bottom: 35px;
+    margin-bottom: 25px;
 }
 
 h2{
-    color:rgb(54, 79, 98);
+    color:rgb(22, 30, 37);
     font-family: Arial, Helvetica, sans-serif;
     text-transform: uppercase;
-    font-size: 8px;
+    font-size: 15px;
     letter-spacing: 1px;
     margin-left: 2px;
     margin-top:10px
@@ -204,7 +203,7 @@ h2{
 
 .input, p{
     border:0;
-    border-bottom: 1px solid #3fb6a8;
+    border-bottom: 1px solid #2c302f;
     width: 80%;
     font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     font-size: .7em;
@@ -231,9 +230,7 @@ h2{
     color: #fff;
 }
 
-.tabShow{
-    display:none;
-}
+
 
 
 </style>
