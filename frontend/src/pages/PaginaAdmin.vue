@@ -10,6 +10,7 @@ export default defineComponent({
         return {
             films: [] as Film[],
             filmDetails:{
+                idfilm: 0,
                 titolo: '',
                 regista: '',
                 genere: '',
@@ -31,6 +32,7 @@ export default defineComponent({
         toggleEdit<T extends keyof Film>(filmId: number, attribute: T){
             const film = this.films.find((f: Film)=> f.idfilm === filmId);
             if (film){
+                
                 film.editing[attribute] = true;
                 this.filmDetails[attribute as string] = film[attribute] as any;
             }
@@ -44,6 +46,9 @@ export default defineComponent({
             }
             
         },
+        getProperty(obj: Record<string, any>, key: string): any{
+            return obj[key];
+        }
 
 
     },
@@ -67,7 +72,7 @@ export default defineComponent({
                         <tbody>
                             <tr v-for="field in Object.keys(film)" :key="field">
                                 <td>{{ field }}</td>
-                                <td v-if="!film.editing[field]">{{ film[field] }}</td>
+                                <td v-if="film && !film.editing[field]">{{ getProperty(film, field) }}</td>
                                 <td v-else>
                                     <input v-if="field === 'length'" type="number" v-model="filmDetails[field]" />
                                     <input v-else type="text" v-model="filmDetails[field]" />
@@ -97,8 +102,8 @@ export default defineComponent({
                             <th>Lingua</th>
                             <td>{{ film.lingua }}</td> 
                         </tr> -->
-                    <button @click="toggleEdit(film.idfilm,field)" v-for="field in Object.keys(film)" :key="field">Edit {{ field }}</button>
-                    <button @click="saveChanges(film.idfilm,field)" v-for="field in Object.keys(film)" :key="field">Save {{ field }}</button>"
+                    <button @click="toggleEdit(film.idfilm,field as keyof Film)" v-for="field in Object.keys(film)" :key="field">Edit {{ field }}</button>
+                    <button @click="saveChanges(film.idfilm,field as keyof Film)" v-for="field in Object.keys(film)" :key="field">Save {{ field }}</button>"
                 </article>
                <!-- <RouterLink :to="'/film/' + film.idfilm">Scheda Film</RouterLink>-->
 
