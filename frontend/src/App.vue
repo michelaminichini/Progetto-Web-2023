@@ -16,16 +16,16 @@
         <a title="GalaxyCineverse" class="navbar-brand" href="#">
           <img src="/img/ImmLogo.png" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
         </a>
-        <div class="collapse navbar-collapse" id="navbarNav">
+        <div id="navbarNav" class="d-flex" style="margin-right: 50%;">
           <i class="fas fa-bars mobile-nav-icon" @click="toggleMobileNav" style="font-size:36px; color:white"></i>
-          <ul class="navbar-nav" :class=" {'show-mobile-nav': isMobileNavOpen} ">
-            <li class="nav-item">
+          <ul :class=" {'show-mobile-nav': isMobileNavOpen} ">
+            <li class="nav-item" style="margin-right: 5%;">
               <router-link class="nav-link" aria-current="page" to="/">Programmazione</router-link>
             </li>
-            <li class="nav-item">
+            <li class="nav-item" style="margin-right: 5%;">
               <router-link class="nav-link" to="/prossimamente">Prossimamente</router-link>
             </li>
-            <li class="nav-item">
+            <li class="nav-item" style="margin-right: 5%;">
               <router-link class="nav-link" to="/info">Info</router-link>
             </li>
             
@@ -33,12 +33,12 @@
               <router-link class="nav-link" to="/seatbooking">SeatBooking</router-link>
             </li> -->
             
-            <li class="nav-item">
+            <!--li class="nav-item">
               <router-link class="nav-link" to="/paginaAdmin">Pagina Admin</router-link>
-            </li>
+            </li>-->
           </ul>
         </div>
-            <form class="d-flex">
+            <form class="d-flex" style="margin-right: 5%;">
                 <router-link to="/login"><button class="btn btn-lg btn-primary">LOGIN</button></router-link>
             </form>
       </div>
@@ -112,7 +112,7 @@ export default {
     width: 100%;
   }
 
-  ul.show-mobile-nav {
+  .show-mobile-nav ul {
     display: flex;
   }
 

@@ -123,9 +123,10 @@ nav{
   
 }
 
-#navbarNav{
+.d-flex{
   display: flex;
-  align-items: center;
+  align-items:start;
+  
 }
 
 div#navbarNav > ul{
@@ -133,10 +134,13 @@ div#navbarNav > ul{
   display: flex;
 }
 
+li.class-item{
+  height: 5%;
+}
 
 #nav a {
   font-weight: bold;
-  color: #0468BF;
+  color: #f7f7f7;
   
 }
 
@@ -146,7 +150,7 @@ div#navbarNav > ul{
   border-radius: .5rem;
 }
 
-body > nav > i {
+body > nav > div > div > i {
   cursor: pointer;
   display: block;
   text-align: right;
