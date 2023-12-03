@@ -120,8 +120,19 @@ nav{
   padding: 0;
   text-align: center;
   margin-left:5%;
-
+  
 }
+
+#navbarNav{
+  display: flex;
+  align-items: center;
+}
+
+div#navbarNav > ul{
+  list-style-type: none;
+  display: flex;
+}
+
 
 #nav a {
   font-weight: bold;
@@ -134,3 +145,11 @@ nav{
   background: #F67F3C;
   border-radius: .5rem;
 }
+
+body > nav > i {
+  cursor: pointer;
+  display: block;
+  text-align: right;
+  padding: 3%;
+  color: white;
+  }
