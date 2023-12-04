@@ -16,6 +16,9 @@ import SeatBooking from "./pages/SeatBooking.vue"
 
 import UserProfile from "./pages/UserProfile.vue"
 
+import axios from "axios"
+import { User } from "./types"
+
 
 const router: Router = createRouter({
     history:createWebHistory(),
@@ -34,4 +37,16 @@ const router: Router = createRouter({
 })
 
 
+/*
+// Funzione che viene eseguita prima di ogni navigazione del router
+router.beforeEach(async (to) => {
+    const res = await axios.get("/api/auth/profile")
+    const user = res.data as User | null
+    // Se la pagina richiede il login, ma l'utente non l'ha effettuato, lo rimanda alla pagina di login
+    if (to.meta.requireLogin && !user) {
+      return { path: "/login" }
+    }
+})
+
+*/
 createApp(App).use(router).mount("#app")

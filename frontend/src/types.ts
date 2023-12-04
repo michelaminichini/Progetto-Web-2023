@@ -74,3 +74,10 @@ export interface posto {
     occupato: boolean
     speciale: boolean
 }
+
+export interface User{
+    idutente: number
+    email: string
+    password: string
+    ruolo: "amministratore" | "acquirente"
+}

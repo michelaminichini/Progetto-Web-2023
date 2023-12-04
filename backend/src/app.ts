@@ -1,36 +1,20 @@
+import cookieParser from "cookie-parser"
 import express, {Express} from "express"
 import filmRouter from "./routes/film-router"
 import proiezioneRouter from "./routes/proiezione-router"
 import history from "connect-history-api-fallback"
 
-//import { Request as ExpressRequest } from 'express';
-//import { MulterFile } from 'multer';
-
-// Extend the Request type to include the file property
-//interface RequestWithFile extends ExpressRequest {
-  //file: MulterFile;
-//}
+import authRouter from "./routes/auth-router"
 
 const app: Express = express()
 const port: number = 3000
 
-//const multer = require('multer');
-
-//const storage = multer.memoryStorage(); // In-memory storage for simplicity
-//const upload = multer({ storage: storage });
-
-//app.post('/api/addfilm', upload.single('poster'), (req, res) => {
-  //const { title, genre, director, year } = req.body;
-  //const poster = req.file;
-
-  // Process the film data and poster as needed (e.g., save to database)
-
-  // Respond with a success status
-  //res.status(201).send('Film added successfully');
-//});
+app.use(cookieParser()) // consente ad express di leggere e scrivere i cookie
 
 app.use(filmRouter)
 app.use(proiezioneRouter)
+
+app.use(authRouter)
 
 app.use(history())
 app.use(express.static("public"))

@@ -14,7 +14,7 @@
     <nav class="navbar navbar-expand-lg bg-transparent">
       <div id="nav" class="container-fluid">
         <a title="GalaxyCineverse" class="navbar-brand" href="#">
-          <img src="/img/ImmLogo.png" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
+          <img src="backend/public/img/ImmLogo.png" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
         </a>
         <div id="navbarNav" class="d-flex" style="margin-right: 50%;">
           <i class="fas fa-bars mobile-nav-icon" @click="toggleMobileNav" style="font-size:36px; color:white"></i>
@@ -59,13 +59,30 @@
 </template>
 
 <script lang="ts">
+import axios from "axios"
+import { defineComponent } from 'vue';
+import UserInfo from "./components/user-info.vue"
+import { User } from "./types"
 
-export default {
+export default defineComponent({
+  //components: { UserInfo },
   data() {
+    //return {
+      //user: null as User | null,
+    //};
     return {
       isMobileNavOpen: false,
-    };
+    }
   },
+  //methods: {
+    //async getUser() {
+      //const res = await axios.get("/api/auth/profile")
+      //this.user = res.data
+    //},
+  //},
+  //mounted() {
+    //this.getUser()
+  //},
   mounted() {
     // Set isMobileNavOpen to false initially
     this.isMobileNavOpen = false;
@@ -89,9 +106,17 @@ export default {
       this.isMobileNavOpen = !this.isMobileNavOpen;
     },
   },
-};
+
+
+
+
+
+})
+  
+
 
 </script>
+
 
 <style>
 @import "./styles/style.scss";
