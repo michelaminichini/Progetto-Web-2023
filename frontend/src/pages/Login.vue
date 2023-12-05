@@ -13,10 +13,10 @@ export default defineComponent({
     async onSubmit() {
       try {
         await axios.post("/api/auth/login", {
-          username: this.email,
+          email: this.email,
           password: this.password,
         })
-        window.location.href = "/"
+        window.location.href = "/PostiSala/:idproiezione"
       } catch (e: any) {
         if (e.response) {
           alert(`${e.response.status} - ${e.response.statusText}\n${e.response.data}`)

@@ -1,3 +1,4 @@
+import bodyParser from "body-parser"
 import cookieParser from "cookie-parser"
 import express, {Express} from "express"
 import filmRouter from "./routes/film-router"
@@ -9,6 +10,7 @@ import authRouter from "./routes/auth-router"
 const app: Express = express()
 const port: number = 3000
 
+app.use(bodyParser.json())
 app.use(cookieParser()) // consente ad express di leggere e scrivere i cookie
 
 app.use(filmRouter)

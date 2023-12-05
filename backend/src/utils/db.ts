@@ -1,14 +1,3 @@
-import mysql, { Connection } from 'mysql2'
-
-export const connection: Connection = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: '',
-  database: 'cinema'
-})
-
-/* modo alternativo
-
 import mysql, { Connection } from "mysql2/promise"
 
 let conn: Connection | null = null
@@ -19,9 +8,8 @@ export const getConnection = async () => {
       host: "localhost",
       user: "root",
       password: "",
-      database: "vuepost",
+      database: "cinema",
     })
   }
   return conn
 }
-*/
