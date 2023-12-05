@@ -19,14 +19,19 @@ export default defineComponent({
         axios.get("/api/sala/" + this.$route.params.idproiezione)
         .then(response => {this.sala = response.data[0]; console.log(response.data)})
     },
-    getPosti(){
+    getPostiA(){
       axios.get("/api/posti/" + this.$route.params.idproiezione+"/A")
       .then(response => {this.posti = response.data; console.log(response.data)})
-    }
+    },
+    getPostiB(){
+      axios.get("/api/posti/" + this.$route.params.idproiezione+"/B")
+      .then(response => {this.posti = response.data; console.log(response.data)})
+    },
   },
   mounted() {
     this.getSala()
-    this.getPosti()
+    this.getPostiA()
+    this.getPostiB()
   }
 })
 </script>
@@ -47,6 +52,9 @@ export default defineComponent({
     <div id="app">
       <div class="salaContainer">
         <div v-for= "posto in posti " :key="posto.idproiezione" class="chair">
+            <div class="row">
+                <li class="seat">{{ posto.fila}}{{ posto.numero}}</li>
+            </div>
             <div class="row">
                 <li class="seat">{{ posto.fila}}{{ posto.numero}}</li>
             </div>    

@@ -13,6 +13,8 @@ import PostiSala from "./pages/PostiSala.vue"
 import Pagamento from "./pages/Pagamento.vue"
 import PaginaAdmin from "./pages/PaginaAdmin.vue"
 import SeatBooking from "./pages/SeatBooking.vue"
+import ProvaGiulia from "./pages/provaGiulia.vue"
+import EditFilm from "./pages/EditFilm.vue"
 
 const router: Router = createRouter({
     history:createWebHistory(),
@@ -22,10 +24,12 @@ const router: Router = createRouter({
         { path: "/info", component: InfoCinema },
         { path: "/login", component: Login },
         { path: "/film/:idfilm", component: SchedaFilm },
-        { path: "/seatbooking/:idproiezione", component: SeatBooking},
+        { path: "/seatbooking", component: SeatBooking},
         { path: "/pagamento", component: Pagamento},
         { path:"/paginaAdmin", component: PaginaAdmin},
-        { path: "/PostiSala/:idproiezione", component: PostiSala}
+        { path: "/PostiSala/:idproiezione", component: PostiSala},
+        { path: "/provaGiulia", component: ProvaGiulia},
+        { path: "/film/:idfilm/edit", component:EditFilm}
     ]
 })
 

@@ -2,6 +2,7 @@ import express, {Express} from "express"
 import filmRouter from "./routes/film-router"
 import proiezioneRouter from "./routes/proiezione-router"
 import history from "connect-history-api-fallback"
+import bodyParser from "body-parser"
 
 //import { Request as ExpressRequest } from 'express';
 //import { MulterFile } from 'multer';
@@ -35,6 +36,7 @@ app.use(proiezioneRouter)
 app.use(history())
 app.use(express.static("public"))
 app.use(express.static("dist-frontend"))
+app.use(bodyParser.json())
 
 app.use(function(req, res, next) {
     res.setHeader("Content-Type", "text/plain")

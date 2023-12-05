@@ -23,14 +23,17 @@
             <li class="nav-item">
               <router-link class="nav-link" to="/admin">Admin</router-link>
             </li>
-            <!-- <li class="nav-item">
+            <li class="nav-item">
               <router-link class="nav-link" to="/seatbooking">SeatBooking</router-link>
-            </li> -->
+            </li>
             <li class="nav-item">
               <router-link class="nav-link" to="/pagamento">Pagamento</router-link>
             </li>
             <li class="nav-item">
               <router-link class="nav-link" to="/paginaAdmin">Pagina Admin</router-link>
+            </li>
+            <li>
+              <router-link class="nav-link" to="/ProvaGiulia">Prova Giulia</router-link>
             </li>
           </ul>
         </div>
