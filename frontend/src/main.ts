@@ -33,7 +33,8 @@ const router: Router = createRouter({
         { path: "/seatbooking", component: SeatBooking},
         { path: "/pagamento", component: Pagamento},
         { path:"/paginaAdmin", component: PaginaAdmin},
-        { path: "/PostiSala/:idproiezione", component: PostiSala}
+        { path: "/PostiSala/:idproiezione", component: PostiSala},
+        { path: "/provaGiulia", component: ProvaGiulia}
     ]
 })
 
