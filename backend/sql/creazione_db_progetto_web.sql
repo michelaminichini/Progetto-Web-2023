@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS `cinema`.`film` (
   `locandina` VARCHAR(100) ,
   `lingua` VARCHAR(100) ,
   `attori` VARCHAR(100) ,
-  `attivo` TINYINT NULL DEFAULT 0,
+  `stato` VARCHAR(30),
   PRIMARY KEY (`idfilm`))
 ENGINE = InnoDB;
 

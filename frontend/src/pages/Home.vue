@@ -37,16 +37,24 @@ export default defineComponent({
                             <td>{{ film.regista }}</td>
                         </tr>
                         <tr>
-                            <th>Anno uscita</th>
-                            <td>{{ film.anno }}</td>
-                        </tr>
-                        <tr>
                             <th>Genere</th>
                             <td>{{ film.genere }}</td>
                         </tr>
                         <tr>
+                            <th>Anno di uscita</th>
+                            <td>{{ film.anno }}</td>
+                        </tr>
+                        <tr>
                             <th>Durata</th>
                             <td>{{ film.durata }} min</td>
+                        </tr>
+                        <tr>
+                            <th>Trama</th>
+                            <td>{{ film.descrizione }}</td> 
+                        </tr>
+                        <tr>
+                            <th>Attori principali</th>
+                            <td>{{ film.attori }}</td> 
                         </tr>
                         <tr>
                             <th>Lingua</th>
@@ -78,13 +86,12 @@ article {
 
 table {
     display: inline;
-    margin-left: 10%;
-    width: 100%;
-    margin-top: 0px;
+    margin-left: 5%;
+    width: 50%;
 }
 
 td {
-    width:300px;
+    width:700px;
     border: 2px solid white;
     padding: 2px;
     text-align: center;

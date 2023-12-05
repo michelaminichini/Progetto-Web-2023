@@ -11,22 +11,9 @@ export interface Film{
     locandina: string
     lingua: string
     attori: string
-    attivo: string
+    attivo: number
+    editing: {[ key: string] : boolean}
 }
-
-export interface Modifica{
-    idfilm:number
-    titolo: string
-    regista: string
-    genere: string
-    durata: number
-    anno: string
-    descrizione: string
-    locandina: string
-    lingua: string
-    attori: string
-}
-
 
 /* export interface Prox{
     id_film: number
@@ -86,4 +73,11 @@ export interface posto {
     numero: number
     occupato: boolean
     speciale: boolean
+}
+
+export interface User{
+    idutente: number
+    email: string
+    password: string
+    ruolo: "amministratore" | "acquirente"
 }
