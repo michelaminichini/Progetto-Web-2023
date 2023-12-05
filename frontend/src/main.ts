@@ -22,6 +22,8 @@ import Profilo from "./pages/Profilo.vue"
 import axios from "axios"
 import { User } from "./types"
 
+import ProvaGiulia from "./pages/provaGiulia.vue"
+import EditFilm from "./pages/EditFilm.vue"
 
 
 
@@ -34,12 +36,17 @@ const router: Router = createRouter({
         { path: "/login", component: Login, meta: { requireLogout: true }, },
         { path: "/register", component: Register, meta: { requireLogout: true },},
         { path: "/film/:idfilm", component: SchedaFilm },
-        { path: "/seatbooking/:idproiezione", component: SeatBooking},
+        { path: "/seatbooking", component: SeatBooking},
         { path: "/pagamento", component: Pagamento},
         { path:"/paginaAdmin", component: PaginaAdmin},
+<<<<<<< HEAD
         { path: "/PostiSala/:idproiezione", component: PostiSala, meta: { requireLogin: true },},
         { path: "/profiloutente", component: UserProfile},
         { path: "/profilo", component: Profilo}
+=======
+        { path: "/PostiSala/:idproiezione", component: PostiSala},
+        { path: "/provaGiulia", component: ProvaGiulia}
+>>>>>>> f081250779bb26a629547c846a11a1f837df1cb3
     ]
 })
 

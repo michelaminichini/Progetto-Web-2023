@@ -2,12 +2,12 @@
 
 import {defineComponent} from "vue"
 import axios from "axios"
-import {Prox} from "../types" //qui Prox si riferisce al tipo di interfaccia creata nel file types.ts
+import {Film} from "../types" //si riferisce al tipo di interfaccia creata nel file types.ts
 
 export default defineComponent({
     data(){
         return {
-        prossimiFilm: [] as Prox[]
+        prossimiFilm: [] as Film[]
         }
     },
     methods: {
@@ -30,22 +30,22 @@ export default defineComponent({
 
     <body>
         <div id="app">
-            <div v-for= "film in prossimiFilm" :key="film.id_film" class="cineContainer">
+            <div v-for= "film in prossimiFilm" :key="film.idfilm" class="cineContainer">
                 <article>
-                    <h2>{{ film.titolo_film }}</h2>
+                    <h2>{{ film.titolo }}</h2>
                     <img style="height: 400px; width: 300px;" :src="'/img/' + film.locandina" alt=""/>
                     <table>
                         <tr>
                             <th>Diretto da</th>
-                            <td>{{ film.regista_film }}</td>
+                            <td>{{ film.regista }}</td>
                         </tr>
                         <tr>
                             <th>Anno uscita</th>
-                            <td>{{ film.anno_uscita }}</td>
+                            <td>{{ film.anno }}</td>
                         </tr>
                         <tr>
                             <th>Genere</th>
-                            <td>{{ film.genere_film }}</td>
+                            <td>{{ film.genere }}</td>
                         </tr>
                     </table>  
                 </article>

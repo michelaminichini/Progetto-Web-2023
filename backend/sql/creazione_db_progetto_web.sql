@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS `cinema`.`film` (
   `locandina` VARCHAR(100) ,
   `lingua` VARCHAR(100) ,
   `attori` VARCHAR(100) ,
-  `attivo` TINYINT NULL DEFAULT 0,
+  `stato` VARCHAR(30),
   PRIMARY KEY (`idfilm`))
 ENGINE = InnoDB;
 
@@ -190,7 +190,7 @@ CREATE TABLE IF NOT EXISTS `cinema`.`pagamenti` (
 -- ------------------------------------------------------------
 -- Table `cinema`.`prossimamente`
 -- -----------------------------------------------------------
-CREATE TABLE IF NOT EXISTS `cinema`.`prossimamente` (
+/* CREATE TABLE IF NOT EXISTS `cinema`.`prossimamente` (
   `id_film` INT (6) NOT NULL AUTO_INCREMENT,
   `titolo_film` VARCHAR(100) NOT NULL,
   `regista_film` VARCHAR(100) NOT NULL,
@@ -200,7 +200,7 @@ CREATE TABLE IF NOT EXISTS `cinema`.`prossimamente` (
   `trailer` VARCHAR(100) ,
   `locandina` VARCHAR(100) ,
   PRIMARY KEY (`id_film`))
- ENGINE = InnoDB;
+ ENGINE = InnoDB; */
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;

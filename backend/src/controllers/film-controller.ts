@@ -1,16 +1,13 @@
 import { Request, Response } from "express";
 import {getConnection} from "../utils/db"
 
-
-
 export async function allFilms(req:Request, res: Response) {
     const connection = await getConnection()
     const [results] = await connection.execute(
-        `SELECT idfilm, titolo, regista, genere, durata, nazione, anno, descrizione, trailer, locandina, lingua, attori, stato FROM film`,
+        `SELECT idfilm, titolo, regista, genere, durata, nazione, anno, descrizione, trailer, locandina, lingua, attori, attivo FROM film`,
     [],
    
     )
-    //console.log(results)
     res.json(results)
 }
 
@@ -33,6 +30,16 @@ export async function scheda(req:Request, res:Response) {
     )
     res.json(results)
 }
+
+export async function nuovofilm(req:Request, res: Response) {
+    const connection = await getConnection()
+    const [results] = await connection.execute(
+        `INSERT INTO film (titolo) VALUES (' ')`,
+    )
+    res.json(results)
+}
+
+
 
 
 

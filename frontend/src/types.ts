@@ -3,7 +3,7 @@ export interface Film{
     titolo: string
     regista: string
     genere: string
-    durata: number
+    durata: string
     nazione: string
     anno: string
     descrizione: string
@@ -15,7 +15,7 @@ export interface Film{
     editing: {[ key: string] : boolean}
 }
 
-export interface Prox{
+/* export interface Prox{
     id_film: number
     titolo_film: string
     regista_film: string
@@ -24,7 +24,7 @@ export interface Prox{
     descrizione: string
     trailer: string
     locandina: string
-}
+} */
 
 export interface SchedaF{
     idfilm: number
