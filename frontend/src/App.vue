@@ -28,16 +28,16 @@
             <li class="nav-item" style="margin-right: 5%;">
               <router-link class="nav-link" to="/info">Info</router-link>
             </li>
-            <li class="nav-item">
+            <li class="nav-item" style="margin-right: 5%;">
               <router-link class="nav-link" to="/seatbooking">SeatBooking</router-link>
             </li> 
             <!--li class="nav-item">
               <router-link class="nav-link" to="/pagamento">Pagamento</router-link>
             </li-->
-            <li class="nav-item">
+            <li class="nav-item" style="margin-right: 5%;">
               <router-link class="nav-link" to="/paginaAdmin">Pagina Admin</router-link>
             </li>
-            <li class="nav-item">
+            <li class="nav-item" style="margin-right: 5%;">
               <router-link class="nav-link" to="/provaGiulia">Prova Giulia</router-link>
             </li>
           </ul>

@@ -3,7 +3,7 @@
 import {defineComponent} from "vue"
 import axios from "axios"
 import {Film} from "../types" // tipo di interfaccia creata nel file types.ts
-import { Modifica } from "../types"
+//import { Modifica } from "../types"
 
 interface EditingCell{
     rowIndex: number
@@ -105,9 +105,9 @@ export default defineComponent({
                         <td>{{Film.nazione}}</td>
                         <td>{{Film.anno}}</td>
 
-                        <td v-if="!isEditing(rowIndex, Film.attivo)" @click="startEditing(rowIndex, Film.attivo)">{{ Film.attivo }}</td>
+                        <td v-if="!isEditing(rowIndex, Film.stato.toString())" @click="startEditing(rowIndex, Film.stato.toString())">{{ Film.stato }}</td>
                         <td v-else>
-                        <input type="text" v-model="Film.attivo" @blur="stopEditing" />
+                        <input type="text" v-model="Film.stato" @blur="stopEditing" />
                         </td>
                         
                         

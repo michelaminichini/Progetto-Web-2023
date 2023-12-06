@@ -11,10 +11,25 @@ export interface Film{
     locandina: string
     lingua: string
     attori: string
-    attivo: number
+    stato: number
     editing: {[ key: string] : boolean}
 }
-
+export interface FilmE{
+    idfilm: string
+    titolo: string
+    regista: string
+    genere: string
+    durata: string
+    nazione: string
+    anno: string
+    descrizione: string
+    trailer: string
+    locandina: string
+    lingua: string
+    attori: string
+    stato: string
+    editing: {[ key: string] : boolean}
+}
 /* export interface Prox{
     id_film: number
     titolo_film: string
