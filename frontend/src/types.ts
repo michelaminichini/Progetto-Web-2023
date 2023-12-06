@@ -11,7 +11,7 @@ export interface Film{
     locandina: string
     lingua: string
     attori: string
-    attivo: number
+    stato: number
     editing: {[ key: string] : boolean}
 }
 export interface FilmE{
@@ -27,7 +27,7 @@ export interface FilmE{
     locandina: string
     lingua: string
     attori: string
-    attivo: string
+    stato: string
     editing: {[ key: string] : boolean}
 }
 /* export interface Prox{

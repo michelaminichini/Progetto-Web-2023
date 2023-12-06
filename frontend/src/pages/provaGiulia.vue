@@ -78,7 +78,7 @@ export default defineComponent({
                             <td>{{ film.durata }}</td>
                             <td>{{ film.nazione }}</td>
                             <td>{{ film.anno }}</td>
-                            <td>{{ film.attivo }}</td>
+                            <td>{{ film.stato }}</td>
                             <td>
                                 <button type="button" class="btn btn-success">
                                 Edit   

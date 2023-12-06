@@ -13,7 +13,7 @@ export async function allFilms(req:Request, res: Response) {
 export async function prossimiFilm(req:Request, res: Response) {
     const connection = await getConnection()
     const [results] = await connection.execute(
-        `SELECT id_film, titolo_film, regista_film, genere_film, anno_uscita, descrizione, trailer, locandina FROM prossimamente`,
+        `SELECT idfilm, titolo, regista, genere, anno, descrizione, trailer, locandina FROM film WHERE stato=2`,
         [],
     )
     res.json(results)
@@ -36,6 +36,14 @@ export async function nuovofilm(req:Request, res: Response) {
     res.json(results)
 }
 
+export async function currentFilm(req:Request, res: Response) {
+    const connection = await getConnection()
+    const [results] = await connection.execute(
+        `SELECT idfilm, titolo, regista, genere, anno, descrizione, trailer, locandina,lingua, attori FROM film WHERE stato=1`,
+        [],
+    )
+    res.json(results)
+}
 
 
 

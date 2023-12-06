@@ -105,9 +105,9 @@ export default defineComponent({
                         <td>{{Film.nazione}}</td>
                         <td>{{Film.anno}}</td>
 
-                        <td v-if="!isEditing(rowIndex, Film.attivo)" @click="startEditing(rowIndex, Film.attivo)">{{ Film.attivo }}</td>
+                        <td v-if="!isEditing(rowIndex, Film.stato)" @click="startEditing(rowIndex, Film.stato)">{{ Film.stato }}</td>
                         <td v-else>
-                        <input type="text" v-model="Film.attivo" @blur="stopEditing" />
+                        <input type="text" v-model="Film.stato" @blur="stopEditing" />
                         </td>
                         
                         
