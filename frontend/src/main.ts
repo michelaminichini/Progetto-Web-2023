@@ -15,7 +15,7 @@ import PaginaAdmin from "./pages/PaginaAdmin.vue"
 import SeatBooking from "./pages/SeatBooking.vue"
 import UserProfile from "./pages/UserProfile.vue"
 import ProvaGiulia from "./pages/provaGiulia.vue"
-import EditFilm from "./pages/EditFilm.vue"
+//import EditFilm from "./pages/EditFilm.vue"
 
 import Register from "./pages/Registrazione.vue"
 import Profilo from "./pages/Profilo.vue"
