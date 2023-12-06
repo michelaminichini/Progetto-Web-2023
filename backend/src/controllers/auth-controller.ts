@@ -71,7 +71,9 @@ export const login = async (req: Request, res: Response) => {
   
     // Crea un JWT contenente i dati dell'utente e lo imposta come cookie
     setAccessToken(req, res, userData)
-    res.json({ message: "Login effettuato" })
+    console.log("User:", userData)
+    res.json(userData)
+    
 }
 
 
