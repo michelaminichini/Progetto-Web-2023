@@ -2,13 +2,13 @@
 
 import {defineComponent} from "vue"
 import axios from "axios"
-import {Film} from "../types" 
+import {FilmE} from "../types" 
 
 
 export default defineComponent({
     data(){
         return {
-            films: [] as Film[],
+            films: [] as FilmE[],
             filmDetails:{
                 idfilm: 0,
                 titolo: '',
@@ -29,16 +29,16 @@ export default defineComponent({
             axios.get("/api/films").then(response => {this.films = response.data; console.log(response.data)});
         },
 
-        toggleEdit<T extends keyof Film>(filmId: number, attribute: T){
-            const film = this.films.find((f: Film)=> f.idfilm === filmId);
+        toggleEdit<T extends keyof FilmE>(filmId: string, attribute: T){
+            const film = this.films.find((f: FilmE)=> f.idfilm === filmId);
             if (film){           
                 film.editing[attribute] = true;
                 this.filmDetails[attribute as string] = film[attribute] as any;
             }
             
         },
-        saveChanges<T extends keyof Film>(filmId: number, attribute: T){
-            const film = this.films.find((f: Film)=> f.idfilm === filmId);
+        saveChanges<T extends keyof FilmE>(filmId: string, attribute: T){
+            const film = this.films.find((f: FilmE)=> f.idfilm === filmId);
             if (film){
                 film[attribute]=this.filmDetails[attribute as string] as any;
                 film.editing[attribute] = false;
@@ -101,10 +101,10 @@ export default defineComponent({
                             <th>Lingua</th>
                             <td>{{ film.lingua }}</td> 
                         </tr> -->
-                    <button @click="toggleEdit(film.idfilm,field as keyof Film)" v-for="field in Object.keys(film)" :key="field">Edit {{ field }}</button>
-                    <button @click="saveChanges(film.idfilm,field as keyof Film)" v-for="field in Object.keys(film)" :key="field">Save {{ field }}</button>"
+                    <button @click="toggleEdit(film.idfilm,field as keyof FilmE)" v-for="field in Object.keys(film)" :key="field">Edit {{ field }}</button>
+                    <button @click="saveChanges(film.idfilm,field as keyof FilmE)" v-for="field in Object.keys(film)" :key="field">Save {{ field }}</button>"
                 </article>
-               <!-- <RouterLink :to="'/film/' + film.idfilm">Scheda Film</RouterLink>-->
+               <!-- <RouterLink :to="'/film/' + film.idfilm">Scheda FilmE</RouterLink>-->
 
             </div>
         </div>
