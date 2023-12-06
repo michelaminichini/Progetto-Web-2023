@@ -13,14 +13,14 @@ import PostiSala from "./pages/PostiSala.vue"
 import Pagamento from "./pages/Pagamento.vue"
 import PaginaAdmin from "./pages/PaginaAdmin.vue"
 import SeatBooking from "./pages/SeatBooking.vue"
-
 import UserProfile from "./pages/UserProfile.vue"
+import ProvaGiulia from "./pages/provaGiulia.vue"
+import EditFilm from "./pages/EditFilm.vue"
 
 import axios from "axios"
 import { User } from "./types"
 
-import ProvaGiulia from "./pages/provaGiulia.vue"
-import EditFilm from "./pages/EditFilm.vue"
+
 
 const router: Router = createRouter({
     history:createWebHistory(),
@@ -32,9 +32,10 @@ const router: Router = createRouter({
         { path: "/film/:idfilm", component: SchedaFilm },
         { path: "/seatbooking", component: SeatBooking},
         { path: "/pagamento", component: Pagamento},
-        { path:"/paginaAdmin", component: PaginaAdmin},
+        { path: "/paginaAdmin", component: PaginaAdmin},
         { path: "/PostiSala/:idproiezione", component: PostiSala},
-        { path: "/provaGiulia", component: ProvaGiulia}
+        { path: "/profiloutente", component: UserProfile},
+        { path: "/provaGiulia", component: ProvaGiulia},
     ]
 })
 

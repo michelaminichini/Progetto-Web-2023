@@ -21,18 +21,17 @@ export default defineComponent({
                 locandina: '',
                 lingua: '',
                 attori: ''
-            } as {[ key: string] : any}
+            } as {[ key: string] : any},
         }
     },
     methods: {
         getFilminLista(){
-            axios.get("/api/films").then(response => this.films = response.data)
+            axios.get("/api/films").then(response => {this.films = response.data; console.log(response.data)});
         },
 
         toggleEdit<T extends keyof Film>(filmId: number, attribute: T){
             const film = this.films.find((f: Film)=> f.idfilm === filmId);
-            if (film){
-                
+            if (film){           
                 film.editing[attribute] = true;
                 this.filmDetails[attribute as string] = film[attribute] as any;
             }
@@ -54,10 +53,10 @@ export default defineComponent({
     },
     
     mounted(){
-        this.getFilminLista()
+        this.getFilminLista();
    }
 
-})
+});
 
 
 </script>

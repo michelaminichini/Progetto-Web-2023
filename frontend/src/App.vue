@@ -14,7 +14,7 @@
     <nav class="navbar navbar-expand-lg bg-transparent">
       <div id="nav" class="container-fluid">
         <a title="GalaxyCineverse" class="navbar-brand" href="#">
-          <img src="backend/public/img/ImmLogo.png" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
+          <img src="/img/ImmLogo.png" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
         </a>
         <div id="navbarNav" class="d-flex" style="margin-right: 50%;">
           <i class="fas fa-bars mobile-nav-icon" @click="toggleMobileNav" style="font-size:36px; color:white"></i>
@@ -29,16 +29,16 @@
               <router-link class="nav-link" to="/info">Info</router-link>
             </li>
             
-            <li class="nav-item">
+            <li class="nav-item" style="margin-right: 5%;">
               <router-link class="nav-link" to="/seatbooking">SeatBooking</router-link>
             </li> 
-            <li class="nav-item">
+            <li class="nav-item" style="margin-right: 5%;">
               <router-link class="nav-link" to="/pagamento">Pagamento</router-link>
             </li>
-            <li class="nav-item">
+            <li class="nav-item" style="margin-right: 5%;">
               <router-link class="nav-link" to="/paginaAdmin">Pagina Admin</router-link>
             </li>
-            <li class="nav-item">
+            <li class="nav-item" style="margin-right: 5%;">
               <router-link class="nav-link" to="/provaGiulia">Prova Giulia</router-link>
             </li>
           </ul>
