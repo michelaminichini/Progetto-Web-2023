@@ -17,8 +17,13 @@ import UserProfile from "./pages/UserProfile.vue"
 import ProvaGiulia from "./pages/provaGiulia.vue"
 import EditFilm from "./pages/EditFilm.vue"
 
+import Register from "./pages/Registrazione.vue"
+import Profilo from "./pages/Profilo.vue"
+
 import axios from "axios"
 import { User } from "./types"
+
+
 
 
 
@@ -28,19 +33,21 @@ const router: Router = createRouter({
         { path: "/", component: Home },
         { path: "/prossimamente", component: Prossimamente },
         { path: "/info", component: InfoCinema },
-        { path: "/login", component: Login },
+        { path: "/login", component: Login},
+        { path: "/register", component: Register},
         { path: "/film/:idfilm", component: SchedaFilm },
         { path: "/seatbooking", component: SeatBooking},
         { path: "/pagamento", component: Pagamento},
-        { path: "/paginaAdmin", component: PaginaAdmin},
-        { path: "/PostiSala/:idproiezione", component: PostiSala},
+        { path:"/paginaAdmin", component: PaginaAdmin},
+        { path: "/PostiSala/:idproiezione", component: PostiSala, meta: { requireLogin: true },},
         { path: "/profiloutente", component: UserProfile},
-        { path: "/provaGiulia", component: ProvaGiulia},
+        { path: "/profilo", component: Profilo},
+        { path: "/provaGiulia", component: ProvaGiulia}
     ]
 })
 
 
-/*
+
 // Funzione che viene eseguita prima di ogni navigazione del router
 router.beforeEach(async (to) => {
     const res = await axios.get("/api/auth/profile")
@@ -49,7 +56,11 @@ router.beforeEach(async (to) => {
     if (to.meta.requireLogin && !user) {
       return { path: "/login" }
     }
+    // Se la pagina richiede il logout, ma l'utente ha effettuato l'accesso, lo rimanda alla home
+    if (to.meta.requireLogout && user) {
+        return { path: "/" }
+    }
 })
 
-*/
+
 createApp(App).use(router).mount("#app")

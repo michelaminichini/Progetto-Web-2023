@@ -17,8 +17,11 @@
   "devDependencies": {
     "@types/node": "^20.9.1",
     "@vitejs/plugin-vue": "^4.2.3",
+    "autoprefixer": "^10.4.16",
+    "postcss": "^8.4.32",
     "sass": "^1.69.5",
     "scss": "^0.2.4",
+    "tailwindcss": "^3.3.6",
     "ts-node-dev": "^2.0.0",
     "typescript": "^5.2.2",
     "vite": "^4.4.5",

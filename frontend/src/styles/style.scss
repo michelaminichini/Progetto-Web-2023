@@ -130,7 +130,12 @@ nav{
 .d-flex{
   display: flex;
   align-items:start;
+  background: none;
   
+}
+
+.d-flex:hover{
+  background: #001C38;
 }
 
 div#navbarNav > ul{

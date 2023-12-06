@@ -17,15 +17,30 @@ export default defineComponent({
 </script>
 
 <template>
-  <span class="text-sm">{{ user?.email }}</span>
+  <div id="div-info">
+    <span class="text-sm">{{ user?.email }}</span>
+    <button id="bottone-logout" class="btn !px-2" @click="logout">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="h-5 w-5">
+        <path
+          fill="none"
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="1.5"
+          d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15m3 0l3-3m0 0l-3-3m3 3H9"
+        />
+      </svg>
+    </button>
+  </div>
   <div
+    id="div-utente"
     class="h-9 w-9 flex rounded-full"
     :class="{ 'bg-blue-500': user?.ruolo != 'amministratore', 'bg-rose-500': user?.ruolo == 'amministratore' }"
   >
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 20 20"
-      class="h-5 w-5 text-white/70 m-auto"
+      class="h-2 w-2 text-white/70 m-auto"
     >
       <path
         fill="currentColor"
@@ -33,16 +48,37 @@ export default defineComponent({
       />
     </svg>
   </div>
-  <button class="btn !px-2" @click="logout">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="h-5 w-5">
-      <path
-        fill="none"
-        stroke="currentColor"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        stroke-width="1.5"
-        d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15m3 0l3-3m0 0l-3-3m3 3H9"
-      />
-    </svg>
-  </button>
 </template>
+
+<style scoped>
+
+#bottone-logout{
+  display: inline; 
+  background-color: rgb(0, 0, 255); 
+  color:white; 
+  width: 50px;
+  
+}
+
+div > svg{
+  max-width: 100px;
+  display: inline;
+  padding-top:5%;
+
+}
+
+#div-info{
+  display: block;
+  text-align: center;
+}
+
+#div-utente{
+  display: block;
+  text-align: center;
+  margin-bottom: 5%;
+
+}
+
+
+
+</style>
