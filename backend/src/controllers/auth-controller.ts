@@ -2,15 +2,14 @@ import { Request, Response } from "express";
 import {getConnection} from "../utils/db"
 import bcrypt from "bcrypt"
 import { decodeAccessToken, deleteAccessToken, setAccessToken } from "../utils/auth";
-import { Connection } from "mysql2/promise";
+//import { Connection } from "mysql2/promise";
 
 
 
 export const register = async (req: Request, res: Response) => {
-
-  
+  //estrarre username (email) e password dal body
     const { email, password } = req.body
-
+  //verificare che la mail sia disponibile
     const connection = await getConnection()
     const [users] = await connection.execute(`SELECT email FROM utente WHERE email=?`, [email])
     if (Array.isArray(users) && users.length > 0){
@@ -28,7 +27,6 @@ export const register = async (req: Request, res: Response) => {
     setAccessToken(req,res,newUser)
 
     res.json({message: "Registrazione effettuata"})
-
     
 }
 
@@ -45,7 +43,7 @@ export const login = async (req: Request, res: Response) => {
     const { email, password } = req.body
   
     // Esegue la query al database per ottenere i dati dell'utente in base allo username
-    const connection: Connection = await getConnection()
+    const connection = await getConnection()
     const [results]= await connection.execute(
       "SELECT idutente, email, password, ruolo FROM utente WHERE email=?",
       [email]
@@ -60,20 +58,19 @@ export const login = async (req: Request, res: Response) => {
     const userData = results[0] as any
   
     // Confronta l'hash della password fornita con quello nel database
-   // const passwordOk = await bcrypt.compare(password, userData.password)
+    const passwordOk = await bcrypt.compare(password, userData.password)
   
     // Errore se la password è errata
-    //if (!passwordOk) {
-      //res.status(400).send("Credenziali sbagliate.")
-      //return
-    //}
+    if (!passwordOk) {
+      res.status(400).send("Credenziali sbagliate.")
+      return
+    }
   
     // Importante! Rimuove la password dall'oggetto utente
     delete userData.password
   
     // Crea un JWT contenente i dati dell'utente e lo imposta come cookie
     setAccessToken(req, res, userData)
-  
     res.json({ message: "Login effettuato" })
 }
 
@@ -96,3 +93,45 @@ export const getProfile = async (req: Request, res: Response) => {
   const user = decodeAccessToken(req, res)
   res.json(user)
 }
+
+/*
+
+export const userRole = async (req: Request, res: Response) => {
+  try {
+    // Assuming you have a middleware or authentication logic to get the current user
+    // For simplicity, this example assumes a user object is attached to the request
+    //const currentUser: any = req['user']; // Assuming the user is attached to the request
+
+    //if (!currentUser) {
+      //res.status(401).json({ error: 'User not authenticated' });
+      //return;
+    //}
+    const { email, password, ruolo } = req.body
+    const connection = await getConnection();
+    
+    // Assuming your User entity has a "role" field
+    const [user] = await connection.execute("SELECT ruolo FROM utente WHERE email=?", [email]);
+
+    //if (user) {
+      
+
+      // Check the user role and redirect accordingly
+      if (ruolo === 'amministratore') {
+        res.json({ ruolo });
+        // Redirect admin to the admin page
+        res.redirect('/provaGiulia');
+      } else if (ruolo === 'acquirente') {
+        res.json({ ruolo });
+        // Redirect user to the user page
+        res.redirect("/PostiSala/:idproiezione");
+      } else {
+        // Handle other roles or invalid roles
+        res.status(403).json({ error: 'Invalid user role' });
+      }
+      
+  } catch (error) {
+    console.error('Error fetching user role:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+}
+*/

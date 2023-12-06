@@ -25,29 +25,30 @@ export default defineComponent({
 
 <template>
   <header class="flex items-center p-6">
-    <h1>Accedi qui al tuo profilo personale</h1>
+    <h2>Accedi qui al tuo profilo personale</h2>
     <div class="grow flex justify-end items-center gap-3">
       <UserInfo v-if="user" :user="user" />
       <template v-else>
         <RouterLink to="/login" class="btn" id="bottone-login">Login</RouterLink>
+        <h2>Oppure registrati se non possiedi già un account</h2>
         <RouterLink to="/register" class="btn !bg-blue-500 text-white" id="bottone-reg">Registrati</RouterLink>
       </template>
     </div>
-    <RouterLink to="/" class="text-blue-500 font-bold" style="display: block; margin: 5%;">Indietro</RouterLink>
+    <RouterLink to="/" class="text-white font-bold" style="display: block; margin: 5%;">Indietro</RouterLink>
   </header>
   <main class="grow py-6 border-y border-slate-200 mx-6">
     <!-- Passa l'utente come prop a tutte le pagine del router -->
     <RouterView :user="user" />
   </main>
-  <!--footer class="flex p-6">
-    <RouterLink to="/" class="text-blue-500 font-bold m-auto">Vuepost</RouterLink>
-  </footer-->
+  <RouterLink to="/profiloutente" class="btn btn-primary" role="button" id="button">Vedi profilo</RouterLink> 
 </template>
 
 <style scoped>
-h1{
-  margin-left: 5%;
-  margin-bottom: 5%;
+h2{
+  display: block;
+  margin-top:5%;
+  margin-bottom: 2%;
+  text-align: center;
 }
 
 #bottone-login{

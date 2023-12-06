@@ -33,20 +33,16 @@ const router: Router = createRouter({
         { path: "/", component: Home },
         { path: "/prossimamente", component: Prossimamente },
         { path: "/info", component: InfoCinema },
-        { path: "/login", component: Login, meta: { requireLogout: true }, },
-        { path: "/register", component: Register, meta: { requireLogout: true },},
+        { path: "/login", component: Login},
+        { path: "/register", component: Register},
         { path: "/film/:idfilm", component: SchedaFilm },
         { path: "/seatbooking", component: SeatBooking},
         { path: "/pagamento", component: Pagamento},
         { path:"/paginaAdmin", component: PaginaAdmin},
-<<<<<<< HEAD
         { path: "/PostiSala/:idproiezione", component: PostiSala, meta: { requireLogin: true },},
         { path: "/profiloutente", component: UserProfile},
-        { path: "/profilo", component: Profilo}
-=======
-        { path: "/PostiSala/:idproiezione", component: PostiSala},
+        { path: "/profilo", component: Profilo},
         { path: "/provaGiulia", component: ProvaGiulia}
->>>>>>> f081250779bb26a629547c846a11a1f837df1cb3
     ]
 })
 

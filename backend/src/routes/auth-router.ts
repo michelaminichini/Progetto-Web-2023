@@ -7,5 +7,7 @@ router.post("/api/auth/register", authController.register)
 router.post("/api/auth/login", authController.login)
 router.post("/api/auth/logout", authController.logout)
 router.get("/api/auth/profile", authController.getProfile)
+//router.get("/api/auth/ruolo", authController.userRole)
+
 
 export default router

@@ -68,15 +68,15 @@ div > svg{
 }
 
 #div-info{
-  border-width: 3%;
-  border-radius: 2%;
-  float: right;
-  margin-top:5%;
-  margin-right: 5%;
+  display: block;
+  text-align: center;
 }
 
 #div-utente{
-  margin-bottom: 10%;
+  display: block;
+  text-align: center;
+  margin-bottom: 5%;
+
 }
 
 
