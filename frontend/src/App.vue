@@ -73,7 +73,7 @@ export default defineComponent({
   <body> 
     <nav class="navbar navbar-expand-lg bg-transparent">
       <div id="nav" class="container-fluid">
-        <a title="GalaxyCineverse" class="navbar-brand" href="#">
+        <a title="GalaxyCineverse" class="navbar-brand" href="http://localhost:5173/">
           <img src="/ImmLogo.png" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
         </a>
         <div id="navbarNav" class="d-flex" style="margin-right: 50%;">
