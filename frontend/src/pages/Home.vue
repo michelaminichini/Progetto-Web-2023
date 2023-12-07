@@ -71,6 +71,7 @@ export default defineComponent({
 
 <style scoped>
 
+
 body > div > div > article > h2{
     padding:2%;
     margin:0;
@@ -88,6 +89,7 @@ table {
     display: inline;
     margin-left: 5%;
     width: 50%;
+    border-collapse: collapse;
 }
 
 td {
@@ -99,5 +101,19 @@ td {
 
 th {
     background-color: transparent;
+}
+
+
+@media only screen and (max-width: 600px) {
+    th, td {
+      display: block;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    th {
+      text-align: left;
+      background-color:transparent;
+    }
 }
 </style>

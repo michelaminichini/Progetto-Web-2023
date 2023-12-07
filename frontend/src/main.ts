@@ -39,7 +39,7 @@ const router: Router = createRouter({
         { path: "/pagamento", component: Pagamento},
         { path:"/paginaAdmin", component: PaginaAdmin},
         { path: "/PostiSala/:idproiezione", component: PostiSala, meta: { requireLogin: true },},
-        { path: "/profiloutente", component: UserProfile},
+        { path: "/profiloutente", component: UserProfile, meta: { requireLogin: true },},
         { path: "/profilo", component: Profilo},
         { path: "/provaGiulia", component: ProvaGiulia}
     ]
@@ -51,6 +51,7 @@ const router: Router = createRouter({
 router.beforeEach(async (to) => {
     const res = await axios.get("/api/auth/profile")
     const user = res.data as User | null
+    console.log("User è:", res)
     // Se la pagina richiede il login, ma l'utente non l'ha effettuato, lo rimanda alla pagina di login
     if (to.meta.requireLogin && !user) {
       return { path: "/login" }

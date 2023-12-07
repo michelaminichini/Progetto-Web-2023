@@ -1,5 +1,7 @@
 <script lang="ts">
-export default{
+import { defineComponent } from "vue"
+
+export default defineComponent({
     data(){
         return {
             activeDiv: null,
@@ -10,20 +12,24 @@ export default{
             this.activeDiv = this.activeDiv === index ? null: index;
         },
     },
-};
 
+
+})
+    
 </script>
 
 <template>
     <head>
-        <title>Impostazioni Profilo Personale</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     </head>
 
     <body>
-        <div class="container">
-            <div class="nav-container">
-                <nav>
+        <section>
+            <h1>Impostazioni Profilo Personale</h1>
+        </section>
+        <div id="CONTAINER" class="container">
+            <div id="NavContainer" class="nav-container">
+                <nav id="nav-profilo-utente">
                     <a class="tab active" @click="toggleDiv(0)">
                         <i class="glyphicon glyphicon-user"></i>
                     </a>
@@ -94,41 +100,30 @@ export default{
 
                 <button class="btn">Salva</button>
             </div>
-                
         </div>
-        
     </body>
-
 </template>
 
 
 
 <style scoped>
-*{
-    margin:0;
-    padding:0;
-}
-
 
 body {
-    overflow-x:hidden;
-    background-color: rgb(77, 77, 223);
-    margin-bottom: 6%;
-    height: 700px;
-
+    background-color: #001C38;
+    width: 100%;
 }
 
-.container{
+#CONTAINER{
     background: #fff;
     width:540px;
-    height:450px;
+    height:500px;
     margin:0 auto;
     position:relative;
     margin-top:10%;
     box-shadow: 2px 5px 20px rgba(119,119,119,.5);
 }
 
-.nav-container{
+#NavContainer{
     float:left;
     top:-5%;
     left:5%;
@@ -140,7 +135,7 @@ body {
     border: .1em solid #fff;
 }
 
-nav a {
+#nav-profilo-utente > a {
     list-style:none;
     padding: 35px;
     color:#fff;
@@ -149,17 +144,17 @@ nav a {
     transition: all .3s ease-in-out;
 }
 
-nav a:hover{
+#nav-profilo-utente > a:hover{
     color:#0d2f26;
     cursor: pointer;
     transform: scale(1.2);
 }
 
-nav a:first-child{
+#nav-profilo-utente > a:first-child{
     margin-top:7px;
 }
 
-nav a.active{
+#nav-profilo-utente > a.active{
     color:#0d2f26;
 }
 
@@ -183,7 +178,23 @@ nav a.active{
     width: 80%;
 }
 
-h1{
+#CONTAINER > .primo > h1{
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 2.3rem;
+    color:rgb(32, 54, 72);
+    margin-top:40px;
+    margin-bottom: 25px;
+}
+
+#CONTAINER > .secondo > h1{
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 2.3rem;
+    color:rgb(32, 54, 72);
+    margin-top:40px;
+    margin-bottom: 25px;
+}
+
+#CONTAINER > .terzo > h1{
     font-family:Verdana, Geneva, Tahoma, sans-serif;
     font-size: 2.3rem;
     color:rgb(32, 54, 72);
@@ -230,7 +241,18 @@ h2{
     color: #fff;
 }
 
+section > h1{
+    color: white;
+    margin:2%;
+    padding:0;
+    background-color: #001C38;
+    width: 100%;
+}
 
+footer{
+    margin:0;
+    padding:0;
+}
 
 
 </style>
