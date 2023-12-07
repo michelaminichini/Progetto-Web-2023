@@ -40,7 +40,7 @@ const router: Router = createRouter({
         { path: "/pagamento", component: Pagamento},
         { path:"/paginaAdmin", component: PaginaAdmin},
         { path: "/PostiSala/:idproiezione", component: PostiSala, meta: { requireLogin: true },},
-        { path: "/profiloutente", component: UserProfile},
+        { path: "/profiloutente", component: UserProfile, meta: { requireLogin: true },},
         { path: "/profilo", component: Profilo},
         { path: "/provaGiulia", component: ProvaGiulia}
     ]

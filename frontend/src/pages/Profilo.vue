@@ -40,7 +40,6 @@ export default defineComponent({
     <!-- Passa l'utente come prop a tutte le pagine del router -->
     <RouterView :user="user" />
   </main>
-  <RouterLink to="/profiloutente" class="btn btn-primary" role="button" id="button">Vedi profilo</RouterLink> 
 </template>
 
 <style scoped>
@@ -51,7 +50,7 @@ h2{
   text-align: center;
 }
 
-#bottone-login{
+#bottone-login, #bottone-reg{
   display: block;
   margin: 0 auto;
   width:400px;
@@ -62,17 +61,8 @@ h2{
   color: white;
 }
 
-#bottone-reg{
-  display: block;
-  margin: 0 auto;
-  width:400px;
-  height: 50px;
-  text-align: center;
-  font-size: large;
-  margin-top: 3%;
-  background-color: blue;
-  color: white;
+#button{
+  margin-top: 0;
 }
-
 
 </style>

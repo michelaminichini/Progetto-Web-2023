@@ -19,7 +19,7 @@ export default defineComponent({
 <template>
   <div id="div-info">
     <span class="text-sm">{{ user?.email }}</span>
-    <button id="bottone-logout" class="btn !px-2" @click="logout">
+    <button id="bottone-logout" class="btn !px-2" title="LOGOUT" @click="logout"> <!--CON "TITLE" VIENE VISUALIZZATO UN BREVE MESSAGGIO QUANDO IL CURSORE SI POSIZIONA SUL PULSANTE-->
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="h-5 w-5">
         <path
           fill="none"
@@ -47,6 +47,7 @@ export default defineComponent({
         d="M10 8a3 3 0 1 0 0-6a3 3 0 0 0 0 6Zm-6.535 6.493a1.23 1.23 0 0 0 .41 1.412A9.957 9.957 0 0 0 10 18c2.31 0 4.438-.784 6.131-2.1c.43-.333.604-.903.408-1.41a7.002 7.002 0 0 0-13.074.003Z"
       />
     </svg>
+    <RouterLink to="/profiloutente" class="btn" role="button" id="button">Vedi profilo</RouterLink> 
   </div>
 </template>
 
@@ -75,10 +76,22 @@ div > svg{
 #div-utente{
   display: block;
   text-align: center;
-  margin-bottom: 5%;
+  margin-bottom: 3%;
 
 }
 
+#button{
+  margin-top: 0;
+  display: block;
+  margin: 0 auto;
+  width:400px;
+  height: 50px;
+  text-align: center;
+  font-size: large;
+  background-color: blue;
+  color: white;
+  margin-top:3%;
+}
 
 
 </style>
