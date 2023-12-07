@@ -114,6 +114,11 @@ export default defineComponent({
                             <th>Durata</th>
                             <th>Nazione</th>
                             <th>Anno</th>
+                            <th>Descrizione</th>
+                            <th>Trailer</th>
+                            <th>Locandina</th>
+                            <th>Lingua</th>
+                            <th>Attori</th>
                             <th>Stato</th>
                             <th>Edita</th>
                         </tr>
