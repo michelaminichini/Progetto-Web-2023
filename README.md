@@ -13,7 +13,7 @@
 - [Color Accessibility](#color-accessibility)
 - [Documentazione](#documentazione)
 
-  ## Introduzione
+## Introduzione
 
 Benvenuti nel sito ufficiale GalaxyCineVerse! 
 Questa applicazione web permette agli utenti di visionare una lista di film disponibili, selezionare quello che più interessa visionando i relativi dettagli come data e orario, per poi proseguire con la prenotazione di un posto e l'acquisto di un biglietto.
