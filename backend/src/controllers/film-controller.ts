@@ -46,27 +46,14 @@ export async function currentFilm(req:Request, res: Response) {
 }
 
 export async function aggiornaFilm(req:Request, res: Response) {
+    const {idfilm,titolo,regista,genere,durata,nazione,anno,descrizione,
+        trailer,locandina,lingua,attori,stato} = req.body
+    console.log(req.body)
     const connection = await getConnection()
     const [results] = await connection.execute(
-        `UPDATE film SET titolo=?, regista=?, genere=?, anno=?, descrizione=?, trailer=?, locandina=?,lingua=?, attori=? WHERE idfilm=?`,
-        [
-            req.params.rtitolo,
-            req.params.rregista,
-            req.params.rgenere,
-            req.params.rdurata,
-            req.params.rnazione,
-            req.params.ranno,
-            req.params.rdescrizione,
-            req.params.rtrailer,
-            req.params.rlocandina,
-            req.params.rlingua,
-            req.params.rattori,
-            req.params.rstato,
-            req.params.idf,
-        ],
+        `UPDATE film SET titolo=?, regista=?, genere=?, durata=?, nazione=?, anno=?, descrizione=?, trailer=?, locandina=?,lingua=?, attori=?, stato=? WHERE idfilm=?`,
+        [titolo,regista,genere,durata,nazione,anno,descrizione,trailer,locandina,lingua,attori,stato,idfilm],
     )
     res.json(results)
 }
-
-
 

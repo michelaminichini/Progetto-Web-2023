@@ -22,6 +22,7 @@ export default defineComponent({
     methods: {
         getLista() {
             axios.get("/api/tuttifilm").then(response => this.ListaFilm = response.data)
+            
         },
 
         addFilm() {
@@ -43,47 +44,18 @@ export default defineComponent({
         },
 
         finishEditing(rowIndex) {
-            let idf = rowIndex+1;
             let riga = this.ListaFilm[rowIndex];
-            let rtitolo = riga.titolo;
-            let rregista = riga.regista;
-            let rgenere = riga.genere;
-            let rdurata = riga.durata;
-            let rnazione = riga.nazione;
-            let ranno = riga.anno;
-            let rdescrizione = riga.descrizione;
-            let rtrailer = riga.trailer;
-            let rlocandina = riga.locandina;
-            let rlingua = riga.lingua;
-            let rattori = riga.attori;
-            let rstato = riga.stato;
-
-            this.editingCell = null;
-            axios.post("/api/aggiornamento/",{params: {
-                rtitolo,
-                rregista,
-                rgenere,
-                rdurata,
-                rnazione,
-                ranno,
-                rdescrizione,
-                rtrailer,
-                rlocandina,
-                rlingua,
-                rattori,
-                rstato,
-                idf,
-                }
-            })
+            this.editingCell = null;            
+            axios.put("/api/aggiornamento",riga)
             .then(response => {console.log(response.data)})
             console.log("/api/aggiornamento/"+ (rowIndex+1));
             console.log(this.ListaFilm[rowIndex]);
         },
-
        
     },
     mounted() {
     this.getLista()
+    
   }
 })
 
@@ -114,6 +86,11 @@ export default defineComponent({
                             <th>Durata</th>
                             <th>Nazione</th>
                             <th>Anno</th>
+                            <th>Descrizione</th>
+                            <th>Trailer</th>
+                            <th>Locandina</th>
+                            <th>Lingua</th>
+                            <th>Attori</th>
                             <th>Stato</th>
                             <th>Edita</th>
                         </tr>
