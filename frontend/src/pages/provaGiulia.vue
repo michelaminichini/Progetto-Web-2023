@@ -2,19 +2,20 @@
 
 import {defineComponent} from "vue"
 import axios from "axios"
-import {Film} from "../types" // tipo di interfaccia creata nel file types.ts
+import {FilmE} from "../types" // tipo di interfaccia creata nel file types.ts
 //import { Modifica } from "../types"
 
 interface EditingCell{
     rowIndex: number
-    field: keyof Film 
+    field: keyof FilmE
 }
 
 export default defineComponent({
     data(){
         return {
-        ListaFilm: [] as Film [],
-        EditedFilm: [] as Film []
+        ListaFilm: [] as FilmE [],
+        //EditedFilm: [] as Film [],
+        editingCell: null
         
     }
     },
@@ -28,8 +29,56 @@ export default defineComponent({
             .then(response => {console.log(response.data)})
             this.getLista()
             this.$forceUpdate()
-        }
-        
+        },
+
+        updateFilm(){
+        },
+
+        editCell(rowIndex, cellIndex) {
+            this.editingCell = `${rowIndex}-${cellIndex}`;
+        },
+
+        updateCell(rowI, cellI, v: string|number) {
+            this.ListaFilm[rowI][cellI] = v;
+        },
+
+        finishEditing(rowIndex) {
+            let idf = rowIndex+1;
+            let riga = this.ListaFilm[rowIndex];
+            let rtitolo = riga.titolo;
+            let rregista = riga.regista;
+            let rgenere = riga.genere;
+            let rdurata = riga.durata;
+            let rnazione = riga.nazione;
+            let ranno = riga.anno;
+            let rdescrizione = riga.descrizione;
+            let rtrailer = riga.trailer;
+            let rlocandina = riga.locandina;
+            let rlingua = riga.lingua;
+            let rattori = riga.attori;
+            let rstato = riga.stato;
+
+            this.editingCell = null;
+            axios.post("/api/aggiornamento/",{params: {
+                rtitolo,
+                rregista,
+                rgenere,
+                rdurata,
+                rnazione,
+                ranno,
+                rdescrizione,
+                rtrailer,
+                rlocandina,
+                rlingua,
+                rattori,
+                rstato,
+                idf,
+                }
+            })
+            .then(response => {console.log(response.data)})
+            console.log("/api/aggiornamento/"+ (rowIndex+1));
+            console.log(this.ListaFilm[rowIndex]);
+        },
 
        
     },
@@ -70,17 +119,32 @@ export default defineComponent({
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="(film, index) in ListaFilm" :key="index">
-                            <td>{{ film.idfilm }}</td>
-                            <td>{{ film.titolo }}</td>
+                        <tr v-for="(film, rowIndex) in ListaFilm" :key="rowIndex">
+                            <!-- <td>{{ film.idfilm }}</td> -->
+                            <td v-for="(cell, cellIndex) in film" :key="cellIndex" @click="editCell(rowIndex, cellIndex)">
+                                <template v-if="editingCell === `${rowIndex}-${cellIndex}`">
+                                <input
+                                    type="text"
+                                    :value="cell"
+                                    @input="updateCell(rowIndex, cellIndex, $event.target.value)"
+                                    @blur="finishEditing(rowIndex)"
+                                />
+                                </template>
+                                <template v-else>
+                                {{ cell }}
+                                </template>
+                            </td>
+
+
+                            <!-- <td>{{ film.titolo }}</td> 
                             <td>{{ film.regista }}</td>
                             <td>{{ film.genere }}</td>
                             <td>{{ film.durata }}</td>
                             <td>{{ film.nazione }}</td>
                             <td>{{ film.anno }}</td>
-                            <td>{{ film.stato }}</td>
+                            <td>{{ film.stato }}</td>-->
                             <td>
-                                <button type="button" class="btn btn-success">
+                                <button @click="$emit('someEvent')" type="button" class="btn btn-success">
                                 Edit   
                                 </button>
                                 <button type="button" class="btn btn-danger">

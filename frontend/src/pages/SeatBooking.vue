@@ -46,7 +46,7 @@ export default defineComponent({
         },
 
         isEditing(rowIndex: number, field: string){
-            return this.editingCell !== null && this.editingCell.rowIndex === rowIndex && this.editingCell.field === field;
+            return this.editingCell !== null && this.editingCell.rowIndex == rowIndex && this.editingCell.field == field;
         },
 
        
@@ -91,7 +91,7 @@ export default defineComponent({
                         
                         <td v-if="!isEditing(rowIndex, Film.regista)" @click="startEditing(rowIndex, Film.regista)">{{ Film.regista }}</td>
                         <td v-else>
-                            <input type="text" v-model="Film.regista" @blur="stopEditing" />
+                            <input type="text" v-model="Film.regista" placeholder="edit me" />
                         </td>
 
                         <td v-if="!isEditing(rowIndex, Film.genere)" @click="startEditing(rowIndex, Film.genere)">{{ Film.genere }}</td>
