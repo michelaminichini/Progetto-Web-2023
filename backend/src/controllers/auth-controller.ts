@@ -36,10 +36,10 @@ export const login = async (req: Request, res: Response) => {
     }
     console.log(req)
   
-    // Estrae username e password dal body della richiesta
+    // Estrae email e password dal body della richiesta
     const { email, password } = req.body
   
-    // Esegue la query al database per ottenere i dati dell'utente in base allo username
+    // Esegue la query al database per ottenere i dati dell'utente in base alla email
     const connection = await getConnection()
     const [results]= await connection.execute(
       "SELECT idutente, email, password, ruolo FROM utente WHERE email=?",

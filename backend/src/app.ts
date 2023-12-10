@@ -6,6 +6,7 @@ import proiezioneRouter from "./routes/proiezione-router"
 import history from "connect-history-api-fallback"
 
 import authRouter from "./routes/auth-router"
+import updateDataRouter from "./routes/updateData-router"
 
 const app: Express = express()
 const port: number = 3000
@@ -17,6 +18,7 @@ app.use(filmRouter)
 app.use(proiezioneRouter)
 
 app.use(authRouter)
+app.use(updateDataRouter)
 
 app.use(history())
 app.use(express.static("public"))
