@@ -24,9 +24,19 @@ export async function salaX(req:Request, res:Response) {
 export async function postiX(req:Request, res:Response) {
     const connection = await getConnection()
     const [results] = await connection.execute(
-        `SELECT idposto, idproiezione, fila, numero, occupato, speciale FROM posti_proiezione where idproiezione = ? AND fila = ?`, 
-        [req.params.id,req.params.fila],
-        
+        `SELECT idposto, idproiezione, fila, numero, occupato, speciale FROM posti_proiezione WHERE idproiezione = ?`, 
+        [req.params.id],
     )
     res.json(results)
+    console.log(res)
+}
+
+export async function postiF(req:Request, res:Response) {
+    const connection = await getConnection()
+    const [results] = await connection.execute(
+        `SELECT fila, numero FROM posti_proiezione WHERE idproiezione = ?`, 
+        [req.params.id],
+    )
+    res.json(results)
+    console.log(res)
 }

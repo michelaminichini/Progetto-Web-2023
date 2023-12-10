@@ -2,13 +2,13 @@
 import { defineComponent } from "vue"
 import axios from "axios"
 import { IDsala } from "../types"
-import { posto} from "../types"
+import { postoF } from "../types"
 
 export default defineComponent({
   data() {
     return {
       sala: [] as IDsala[],
-      posti: [] as posto[]
+      posti:[] as postoF[]
     }
   },
   computed:{
@@ -19,19 +19,14 @@ export default defineComponent({
         axios.get("/api/sala/" + this.$route.params.idproiezione)
         .then(response => {this.sala = response.data[0]; console.log(response.data)})
     },
-    getPostiA(){
-      axios.get("/api/posti/" + this.$route.params.idproiezione+"/A")
-      .then(response => {this.posti = response.data; console.log(response.data)})
-    },
-    getPostiB(){
-      axios.get("/api/posti/" + this.$route.params.idproiezione+"/B")
+    getPostiF(){
+      axios.get("/api/postiF/" + this.$route.params.idproiezione)
       .then(response => {this.posti = response.data; console.log(response.data)})
     },
   },
   mounted() {
     this.getSala()
-    this.getPostiA()
-    this.getPostiB()
+    this.getPostiF()
   }
 })
 </script>
@@ -49,7 +44,7 @@ export default defineComponent({
   <h1>Posti sala:</h1>
 
   <body>
-    <div id="app">
+    <!-- <div id="app">
       <div class="salaContainer">
         <div v-for= "posto in posti " :key="posto.idproiezione" class="chair">
             <div class="row">
@@ -60,6 +55,28 @@ export default defineComponent({
             </div>    
         </div>        
       </div>
+    </div> -->
+
+    <div id="app">
+    <table>
+      <tbody>
+        <tr v-for="(fila, rowIndex) in posti" :key="rowIndex">
+          <td v-for="(cell, cellIndex) in fila" :key="cellIndex" @click="editCell(rowIndex, cellIndex)">
+             <template v-if="editingCell === `${rowIndex}-${cellIndex}`">
+              <input
+                type="text"
+                :value="cell"
+                @input="updateCell(rowIndex, cellIndex, $event.target.value)"
+                @blur="finishEditing"
+              />
+            </template>
+            <template v-else>
+              {{ cell }}
+            </template>
+          </td>
+        </tr>
+      </tbody>
+    </table>
     </div>
 
   </body>

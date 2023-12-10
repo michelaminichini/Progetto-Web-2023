@@ -90,6 +90,10 @@ export interface posto {
     speciale: boolean
 }
 
+export interface postoF {
+    fila: string
+    numero: number
+}
 export interface User{
     idutente: number
     email: string
