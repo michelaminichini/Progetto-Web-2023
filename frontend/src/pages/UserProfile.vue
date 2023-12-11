@@ -1,15 +1,20 @@
 <script lang="ts">
 import axios from "axios"
-import { defineComponent } from "vue"
+import { PropType, defineComponent } from "vue"
+import { User } from "../types"
 import UserInfo from "../components/user-info.vue"
 import { CronoUtente } from "../types";
 
 export default defineComponent({
+   /*  props: {
+        user: Object as PropType<User>,
+    }, */
     //components: { UserInfo },
     data(){
         return {
             activeDiv: null,
-            crono: [] as CronoUtente []
+            crono: [] as CronoUtente [],
+            user: null as User | null,
         };
     },
     
@@ -17,8 +22,15 @@ export default defineComponent({
         toggleDiv(index: any){
             this.activeDiv = this.activeDiv === index ? null: index;
         },
-        getCronologia(){
-            axios.get("/api/cronologia").then(response => this.crono = response.data)
+        async getCronologia(){ 
+            const res = await axios.get("/api/auth/profile")
+            this.user = res.data
+            console.log(this.user) 
+            const id = this.user?.idutente                    
+            console.log("Id "+id)
+            const res1 = await axios.get("/api/cronologia/"+id)
+            this.crono = res1.data
+            console.log(this.crono)
         }
         /*
         async updateUserProfile(){
