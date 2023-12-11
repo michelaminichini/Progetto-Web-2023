@@ -22,10 +22,6 @@ import Profilo from "./pages/Profilo.vue"
 import axios from "axios"
 import { User } from "./types"
 
-
-
-
-
 const router: Router = createRouter({
     history:createWebHistory(),
     routes: [
