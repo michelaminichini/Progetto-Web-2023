@@ -57,3 +57,12 @@ export async function aggiornaFilm(req:Request, res: Response) {
     res.json(results)
 }
 
+export async function deleteFilm(req:Request, res: Response) {
+    const connection = await getConnection()
+    const [results] = await connection.execute(
+        `DELETE FROM film WHERE idfilm=?`,
+        [req.params.id],
+    )
+    res.json(results)
+}
+

@@ -97,9 +97,9 @@ export default defineComponent({
             <li class="nav-item" style="margin-right: 5%;">
               <router-link class="nav-link" to="/paginaAdmin">Pagina Admin</router-link>
             </li>
-            <!--li class="nav-item" style="margin-right: 5%;">
+            <li class="nav-item" style="margin-right: 5%;">
               <router-link class="nav-link" to="/provaGiulia">Prova Giulia</router-link>
-            </li-->
+            </li>
           </ul>
         </div>
             <form class="d-flex" style="margin-right: 5%;">
