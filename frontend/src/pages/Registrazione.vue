@@ -7,12 +7,16 @@ export default defineComponent({
     return {
       email: "",
       password: "",
+      nome:"",
+      cognome:"",
+      telefono:0,
+      data_nascita:"",
       confirmPassword: "",
     }
   },
   computed:{
     isSubmitDisabled(){
-      return !this.email || !this.password || !this.confirmPassword;
+      return !this.email || !this.password || !this.nome || !this.cognome || !this.telefono || !this.data_nascita || !this.confirmPassword;
     }
   },
   methods: {
@@ -25,6 +29,10 @@ export default defineComponent({
         await axios.post("/api/auth/register", {
           email: this.email,
           password: this.password,
+          nome: this.nome,
+          cognome: this.cognome,
+          telefono: this.telefono,
+          data_nascita: this.data_nascita,
         })
         window.location.href ="/login"
       } catch (e: any) {
@@ -67,6 +75,38 @@ export default defineComponent({
         placeholder="Conferma password"
         required
       />
+      <input
+        id="quarto"
+        type="text"
+        v-model="nome"
+        class="rounded-lg border-slate-200"
+        placeholder="Nome"
+        required
+      />
+      <input
+        id="quinto"
+        type="text"
+        v-model="cognome"
+        class="rounded-lg border-slate-200"
+        placeholder="Cognome"
+        required
+      />
+      <input
+        id="sesto"
+        type="number"
+        v-model="telefono"
+        class="rounded-lg border-slate-200"
+        placeholder="Numero di telefono"
+        required
+      />
+      <input
+        id="settimo"
+        type="date"
+        v-model="data_nascita"
+        class="rounded-lg border-slate-200"
+        placeholder="Data di nascita"
+        required
+      />
       <button id="btn-crea-utente" type="submit" class="btn !bg-blue-500 text-white w-1/2 mx-auto mt-3" :disabled="isSubmitDisabled">
         Registrati
       </button>
@@ -87,11 +127,13 @@ input{
   width:220px;
   margin-right: 1%;
   margin-left: 5%;
+  margin-bottom: 2%;
 }
 
 #btn-crea-utente{
   display: inline;
   color:white;
+  font-size: large;
   background-color: rgb(36, 91, 255);
   width:150px;
 }

@@ -1,9 +1,12 @@
 import bodyParser from "body-parser"
 import cookieParser from "cookie-parser"
 import express, {Express} from "express"
+
 import filmRouter from "./routes/film-router"
 import proiezioneRouter from "./routes/proiezione-router"
 import authRouter from "./routes/auth-router"
+import updateDataRouter from "./routes/updateData-router"
+
 import history from "connect-history-api-fallback"
 
 const app: Express = express()
@@ -15,6 +18,7 @@ app.use(cookieParser()) // consente ad express di leggere e scrivere i cookie
 app.use(filmRouter)
 app.use(proiezioneRouter)
 app.use(authRouter)
+app.use(updateDataRouter)
 
 app.use(history())
 app.use(express.static("public"))

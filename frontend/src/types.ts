@@ -100,3 +100,10 @@ export interface User{
     password: string
     ruolo: "amministratore" | "acquirente"
 }
+export interface DatiUtente{
+    email: string
+    nome: string
+    cognome: string
+    telefono: number
+    data_nascita: string
+}

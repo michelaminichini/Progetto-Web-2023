@@ -43,8 +43,8 @@ export default defineComponent({
 <template>
   <h1>Posti sala:</h1>
 
-  <body>
-    <!-- <div id="app">
+  <!--body>
+     <div id="app">
       <div class="salaContainer">
         <div v-for= "posto in posti " :key="posto.idproiezione" class="chair">
             <div class="row">
@@ -57,7 +57,7 @@ export default defineComponent({
       </div>
     </div> -->
 
-    <div id="app">
+    <!--div id="app">
     <table>
       <tbody>
         <tr v-for="(fila, rowIndex) in posti" :key="rowIndex">
@@ -79,7 +79,7 @@ export default defineComponent({
     </table>
     </div>
 
-  </body>
+  </body-->
 
 </template>
 

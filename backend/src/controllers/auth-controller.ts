@@ -7,8 +7,8 @@ import { decodeAccessToken, deleteAccessToken, setAccessToken } from "../utils/a
 
 // Procedura di registrazione di un nuovo account 
 export const register = async (req: Request, res: Response) => {
-    //estrarre username (email) e password dal body
-    const { email, password } = req.body
+    //estrarre data dal body
+    const { email, password, nome, cognome, telefono, data_nascita } = req.body
 
     //verificare che la mail sia disponibile
     const connection = await getConnection()
@@ -21,7 +21,7 @@ export const register = async (req: Request, res: Response) => {
     const passwordHash = await bcrypt.hash(password, 10)
 
     // Inserire nuova riga nel database contenente email e password dell'utente (password cryptata). In questo modo i dati vengono salvati e l'utente ha creato così il proprio account
-    await connection.execute(`INSERT INTO utente (email, password) VALUES (?, ?)`, [email, passwordHash])
+    await connection.execute(`INSERT INTO utente (email, password, nome, cognome, telefono, data_nascita) VALUES (?, ?, ?, ?, ?, ?)`, [email, passwordHash, nome, cognome, telefono, data_nascita])
 
     res.json({message: "Registrazione effettuata"})
 }
@@ -36,10 +36,10 @@ export const login = async (req: Request, res: Response) => {
     }
     console.log(req)
   
-    // Estrae username e password dal body della richiesta
+    // Estrae email e password dal body della richiesta
     const { email, password } = req.body
   
-    // Esegue la query al database per ottenere i dati dell'utente in base allo username
+    // Esegue la query al database per ottenere i dati dell'utente in base alla email
     const connection = await getConnection()
     const [results]= await connection.execute(
       "SELECT idutente, email, password, ruolo FROM utente WHERE email=?",

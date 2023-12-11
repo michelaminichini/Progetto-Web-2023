@@ -1,21 +1,62 @@
 <script lang="ts">
+import axios from "axios"
 import { defineComponent } from "vue"
+import UserInfo from "../components/user-info.vue"
+import { DatiUtente } from "../types";
 
 export default defineComponent({
+    //components: { UserInfo },
     data(){
         return {
             activeDiv: null,
+            email:"",
+            nome:"",
+            cognome:"",
+            telefono:0,
+            data_mascita:"",
         };
     },
+    
     methods:{
         toggleDiv(index: any){
             this.activeDiv = this.activeDiv === index ? null: index;
         },
+
+        async updateUserProfile(){
+            const updateData = {
+                email:this.email,
+                nome: this.nome,
+                congome: this.cognome,
+                telefono: this.telefono,
+                data_nascita: this.data_mascita
+            }
+            try {
+                //console.log('Data sent in request:', {
+                   // nome: this.nome,
+                    //cognome: this.cognome,
+                    //telefono: parseInt(this.telefono),
+                    //data_nascita: this.data_nascita,
+                //})
+                const risposta = await axios.put("/api/update/aggiornaDati" , updateData)
+                window.location.href = "/profiloutente"
+                console.log("RISPOSTA:", risposta.data)
+
+                //this.user = risposta.data
+
+                //console.log("Risposta:", risposta)
+            } catch (e: any) {
+              if (e.response) {
+                  alert(`${e.response.status} - ${e.response.statusText}\n${e.response.data}`)
+              } else {
+                  alert(e.message)
+              }   
+            }
+        },
     },
-
-
+    mounted(){
+        this.updateUserProfile()
+    }
 })
-    
 </script>
 
 <template>
@@ -46,24 +87,29 @@ export default defineComponent({
             </div>
 
             <div v-show="activeDiv === 0" class="primo">
-                <h1>Informazioni personali</h1>
-                <h2>Nome e Cognome</h2>
-                <input type="text" class="input" placeholder="Jane Doe">
+                <form>
+                    
+                    <h1>Informazioni personali</h1>
 
-                <h2>Data di nascita</h2>
-                <input type="text" class="input" placeholder="20 Aprile 1998">
+                    <!--span class="text-sm" style="color: red; font-size: large;">{{ user?.email }}</span-->
+                    <h2>Email</h2>
+                    <input type="text" v-model="email" class="rounded-lg border-slate-200" placeholder="Nome" required>
 
-                <h2>Email</h2>
-                <input type="text" class="input" placeholder="example@example.com">
+                    <h2>Nome</h2>
+                    <input type="text" v-model="nome" class="rounded-lg border-slate-200" placeholder="Nome" required>
 
-                <h2>Numero di Telefono</h2>
-                <input type="text" class="input" placeholder="1111111111">
+                    <h2>Cognome</h2>
+                    <input type="text" v-model="cognome" class="rounded-lg border-slate-200" placeholder="Cognome" required>
 
-                <h2>Data creazione account</h2>
-                <input type="date" class="input" placeholder="00-00-0000">
+                    <h2>Numero di Telefono</h2>
+                    <input type="number" v-model="telefono" class="rounded-lg border-slate-200" placeholder="1111111111" required>
 
-                <button class="btn">Salva</button>
-    
+                    <h2>Data di nascita</h2>
+                    <input type="date" v-model="data_mascita" class="rounded-lg border-slate-200" required>
+
+                    <button class="btn text-white w-1/2 mx-auto mt-3" @click="updateUserProfile">Salva</button>
+                </form>
+                    
             </div>
 
             <div v-show="activeDiv === 1" class="secondo">
@@ -178,23 +224,7 @@ body {
     width: 80%;
 }
 
-#CONTAINER > .primo > h1{
-    font-family:Verdana, Geneva, Tahoma, sans-serif;
-    font-size: 2.3rem;
-    color:rgb(32, 54, 72);
-    margin-top:40px;
-    margin-bottom: 25px;
-}
-
-#CONTAINER > .secondo > h1{
-    font-family:Verdana, Geneva, Tahoma, sans-serif;
-    font-size: 2.3rem;
-    color:rgb(32, 54, 72);
-    margin-top:40px;
-    margin-bottom: 25px;
-}
-
-#CONTAINER > .terzo > h1{
+#CONTAINER > .primo, .secondo, .terzo > h1{
     font-family:Verdana, Geneva, Tahoma, sans-serif;
     font-size: 2.3rem;
     color:rgb(32, 54, 72);
