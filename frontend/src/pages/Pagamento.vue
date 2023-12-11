@@ -1,4 +1,23 @@
 <!-- PAGINA PAGAMENTO IN LAVORAZIONE, AL MOMENTO SEMPLICE PAGINA VUE CON STILE. DA MIGLIORARE CON PACCHETTI O ALTRO DA UTILIZZARE -->
+<script lang="ts">
+import { defineComponent } from 'vue';
+import axios from "axios"
+
+export default defineComponent({
+    data(){
+        return{
+
+        }
+    },
+    methods:{
+        
+    },
+    
+})
+
+</script>
+
+
 
 <template>
     <h1>Pagamento</h1>
@@ -66,8 +85,7 @@
                     </div>
                 </div>
             </div>
-
-            <input type="submit" value="proceed to checkout" class="submit-btn">
+            <button style="background-color: blue; color: white; display: inline;" @click="">Procedi all'acquisto</button>
 
         </form>
     </div>

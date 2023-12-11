@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import {getConnection} from "../utils/db"
 import { decodeAccessToken } from "../utils/auth";
 
+/*
 
 export const updateData = async (req: Request, res: Response) => {
     //console.log('Update profile route reached');
@@ -26,4 +27,5 @@ export const updateData = async (req: Request, res: Response) => {
     console.log("Ecco i tuoi risultati:", risultati)
     res.json(risultati)
 }
+*/
 
