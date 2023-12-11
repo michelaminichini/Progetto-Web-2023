@@ -1,49 +1,49 @@
 <script lang="ts">
 import axios from "axios"
-import { PropType, defineComponent } from "vue"
+import { defineComponent } from "vue"
 import UserInfo from "../components/user-info.vue"
-import { User } from "../types";
+import { DatiUtente } from "../types";
 
 export default defineComponent({
-    components: { UserInfo },
+    //components: { UserInfo },
     data(){
         return {
             activeDiv: null,
             email:"",
-            nome: "",
-            cognome: "",
-            telefono: "",
-            data_nascita:"",
-
-            user: null as User | null,
+            nome:"",
+            cognome:"",
+            telefono:0,
+            data_mascita:"",
         };
     },
-    computed:{
-        isSubmitDisabled(){
-            return !this.nome || !this.cognome || !this.telefono || !this.data_nascita ;
-        }
-    },
+    
     methods:{
         toggleDiv(index: any){
             this.activeDiv = this.activeDiv === index ? null: index;
         },
-        async onSubmit(){
+
+        async updateUserProfile(){
+            const updateData = {
+                email:this.email,
+                nome: this.nome,
+                congome: this.cognome,
+                telefono: this.telefono,
+                data_nascita: this.data_mascita
+            }
             try {
-                console.log('Data sent in request:', {
-                    nome: this.nome,
-                    cognome: this.cognome,
-                    telefono: parseInt(this.telefono),
-                    data_nascita: this.data_nascita,
-                })
-                const risposta = await axios.post("/api/update/aggiornaDati", {
-                    email: this.email,
-                    nome: this.nome,
-                    cognome: this.cognome,
-                    telefono: parseInt(this.telefono),
-                    data_nascita: this.data_nascita,
-                })
-                this.user = risposta.data
-                console.log("Risposta:", risposta)
+                //console.log('Data sent in request:', {
+                   // nome: this.nome,
+                    //cognome: this.cognome,
+                    //telefono: parseInt(this.telefono),
+                    //data_nascita: this.data_nascita,
+                //})
+                const risposta = await axios.put("/api/update/aggiornaDati" , updateData)
+                window.location.href = "/profiloutente"
+                console.log("RISPOSTA:", risposta.data)
+
+                //this.user = risposta.data
+
+                //console.log("Risposta:", risposta)
             } catch (e: any) {
               if (e.response) {
                   alert(`${e.response.status} - ${e.response.statusText}\n${e.response.data}`)
@@ -53,6 +53,9 @@ export default defineComponent({
             }
         },
     },
+    mounted(){
+        this.updateUserProfile()
+    }
 })
 </script>
 
@@ -84,25 +87,29 @@ export default defineComponent({
             </div>
 
             <div v-show="activeDiv === 0" class="primo">
-                <form @submit.prevent="onSubmit">
+                <form>
+                    
                     <h1>Informazioni personali</h1>
 
-                    <span class="text-sm" style="color: red; font-size: large;">{{ user?.email }}</span>
+                    <!--span class="text-sm" style="color: red; font-size: large;">{{ user?.email }}</span-->
+                    <h2>Email</h2>
+                    <input type="text" v-model="email" class="rounded-lg border-slate-200" placeholder="Nome" required>
 
                     <h2>Nome</h2>
-                    <input type="text" v-model="nome" class="rounded-lg border-slate-200" placeholder="Nome">
+                    <input type="text" v-model="nome" class="rounded-lg border-slate-200" placeholder="Nome" required>
 
                     <h2>Cognome</h2>
-                    <input type="text" v-model="cognome" class="rounded-lg border-slate-200" placeholder="Cognome">
+                    <input type="text" v-model="cognome" class="rounded-lg border-slate-200" placeholder="Cognome" required>
 
                     <h2>Numero di Telefono</h2>
-                    <input type="number" v-model="telefono" class="rounded-lg border-slate-200" placeholder="1111111111">
+                    <input type="number" v-model="telefono" class="rounded-lg border-slate-200" placeholder="1111111111" required>
 
                     <h2>Data di nascita</h2>
-                    <input type="date" v-model="data_nascita" class="rounded-lg border-slate-200" placeholder="20 Aprile 1998">
+                    <input type="date" v-model="data_mascita" class="rounded-lg border-slate-200" required>
 
-                    <button class="btn text-white w-1/2 mx-auto mt-3"  :disabled="isSubmitDisabled">Salva</button>
+                    <button class="btn text-white w-1/2 mx-auto mt-3" @click="updateUserProfile">Salva</button>
                 </form>
+                    
             </div>
 
             <div v-show="activeDiv === 1" class="secondo">

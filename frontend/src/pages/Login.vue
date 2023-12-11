@@ -2,25 +2,11 @@
 import axios from "axios"
 import { defineComponent } from "vue"
 
-//import { User } from "../types"
-
-//import { useRouter } from "vue-router"
-/*
-interface User{
-    idutente: number
-    email: string
-    password: string
-    ruolo: "amministratore" | "acquirente"
-}
-*/
-
 export default defineComponent({
   data() {
     return {
       email: "",
       password: "",
-
-      //ruolo: "",
     }
   },
   methods: {
@@ -29,25 +15,12 @@ export default defineComponent({
         const response = await axios.post("/api/auth/login", {
           email: this.email,
           password: this.password,
-          //ruolo: this.ruolo
         })
 
 
         // Assuming your backend returns user details including the role if authentication is successful
         const user = response.data;
         console.log('User Object:', user);
-        //const { email, password, ruolo} = authResponse.data;
-        /*
-        const roleResponse = await axios.post("/api/auth/ruolo", {
-          email,
-          password,
-          ruolo,
-        });
-
-        const { role } = roleResponse.data;
-        */
-        
-        //const router = useRouter()
         
         // Check the user role
         if (user) {
