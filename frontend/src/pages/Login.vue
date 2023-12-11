@@ -57,12 +57,14 @@ export default defineComponent({
         v-model="email"
         class="rounded-lg border-slate-200"
         placeholder="Email"
+        required
       />
       <input
         type="password"
         v-model="password"
         class="rounded-lg border-slate-200"
         placeholder="Password"
+        required
       />
       <button id="accedi" type="submit" class="btn !bg-blue-500 text-white w-1/2 mx-auto mt-3">Accedi</button>
     </form>
