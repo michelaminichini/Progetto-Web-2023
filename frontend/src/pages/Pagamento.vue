@@ -1,4 +1,3 @@
-<!-- PAGINA PAGAMENTO IN LAVORAZIONE, AL MOMENTO SEMPLICE PAGINA VUE CON STILE. DA MIGLIORARE CON PACCHETTI O ALTRO DA UTILIZZARE -->
 <script lang="ts">
 import { defineComponent } from 'vue';
 import axios from "axios"

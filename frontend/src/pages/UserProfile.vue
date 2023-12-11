@@ -2,18 +2,14 @@
 import axios from "axios"
 import { defineComponent } from "vue"
 import UserInfo from "../components/user-info.vue"
-import { DatiUtente } from "../types";
+import { CronoUtente } from "../types";
 
 export default defineComponent({
     //components: { UserInfo },
     data(){
         return {
             activeDiv: null,
-            email:"",
-            nome:"",
-            cognome:"",
-            telefono:0,
-            data_mascita:"",
+            crono: [] as CronoUtente []
         };
     },
     
@@ -21,7 +17,10 @@ export default defineComponent({
         toggleDiv(index: any){
             this.activeDiv = this.activeDiv === index ? null: index;
         },
-
+        getCronologia(){
+            axios.get("/api/cronologia").then(response => this.crono = response.data)
+        }
+        /*
         async updateUserProfile(){
             const updateData = {
                 email:this.email,
@@ -51,10 +50,11 @@ export default defineComponent({
                   alert(e.message)
               }   
             }
-        },
+        },*/
     },
     mounted(){
-        this.updateUserProfile()
+        //this.updateUserProfile()
+        this.getCronologia()
     }
 })
 </script>
@@ -87,11 +87,10 @@ export default defineComponent({
             </div>
 
             <div v-show="activeDiv === 0" class="primo">
-                <form>
+                <!--form>
                     
                     <h1>Informazioni personali</h1>
 
-                    <!--span class="text-sm" style="color: red; font-size: large;">{{ user?.email }}</span-->
                     <h2>Email</h2>
                     <input type="text" v-model="email" class="rounded-lg border-slate-200" placeholder="Nome" required>
 
@@ -108,7 +107,7 @@ export default defineComponent({
                     <input type="date" v-model="data_mascita" class="rounded-lg border-slate-200" required>
 
                     <button class="btn text-white w-1/2 mx-auto mt-3" @click="updateUserProfile">Salva</button>
-                </form>
+                </form-->
                     
             </div>
 
@@ -146,6 +145,24 @@ export default defineComponent({
 
                 <button class="btn">Salva</button>
             </div>
+
+            <div v-show="activeDiv === 3" class="quarto">
+                <h1>La tua cronologia di acquisti</h1>
+                <table>
+                    <thead>
+                        <th>CIAO</th>
+                        <th>CIAO</th>
+                        <th>CIAO</th>
+                        <th>CIAO</th>
+                    </thead>
+                    <tbody>
+                        <td>CIAO</td>
+                    </tbody>
+
+                </table>
+
+                <button class="btn">Salva</button>
+            </div>
         </div>
     </body>
 </template>
@@ -159,10 +176,15 @@ body {
     width: 100%;
 }
 
+th, td{
+    color: black;
+
+}
+
 #CONTAINER{
     background: #fff;
-    width:540px;
-    height:500px;
+    width:900px;
+    height:600px;
     margin:0 auto;
     position:relative;
     margin-top:10%;
@@ -204,19 +226,9 @@ body {
     color:#0d2f26;
 }
 
-.primo{
+.primo, .secondo, .terzo, .quarto{
     width:60%;
-    margin-left:27%;
-}
-
-.secondo{
-    width:60%;
-    margin-left:27%;
-}
-
-.terzo{
-    width:60%;
-    margin-left:27%;
+    margin-left:25%;
 }
 
 .tab{

@@ -100,10 +100,20 @@ export interface User{
     password: string
     ruolo: "amministratore" | "acquirente"
 }
-export interface DatiUtente{
-    email: string
-    nome: string
-    cognome: string
-    telefono: number
-    data_nascita: string
+
+export interface CronoUtente{
+    idutente: number
+    idfilm: number
+    titolo: string
+    idbiglietto: number
+    idtipo_pagamento1: number
+    import: number
+    idproiezione: number
+    idsala: number
+    datap: string
+    orario: string
+    descrizione: string
+    Descrizione: string
+    Circuito: string
+
 }
