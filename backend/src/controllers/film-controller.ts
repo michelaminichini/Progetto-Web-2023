@@ -58,11 +58,17 @@ export async function aggiornaFilm(req:Request, res: Response) {
 }
 
 export async function cronologiaUtente(req:Request, res: Response) {
-    const connection = await getConnection()
-    const [results] = await connection.execute(
+    try {
+        const connection = await getConnection()
+        const [results] = await connection.execute(
         `SELECT idutente, film.idfilm, titolo, idbiglietto, idtipo_pagamento1, importo, proiezioni.idproiezione, proiezioni.idsala, datap, orario, sale.descrizione, tipo_pagamenti.Descrizione, tipo_pagamenti.circuito FROM biglietti JOIN pagamenti ON (biglietti.idbiglietto = pagamenti.idbiglietto1) JOIN tipo_pagamenti ON ( pagamenti.idtipo_pagamento1 = tipo_pagamenti.idtipo_pagamento) JOIN proiezioni ON (biglietti.idproiezione1 = proiezioni.idproiezione) JOIN sale ON (sale.idsala = proiezioni.idsala) JOIN film ON (proiezioni.idfilm = film.idfilm) WHERE idutente=?`,
-        [req.params.id],
-    )
-    res.json(results)
+            [req.params.idutente],
+        );
+        res.json(results)
+    } catch (error) {
+        console.error('Error executing SQL query:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+    
 }
 

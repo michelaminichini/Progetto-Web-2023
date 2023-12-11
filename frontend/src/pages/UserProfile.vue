@@ -9,7 +9,8 @@ export default defineComponent({
     data(){
         return {
             activeDiv: null,
-            crono: [] as CronoUtente []
+            //crono: [] as CronoUtente [],
+            userHistory: [] as CronoUtente [],
         };
     },
     
@@ -17,9 +18,21 @@ export default defineComponent({
         toggleDiv(index: any){
             this.activeDiv = this.activeDiv === index ? null: index;
         },
-        getCronologia(){
-            axios.get("/api/cronologia").then(response => this.crono = response.data)
+        //getCronologia(){
+          //  axios.get("/api/cronologia/:idutente").then(response => this.crono = response.data)
+        //}
+        
+        async fetchUserHistory(){
+            try {
+                const IdUser = this.$route.params.idutente;
+                const response = await fetch(`/api/cronologia/${IdUser}`);
+                const data = await response.json();
+                this.userHistory = data;
+            } catch (error) {
+                console.error("Errore nel fetch user history:", error)
+            }
         }
+
         /*
         async updateUserProfile(){
             const updateData = {
@@ -54,7 +67,8 @@ export default defineComponent({
     },
     mounted(){
         //this.updateUserProfile()
-        this.getCronologia()
+        //this.getCronologia()
+        this.fetchUserHistory()
     }
 })
 </script>
@@ -150,13 +164,18 @@ export default defineComponent({
                 <h1>La tua cronologia di acquisti</h1>
                 <table>
                     <thead>
-                        <th>CIAO</th>
-                        <th>CIAO</th>
-                        <th>CIAO</th>
-                        <th>CIAO</th>
+                        <tr>
+                            <th>CIAO</th>
+                            <th>CIAO</th>
+                            <th>CIAO</th>
+                            <th>CIAO</th>
+                        </tr>
                     </thead>
                     <tbody>
-                        <td>CIAO</td>
+                        <tr v-for="entry in userHistory" :key="entry.idutente">
+                            <td>{{ entry.titolo }}</td>
+                        </tr>
+                        
                     </tbody>
 
                 </table>
