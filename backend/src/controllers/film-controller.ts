@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import {getConnection} from "../utils/db"
 
-export async function allFilms(res: Response) {
+export async function allFilms(req:Request, res: Response) {
     const connection = await getConnection()
     const [results] = await connection.execute(
         `SELECT idfilm, titolo, regista, genere, durata, nazione, anno, descrizione, trailer, locandina, lingua, attori, stato FROM film`,
@@ -53,6 +53,15 @@ export async function aggiornaFilm(req:Request, res: Response) {
     const [results] = await connection.execute(
         `UPDATE film SET titolo=?, regista=?, genere=?, durata=?, nazione=?, anno=?, descrizione=?, trailer=?, locandina=?,lingua=?, attori=?, stato=? WHERE idfilm=?`,
         [titolo,regista,genere,durata,nazione,anno,descrizione,trailer,locandina,lingua,attori,stato,idfilm],
+    )
+    res.json(results)
+}
+
+export async function deleteFilm(req:Request, res: Response) {
+    const connection = await getConnection()
+    const [results] = await connection.execute(
+        `DELETE FROM film WHERE idfilm=?`,
+        [req.params.id],
     )
     res.json(results)
 }

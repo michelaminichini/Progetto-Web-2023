@@ -14,7 +14,7 @@ import Pagamento from "./pages/Pagamento.vue"
 import PaginaAdmin from "./pages/PaginaAdmin.vue"
 import SeatBooking from "./pages/SeatBooking.vue"
 import UserProfile from "./pages/UserProfile.vue"
-//import ProvaGiulia from "./pages/provaGiulia.vue"
+import ProvaGiulia from "./pages/provaGiulia.vue"
 
 import Register from "./pages/Registrazione.vue"
 import Profilo from "./pages/Profilo.vue"
@@ -37,7 +37,7 @@ const router: Router = createRouter({
         //{ path: "/PostiSala/:idproiezione", component: PostiSala, meta: { requireLogin: true }},
         { path: "/profiloutente", component: UserProfile, meta: { requireLogin: true },},
         { path: "/profilo", component: Profilo},
-        //{ path: "/provaGiulia", component: ProvaGiulia}
+        { path: "/provaGiulia", component: ProvaGiulia}
     ]
 })
 

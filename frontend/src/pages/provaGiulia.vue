@@ -4,7 +4,7 @@ import {defineComponent} from "vue"
 import axios from "axios"
 import {FilmE} from "../types" // tipo di interfaccia creata nel file types.ts
 //import { Modifica } from "../types"
-/*
+
 interface EditingCell{
     rowIndex: number
     field: keyof FilmE
@@ -15,7 +15,8 @@ export default defineComponent({
         return {
         ListaFilm: [] as FilmE [],
         //EditedFilm: [] as Film [],
-        editingCell: null
+        editingCell: null,
+        rowIndex: null
         
     }
     },
@@ -33,6 +34,15 @@ export default defineComponent({
         },
 
         updateFilm(){
+        },
+
+        
+        deleteFilm(rowIndex){
+            axios.delete("/api/eliminazione/"+this.ListaFilm[rowIndex].idfilm)
+            .then(response => 
+            console.log("deleting film "+this.ListaFilm[rowIndex].idfilm))
+            this.getLista()
+            this.$forceUpdate()
         },
 
         editCell(rowIndex, cellIndex) {
@@ -59,7 +69,7 @@ export default defineComponent({
   }
 })
 
-*/
+
 </script>
 
 <template>
@@ -68,7 +78,7 @@ export default defineComponent({
         prova Giulia
     </h1>
 
-    <!--div class="card">
+    <div class="card">
         <div class="card-header">
             <h4>Lista films
                 <button @click="addFilm()" type="button" class="btn btn-primary float-end">
@@ -78,7 +88,7 @@ export default defineComponent({
         </div>
     
         <div class="card-body">
-            <table class="table table-bordered">
+            <table class="table table-striped table-bordered">
                     <thead>
                         <tr>
                             <th>ID</th>
@@ -99,7 +109,6 @@ export default defineComponent({
                     </thead>
                     <tbody>
                         <tr v-for="(film, rowIndex) in ListaFilm" :key="rowIndex">
-                            <<td>{{ film.idfilm }}</td>>
                             <td v-for="(cell, cellIndex) in film" :key="cellIndex" @click="editCell(rowIndex, cellIndex)">
                                 <template v-if="editingCell === `${rowIndex}-${cellIndex}`">
                                 <input
@@ -113,26 +122,23 @@ export default defineComponent({
                                 {{ cell }}
                                 </template>
                             </td>
-
-
-                            <td>{{ film.titolo }}</td> 
-                            <td>{{ film.regista }}</td>
-                            <td>{{ film.genere }}</td>
-                            <td>{{ film.durata }}</td>
-                            <td>{{ film.nazione }}</td>
-                            <td>{{ film.anno }}</td>
-                            <td>{{ film.stato }}</td>
                             <td>
                                 <button @click="$emit('someEvent')" type="button" class="btn btn-success">
                                 Edit   
                                 </button>
-                                <button type="button" class="btn btn-danger">
+                                <button @click="deleteFilm(rowIndex)" type="button" class="btn btn-danger">
                                 Delete</button>
                             </td>
                         </tr>
                     </tbody>
             </table>
          </div>   
-    </div-->
+    </div>
 </template>
 
+<style scoped>
+.card {
+    margin-left: 5%;
+    margin-right: 5%;
+}
+</style>
