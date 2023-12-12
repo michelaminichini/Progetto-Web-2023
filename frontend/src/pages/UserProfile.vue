@@ -160,9 +160,12 @@ export default defineComponent({
                 <button class="btn">Salva</button>
             </div>
 
-            <div v-show="activeDiv === 3" class="quarto">
-                <h1>La tua cronologia di acquisti</h1>
-                <table>
+            <div v-show="activeDiv === 3" class="quarto" v-for="entry in userHistory">
+                <h1>La tua cronologia di acquisti - Clicca qui</h1>
+                 
+                    <RouterLink :to="'/api/cronologia/' + entry.idutente" style="color: black; margin-left: 5%;">CRONOLOGIA</RouterLink>
+                
+                <!--table>
                     <thead>
                         <tr>
                             <th>CIAO</th>
@@ -178,9 +181,9 @@ export default defineComponent({
                         
                     </tbody>
 
-                </table>
+                </table-->
 
-                <button class="btn">Salva</button>
+                <!--button class="btn">Salva</button-->
             </div>
         </div>
     </body>
