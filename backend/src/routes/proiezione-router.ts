@@ -9,6 +9,6 @@ router.get("/api/sala/:id", proiezioneController.salaX)
 //router.get("/api/posti/:id", proiezioneController.postiX)
 //router.get("/api/postiF/:id", proiezioneController.postiF)
 router.get("/api/postiL", proiezioneController.getPostiL)
-router.get("/api/aggiornaP", proiezioneController.aggiornaPosto)
+router.put("/api/aggiornaP", proiezioneController.aggiornaPosto)
 
 export default router
