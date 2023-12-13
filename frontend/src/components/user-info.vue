@@ -18,7 +18,7 @@ export default defineComponent({
 
 <template>
   <div id="div-info">
-    <span class="text-sm">{{ user?.email }}</span>
+    <span class="text-sm" style="margin-right: 10%;">{{ user?.email }}</span>
     <button id="bottone-logout" class="btn !px-2" title="LOGOUT" @click="logout"> <!--CON "TITLE" VIENE VISUALIZZATO UN BREVE MESSAGGIO QUANDO IL CURSORE SI POSIZIONA SUL PULSANTE-->
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="h-5 w-5">
         <path

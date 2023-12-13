@@ -46,8 +46,7 @@ export async function currentFilm(req:Request, res: Response) {
 }
 
 export async function aggiornaFilm(req:Request, res: Response) {
-    const {idfilm,titolo,regista,genere,durata,nazione,anno,descrizione,
-        trailer,locandina,lingua,attori,stato} = req.body
+    const {idfilm,titolo,regista,genere,durata,nazione,anno,descrizione,trailer,locandina,lingua,attori,stato} = req.body
     console.log(req.body)
     const connection = await getConnection()
     const [results] = await connection.execute(

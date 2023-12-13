@@ -80,7 +80,7 @@ export default defineComponent({
 
                         </tbody>
                     </table>
-                        <!--</tbody>
+                    <tbody>
                         <tr>
                             <th>Titolo</th>
                             <td>{{ film.anno }}</td>
@@ -100,7 +100,8 @@ export default defineComponent({
                         <tr>
                             <th>Lingua</th>
                             <td>{{ film.lingua }}</td> 
-                        </tr> -->
+                        </tr>
+                    </tbody>
                     <button @click="toggleEdit(film.idfilm,field as keyof FilmE)" v-for="field in Object.keys(film)" :key="field">Edit {{ field }}</button>
                     <button @click="saveChanges(film.idfilm,field as keyof FilmE)" v-for="field in Object.keys(film)" :key="field">Save {{ field }}</button>"
                 </article>

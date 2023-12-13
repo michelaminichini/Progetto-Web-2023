@@ -5,14 +5,32 @@ import axios from "axios"
 export default defineComponent({
     data(){
         return{
-
+            Numero_carta:0,
+            Data_scadenza:"",
+            CVV:0,
         }
     },
     methods:{
         async pagamentoEffettuato(){
-            alert("Pagamento andato a buon fine \nGrazie e buona visione");
-            window.location.href = "/"
+            alert("Pagamento andato a buon fine \nGrazie e buona visione")
         },
+        async aggiornaDatiPagamento(){
+            try {
+                await axios.post("/api/aggiorna/pagamento", {
+                    Numero_carta: this.Numero_carta,
+                    Data_scadenza: this.Data_scadenza,
+                    CVV: this.CVV,
+                })
+                window.location.href ="/profilo"
+
+            } catch (e: any) {
+                if (e.response) {
+                    alert(`${e.response.status} - ${e.response.statusText}\n${e.response.data}`)
+                } else {
+                    alert(e.message)
+                }
+            }
+        }
         
     },
     
@@ -27,68 +45,29 @@ export default defineComponent({
 
 <body>
     <div class="container">
-        <form action="">
+        <form>
             <div class="row">
-                <div class="col">
-                    <h3 class="title">billing address</h3>
-                    <div class="inputBox">
-                        <span>full name</span>
-                        <input type="text" placeholder="john deo">
-                    </div>
-                    <div class="inputBox">
-                        <span>email </span>
-                        <input type="email" placeholder="example@example.com">
-                    </div>
-                    <div class="inputBox">
-                        <span>address </span>
-                        <input type="text" placeholder="via - n.civico">
-                    </div>
-                    <div class="inputBox">
-                        <span>città </span>
-                        <input type="text" placeholder="città">
-                    </div>
-                    <div class="flex">
-                        <div class="inputBox">
-                            <span>stato </span>
-                            <input type="text" placeholder="italia">
-                        </div>
-                        <div class="inputBox">
-                            <span>codice postale</span>
-                            <input type="text" placeholder="11111">
-                        </div>
-                    </div>
-                </div>
 
                 <div class="col">
                     
-                    <h3 class="title">payment</h3>
+                    <h3 class="title">Inserire dati per effettuare il pagamento</h3>
 
                     <div class="inputBox">
-                        <span>name on card</span>
-                        <input type="text" placeholder="john deo">
-                    </div>
-                    <div class="inputBox">
-                        <span>credit card number</span>
+                        <span>Numero Carta</span>
                         <input type="number" placeholder="1111-2222-3333-4444">
                     </div>
                     <div class="inputBox">
-                        <span>exp month </span>
-                        <input type="text" placeholder="january">
+                        <span>Data scadenza</span>
+                        <input type="date">
                     </div>
-                
-                    <div class="flex">
-                        <div class="inputBox">
-                            <span>exp year </span>
-                            <input type="number" placeholder="2023">
-                        </div>
-                        <div class="inputBox">
-                            <span>CVV</span>
-                            <input type="text" placeholder="123">
-                        </div>
+                    <div class="inputBox">
+                        <span>CVV</span>
+                        <input type="number" placeholder="123">
                     </div>
                 </div>
-            </div>            
-            <button style="background-color: blue; color: white; display: inline;" @click="pagamentoEffettuato">Procedi all'acquisto</button>
+            </div>
+                       
+            <button style="background-color: blue; color: white; display: inline;" @click="aggiornaDatiPagamento">Procedi all'acquisto</button>
 
         </form>
     </div>

@@ -25,7 +25,7 @@ export default defineComponent({
           if (user.ruolo === "acquirente") {
             window.location.href = "/PostiSala/:idproiezione";
           } else if (user.ruolo === "amministratore"){
-            window.location.href = "/provaGiulia"; 
+            window.location.href = "/adminpage"; 
           }
         }
           
