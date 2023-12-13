@@ -11,6 +11,7 @@ export default defineComponent({
       cognome:"",
       telefono:0,
       data_nascita:"",
+      ruolo:"acquirente",
       confirmPassword: "",
     }
   },
@@ -33,6 +34,7 @@ export default defineComponent({
           cognome: this.cognome,
           telefono: this.telefono,
           data_nascita: this.data_nascita,
+          ruolo: this.ruolo
         })
         window.location.href ="/login"
       } catch (e: any) {
