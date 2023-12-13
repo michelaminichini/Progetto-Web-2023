@@ -213,22 +213,20 @@ export default defineComponent({
                 <table>
                     <thead>
                         <tr>
-                            <th>ID Utente</th>
                             <th>Titolo Film</th>
                             <th>Data proiezione film</th>
                             <th>Orario proiezione film</th>
-                            <th>ID Sala</th>
+                            <th>Importo</th>
                             <th>Descrizione Sala</th>
                             <th>Tipo di pagamento</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr v-for="entry in crono" :key="entry.idutente">
-                            <td>{{ entry.idutente }}</td>
                             <td>{{ entry.titolo }}</td>
                             <td>{{ entry.datap }}</td>
                             <td>{{ entry.orario }}</td>
-                            <td>{{ entry.idsala }}</td>
+                            <td>{{ entry.importo }} €</td>
                             <td>{{ entry.descrizione }}</td>
                             <td>{{ entry.Descrizione }}</td>
                         </tr>  
@@ -257,7 +255,7 @@ th, td{
 }
 
 table{
-    display: block;
+    display: inline-block;
     border-collapse: collapse;
     border-spacing: 0;
     table-layout: fixed;
