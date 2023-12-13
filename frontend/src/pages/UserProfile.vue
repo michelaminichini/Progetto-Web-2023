@@ -4,6 +4,7 @@ import { PropType, defineComponent } from "vue"
 import { User } from "../types"
 import UserInfo from "../components/user-info.vue"
 import { CronoUtente } from "../types";
+import { UpdateUser } from "../types";
 
 export default defineComponent({
    /*  props: {
@@ -16,6 +17,7 @@ export default defineComponent({
             //userHistory: [] as CronoUtente [],
             crono: [] as CronoUtente [],
             user: null as User | null,
+            utenteAggiornato: [] as UpdateUser [],
         };
     },
     
@@ -28,21 +30,7 @@ export default defineComponent({
             //this.user = res.data
             //console.log(this.user)
         //},
-        //getCronologia(){
-          //  axios.get("/api/cronologia/:idutente").then(response => this.crono = response.data)
-        //}
-        /*
-        async fetchUserHistory(){
-            try {
-                const IdUser = this.$route.params.idutente;
-                const response = await fetch(`/api/cronologia/${IdUser}`);
-                const data = await response.json();
-                this.userHistory = data;
-            } catch (error) {
-                console.error("Errore nel fetch user history:", error)
-            }
-        },
-        */
+        
         async getCronologia(){ 
             const res = await axios.get("/api/auth/profile")
             this.user = res.data
@@ -52,45 +40,50 @@ export default defineComponent({
             const res1 = await axios.get("/api/cronologia/"+id)
             this.crono = res1.data
             console.log(this.crono)
-        }
-
-        /*
+        },
+        
         async updateUserProfile(){
-            const updateData = {
-                email:this.email,
-                nome: this.nome,
-                congome: this.cognome,
-                telefono: this.telefono,
-                data_nascita: this.data_mascita
-            }
-            try {
-                //console.log('Data sent in request:', {
-                   // nome: this.nome,
-                    //cognome: this.cognome,
-                    //telefono: parseInt(this.telefono),
-                    //data_nascita: this.data_nascita,
-                //})
-                const risposta = await axios.put("/api/update/aggiornaDati" , updateData)
-                window.location.href = "/profiloutente"
-                console.log("RISPOSTA:", risposta.data)
+            const response = await axios.get("/api/auth/profile")
+            this.user = response.data
+            console.log(this.user)
+            const ID = this.user?.idutente
+            console.log("Id "+ID)
+            const risposta = await axios.put("/api/update/aggiornaDati/"+ID)
+            this.utenteAggiornato = risposta.data
+            console.log(this.utenteAggiornato)
 
-                //this.user = risposta.data
+            // const updateData = {
+            //     nome: this.nome,
+            //     congome: this.cognome,
+            //     telefono: this.telefono,
+            //     data_nascita: this.data_nascita
+            // }
+            // try {
+            //     //console.log('Data sent in request:', {
+            //        // nome: this.nome,
+            //         //cognome: this.cognome,
+            //         //telefono: parseInt(this.telefono),
+            //         //data_nascita: this.data_nascita,
+            //     //})
+            //     const risposta = await axios.put("/api/update/aggiornaDati" , updateData)
+            //     window.location.href = "/profiloutente"
+            //     console.log("RISPOSTA:", risposta.data)
 
-                //console.log("Risposta:", risposta)
-            } catch (e: any) {
-              if (e.response) {
-                  alert(`${e.response.status} - ${e.response.statusText}\n${e.response.data}`)
-              } else {
-                  alert(e.message)
-              }   
-            }
-        },*/
+            //     //this.user = risposta.data
+
+            //     //console.log("Risposta:", risposta)
+            // } catch (e: any) {
+            //   if (e.response) {
+            //       alert(`${e.response.status} - ${e.response.statusText}\n${e.response.data}`)
+            //   } else {
+            //       alert(e.message)
+            //   }   
+            // }
+        },
     },
     mounted(){
-        //this.updateUserProfile()
-        //this.getuser()
         this.getCronologia()
-        //this.fetchUserHistory()
+        //this.updateUserProfile()
     }
 })
 </script>
@@ -123,27 +116,24 @@ export default defineComponent({
             </div>
 
             <div v-show="activeDiv === 0" class="primo">
-                <!--form>
+                <form v-for="dato in utenteAggiornato" :key="dato.idutente">
                     
                     <h1>Informazioni personali</h1>
 
-                    <h2>Email</h2>
-                    <input type="text" v-model="email" class="rounded-lg border-slate-200" placeholder="Nome" required>
-
                     <h2>Nome</h2>
-                    <input type="text" v-model="nome" class="rounded-lg border-slate-200" placeholder="Nome" required>
+                    <input type="text" v-model="dato.nome" class="rounded-lg border-slate-200" placeholder="Nome" required>
 
                     <h2>Cognome</h2>
-                    <input type="text" v-model="cognome" class="rounded-lg border-slate-200" placeholder="Cognome" required>
+                    <input type="text" v-model="dato.cognome" class="rounded-lg border-slate-200" placeholder="Cognome" required>
 
                     <h2>Numero di Telefono</h2>
-                    <input type="number" v-model="telefono" class="rounded-lg border-slate-200" placeholder="1111111111" required>
+                    <input type="number" v-model="dato.telefono" class="rounded-lg border-slate-200" placeholder="1111111111" required>
 
                     <h2>Data di nascita</h2>
-                    <input type="date" v-model="data_mascita" class="rounded-lg border-slate-200" required>
+                    <input type="date" v-model="dato.data_nascita" class="rounded-lg border-slate-200" required>
 
                     <button class="btn text-white w-1/2 mx-auto mt-3" @click="updateUserProfile">Salva</button>
-                </form-->
+                </form>
                     
             </div>
 

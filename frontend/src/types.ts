@@ -124,3 +124,11 @@ export interface CronoUtente{
     Circuito: string
 
 }
+
+export interface UpdateUser{
+    idutente:number
+    nome:string
+    cognome:string
+    telefono:number
+    data_nascita:string
+}
