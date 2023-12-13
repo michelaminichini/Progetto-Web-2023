@@ -4,226 +4,143 @@ import {defineComponent} from "vue"
 import axios from "axios"
 import {Film} from "../types" // tipo di interfaccia creata nel file types.ts
 //import { Modifica } from "../types"
+//import { IdSala } from "../types"
+import { PostoL } from "../types"
 
-interface EditingCell{
-    rowIndex: number
-    field: string
-    //keyof Film 
-}
-
-export default defineComponent({
-    data(){
-        return {
-        ListaFilm: [] as Film [],
-        editingCell: null as EditingCell| null
+export default {
+  data() {
+    return {
+      //sala: [] as IdSala[],
+      seatLayout: [] as PostoL[]
+      /* seatLayout: [
+        [{ label: 'A1', selected: false, reserved: false }, { label: 'A2', selected: false, reserved: false }, { label: 'A3', selected: false, reserved: false }, { label: 'A4', selected: false, reserved: false }, { label: 'A5', selected: false, reserved: false }],
+        [{ label: 'B1', selected: false, reserved: false }, { label: 'B2', selected: false, reserved: false }, { label: 'B3', selected: false, reserved: false }, { label: 'B4', selected: false, reserved: false }]
+        // Add more rows and seats as needed
+      ], */
     }
+  },
+  methods: {
+    /* getSala() {
+        axios.get("/api/sala/" + this.$route.params.idproiezione)
+        .then(response => {this.sala = response.data[0]; console.log(response.data)})
+    }, */
+
+    toggleSeat(rowIndex, seatIndex) {
+      const seat = this.seatLayout[rowIndex][seatIndex];
+      if (!seat.reserved) {
+        seat.selected = !seat.selected;
+      }
     },
-    methods: {
-        getLista() {
-            axios.get("/api/tuttifilm").then(response => this.ListaFilm = response.data)
-        },
-        putFilm(){
-            axios.put("/api/inserimento")
-        },
-        startEditing(rowIndex: number, field: string){
-            this.editingCell = { rowIndex, field};
-            console.log(this.editingCell);
-        },
-
-        stopEditing(){           
-            //this.saveChanges();
-            this.editingCell = null;
-        },
-        saveChanges(){
-            axios.post("/api/inserimento",{title: "prova4"});
-        /*
-            axios.post("/api/update-films", this.ListaFilm).then((response) => {
-                console.log("Changes saved:", response.data);
-            }).catch((error) => {
-                console.error("Error saving changes:", error);
-            });
-        */ 
-        },
-
-        isEditing(rowIndex: number, field: string){
-            return this.editingCell !== null && this.editingCell.rowIndex == rowIndex && this.editingCell.field == field;
-        },
-
-       
+    bookSeats() {
+      const selectedSeats = [];
+      this.seatLayout.forEach(row => {
+        row.forEach(seat => {
+          if (seat.selected && !seat.reserved) {
+            seat.reserved = true;
+            seat.selected = false; // Reset selected state after booking
+            selectedSeats.push(seat.label);            
+            axios.put("/api/aggiornaP",seat)
+            .then(response => {console.log(response.data)})
+          }
+        });
+      });
+      alert(`Booked seats: ${selectedSeats.join(', ')}`);
     },
-    mounted() {
-    this.getLista()
+    chunkArray(arr, chunkSize: number) {
+      const chunkedArr = [];
+      for (let i = 0; i < arr.length; i += chunkSize) {
+        chunkedArr.push(arr.slice(i, i + chunkSize));
+      }
+      return chunkedArr;
+    },
+
+    async getPostiL() {
+      const res = await axios.get("/api/postiL")
+      //this.seatLayoutDB = res.data
+      console.log(res.data)
+
+      const dataArray = res.data;
+
+      // Displaying data in subarrays in the console
+      const subArrays = this.chunkArray(dataArray, 15); // Change '3' to your desired subarray size
+      subArrays.forEach((subArray, index) => {
+        console.log(`Subarray ${index + 1}:`, subArray);
+        this.seatLayout.push(subArray)
+      });
+    },
+  },
+  computed: {
+    
+  },
+  mounted() {
+    //this.getSala()
+    this.getPostiL()
+    //console.log(this.seatLayout);
+    console.log(this.seatLayout);
   }
-})
-
+};
 
 </script>
 
 <template>
-    <h1>Prova pagina admin collegata col db</h1>
-    <button @click="saveChanges()" type="button" class="btn btn-primary">Prova</button>
-<body>
-    <div id="app">
-        <div class="container">
-            <h3 class="p-3 text-center">Prova</h3>
-            <table class="table table-striped table-bordered" >
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Titolo</th>
-                        <th>Regista</th>
-                        <th>Genere</th>
-                        <th>Durata</th>
-                        <th>Nazione</th>
-                        <th>Anno</th>
-                        <th>Stato</th>
-                        
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr v-for="(Film, rowIndex) in ListaFilm" :key="Film.idfilm">
-                        <td>{{ Film.idfilm}}</td> 
-                        <td v-if="!isEditing(rowIndex, Film.titolo)" @click="startEditing(rowIndex,Film.titolo)">{{ Film.titolo }}</td>
-                        <td v-if="isEditing(rowIndex, Film.titolo)">
-                            <!-- <input class="input" type="text" v-model="ListaFilm[rowIndex].titolo" @blur="stopEditing" /> -->
-                            <input class="input" type="text" v-model="Film.titolo"/>
-                        </td>
-                        
-                        <td v-if="!isEditing(rowIndex, Film.regista)" @click="startEditing(rowIndex, Film.regista)">{{ Film.regista }}</td>
-                        <td v-else>
-                            <input type="text" v-model="Film.regista" placeholder="edit me" />
-                        </td>
-
-                        <td v-if="!isEditing(rowIndex, Film.genere)" @click="startEditing(rowIndex, Film.genere)">{{ Film.genere }}</td>
-                        <td v-else>
-                        <input type="text" v-model="Film.genere" @blur="stopEditing" />
-                        </td>
-
-                        
-    
-                        <td>{{Film.durata}}</td>
-                        <td>{{Film.nazione}}</td>
-                        <td>{{Film.anno}}</td>
-
-                        <td v-if="!isEditing(rowIndex, Film.stato.toString())" @click="startEditing(rowIndex, Film.stato.toString())">{{ Film.stato }}</td>
-                        <td v-else>
-                        <input type="text" v-model="Film.stato" @blur="stopEditing" />
-                        </td>
-                        
-                        
-                    </tr>
-                </tbody>
-            </table>
-        </div>    
-    </div>
-    <!--<div id="app">
-         <table class="table table-striped table-bordered" contenteditable="true">
-            <thead>
-                <tr>
-                    <th>id</th>
-                    <th>Titolo</th>
-                    <th>Regista</th>
-                    <th>Genere</th>
-                    <th>Durata</th>
-                    <th>Nazione</th>
-                    <th>Anno</th>
-                    <th>Descrizione</th>
-                    <th>Trailer</th>
-                    <th>Locandina</th>
-                    <th>Lingua</th>
-                    <th>Attori</th>
-                    <th>Stato</th>
-                </tr>
-            </thead>
-            <tbody>
-                <div v-for= "(film, rowIndex) in ListaFilm" :key="film.idfilm" id="prova" class="cineContainer">    
-                    
-                    <th>{{ film.idfilm }}</th>
-                    <td v-if="!isEditing(rowIndex, film.titolo)" @click="startEditing(rowIndex, film.titolo)">{{ film.titolo }}</td>
-                    <td v-else>
-                        <input type="text" v-model="film.titolo" @blur="stopEditing" />
-                    </td>
-                    <td v-if="!isEditing(rowIndex, film.regista)" @click="startEditing(rowIndex, film.regista)">{{ film.regista }}</td>
-                    <td v-else>
-                        <input type="text" v-model="film.regista" @blur="stopEditing" />
-                    </td>
-                    <td v-if="!isEditing(rowIndex, film.genere)" @click="startEditing(rowIndex, film.genere)">{{ film.genere }}</td>
-                    <td v-else>
-                        <input type="text" v-model="film.genere" @blur="stopEditing" />
-                    </td>
-                    <td v-if="!isEditing(rowIndex, film.durata)" @click="startEditing(rowIndex, film.durata)">{{ film.durata }}</td>
-                    <td v-else>
-                        <input type="text" v-model="film.durata" @blur="stopEditing" />
-                    </td>
-                    <td v-if="!isEditing(rowIndex, film.nazione)" @click="startEditing(rowIndex, film.nazione)">{{ film.nazione }}</td>
-                    <td v-else>
-                        <input type="text" v-model="film.nazione" @blur="stopEditing" />
-                    </td>
-                    <td v-if="!isEditing(rowIndex, film.anno)" @click="startEditing(rowIndex, film.anno)">{{ film.anno }}</td>
-                    <td v-else>
-                        <input type="text" v-model="film.anno" @blur="stopEditing" />
-                    </td>
-                    <td v-if="!isEditing(rowIndex, film.descrizione)" @click="startEditing(rowIndex, film.descrizione)">{{ film.descrizione }}</td>
-                    <td v-else>
-                        <input type="text" v-model="film.descrizione" @blur="stopEditing" />
-                    </td>
-                    <td v-if="!isEditing(rowIndex, film.trailer)" @click="startEditing(rowIndex, film.trailer)">{{ film.trailer }}</td>
-                    <td v-else>
-                        <input type="text" v-model="film.trailer" @blur="stopEditing" />
-                    </td>
-                    <td v-if="!isEditing(rowIndex, film.locandina)" @click="startEditing(rowIndex, film.locandina)">{{ film.locandina }}</td>
-                    <td v-else>
-                        <input type="text" v-model="film.locandina" @blur="stopEditing" />
-                    </td>
-                    <td v-if="!isEditing(rowIndex, film.lingua)" @click="startEditing(rowIndex, film.lingua)">{{ film.lingua }}</td>
-                    <td v-else>
-                        <input type="text" v-model="film.lingua" @blur="stopEditing" />
-                    </td>
-                    <td v-if="!isEditing(rowIndex, film.attori)" @click="startEditing(rowIndex, film.attori)">{{ film.attori }}</td>
-                    <td v-else>
-                        <input type="text" v-model="film.attori" @blur="stopEditing" />
-                    </td>
-                    <td v-if="!isEditing(rowIndex, film.attivo)" @click="startEditing(rowIndex, film.attivo)">{{ film.attivo }}</td>
-                    <td v-else>
-                        <input type="text" v-model="film.attivo" @blur="stopEditing" />
-                    </td>
+    <div class="seat-booking">
+        <h2>Select Your Seats</h2>
+        <div class="seats">
+            <div
+                v-for="(row, rowIndex) in seatLayout"
+                :key="rowIndex"
+                class="seat-row"
+            >
+                <div
+                    v-for="(seat, seatIndex) in row"
+                    :key="seatIndex"
+                    class="seat"
+                    :class="{ selected: seat.selected, reserved: seat.reserved }"
+                    @click="toggleSeat(rowIndex, seatIndex)"
+                    >
+                    {{ seat.label }}
                 </div>
-            </tbody>
-        </table> 
-    
-    </div>-->
-    <!-- <div id="app">
-        <div v-for=" proiezioni in proiezioneSB" :key="proiezioni.idproiezione">
-            <article >
-                <p>{{proiezioni.idproiezione}} </p>
-            </article>
-            <RouterLink :to="'/sala/' + proiezioni.idproiezione">Prenota posti </RouterLink>
+            </div>
         </div>
-    </div> -->
-
-
-</body>
+        <button @click="bookSeats">Book Selected Seats</button>
+    </div>
 </template>
 
-<style>
-button{
-    margin-left: 20%;
-}
-h1, h2, p{
-    color:aliceblue;
-    margin: 10%;
+<style scoped>
+.seat-booking {
+  color: aliceblue;  
+  text-align: center;
+  margin-top: 30px;
 }
 
-table {
-  border-collapse: collapse;
-  width: 100%;
+.seats {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
 }
 
-th, td {
-  padding: 8px;
-  text-align: left;
-  border-bottom: 1px solid #ddd;
-  color: aliceblue;
+.seat-row {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.seat {
+  margin: 5px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+}
+
+.seat.selected {
+  background-color: #6bd1e7;
+}
+
+.seat.reserved {
+  background-color: #e74c3c;
+  pointer-events: none; /* Disable click for reserved seats */
 }
 
 </style>

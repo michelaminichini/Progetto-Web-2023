@@ -95,6 +95,12 @@ export interface postoF {
     numero: number
 }
 
+export interface PostoL {
+    label: string,
+    selected: boolean,
+    reserved: boolean,
+  }
+
 export interface User{
     idutente: number
     email: string
