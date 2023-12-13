@@ -132,6 +132,8 @@ export default {
   padding: 10px;
   border: 1px solid #ccc;
   cursor: pointer;
+  max-width: 50px;
+  text-align: center;
 }
 
 .seat.selected {
