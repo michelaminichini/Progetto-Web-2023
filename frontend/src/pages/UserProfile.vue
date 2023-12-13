@@ -13,7 +13,7 @@ export default defineComponent({
     data(){
         return {
             activeDiv: null,
-            userHistory: [] as CronoUtente [],
+            //userHistory: [] as CronoUtente [],
             crono: [] as CronoUtente [],
             user: null as User | null,
         };
@@ -23,10 +23,15 @@ export default defineComponent({
         toggleDiv(index: any){
             this.activeDiv = this.activeDiv === index ? null: index;
         },
+        //async getuser(){
+          //  const res = await axios.get("/api/auth/profile")
+            //this.user = res.data
+            //console.log(this.user)
+        //},
         //getCronologia(){
           //  axios.get("/api/cronologia/:idutente").then(response => this.crono = response.data)
         //}
-        
+        /*
         async fetchUserHistory(){
             try {
                 const IdUser = this.$route.params.idutente;
@@ -37,6 +42,7 @@ export default defineComponent({
                 console.error("Errore nel fetch user history:", error)
             }
         },
+        */
         async getCronologia(){ 
             const res = await axios.get("/api/auth/profile")
             this.user = res.data
@@ -82,15 +88,16 @@ export default defineComponent({
     },
     mounted(){
         //this.updateUserProfile()
-        //this.getCronologia()
-        this.fetchUserHistory()
+        //this.getuser()
+        this.getCronologia()
+        //this.fetchUserHistory()
     }
 })
 </script>
 
 <template>
     <head>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     </head>
 
     <body>
@@ -162,44 +169,73 @@ export default defineComponent({
 
             <div v-show="activeDiv === 2" class="terzo">
                 <h1>Impostazioni sulla Privacy e sul Tuo Account</h1>
-                <h2>Gestisce notifiche email</h2><p></p>
-                        
-                <h2>Gestisci impostazioni sulla privacy</h2><p></p>
 
-                <h2>Vedi Termini e Condizioni</h2><p></p>
-                        
-                <h2>Personalized Ad Experience</h2><p></p>
+                <h2>Informativa sulla privacy</h2>
+                <p>
+                    1. Informazioni che raccogliamo
+                    Raccogliamo informazioni personali quando utilizzi il nostro sito web di GalaxyCineVerse, acquisti biglietti o interagisci con i nostri servizi. 
+                    Queste informazioni possono includere:
 
-                <h2>Preoteggi il tuo account</h2><p></p>
+                    Nome e ulteriori informazioni personali,
+                    Informazioni di contatto (email, numero di telefono),
+                    Dettagli di pagamento,
+                    Cronologia delle transazioni,
+                    Altre informazioni fornite volontariamente.
+                </p>
+                <p>
+                    2. Come utilizziamo le tue informazioni
+                    Utilizziamo le informazioni raccolte per i seguenti scopi:
 
-                <button class="btn">Salva</button>
-            </div>
+                    Elaborare acquisti e prenotazioni di biglietti,
+                    Migliorare il nostro sito web e i nostri servizi,
+                    Garantire la sicurezza del nostro sito web e prevenire frodi.
+                </p>
+                <p>
+                    3. Sicurezza dei dati
+                    Adottiamo misure ragionevoli per proteggere le tue informazioni personali da accessi non autorizzati, divulgazioni, alterazioni e distruzioni. 
+                </p>
+                <p>
+                    4. Cookie e tecnologie di tracciamento
+                    Utilizziamo cookie e tecnologie di tracciamento simili per migliorare la tua esperienza sul nostro sito web.
+                </p>
+                <p>
+                    5. Contattaci
+                    Se hai domande su questa informativa sulla privacy o sulle nostre pratiche relative ai dati, contattaci all'indirizzo " galaxycineverse@cinema.com ".
+                    Utilizzando il nostro sito web, accetti i termini indicati in questa informativa sulla privacy.
 
-            <div v-show="activeDiv === 3" class="quarto" v-for="entry in userHistory">
-                <h1>La tua cronologia di acquisti - Clicca qui</h1>
-                 
-                    <RouterLink :to="'/api/cronologia/' + entry.idutente" style="color: black; margin-left: 5%;">CRONOLOGIA</RouterLink>
-                
-                <!--table>
-                    <thead>
-                        <tr>
-                            <th>CIAO</th>
-                            <th>CIAO</th>
-                            <th>CIAO</th>
-                            <th>CIAO</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr v-for="entry in userHistory" :key="entry.idutente">
-                            <td>{{ entry.titolo }}</td>
-                        </tr>
-                        
-                    </tbody>
-
-                </table-->
+                </p>
 
                 <!--button class="btn">Salva</button-->
             </div>
+
+            <div v-show="activeDiv === 3" class="quarto">
+                <h1 style="margin-bottom: 5%;">La tua cronologia di acquisti</h1>                
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID Utente</th>
+                            <th>Titolo Film</th>
+                            <th>Data proiezione film</th>
+                            <th>Orario proiezione film</th>
+                            <th>ID Sala</th>
+                            <th>Descrizione Sala</th>
+                            <th>Tipo di pagamento</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="entry in crono" :key="entry.idutente">
+                            <td>{{ entry.idutente }}</td>
+                            <td>{{ entry.titolo }}</td>
+                            <td>{{ entry.datap }}</td>
+                            <td>{{ entry.orario }}</td>
+                            <td>{{ entry.idsala }}</td>
+                            <td>{{ entry.descrizione }}</td>
+                            <td>{{ entry.Descrizione }}</td>
+                        </tr>  
+                    </tbody>
+                </table>
+            </div>
+
         </div>
     </body>
 </template>
@@ -215,12 +251,22 @@ body {
 
 th, td{
     color: black;
+    padding: 0;
+    font-size: medium;
 
+}
+
+table{
+    display: block;
+    border-collapse: collapse;
+    border-spacing: 0;
+    table-layout: fixed;
+    width: 100%;
 }
 
 #CONTAINER{
     background: #fff;
-    width:900px;
+    width:100%;
     height:600px;
     margin:0 auto;
     position:relative;
@@ -331,6 +377,10 @@ section > h1{
 footer{
     margin:0;
     padding:0;
+}
+
+p{
+    font-size: 14px;
 }
 
 

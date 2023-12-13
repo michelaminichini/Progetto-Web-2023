@@ -2,13 +2,12 @@ import { Request, Response } from "express";
 import {getConnection} from "../utils/db"
 import bcrypt from "bcrypt"
 import { decodeAccessToken, deleteAccessToken, setAccessToken } from "../utils/auth";
-//import { Connection } from "mysql2/promise";
 
 
 // Procedura di registrazione di un nuovo account 
 export const register = async (req: Request, res: Response) => {
     //estrarre data dal body
-    const { email, password, nome, cognome, telefono, data_nascita } = req.body
+    const { email, password, nome, cognome, telefono, data_nascita, ruolo } = req.body
 
     //verificare che la mail sia disponibile
     const connection = await getConnection()
@@ -20,8 +19,8 @@ export const register = async (req: Request, res: Response) => {
 
     const passwordHash = await bcrypt.hash(password, 10)
 
-    // Inserire nuova riga nel database contenente email e password dell'utente (password cryptata). In questo modo i dati vengono salvati e l'utente ha creato così il proprio account
-    await connection.execute(`INSERT INTO utente (email, password, nome, cognome, telefono, data_nascita) VALUES (?, ?, ?, ?, ?, ?)`, [email, passwordHash, nome, cognome, telefono, data_nascita])
+    // Inserire nuova riga nel database. In questo modo i dati vengono salvati e l'utente ha creato così il proprio account
+    await connection.execute(`INSERT INTO utente (email, password, nome, cognome, telefono, data_nascita, ruolo) VALUES (?, ?, ?, ?, ?, ?, ?)`, [email, passwordHash, nome, cognome, telefono, data_nascita, ruolo])
 
     res.json({message: "Registrazione effettuata"})
 }

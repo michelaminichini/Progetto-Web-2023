@@ -17,8 +17,6 @@ export default defineComponent({
           password: this.password,
         })
 
-
-        // Assuming your backend returns user details including the role if authentication is successful
         const user = response.data;
         console.log('User Object:', user);
         
@@ -26,10 +24,8 @@ export default defineComponent({
         if (user) {
           if (user.ruolo === "acquirente") {
             window.location.href = "/PostiSala/:idproiezione";
-            //await this.$router.push('/provaGiulia')
           } else if (user.ruolo === "amministratore"){
             window.location.href = "/provaGiulia"; 
-            //await this.$router.push('/PostiSala/:idproiezione')
           }
         }
           

@@ -9,6 +9,10 @@ export default defineComponent({
         }
     },
     methods:{
+        async pagamentoEffettuato(){
+            alert("Pagamento andato a buon fine \nGrazie e buona visione");
+            window.location.href = "/"
+        },
         
     },
     
@@ -83,8 +87,8 @@ export default defineComponent({
                         </div>
                     </div>
                 </div>
-            </div>
-            <button style="background-color: blue; color: white; display: inline;" @click="">Procedi all'acquisto</button>
+            </div>            
+            <button style="background-color: blue; color: white; display: inline;" @click="pagamentoEffettuato">Procedi all'acquisto</button>
 
         </form>
     </div>

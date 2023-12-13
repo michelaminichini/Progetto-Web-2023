@@ -114,7 +114,7 @@ export interface CronoUtente{
     titolo: string
     idbiglietto: number
     idtipo_pagamento1: number
-    import: number
+    importo: number
     idproiezione: number
     idsala: number
     datap: string
