@@ -108,6 +108,18 @@ export interface User{
     ruolo: "amministratore" | "acquirente"
 }
 
+export interface DatiUtente{
+    idutente: number
+    email: string
+    password: string
+    nome: string
+    cognome: string
+    telefono: number
+    data_nascita: string
+    ruolo: "amministratore" | "acquirente"
+
+}
+
 export interface CronoUtente{
     idutente: number
     idfilm: number

@@ -29,10 +29,22 @@ export const updateData = async (req: Request, res: Response) => {
 }
 */
 
-// export const aggiornaDatiPagamentoUtente =async (req: Request, res: Response) => {
-//     const { Numero_carta, Data_scadenza, CVV} = req.body
-//     const connection = await getConnection()
-//     //await connection.execute(`INSERT INTO tipo_pagamenti (Numero_carta, Data_scadenza, CVV) VALUES (?,?,?) WHERE idutente=?`, [Numero_carta, Data_scadenza, CVV, req.params.id])
-//     res.json({ message: "Pagamento effettuato, dati salvati"})
-// }   
+
+ export const aggiornaDatiPagamentoUtente =async (req: Request, res: Response) => {
+     const {idbiglietto, tipo_pagamenti, importo, Numero_carta, Data_scadenza, CVV} = req.body
+     const connection = await getConnection()
+     await connection.execute(`INSERT INTO pagamenti (Importo, Numero_carta, Data_scadenza, CVV) VALUES (?,?,?,?) WHERE idutente=?`,
+     [idbiglietto, tipo_pagamenti, importo, Numero_carta, Data_scadenza, CVV, req.params.id])
+     res.json({ message: "Pagamento effettuato, dati salvati"})
+ }  
+ 
+ export const leggiDatiProfiloPersonale =async (req: Request, res: Response) => {
+    const connection = await getConnection()
+    const [results] = await connection.execute(`SELECT * FROM utente WHERE idutente = ?`,
+    [req.params.id],   
+    )
+    res.json(results)   
+}  
+ 
+
 
