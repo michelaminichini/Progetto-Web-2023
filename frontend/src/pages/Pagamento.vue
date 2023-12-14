@@ -8,6 +8,9 @@ export default defineComponent({
             Numero_carta:0,
             Data_scadenza:"",
             CVV:0,
+            idbiglietto:0,
+            tipo_pagamenti:1,
+            importo:10,     
         }
     },
     methods:{
@@ -15,21 +18,24 @@ export default defineComponent({
             alert("Pagamento andato a buon fine \nGrazie e buona visione")
         },
         async aggiornaDatiPagamento(){
-            try {
-                await axios.post("/api/aggiorna/pagamento", {
+             try {
+                await axios.post("/api/aggiornapagamento", {
                     Numero_carta: this.Numero_carta,
                     Data_scadenza: this.Data_scadenza,
                     CVV: this.CVV,
+                    idbiglietto: this.idbiglietto,
+                    tipo_pagamenti: this.tipo_pagamenti,
+                    importo: this.importo,
                 })
-                window.location.href ="/profilo"
-
             } catch (e: any) {
                 if (e.response) {
                     alert(`${e.response.status} - ${e.response.statusText}\n${e.response.data}`)
                 } else {
                     alert(e.message)
                 }
-            }
+            } 
+            //window.location.href ="/profilo"
+            this.$router.push('/profilo');
         }
         
     },

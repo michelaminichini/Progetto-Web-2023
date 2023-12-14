@@ -45,6 +45,7 @@ export default {
         });
       });
       alert(`Booked seats: ${selectedSeats.join(', ')}`);
+      this.$router.push('/pagamento');
     },
     chunkArray(arr, chunkSize: number) {
       const chunkedArr = [];
