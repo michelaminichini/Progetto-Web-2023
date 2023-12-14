@@ -114,10 +114,9 @@ export interface DatiUtente{
     password: string
     nome: string
     cognome: string
-    telefono: number
+    telefono: string
     data_nascita: string
-    ruolo: "amministratore" | "acquirente"
-
+    ruolo: string
 }
 
 export interface CronoUtente{

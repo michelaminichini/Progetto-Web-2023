@@ -45,6 +45,17 @@ export const updateData = async (req: Request, res: Response) => {
     )
     res.json(results)   
 }  
+
+export async function aggiornaDatiProfilo(req: Request, res: Response) {
+    const {idutente, email, password, nome, cognome, telefono, data_nascita, ruolo} = req.body
+    console.log({idutente, email, password, nome, cognome, telefono, data_nascita, ruolo})
+    console.log(req.body)
+    const connection = await getConnection()
+    const [result] = await connection.execute(`UPDATE utente SET nome=?, cognome=?, telefono=?, data_nascita=? WHERE idutente=?`,
+    [nome, cognome, telefono, data_nascita, idutente],)
+    //res.json({message: "Profilo aggiornato"+result})
+    res.json({result})
+}
  
 
 

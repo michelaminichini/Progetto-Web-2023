@@ -18,10 +18,32 @@ export default defineComponent({
             crono: [] as CronoUtente [],
             user: null as User | null,
             datiUtente: [] as DatiUtente [],
+            editmode: false,
         };
+      
     },
     
     methods:{
+
+        dateToYYYYMMDD(d) {
+            return d && new Date(d.getTime()-(d.getTimezoneOffset()*60*1000)).toISOString().split('T')[0];
+        },
+
+        updateValue: function (target) {
+            this.$emit('input', target.valueAsDate);
+        },
+        selectAll: function (event) {
+            // Workaround for Safari bug
+            // http://stackoverflow.com/questions/1269722/selecting-text-on-focus-using-jquery-not-working-in-safari-and-chrome
+            setTimeout(function () {
+                event.target.select()
+            }, 0)
+        },
+
+        edit: function() {
+            this.editmode = !this.editmode;
+        },
+
         toggleDiv(index: any){
             this.activeDiv = this.activeDiv === index ? null: index;
         },
@@ -46,6 +68,17 @@ export default defineComponent({
             }
         },
         */
+        async getCronologia(){ 
+            const res = await axios.get("/api/auth/profile")
+            this.user = res.data
+            console.log(this.user) 
+            const id = this.user?.idutente                    
+            console.log("Id "+id)
+            const res1 = await axios.get("/api/cronologia/"+id)
+            this.crono = res1.data
+            console.log(this.crono)
+        },
+
         async getDatiUtente(){
             const res = await axios.get("/api/auth/profile")
             this.user = res.data
@@ -57,17 +90,17 @@ export default defineComponent({
             console.log(this.datiUtente)
         },
 
-        async getCronologia(){ 
-            const res = await axios.get("/api/auth/profile")
+        async updateDatiUtente(){
+/*             const res = await axios.get("/api/auth/profile")
             this.user = res.data
             console.log(this.user) 
             const id = this.user?.idutente                    
-            console.log("Id "+id)
-            const res1 = await axios.get("/api/cronologia/"+id)
-            this.crono = res1.data
-            console.log(this.crono)
-        }
-
+            console.log("Id "+id)  */
+            const datiU = this.datiUtente
+            console.log(datiU)
+            axios.put("/api/aggiornautente", datiU)
+            .then(response => {console.log(response.data)})
+        },
         /*
         async updateUserProfile(){
             const updateData = {
@@ -139,7 +172,6 @@ export default defineComponent({
 
             <div v-show="activeDiv === 0" class="primo">
 
-                    
                     <!-- <h1>Informazioni personali</h1>
 
                     <h2>Email</h2>
@@ -160,26 +192,71 @@ export default defineComponent({
                     <button class="btn text-white w-1/2 mx-auto mt-3" @click="updateUserProfile">Salva</button>
                  -->
                     <h1>Informazioni personali: </h1>
-                    <div v-for= "utente in datiUtente" :key="utente.idutente" id="contenitore" class="profiloContainer">
-                        <ul>
-                            <li>
-                                Nome: {{ utente.nome }} 
-                            </li>
-                            <li>
-                                Cognome: {{ utente.cognome }}
-                            </li>
-                            <li>
-                                E-mail: {{ utente.email }}
-                            </li>
-                            <li>
-                                Telefono: {{ utente.telefono }}
-                            </li>
-                            <li>
-                                Data di nascita: {{ utente.data_nascita.slice(0, 10) }}
-                            </li>
-
-                        </ul>
-                    </div>
+                    <!-- inserimento dati utente con query get (funzionante) -->
+                    <!-- <div v-for= "utente in datiUtente" :key="utente.idutente" id="contenitore" class="row">
+                        <div class="col-sm-6">
+                            <ul>
+                                <li>
+                                    Nome: {{ utente.nome }}
+                                </li>
+                                <li>
+                                    Cognome: {{ utente.cognome }}
+                                </li>
+                                <li>
+                                    E-mail: {{ utente.email }}
+                                </li>
+                                <li>
+                                    Telefono: {{ utente.telefono }}
+                                </li>
+                                <li>
+                                    Data di nascita: {{ utente.data_nascita.slice(0, 10) }}
+                                </li>
+                                <button class="btn">Salva</button>
+                            </ul>
+                        </div>
+                        <div class="col-sm-6">
+                            <ul>
+                                <input>
+                            </ul>
+                        </div>
+                       
+                    </div> -->
+                    <!-- inserimento e modifica dei dati utente, con query get e update (update non funzionante) -->
+                    <div v-for= "utente in datiUtente" :key="utente.idutente" id="contenitore" class="row">
+                        <div v-if="editmode">
+                            Nome: 
+                            <input v-model="utente.nome">
+                        </div>
+                        <div v-else>Nome: {{utente.nome}}</div>
+                        <div v-if="editmode">
+                            Cognome: 
+                            <input v-model="utente.cognome">
+                        </div>
+                        <div v-else>Cognome: {{utente.cognome}}</div>
+                        <div v-if="editmode">
+                            Data di nascita: 
+                            <input v-model="utente.data_nascita">
+                            <!-- <input
+                                type="date"
+                                ref="input"
+                                v-bind:value="dateToYYYYMMDD(utente.data_nascita)"
+                                v-on:input="updateValue($event.target)"
+                                v-on:focus="selectAll"
+                            > -->
+                        </div>
+                        <div v-else>Data di nascita: {{utente.data_nascita.slice(0, 10)}}</div>
+                        <div v-if="editmode">
+                            Telefono: 
+                            <input v-model="utente.telefono">
+                        </div>
+                        <div v-else>Telefono: {{utente.telefono}}</div>
+                        <div>
+                            <button v-on:click="edit()" class="btn btn-danger">edit</button>
+                        <!-- bottone save fa partire la query update che non funziona, se cliccato crasha tutto -->
+                        <!-- <button v-on:click="updateDatiUtente()" class="btn btn-danger">save</button> -->
+                        </div>
+                        
+                    </div>    
                     
             </div>
 
