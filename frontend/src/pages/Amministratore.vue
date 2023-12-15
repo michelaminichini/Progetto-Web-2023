@@ -75,7 +75,7 @@ export default defineComponent({
 <template>
     
     <h1>
-        prova Giulia
+        Pagina Amministratore - pannello di controllo
     </h1>
 
     <div class="card">
@@ -99,7 +99,7 @@ export default defineComponent({
                             <th>Nazione</th>
                             <th>Anno</th>
                             <th>Descrizione</th>
-                            <th style="width: 2%;">Trailer</th>
+                            <th>Trailer</th>
                             <th>Locandina</th>
                             <th>Lingua</th>
                             <th>Attori</th>
@@ -143,8 +143,9 @@ export default defineComponent({
 }
 
 h1{
-    margin:0;
+    margin:2%;
     padding:0;
+    color: white;
 }
 
 table{

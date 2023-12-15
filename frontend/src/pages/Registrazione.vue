@@ -121,6 +121,7 @@ export default defineComponent({
 h1{
   margin:5%;
   padding:0;
+  color:white;
 }
 
 input{
