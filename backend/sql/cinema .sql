@@ -2574,11 +2574,14 @@ CREATE TABLE `utente` (
 --
 
 INSERT INTO `utente` (`idutente`, `email`, `password`, `nome`, `cognome`, `telefono`, `data_nascita`, `ruolo`) VALUES
-(1, 'mariorossi@gmail.com', 'password1', 'Mario', 'Rossi', 11111111, '1979-12-25', 'acquirente'),
-(2, 'saramarconi@libero.it', 'password2', 'Sara', 'Marconi', 22222222, '2003-05-16', 'acquirente'),
-(3, 'admingiulia@gmail.com', '123', 'Giulia', 'Vanni', 33333333, '2000-06-16', 'amministratore1'),
-(4, 'adminmichela@gmail.com', '123', 'Michela', 'Minichini', 44444444, '2002-08-06', 'amministratore2'),
-(6, 'pippo@gmail.com', '$2b$10$8QVMUdOa3qSVz/FvQHnkguGC6jAMK8Z6BmoHWXqcyI7dC/3eVyitW', 'pippo', 'pluto', 1, '2023-12-15', 'acquirente');
+(1, 'admin1@gmail.com', '$2b$10$eARXxnqhDsukCSmi..Yyt.eC9Vr0DqHv0i68/7kyiNLO45Ghb71i2', 'Giulia', 'Vanni', 345345345, '2000-06-16', 'amministratore'),
+(2, 'admin2@gmail.com', '$2b$10$3WfZ38CjDL7PTAekdYfuVODGj7uzMRnN8ZXEWr7Xp3D3lKmhDYj4i', 'Mario', 'Rossi', 44433322, '2000-05-03', 'amministratore'),
+(3, 'sarabianchi@gmail.com', '$2b$10$y6mATNtd6S1hgZYUv/LemuaxtSSoa8hPW5hWnYGYDoNuTxjxeOLxC', 'Sara', 'Bianchi', 55555555, '1999-08-18', 'acquirente'),
+(4, 'michelaminichini@gmail.com', '$2b$10$KlfX4oRq505jruEbX2X0Q.Bcjt6gb27Z3UD2NsHA4YEwy1iMfbXRq', 'Michela', 'Minichini', 1111111111, '2002-08-06', 'acquirente'),
+(5, 'utente1@gmail.com', '$2b$10$28V0xU5TYlGvxuAIGQZ3dOk.kY2qJ8VMTl9ce4YlRUGPVibD0LFue', 'Martina', 'Pina', 2232222, '1999-01-22', 'acquirente'),
+(6, 'utente2@gmail.com', '$2b$10$inHMWBTYtgYiRCkTbyo63u1V/WFHTNWeOA60qHxc.7oKG7Z3kRUOi', 'Matteo', 'Neri', 345678, '2000-11-05', 'acquirente'),
+(7, 'utente3@gmail.com', '$2b$10$iq.Vu8luHvnAgSzz7iaMEe43tXhvS38NI.DX/VLq1I1084i6o0RBi', 'Sabrina', 'Fiera', 8888888, '1998-04-23', 'acquirente'),
+(8, 'utente6@gmail.com', '$2b$10$CxZQrAXOVibcPWgvf5Fq.OFXNJytzzTC.Rk9lRhG7JimstMSfKvZi', 'Marino', 'Marte', 99999999, '1999-05-22', 'acquirente');
 
 --
 -- Indici per le tabelle scaricate
