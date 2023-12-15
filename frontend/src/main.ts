@@ -60,4 +60,4 @@ router.beforeEach(async (to) => {
 })
 
 
-createApp(App).use(router).component('VueDatePicker', VueDatePicker).mount("#app")
+createApp(App).use(router).mount("#app")
