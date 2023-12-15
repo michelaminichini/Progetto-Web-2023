@@ -212,7 +212,7 @@ export default defineComponent({
                     <div v-else>Data di nascita: {{utente.data_nascita.slice(0, 10)}}</div>
                     <div v-if="editmode">
                         Telefono: 
-                        <input v-model="utente.telefono">
+                        <input v-model="utente.telefono"> 
                     </div>
                     <div v-else>Telefono: {{utente.telefono}}</div>
                     <div>
