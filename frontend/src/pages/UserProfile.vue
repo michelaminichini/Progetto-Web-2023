@@ -74,6 +74,7 @@ export default defineComponent({
             console.log(datiU)
             axios.put("/api/aggiornautente", datiU)
             .then(response => {console.log(response.data)})
+            this.editmode = false
         },
     },
     mounted(){
