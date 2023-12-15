@@ -9,6 +9,7 @@ export const updateData = async (req: Request, res: Response) => {
     const { idutente, nome, cognome, telefono, data_nascita } = req.body
     console.log('Request body:', req.body) // appurato che viene stampato in console
 
+    console.log("ID"+ idutente)
     const connection = await getConnection()
     const [risultati] = await connection.execute(`UPDATE utente SET nome=?, cognome=?, telefono=?, data_nascita=? WHERE idutente=?`, [nome, cognome, telefono, data_nascita, idutente])
     
@@ -36,8 +37,8 @@ export const updateData = async (req: Request, res: Response) => {
 }  
 
 export async function aggiornaDatiProfilo(req: Request, res: Response) {
-    const {idutente, email, password, nome, cognome, telefono, data_nascita, ruolo} = req.body
-    console.log({idutente, email, password, nome, cognome, telefono, data_nascita, ruolo})
+    const {idutente, email, password, nome, cognome, telefono, data_nascita, ruolo} = req.body[0]
+    console.log(idutente)
     console.log(req.body)
     const connection = await getConnection()
     const [result] = await connection.execute(`UPDATE utente SET nome=?, cognome=?, telefono=?, data_nascita=? WHERE idutente=?`,

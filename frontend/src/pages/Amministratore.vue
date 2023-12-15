@@ -45,11 +45,11 @@ export default defineComponent({
             this.$forceUpdate()
         },
 
-        editCell(rowIndex: any, cellIndex: any) {
+        editCell(rowIndex: any, cellIndex: string) {
             this.editingCell = `${rowIndex}-${cellIndex}`;
         },
 
-        updateCell(rowI: any, cellI: any, v: string|number) {
+        updateCell(rowI: number, cellI: number, v: string|number) {
             this.ListaFilm[rowI][cellI] = v;
         },
 
