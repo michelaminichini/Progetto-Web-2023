@@ -5,6 +5,7 @@ import { User } from "../types"
 import { DatiUtente } from "../types";
 import { CronoUtente } from "../types";
 import { UpdateUser } from "../types";
+import dayjs, { Dayjs } from "dayjs";
 
 export default defineComponent({
     data(){
@@ -15,15 +16,20 @@ export default defineComponent({
             utenteAggiornato: [] as UpdateUser [],
             datiUtente: [] as DatiUtente [],
             editmode: false,
+            dataN: dayjs() as Dayjs,
+            dataE: "",
         };
       
     },
     
     methods:{
-        
-        dateToYYYYMMDD(d: { getTime: () => number; getTimezoneOffset: () => number; }) {
-            return d && new Date(d.getTime()-(d.getTimezoneOffset()*60*1000)).toISOString().split('T')[0];
+        formatDateTime(data: string): string{
+            this.dataE=dayjs(data).format('DD-MM-YYYY');
+            return dayjs(data).format('DD-MM-YYYY'); // Example: Formatting date using Day.js
         },
+        // dateToYYYYMMDD(d: { getTime: () => number; getTimezoneOffset: () => number; }) {
+        //     return d && new Date(d.getTime()-(d.getTimezoneOffset()*60*1000)).toISOString().split('T')[0];
+        // },
         
         updateValue(event: Event) {
             if (event instanceof InputEvent) {
@@ -67,14 +73,19 @@ export default defineComponent({
             const res1 = await axios.get("/api/leggiutente/"+ id)
             this.datiUtente = res1.data
             console.log(this.datiUtente)
+            //const datann = dayjs(this.datiUtente[0].data_nascita).format('DD-MM-YYYY')
+            //this.datan = this.datiUtente[0].data_nascita
+    
         },
 
         async updateDatiUtente(){
             const datiU = this.datiUtente
+            datiU[0].data_nascita = dayjs(this.dataE).format('YYYY-MM-DD')
             console.log(datiU)
             axios.put("/api/aggiornautente", datiU)
             .then(response => {console.log(response.data)})
             this.editmode = false
+            alert("Dati aggiornati")
         },
     },
     mounted(){
@@ -132,7 +143,11 @@ export default defineComponent({
                     </div>
                     <div v-else>Cognome: {{utente.cognome}}</div>
                     <div v-if="editmode">
-                        Data di nascita: 
+                        Data di nascita:
+                        <input v-model="dataE" placeholder="data di nascita">
+                        
+                        <!--input type="date" v-model="this.datann" v-on:input="this.datann = dayjs($event.target.value).toDate()"/ -->
+                        <!-- Data di nascita: 
                         <input v-model="utente.data_nascita">
                         <input
                             type="date"
@@ -140,9 +155,9 @@ export default defineComponent({
                             v-bind="dateToYYYYMMDD"
                             v-on:input="updateValue($event)"
                             v-on:focus="selectAll"
-                        > 
+                        >  -->
                     </div>
-                    <div v-else>Data di nascita: {{utente.data_nascita.slice(0, 10)}}</div>
+                    <div v-else>Data di nascita: {{formatDateTime(utente.data_nascita)}}</div>
                     <div v-if="editmode">
                         Telefono: 
                         <input v-model="utente.telefono" placeholder="numero di telefono">

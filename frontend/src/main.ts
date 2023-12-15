@@ -22,6 +22,7 @@ import Profilo from "./pages/Profilo.vue"
 import axios from "axios"
 import { User } from "./types"
 
+
 const router: Router = createRouter({
     history:createWebHistory(),
     routes: [
@@ -59,4 +60,4 @@ router.beforeEach(async (to) => {
 })
 
 
-createApp(App).use(router).mount("#app")
+createApp(App).use(router).component('VueDatePicker', VueDatePicker).mount("#app")
