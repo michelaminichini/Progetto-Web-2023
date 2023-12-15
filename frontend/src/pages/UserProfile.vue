@@ -21,19 +21,22 @@ export default defineComponent({
     
     methods:{
         
-        dateToYYYYMMDD(d) {
+        dateToYYYYMMDD(d: { getTime: () => number; getTimezoneOffset: () => number; }) {
             return d && new Date(d.getTime()-(d.getTimezoneOffset()*60*1000)).toISOString().split('T')[0];
         },
-
-        updateValue: function (target){
-            this.$emit('input', target.valueAsDate);
+        
+        updateValue(event: Event) {
+            if (event instanceof InputEvent) {
+                const target = event.target as HTMLInputElement;
+                this.$emit('input', target.valueAsDate);
+            }
         },
-        selectAll: function (event) {
-            // Workaround for Safari bug
-            // http://stackoverflow.com/questions/1269722/selecting-text-on-focus-using-jquery-not-working-in-safari-and-chrome
+
+        selectAll: function (event: Event) {
             setTimeout(function () {
-                event.target.select()
-            }, 0)
+                const target = event.target as HTMLInputElement;
+                target!.select();
+            }, 0);
         },
 
         edit: function() {
@@ -67,11 +70,6 @@ export default defineComponent({
         },
 
         async updateDatiUtente(){
-/*             const res = await axios.get("/api/auth/profile")
-            this.user = res.data
-            console.log(this.user) 
-            const id = this.user?.idutente                    
-            console.log("Id "+id)  */
             const datiU = this.datiUtente
             console.log(datiU)
             axios.put("/api/aggiornautente", datiU)
@@ -119,7 +117,6 @@ export default defineComponent({
 
             <div v-show="activeDiv === 0" class="primo">
                   
-                <!--inserimento e modifica dei dati utente, con query get e update (update non funzionante) -->
                 <div v-for= "utente in datiUtente" :key="utente.idutente" id="contenitore" class="row">
                     <h1>Informazioni personali</h1>
                     <h2>Se i dati inseriti al momento della registrazione non sono corretti, puoi modificarli qui</h2>
@@ -139,8 +136,8 @@ export default defineComponent({
                         <input
                             type="date"
                             ref="input"
-            
-                            v-on:input="updateValue($event.target)"
+                            v-bind="dateToYYYYMMDD"
+                            v-on:input="updateValue($event)"
                             v-on:focus="selectAll"
                         > 
                     </div>
@@ -376,6 +373,9 @@ h2{
     margin-top:15px
 }
 
+#contenitore{
+    font-size: 22px;
+}
 
 .btn:hover{
     color: #fff;

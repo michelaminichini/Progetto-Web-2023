@@ -94,6 +94,7 @@ div > h2{
   margin-bottom: 0;
   margin-left:5%;
   padding: 0;
+  color: white;
 }
 
 div > select{
