@@ -5,6 +5,7 @@ import { User } from "../types"
 import UserInfo from "../components/user-info.vue"
 import { DatiUtente } from "../types";
 import { CronoUtente } from "../types";
+import { UpdateUser } from "../types";
 
 export default defineComponent({
    /*  props: {
@@ -17,6 +18,7 @@ export default defineComponent({
             //userHistory: [] as CronoUtente [],
             crono: [] as CronoUtente [],
             user: null as User | null,
+            utenteAggiornato: [] as UpdateUser [],
             datiUtente: [] as DatiUtente [],
             editmode: false,
         };
@@ -53,21 +55,7 @@ export default defineComponent({
             //this.user = res.data
             //console.log(this.user)
         //},
-        //getCronologia(){
-          //  axios.get("/api/cronologia/:idutente").then(response => this.crono = response.data)
-        //}
-        /*
-        async fetchUserHistory(){
-            try {
-                const IdUser = this.$route.params.idutente;
-                const response = await fetch(`/api/cronologia/${IdUser}`);
-                const data = await response.json();
-                this.userHistory = data;
-            } catch (error) {
-                console.error("Errore nel fetch user history:", error)
-            }
-        },
-        */
+        
         async getCronologia(){ 
             const res = await axios.get("/api/auth/profile")
             this.user = res.data
@@ -101,42 +89,50 @@ export default defineComponent({
             axios.put("/api/aggiornautente", datiU)
             .then(response => {console.log(response.data)})
         },
-        /*
+        /*        
         async updateUserProfile(){
-            const updateData = {
-                email:this.email,
-                nome: this.nome,
-                congome: this.cognome,
-                telefono: this.telefono,
-                data_nascita: this.data_mascita
-            }
-            try {
-                //console.log('Data sent in request:', {
-                   // nome: this.nome,
-                    //cognome: this.cognome,
-                    //telefono: parseInt(this.telefono),
-                    //data_nascita: this.data_nascita,
-                //})
-                const risposta = await axios.put("/api/update/aggiornaDati" , updateData)
-                window.location.href = "/profiloutente"
-                console.log("RISPOSTA:", risposta.data)
+            const response = await axios.get("/api/auth/profile")
+            this.user = response.data
+            console.log(this.user)
+            const ID = this.user?.idutente
+            console.log("Id "+ID)
+            const risposta = await axios.put("/api/update/aggiornaDati/"+ID)
+            this.utenteAggiornato = risposta.data
+            console.log(this.utenteAggiornato)
 
-                //this.user = risposta.data
+            // const updateData = {
+            //     nome: this.nome,
+            //     congome: this.cognome,
+            //     telefono: this.telefono,
+            //     data_nascita: this.data_nascita
+            // }
+            // try {
+            //     //console.log('Data sent in request:', {
+            //        // nome: this.nome,
+            //         //cognome: this.cognome,
+            //         //telefono: parseInt(this.telefono),
+            //         //data_nascita: this.data_nascita,
+            //     //})
+            //     const risposta = await axios.put("/api/update/aggiornaDati" , updateData)
+            //     window.location.href = "/profiloutente"
+            //     console.log("RISPOSTA:", risposta.data)
 
-                //console.log("Risposta:", risposta)
-            } catch (e: any) {
-              if (e.response) {
-                  alert(`${e.response.status} - ${e.response.statusText}\n${e.response.data}`)
-              } else {
-                  alert(e.message)
-              }   
-            }
+            //     //this.user = risposta.data
+
+            //     //console.log("Risposta:", risposta)
+            // } catch (e: any) {
+            //   if (e.response) {
+            //       alert(`${e.response.status} - ${e.response.statusText}\n${e.response.data}`)
+            //   } else {
+            //       alert(e.message)
+            //   }   
+            // }
         },*/
     },
     mounted(){
+        this.getCronologia()
         //this.updateUserProfile()
         //this.getuser()
-        this.getCronologia()
         this.getDatiUtente()
         //this.fetchUserHistory()
     }
@@ -171,93 +167,60 @@ export default defineComponent({
             </div>
 
             <div v-show="activeDiv === 0" class="primo">
-
-                    <!-- <h1>Informazioni personali</h1>
-
-                    <h2>Email</h2>
-                    <input type="text" v-model="email" class="rounded-lg border-slate-200" placeholder="Nome" required>
+                <form v-for="dato in utenteAggiornato" :key="dato.idutente">
+                    
+                    <h1>Informazioni personali</h1>
 
                     <h2>Nome</h2>
-                    <input type="text" v-model="datiUtente.nome" class="rounded-lg border-slate-200" placeholder="Nome" required>
+                    <input type="text" v-model="dato.datiUtente.nome" class="rounded-lg border-slate-200" placeholder="Nome" required>
 
                     <h2>Cognome</h2>
-                    <input type="text" v-model="cognome" class="rounded-lg border-slate-200" placeholder="Cognome" required>
+                    <input type="text" v-model="dato.cognome" class="rounded-lg border-slate-200" placeholder="Cognome" required>
 
                     <h2>Numero di Telefono</h2>
-                    <input type="number" v-model="telefono" class="rounded-lg border-slate-200" placeholder="1111111111" required>
+                    <input type="number" v-model="dato.telefono" class="rounded-lg border-slate-200" placeholder="1111111111" required>
 
                     <h2>Data di nascita</h2>
-                    <input type="date" v-model="data_mascita" class="rounded-lg border-slate-200" required>
+                    <input type="date" v-model="dato.data_nascita" class="rounded-lg border-slate-200" required>
 
                     <button class="btn text-white w-1/2 mx-auto mt-3" @click="updateUserProfile">Salva</button>
-                 -->
-                    <h1>Informazioni personali: </h1>
-                    <!-- inserimento dati utente con query get (funzionante) -->
-                    <!-- <div v-for= "utente in datiUtente" :key="utente.idutente" id="contenitore" class="row">
-                        <div class="col-sm-6">
-                            <ul>
-                                <li>
-                                    Nome: {{ utente.nome }}
-                                </li>
-                                <li>
-                                    Cognome: {{ utente.cognome }}
-                                </li>
-                                <li>
-                                    E-mail: {{ utente.email }}
-                                </li>
-                                <li>
-                                    Telefono: {{ utente.telefono }}
-                                </li>
-                                <li>
-                                    Data di nascita: {{ utente.data_nascita.slice(0, 10) }}
-                                </li>
-                                <button class="btn">Salva</button>
-                            </ul>
-                        </div>
-                        <div class="col-sm-6">
-                            <ul>
-                                <input>
-                            </ul>
-                        </div>
-                       
-                    </div> -->
-                    <!-- inserimento e modifica dei dati utente, con query get e update (update non funzionante) -->
-                    <div v-for= "utente in datiUtente" :key="utente.idutente" id="contenitore" class="row">
-                        <div v-if="editmode">
-                            Nome: 
-                            <input v-model="utente.nome">
-                        </div>
-                        <div v-else>Nome: {{utente.nome}}</div>
-                        <div v-if="editmode">
-                            Cognome: 
-                            <input v-model="utente.cognome">
-                        </div>
-                        <div v-else>Cognome: {{utente.cognome}}</div>
-                        <div v-if="editmode">
-                            Data di nascita: 
-                            <input v-model="utente.data_nascita">
-                            <!-- <input
-                                type="date"
-                                ref="input"
-                                v-bind:value="dateToYYYYMMDD(utente.data_nascita)"
-                                v-on:input="updateValue($event.target)"
-                                v-on:focus="selectAll"
-                            > -->
-                        </div>
-                        <div v-else>Data di nascita: {{utente.data_nascita.slice(0, 10)}}</div>
-                        <div v-if="editmode">
-                            Telefono: 
-                            <input v-model="utente.telefono">
-                        </div>
-                        <div v-else>Telefono: {{utente.telefono}}</div>
-                        <div>
-                            <button v-on:click="edit()" class="btn btn-danger">edit</button>
-                        <!-- bottone save fa partire la query update che non funziona, se cliccato crasha tutto -->
-                        <!-- <button v-on:click="updateDatiUtente()" class="btn btn-danger">save</button> -->
-                        </div>
-                        
-                    </div>    
-                    
+                </form>
+                  
+                <!-- inserimento e modifica dei dati utente, con query get e update (update non funzionante) 
+                <div v-for= "utente in datiUtente" :key="utente.idutente" id="contenitore" class="row">
+                    <div v-if="editmode">
+                        Nome: 
+                        <input v-model="utente.nome">
+                    </div>
+                    <div v-else>Nome: {{utente.nome}}</div>
+                    <div v-if="editmode">
+                        Cognome: 
+                        <input v-model="utente.cognome">
+                    </div>
+                    <div v-else>Cognome: {{utente.cognome}}</div>
+                    <div v-if="editmode">
+                        Data di nascita: 
+                        <input v-model="utente.data_nascita">
+                        <input
+                            type="date"
+                            ref="input"
+                            v-bind:value="dateToYYYYMMDD(utente.data_nascita)"
+                            v-on:input="updateValue($event.target)"
+                            v-on:focus="selectAll"
+                        > 
+                    </div>
+                    <div v-else>Data di nascita: {{utente.data_nascita.slice(0, 10)}}</div>
+                    <div v-if="editmode">
+                        Telefono: 
+                        <input v-model="utente.telefono">
+                    </div>
+                    <div v-else>Telefono: {{utente.telefono}}</div>
+                    <div>
+                        <button v-on:click="edit()" class="btn btn-danger">edit</button>
+                        bottone save fa partire la query update che non funziona, se cliccato crasha tutto
+                    <button v-on:click="updateDatiUtente()" class="btn btn-danger">save</button>
+                    </div>                        
+                </div> -->
             </div>
 
             <div v-show="activeDiv === 1" class="secondo">
