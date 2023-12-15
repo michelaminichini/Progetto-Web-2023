@@ -1,21 +1,15 @@
 <script lang="ts">
 import axios from "axios"
-import { PropType, defineComponent } from "vue"
+import { defineComponent } from "vue"
 import { User } from "../types"
-import UserInfo from "../components/user-info.vue"
 import { DatiUtente } from "../types";
 import { CronoUtente } from "../types";
 import { UpdateUser } from "../types";
 
 export default defineComponent({
-   /*  props: {
-        user: Object as PropType<User>,
-    }, */
-    //components: { UserInfo },
     data(){
         return {
             activeDiv: null,
-            //userHistory: [] as CronoUtente [],
             crono: [] as CronoUtente [],
             user: null as User | null,
             utenteAggiornato: [] as UpdateUser [],
@@ -26,12 +20,12 @@ export default defineComponent({
     },
     
     methods:{
-
+        
         dateToYYYYMMDD(d) {
             return d && new Date(d.getTime()-(d.getTimezoneOffset()*60*1000)).toISOString().split('T')[0];
         },
 
-        updateValue: function (target) {
+        updateValue: function (target){
             this.$emit('input', target.valueAsDate);
         },
         selectAll: function (event) {
@@ -45,16 +39,10 @@ export default defineComponent({
         edit: function() {
             this.editmode = !this.editmode;
         },
-
+        
         toggleDiv(index: any){
             this.activeDiv = this.activeDiv === index ? null: index;
         },
-
-        //async getuser(){
-          //  const res = await axios.get("/api/auth/profile")
-            //this.user = res.data
-            //console.log(this.user)
-        //},
         
         async getCronologia(){ 
             const res = await axios.get("/api/auth/profile")
@@ -89,61 +77,16 @@ export default defineComponent({
             axios.put("/api/aggiornautente", datiU)
             .then(response => {console.log(response.data)})
         },
-        /*        
-        async updateUserProfile(){
-            const response = await axios.get("/api/auth/profile")
-            this.user = response.data
-            console.log(this.user)
-            const ID = this.user?.idutente
-            console.log("Id "+ID)
-            const risposta = await axios.put("/api/update/aggiornaDati/"+ID)
-            this.utenteAggiornato = risposta.data
-            console.log(this.utenteAggiornato)
-
-            // const updateData = {
-            //     nome: this.nome,
-            //     congome: this.cognome,
-            //     telefono: this.telefono,
-            //     data_nascita: this.data_nascita
-            // }
-            // try {
-            //     //console.log('Data sent in request:', {
-            //        // nome: this.nome,
-            //         //cognome: this.cognome,
-            //         //telefono: parseInt(this.telefono),
-            //         //data_nascita: this.data_nascita,
-            //     //})
-            //     const risposta = await axios.put("/api/update/aggiornaDati" , updateData)
-            //     window.location.href = "/profiloutente"
-            //     console.log("RISPOSTA:", risposta.data)
-
-            //     //this.user = risposta.data
-
-            //     //console.log("Risposta:", risposta)
-            // } catch (e: any) {
-            //   if (e.response) {
-            //       alert(`${e.response.status} - ${e.response.statusText}\n${e.response.data}`)
-            //   } else {
-            //       alert(e.message)
-            //   }   
-            // }
-        },*/
     },
     mounted(){
         this.getCronologia()
-        //this.updateUserProfile()
-        //this.getuser()
         this.getDatiUtente()
-        //this.fetchUserHistory()
+        
     }
 })
 </script>
 
 <template>
-    <head>
-        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-    </head>
-
     <body>
         <section>
             <h1>Impostazioni Profilo Personale</h1>
@@ -152,42 +95,34 @@ export default defineComponent({
             <div id="NavContainer" class="nav-container">
                 <nav id="nav-profilo-utente">
                     <a class="tab active" @click="toggleDiv(0)">
-                        <i class="glyphicon glyphicon-user"></i>
+                        <i>
+                            <img src="/user-icon.png" alt="Logo" width="30" height="30">
+                        </i>
                     </a>
                     <a class="tab" @click="toggleDiv(1)">
-                        <i class="glyphicon glyphicon-credit-card"></i>
+                        <i>
+                           
+                        </i>
                     </a>
                     <a class="tab" @click="toggleDiv(2)">
-                        <i class="glyphicon glyphicon-cog"></i> 
+                        <i>
+                            <img src="/setting-icon.png" alt="Logo" width="30" height="30">
+                        </i> 
                     </a>
                     <a class="tab" @click="toggleDiv(3)">
-                        <i class="glyphicon glyphicon-time"></i> 
+                        <i>
+                            <img src="/clock-line-icon.png" alt="Logo" width="30" height="30">
+                        </i> 
                     </a>
                 </nav>
             </div>
 
             <div v-show="activeDiv === 0" class="primo">
-                <form v-for="dato in utenteAggiornato" :key="dato.idutente">
-                    
-                    <h1>Informazioni personali</h1>
-
-                    <h2>Nome</h2>
-                    <input type="text" v-model="dato.datiUtente.nome" class="rounded-lg border-slate-200" placeholder="Nome" required>
-
-                    <h2>Cognome</h2>
-                    <input type="text" v-model="dato.cognome" class="rounded-lg border-slate-200" placeholder="Cognome" required>
-
-                    <h2>Numero di Telefono</h2>
-                    <input type="number" v-model="dato.telefono" class="rounded-lg border-slate-200" placeholder="1111111111" required>
-
-                    <h2>Data di nascita</h2>
-                    <input type="date" v-model="dato.data_nascita" class="rounded-lg border-slate-200" required>
-
-                    <button class="btn text-white w-1/2 mx-auto mt-3" @click="updateUserProfile">Salva</button>
-                </form>
                   
-                <!-- inserimento e modifica dei dati utente, con query get e update (update non funzionante) 
+                <!--inserimento e modifica dei dati utente, con query get e update (update non funzionante) -->
                 <div v-for= "utente in datiUtente" :key="utente.idutente" id="contenitore" class="row">
+                    <h1>Informazioni personali</h1>
+                    <h2>Se i dati inseriti al momento della registrazione non sono corretti, puoi modificarli qui</h2>
                     <div v-if="editmode">
                         Nome: 
                         <input v-model="utente.nome">
@@ -204,7 +139,7 @@ export default defineComponent({
                         <input
                             type="date"
                             ref="input"
-                            v-bind:value="dateToYYYYMMDD(utente.data_nascita)"
+            
                             v-on:input="updateValue($event.target)"
                             v-on:focus="selectAll"
                         > 
@@ -212,15 +147,15 @@ export default defineComponent({
                     <div v-else>Data di nascita: {{utente.data_nascita.slice(0, 10)}}</div>
                     <div v-if="editmode">
                         Telefono: 
-                        <input v-model="utente.telefono">
+                        <input v-model="utente.telefono" placeholder="numero di telefono">
                     </div>
                     <div v-else>Telefono: {{utente.telefono}}</div>
                     <div>
                         <button v-on:click="edit()" class="btn btn-danger">edit</button>
-                        bottone save fa partire la query update che non funziona, se cliccato crasha tutto
+                    
                     <button v-on:click="updateDatiUtente()" class="btn btn-danger">save</button>
                     </div>                        
-                </div> -->
+                </div>
             </div>
 
             <div v-show="activeDiv === 1" class="secondo">
@@ -280,13 +215,11 @@ export default defineComponent({
                     Utilizzando il nostro sito web, accetti i termini indicati in questa informativa sulla privacy.
 
                 </p>
-
-                <!--button class="btn">Salva</button-->
             </div>
 
             <div v-show="activeDiv === 3" class="quarto">
-                <h1 style="margin-bottom: 5%;">La tua cronologia di acquisti</h1>                
-                <table>
+                <h1>La tua cronologia di acquisti</h1>                
+                <table class="table table-striped table-bordered table-responsive border border-2 border border-dark">
                     <thead>
                         <tr>
                             <th>Titolo Film</th>
@@ -309,7 +242,6 @@ export default defineComponent({
                     </tbody>
                 </table>
             </div>
-
         </div>
     </body>
 </template>
@@ -323,11 +255,20 @@ body {
     width: 100%;
 }
 
+h1, h2{
+    margin-top: 5%;
+    margin-bottom: 3%;
+}
+
 th, td{
     color: black;
     padding: 0;
     font-size: medium;
+}
 
+td{
+    padding: 1%;
+    width:20%;
 }
 
 table{
@@ -454,7 +395,7 @@ footer{
 }
 
 p{
-    font-size: 14px;
+    font-size: 13px;
 }
 
 
