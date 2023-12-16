@@ -145,17 +145,7 @@ export default defineComponent({
                     <div v-if="editmode">
                         Data di nascita:
                         <input v-model="dataE" placeholder="data di nascita">
-                        
-                        <!--input type="date" v-model="this.datann" v-on:input="this.datann = dayjs($event.target.value).toDate()"/ -->
-                        <!-- Data di nascita: 
-                        <input v-model="utente.data_nascita">
-                        <input
-                            type="date"
-                            ref="input"
-                            v-bind="dateToYYYYMMDD"
-                            v-on:input="updateValue($event)"
-                            v-on:focus="selectAll"
-                        >  -->
+                    
                     </div>
                     <div v-else>Data di nascita: {{formatDateTime(utente.data_nascita)}}</div>
                     <div v-if="editmode">
