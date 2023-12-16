@@ -25,6 +25,7 @@ export default defineComponent({
     methods:{
         formatDateTime(data: string): string{
             this.dataE=dayjs(data).format('DD-MM-YYYY');
+            console.log(this.dataE)
             return dayjs(data).format('DD-MM-YYYY'); // Example: Formatting date using Day.js
         },
         // dateToYYYYMMDD(d: { getTime: () => number; getTimezoneOffset: () => number; }) {
@@ -84,6 +85,7 @@ export default defineComponent({
             console.log(datiU)
             axios.put("/api/aggiornautente", datiU)
             .then(response => {console.log(response.data)})
+            this.dataE=dayjs(datiU[0].data_nascita).format('DD-MM-YYYY');
             this.editmode = false
             alert("Dati aggiornati")
         },
