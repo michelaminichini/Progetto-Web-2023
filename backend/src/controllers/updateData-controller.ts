@@ -18,13 +18,12 @@ export const updateData = async (req: Request, res: Response) => {
     res.json(risultati)
 }
 
-
-
  export const aggiornaDatiPagamentoUtente =async (req: Request, res: Response) => {
      const {idbiglietto, tipo_pagamenti, importo, Numero_carta, Data_scadenza, CVV} = req.body
      const connection = await getConnection()
-     await connection.execute(`INSERT INTO pagamenti (Importo, Numero_carta, Data_scadenza, CVV) VALUES (?,?,?,?) WHERE idutente=?`,
-     [idbiglietto, tipo_pagamenti, importo, Numero_carta, Data_scadenza, CVV, req.params.id])
+     await connection.execute(`INSERT INTO pagamenti (Importo, Numero_carta, Data_scadenza, CVV) VALUES (?,?,?,?)`,
+     //INSERT INTO pagamenti (idbiglietto1,idtipo_pagamento1,Importo, Numero_carta, Data_scadenza, CVV) VALUES (10,1,10.5,'1234','2024-01-01',388);
+     [idbiglietto, tipo_pagamenti, importo, Numero_carta, Data_scadenza, CVV])
      res.json({ message: "Pagamento effettuato, dati salvati"})
  }  
  
