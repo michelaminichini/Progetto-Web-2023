@@ -25,7 +25,7 @@ export default defineComponent({
     
     methods:{
         formatDateTime(data: string): string{
-            this.dataE=dayjs(data).format('DD-MM-YYYY');
+            //this.dataE=dayjs(data).format('DD-MM-YYYY');
             console.log(this.dataE)
             return dayjs(data).format('DD-MM-YYYY'); // Example: Formatting date using Day.js
         },
@@ -33,12 +33,12 @@ export default defineComponent({
         //     return d && new Date(d.getTime()-(d.getTimezoneOffset()*60*1000)).toISOString().split('T')[0];
         // },
         
-        updateValue(event: Event) {
-            if (event instanceof InputEvent) {
-                const target = event.target as HTMLInputElement;
-                this.$emit('input', target.valueAsDate);
-            }
-        },
+        //updateValue(event: Event) {
+        //    if (event instanceof InputEvent) {
+        //        const target = event.target as HTMLInputElement;
+        //        this.$emit('input', target.valueAsDate);
+        //    }
+        //},
 
         selectAll: function (event: Event) {
             setTimeout(function () {
@@ -75,6 +75,8 @@ export default defineComponent({
             const res1 = await axios.get("/api/leggiutente/"+ id)
             this.datiUtente = res1.data
             console.log(this.datiUtente)
+            this.dataE = dayjs(this.datiUtente[0].data_nascita).format('DD-MM-YYYY')
+            console.log(this.dataE)
             //const datann = dayjs(this.datiUtente[0].data_nascita).format('DD-MM-YYYY')
             //this.datan = this.datiUtente[0].data_nascita
     
