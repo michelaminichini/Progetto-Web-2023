@@ -14,16 +14,17 @@ export const aggiornaDatiPagamentoUtente =async (req: Request, res: Response) =>
 */
 export const aggiornaDatiPagamentoUtente =async (req: Request, res: Response) => {
    try {
-    const {Numero_carta, Data_scadenza, CVV} = req.body
-    const idutente = req.params.id
+    const {tipo_pagamenti,importo,nomeT,cognomeT,Numero_carta, Data_scadenza, CVV} = req.body
+    //const idutente = req.params.id
     const connection = await getConnection()
 
     //const [userResult] = await connection.execute(`SELECT idutente FROM utente WHERE idutente = ?`, [req.params.id]);
-
     //if (Array.isArray(userResult) && userResult.length > 0){
-        await connection.execute(`INSERT INTO pagamenti (Numero_carta, Data_scadenza, CVV) VALUES (?,?,?)`,
-        [Numero_carta, Data_scadenza, CVV])
+
+        await connection.execute(`INSERT INTO pagamenti (idtipo_pagamento1,Importo,titolare_nome,Titolare_cognome, Numero_carta, Data_scadenza, CVV) VALUES (?,?,?,?,?,?,?)`,
+        [tipo_pagamenti,importo,nomeT,cognomeT,Numero_carta, Data_scadenza, CVV]),
         res.json({ message: "Pagamento effettuato, dati salvati" });
+
     //} else {
       //res.status(404).json({ error: "User not found or condition not met" });
     //}
