@@ -8,12 +8,15 @@ export default defineComponent({
         return{
             user: null as User | null,
             datiUtente: [] as DatiUtente [],
-            Numero_carta:0,
+            nomeT: null,
+            cognomeT: null,
+            tipo_pagamenti: null,
+            Numero_carta: null,
             Data_scadenza:"",
-            CVV:0,
+            CVV: null,
+            importo:0,
             //idbiglietto:0,
-            //tipo_pagamenti:1,
-            //importo:10,     
+                 
         }
     },
     methods:{
@@ -39,15 +42,24 @@ export default defineComponent({
                 }
                 const paymentData = {
                     //idutente: idutente,
+                    tipo_pagamenti: this.tipo_pagamenti,           
+                    importo: this.importo,
+                    nomeT: this.nomeT,
+                    cognomeT: this.cognomeT,
                     Numero_carta: this.Numero_carta,
                     Data_scadenza: this.Data_scadenza,
                     CVV: this.CVV,
                 };
+                console.log(paymentData);
                 await axios.post("/api/aggiornapagamento", paymentData);
 
-                this.Numero_carta = 0;
+                this.nomeT =null,
+                this.cognomeT= null,
+                this.tipo_pagamenti = null,           
+                this.importo=0,
+                this.Numero_carta = null;
                 this.Data_scadenza = "";
-                this.CVV = 0;
+                this.CVV = null;
 
                 
             } catch (e: any) {
@@ -77,6 +89,42 @@ export default defineComponent({
     <div class="container">
         <form @submit.prevent="aggiornaDatiPagamento">
             <h3 class="title">Inserire dati per effettuare il pagamento</h3>
+                    <div class="inputBox">
+                        <span>Importo</span>
+                        <input 
+                        v-model="importo"
+                        type="number" 
+                        class="rounded-lg border-slate-200"
+                        placeholder="0.00"
+                        />
+                    </div>
+                    <div class="inputBox">
+                        <span>Tipo di pagamento</span>
+                        <input 
+                        v-model="tipo_pagamenti"
+                        type="number" 
+                        class="rounded-lg border-slate-200"
+                        placeholder=""
+                        />
+                    </div>
+                    <div class="inputBox">
+                        <span>Nome titolare</span>
+                        <input 
+                        v-model="nomeT"
+                        type="text" 
+                        class="rounded-lg border-slate-200"
+                        placeholder="Nome"
+                        />
+                    </div>
+                    <div class="inputBox">
+                        <span>Cognome titolare</span>
+                        <input 
+                        v-model="cognomeT"
+                        type="text" 
+                        class="rounded-lg border-slate-200"
+                        placeholder="Cognome"
+                        />
+                    </div>
                     <div class="inputBox">
                         <span>Numero Carta</span>
                         <input 
