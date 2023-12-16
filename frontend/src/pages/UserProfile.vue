@@ -18,6 +18,7 @@ export default defineComponent({
             editmode: false,
             dataN: dayjs() as Dayjs,
             dataE: "",
+            isPopupOpen: false,
         };
       
     },
@@ -87,8 +88,14 @@ export default defineComponent({
             .then(response => {console.log(response.data)})
             this.dataE=dayjs(datiU[0].data_nascita).format('DD-MM-YYYY');
             this.editmode = false
-            alert("Dati aggiornati")
+            //alert("Dati aggiornati")
         },
+        openPopup() {
+            this.isPopupOpen = true;
+        },
+        closePopup() {
+            this.isPopupOpen = false;
+        }
     },
     mounted(){
         this.getCronologia()
@@ -147,17 +154,6 @@ export default defineComponent({
                     <div v-if="editmode">
                         Data di nascita:
                         <input v-model="dataE" placeholder="data di nascita">
-                        
-                        <!--input type="date" v-model="this.datann" v-on:input="this.datann = dayjs($event.target.value).toDate()"/ -->
-                        <!-- Data di nascita: 
-                        <input v-model="utente.data_nascita">
-                        <input
-                            type="date"
-                            ref="input"
-                            v-bind="dateToYYYYMMDD"
-                            v-on:input="updateValue($event)"
-                            v-on:focus="selectAll"
-                        >  -->
                     </div>
                     <div v-else>Data di nascita: {{formatDateTime(utente.data_nascita)}}</div>
                     <div v-if="editmode">
@@ -168,8 +164,13 @@ export default defineComponent({
                     <div>
                         <button v-on:click="edit()" class="btn btn-danger">edit</button>
                     
-                    <button v-on:click="updateDatiUtente()" class="btn btn-danger">save</button>
-                    </div>                        
+                        <button type="button" v-on:click="updateDatiUtente()" class="btn btn-danger"  @click="openPopup">save</button>
+                        <dialog :open="isPopupOpen">
+                            <p>Modifiche effettuate con successo!</p>
+                            <button @click="closePopup">Chiudi</button>
+                        </dialog>
+                        
+                    </div>                          
                 </div>
             </div>
 
@@ -264,6 +265,18 @@ export default defineComponent({
 
 
 <style scoped>
+
+#customPopup {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  z-index: 999;
+}
 
 body {
     background-color: #001C38;
@@ -415,6 +428,5 @@ footer{
 p{
     font-size: 13px;
 }
-
 
 </style>

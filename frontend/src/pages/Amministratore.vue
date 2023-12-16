@@ -16,7 +16,8 @@ export default defineComponent({
         ListaFilm: [] as FilmE [],
         //EditedFilm: [] as Film [],
         editingCell: null,
-        rowIndex: null
+        rowIndex: null,
+        editmode: false,
         
     }
     },
@@ -32,10 +33,6 @@ export default defineComponent({
             this.getLista()
             this.$forceUpdate()
         },
-
-        updateFilm(){
-        },
-
         
         deleteFilm(rowIndex: any){
             axios.delete("/api/eliminazione/"+this.ListaFilm[rowIndex].idfilm)
@@ -60,6 +57,10 @@ export default defineComponent({
             .then(response => {console.log(response.data)})
             console.log("/api/aggiornamento/"+ (rowIndex+1));
             console.log(this.ListaFilm[rowIndex]);
+        },
+
+        edit: function() {
+            this.editmode = !this.editmode;
         },
        
     },
@@ -109,9 +110,10 @@ export default defineComponent({
                     </thead>
                     <tbody>
                         <tr v-for="(film, rowIndex) in ListaFilm" :key="rowIndex">
-                            <td v-for="(cell, cellIndex) in film" :key="cellIndex" @click="editCell(rowIndex, cellIndex)">
+                            <td v-for="(cell, cellIndex) in film" :key="cellIndex">
                                 <template v-if="editingCell === `${rowIndex}-${cellIndex}`">
                                 <input
+                                    v-if="editmode"
                                     type="text"
                                     :value="cell"
                                     @input="updateCell(rowIndex, cellIndex, $event.target.value)"
@@ -121,13 +123,19 @@ export default defineComponent({
                                 <template v-else>
                                 {{ cell }}
                                 </template>
+
+                                <td>
+                                    <button @click="editCell(rowIndex, cellIndex)" v-on:click="edit()"  type="button" class="btn btn-success" style="display: block;">
+                                    Edit   
+                                    <!-- {{ editingCell === `${rowIndex}-${cellIndex}` ? "Save" : "Edit" }} TRASFORMA EDIT IN SAVE QUANDO VIENE PREMUTO, POI VICEVERSA-->
+                                    </button>
+                                </td>
                             </td>
                             <td>
-                                <button @click="$emit('someEvent')" type="button" class="btn btn-success">
-                                Edit   
-                                </button>
+                                
                                 <button @click="deleteFilm(rowIndex)" type="button" class="btn btn-danger">
-                                Delete</button>
+                                    Delete
+                                </button>
                             </td>
                         </tr>
                     </tbody>
