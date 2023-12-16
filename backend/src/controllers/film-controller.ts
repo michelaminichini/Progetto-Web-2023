@@ -64,7 +64,7 @@ export async function deleteFilm(req:Request, res: Response) {
     )
     res.json(results)
 }
-
+// Gestione cronologia dell'utente in base al suo ID
 export async function cronologiaUtente(req:Request, res: Response) {
     try {
         const connection = await getConnection()

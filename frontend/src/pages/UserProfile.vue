@@ -88,6 +88,7 @@ export default defineComponent({
             this.editmode = false
             //alert("Dati aggiornati")
         },
+        // Pop-up window viene aperta o chiusa in base allo stato della variabile isPopupOpen
         openPopup() {
             this.isPopupOpen = true;
         },
