@@ -1,32 +1,55 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import axios from "axios"
+import { DatiUtente, User } from '../types';
 
 export default defineComponent({
     data(){
         return{
+            user: null as User | null,
+            datiUtente: [] as DatiUtente [],
             Numero_carta:0,
             Data_scadenza:"",
             CVV:0,
-            idbiglietto:0,
-            tipo_pagamenti:1,
-            importo:10,     
+            //idbiglietto:0,
+            //tipo_pagamenti:1,
+            //importo:10,     
         }
     },
     methods:{
-        async pagamentoEffettuato(){
-            alert("Pagamento andato a buon fine \nGrazie e buona visione")
+        async getDatiUtente(){
+            const res = await axios.get("/api/auth/profile")
+            this.user = res.data
+            console.log(this.user) 
+            const id = this.user?.idutente                    
+            console.log("Id "+id)
+            const res1 = await axios.get("/api/leggiutente/"+ id)
+            this.datiUtente = res1.data
+            console.log(this.datiUtente)
+            //const datann = dayjs(this.datiUtente[0].data_nascita).format('DD-MM-YYYY')
+            //this.datan = this.datiUtente[0].data_nascita
+    
         },
         async aggiornaDatiPagamento(){
-             try {
-                await axios.post("/api/aggiornapagamento", {
+            try {
+                const idutente = this.user?.idutente;
+                if (!idutente) {
+                    console.error("User ID not available");
+                    return;
+                }
+                const paymentData = {
+                    //idutente: idutente,
                     Numero_carta: this.Numero_carta,
                     Data_scadenza: this.Data_scadenza,
                     CVV: this.CVV,
-                    idbiglietto: this.idbiglietto,
-                    tipo_pagamenti: this.tipo_pagamenti,
-                    importo: this.importo,
-                })
+                };
+                await axios.post("/api/aggiornapagamento", paymentData);
+
+                this.Numero_carta = 0;
+                this.Data_scadenza = "";
+                this.CVV = 0;
+
+                
             } catch (e: any) {
                 if (e.response) {
                     alert(`${e.response.status} - ${e.response.statusText}\n${e.response.data}`)
@@ -36,10 +59,12 @@ export default defineComponent({
             } 
             //window.location.href ="/profilo"
             this.$router.push('/profilo');
-        }
-        
-    },
+        },
     
+    },
+    mounted(){
+        this.getDatiUtente()
+    }
 })
 
 </script>
@@ -48,33 +73,38 @@ export default defineComponent({
 
 <template>
     <h1>Pagamento</h1>
-
 <body>
     <div class="container">
-        <form>
-            <div class="row">
-
-                <div class="col">
-                    
-                    <h3 class="title">Inserire dati per effettuare il pagamento</h3>
-
+        <form @submit.prevent="aggiornaDatiPagamento">
+            <h3 class="title">Inserire dati per effettuare il pagamento</h3>
                     <div class="inputBox">
                         <span>Numero Carta</span>
-                        <input type="number" placeholder="1111-2222-3333-4444">
+                        <input 
+                        v-model="Numero_carta"
+                        type="number" 
+                        class="rounded-lg border-slate-200"
+                        placeholder="1111-2222-3333-4444"
+                        />
                     </div>
                     <div class="inputBox">
                         <span>Data scadenza</span>
-                        <input type="date">
+                        <input 
+                        v-model="Data_scadenza"
+                        type="date"
+                        class="rounded-lg border-slate-200"
+                        />
                     </div>
                     <div class="inputBox">
                         <span>CVV</span>
-                        <input type="number" placeholder="123">
+                        <input 
+                        v-model="CVV"
+                        type="number" 
+                        class="rounded-lg border-slate-200"
+                        placeholder="123"
+                        />
                     </div>
-                </div>
-            </div>
                        
-            <button style="background-color: blue; color: white; display: inline;" @click="aggiornaDatiPagamento">Procedi all'acquisto</button>
-
+            <button type="submit" style="background-color: blue; color: white; display: inline;">Procedi all'acquisto</button>
         </form>
     </div>
 
