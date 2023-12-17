@@ -48,6 +48,7 @@ Se invece ad effettuare il login è l'amministratore, allora sarà disponibile u
 - connect-history-api-fallback (installato nel backend con il comando " npm i connect-history-api-fallback")
 - cookie-parser, jsonwebtoken e bcrypt per tutto ciò che riguarda la protezione delle password. Insieme ad essi, sono stati installati i rispettiti "types" con il comando "@types/nome-pacchetto". Ognuno ha dunque le proprie dichiarazioni TypeScript (TS declarations) messe a disposizione dal comando nominato in precedenza.
 - body-parser (Middleware di parsing del corpo di Node.js. Analizza i corpi delle richieste in arrivo in un middleware prima dei gestori, disponibile sotto la proprietà req.body.) Anch'esso ha le sue dichiarazioni TypeScript messe a disposizione dal comando "@types/nome-pacchetto".
+- Day.js (installato con npm grazie al comando "npm i dayjs") è una libreria JavaScript minimalista che analizza, convalida, manipola e visualizza date e orari per i browser moderni con un'API ampiamente compatibile con Moment.js.
 
 ## Struttura del progetto
 
@@ -67,6 +68,29 @@ Nella bash
 
 ## API Endpoints
 
+## GET
+- /api/films
+- /api/prossimi-film
+- /api/film/:id
+- /api/tuttifilm
+- /api/cronologia/:id
+- /api/auth/profile
+- /api/leggiutente/:id
+
+## POST
+- /api/inserimento
+- /api/auth/register
+- /api/auth/login
+- /api/auth/logout
+- /api/aggiornapagamento
+
+## PUT
+- /api/aggiornamento
+- /api/aggiornautente
+
+## DELETE
+- /api/eliminazione/:id
+
 ## Database
 
 Per realizzare questa applicazione web abbiamo creato un database denominato "cinema" su https://www.phpmyadmin.net/ .
@@ -75,9 +99,13 @@ I dati vengono letti dal database e visualizzati correttamente grazie alla conne
 Esso è composto di 9 diverse tabelle ciascuna con i propri attributi e collegate tra loro mediante "foreign key". Infine, è usato per immagazzinare tutti i dati degli utenti in totale sicurezza.
 
 ## Color accessibility
+Particolare attenzione all'uso dei colori. Utilizzo del contrasto sfondo scuro - scritte chiare.
 
 
 ## Documentazione
 
-- https://www.npmjs.com/ per la ricerca dei pacchetti installati all'interno del progetto
+- NPM: https://www.npmjs.com/ per la ricerca dei pacchetti installati all'interno del progetto. Npm si ottiene installando Node.js.
+- TYPESCRIPT: https://www.typescriptlang.org/docs/handbook/intro.html 
+- BOOTSTRAP: https://getbootstrap.com/docs/5.3/getting-started/introduction/
+- W3schools: https://www.w3schools.com/
 - materiale didattico universitario
