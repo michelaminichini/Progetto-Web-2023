@@ -7,7 +7,6 @@ export async function proiezioneX(req:Request, res:Response) {
     const [results] = await connection.execute(
         `SELECT idproiezione FROM proiezioni`,
         [],
-        
     )
     res.json(results)
 }
@@ -15,7 +14,7 @@ export async function proiezioneX(req:Request, res:Response) {
 export async function salaX(req:Request, res:Response) {
     const connection = await getConnection()
     const [results] = await connection.execute(
-        `SELECT s.idsala, s.fila, s.posti_fila, p.idproiezione FROM sale s join proiezioni p on s.idsala = p.idsala where idproiezione = ?`, 
+        `SELECT sale.idsala, sale.fila, sale.posti_fila FROM sale JOIN proiezioni ON sale.idsala = proiezioni.idsala WHERE idproiezione = ?`,
         [req.params.id],
     )
     res.json(results)
@@ -34,7 +33,7 @@ export async function postiX(req:Request, res:Response) {
 export async function postiF(req:Request, res:Response) {
     const connection = await getConnection()
     const [results] = await connection.execute(
-        `SELECT fila, numero FROM posti_proiezione WHERE idproiezione = ?`, 
+        `SELECT label,selected,reserved FROM posti_proiezione WHERE idproiezione = ?`, 
         [req.params.id],
     )
     res.json(results)
@@ -56,6 +55,17 @@ export async function aggiornaPosto(req:Request, res: Response) {
     const [results] = await connection.execute(
         `UPDATE posti_proiezione SET reserved = 1 WHERE idproiezione = 9 AND label = ?`,
         [label],
+    )
+    res.json(results)
+}
+
+export async function aggiornaPostoPF(req:Request, res: Response) {
+    const {idproiezione, label} = req.body
+    console.log(req.body)
+    const connection = await getConnection()
+    const [results] = await connection.execute(
+        `UPDATE posti_proiezione SET reserved = 1 WHERE idproiezione = ? AND label = ?`,
+        [idproiezione,label]
     )
     res.json(results)
 }
