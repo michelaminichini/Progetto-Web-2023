@@ -8,10 +8,6 @@ export default defineComponent({
     }
   },
   mounted() {
-    // Set isMobileNavOpen to false initially
-    //this.isMobileNavOpen = false;
-    
-    // Check the screen width and update isMobileNavOpen
     this.updateMobileNavState();
     
     // Listen for window resize events to update isMobileNavOpen
@@ -88,9 +84,9 @@ export default defineComponent({
             <li class="nav-item" style="margin-right: 5%;">
               <router-link class="nav-link" to="/info">Info</router-link>
             </li>
-            <li class="nav-item" style="margin-right: 5%;">
+            <!--li class="nav-item" style="margin-right: 5%;">
               <router-link class="nav-link" to="/seatbooking">SeatBooking</router-link>
-            </li> 
+            </li--> 
             <!--li class="nav-item">
               <router-link class="nav-link" to="/pagamento">Pagamento</router-link>
             </li-->
@@ -128,6 +124,8 @@ export default defineComponent({
   nav{
     display: block;
     background-color: #333;
+    position: absolute;
+    z-index: 1;
   }
 
   ul {

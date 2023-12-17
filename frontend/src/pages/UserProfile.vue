@@ -198,12 +198,9 @@ export default defineComponent({
             </div>
 
             <div v-show="activeDiv === 2" class="terzo">
-                <h1>Impostazioni sulla Privacy e sul Tuo Account</h1>
-
-                <h2>Informativa sulla privacy</h2>
+                <h1>Informativa sulla privacy</h1>
                 <p>
-                    1. Informazioni che raccogliamo
-                    Raccogliamo informazioni personali quando utilizzi il nostro sito web di GalaxyCineVerse, acquisti biglietti o interagisci con i nostri servizi. 
+                    1. Raccogliamo informazioni personali quando utilizzi il nostro sito web di GalaxyCineVerse, acquisti biglietti o interagisci con i nostri servizi. 
                     Queste informazioni possono includere:
 
                     Nome e ulteriori informazioni personali,
@@ -213,24 +210,20 @@ export default defineComponent({
                     Altre informazioni fornite volontariamente.
                 </p>
                 <p>
-                    2. Come utilizziamo le tue informazioni
-                    Utilizziamo le informazioni raccolte per i seguenti scopi:
+                    2. Utilizziamo le informazioni raccolte per i seguenti scopi:
 
                     Elaborare acquisti e prenotazioni di biglietti,
                     Migliorare il nostro sito web e i nostri servizi,
                     Garantire la sicurezza del nostro sito web e prevenire frodi.
                 </p>
                 <p>
-                    3. Sicurezza dei dati
-                    Adottiamo misure ragionevoli per proteggere le tue informazioni personali da accessi non autorizzati, divulgazioni, alterazioni e distruzioni. 
+                    3. Adottiamo misure ragionevoli per proteggere le tue informazioni personali da accessi non autorizzati, divulgazioni, alterazioni e distruzioni. 
                 </p>
                 <p>
-                    4. Cookie e tecnologie di tracciamento
-                    Utilizziamo cookie e tecnologie di tracciamento simili per migliorare la tua esperienza sul nostro sito web.
+                    4. Utilizziamo cookie e tecnologie di tracciamento simili per migliorare la tua esperienza sul nostro sito web.
                 </p>
                 <p>
-                    5. Contattaci
-                    Se hai domande su questa informativa sulla privacy o sulle nostre pratiche relative ai dati, contattaci all'indirizzo " galaxycineverse@cinema.com ".
+                    5. Se hai domande su questa informativa sulla privacy o sulle nostre pratiche relative ai dati, contattaci all'indirizzo " galaxycineverse@cinema.com ".
                     Utilizzando il nostro sito web, accetti i termini indicati in questa informativa sulla privacy.
 
                 </p>
