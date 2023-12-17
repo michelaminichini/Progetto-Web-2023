@@ -12,7 +12,8 @@ export default defineComponent({
     },
     methods: {
         getFilminLista(){
-            axios.get("/api/films").then(response => this.datiFilm = response.data)
+            axios.get("/api/films").then(response => {this.datiFilm = response.data; console.log(this.datiFilm)})
+            
         }
     },
     mounted(){
@@ -46,7 +47,7 @@ export default defineComponent({
                         </tr>
                         <tr>
                             <th>Durata</th>
-                            <td>{{ film.durata }} min</td>
+                            <td>{{ film.durata }} min.</td>
                         </tr>
                         <tr>
                             <th>Trama</th>
