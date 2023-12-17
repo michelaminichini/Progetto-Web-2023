@@ -71,6 +71,7 @@ export default defineComponent({
             } 
             //window.location.href ="/profilo"
             alert('Pagamento effettuato');
+            //utente rediretto alla pagina del proprio profilo
             this.$router.push('/profilo');
         },
 

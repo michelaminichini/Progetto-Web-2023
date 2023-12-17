@@ -198,12 +198,9 @@ export default defineComponent({
             </div>
 
             <div v-show="activeDiv === 2" class="terzo">
-                <h1>Impostazioni sulla Privacy e sul Tuo Account</h1>
-
-                <h2>Informativa sulla privacy</h2>
-                <p>
-                    1. Informazioni che raccogliamo
-                    Raccogliamo informazioni personali quando utilizzi il nostro sito web di GalaxyCineVerse, acquisti biglietti o interagisci con i nostri servizi. 
+                <h1>Informativa sulla privacy</h1>
+                <p class="text-justify">
+                    1. Raccogliamo informazioni personali quando utilizzi il nostro sito web di GalaxyCineVerse, acquisti biglietti o interagisci con i nostri servizi. 
                     Queste informazioni possono includere:
 
                     Nome e ulteriori informazioni personali,
@@ -212,25 +209,21 @@ export default defineComponent({
                     Cronologia delle transazioni,
                     Altre informazioni fornite volontariamente.
                 </p>
-                <p>
-                    2. Come utilizziamo le tue informazioni
-                    Utilizziamo le informazioni raccolte per i seguenti scopi:
+                <p class="text-justify">
+                    2. Utilizziamo le informazioni raccolte per i seguenti scopi:
 
                     Elaborare acquisti e prenotazioni di biglietti,
                     Migliorare il nostro sito web e i nostri servizi,
                     Garantire la sicurezza del nostro sito web e prevenire frodi.
                 </p>
-                <p>
-                    3. Sicurezza dei dati
-                    Adottiamo misure ragionevoli per proteggere le tue informazioni personali da accessi non autorizzati, divulgazioni, alterazioni e distruzioni. 
+                <p class="text-justify">
+                    3. Adottiamo misure ragionevoli per proteggere le tue informazioni personali da accessi non autorizzati, divulgazioni, alterazioni e distruzioni. 
                 </p>
-                <p>
-                    4. Cookie e tecnologie di tracciamento
-                    Utilizziamo cookie e tecnologie di tracciamento simili per migliorare la tua esperienza sul nostro sito web.
+                <p class="text-justify">
+                    4. Utilizziamo cookie e tecnologie di tracciamento simili per migliorare la tua esperienza sul nostro sito web.
                 </p>
-                <p>
-                    5. Contattaci
-                    Se hai domande su questa informativa sulla privacy o sulle nostre pratiche relative ai dati, contattaci all'indirizzo " galaxycineverse@cinema.com ".
+                <p class="text-justify">
+                    5. Se hai domande su questa informativa sulla privacy o sulle nostre pratiche relative ai dati, contattaci all'indirizzo " galaxycineverse@cinema.com ".
                     Utilizzando il nostro sito web, accetti i termini indicati in questa informativa sulla privacy.
 
                 </p>
@@ -265,171 +258,6 @@ export default defineComponent({
     </body>
 </template>
 
-
-
 <style scoped>
-
-#customPopup {
-  display: none;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  padding: 20px;
-  background-color: #fff;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-  z-index: 999;
-}
-
-body {
-    background-color: #001C38;
-    width: 100%;
-}
-
-h1, h2{
-    margin-top: 5%;
-    margin-bottom: 3%;
-}
-
-th, td{
-    color: black;
-    padding: 0;
-    font-size: medium;
-}
-
-td{
-    padding: 1%;
-    width:20%;
-}
-
-table{
-    display: inline-block;
-    border-collapse: collapse;
-    border-spacing: 0;
-    table-layout: fixed;
-    width: 100%;
-}
-
-#CONTAINER{
-    background: #fff;
-    width:100%;
-    height:600px;
-    margin:0 auto;
-    position:relative;
-    margin-top:10%;
-    box-shadow: 2px 5px 20px rgba(119,119,119,.5);
-}
-
-#NavContainer{
-    float:left;
-    top:-5%;
-    left:5%;
-    position:absolute;
-    width: 15%;
-    height: 110%;
-    background: rgb(22, 22, 226);
-    box-shadow: 3px 3px 10px rgba(119,119,119,.5);
-    border: .1em solid #fff;
-}
-
-#nav-profilo-utente > a {
-    list-style:none;
-    padding: 35px;
-    color:#fff;
-    font-size:1.1em;
-    display: block;
-    transition: all .3s ease-in-out;
-}
-
-#nav-profilo-utente > a:hover{
-    color:#0d2f26;
-    cursor: pointer;
-    transform: scale(1.2);
-}
-
-#nav-profilo-utente > a:first-child{
-    margin-top:7px;
-}
-
-#nav-profilo-utente > a.active{
-    color:#0d2f26;
-}
-
-.primo, .secondo, .terzo, .quarto{
-    width:60%;
-    margin-left:25%;
-}
-
-.tab{
-    transition: all .5s ease-in;
-    width: 80%;
-}
-
-#CONTAINER > .primo, .secondo, .terzo > h1{
-    font-family:Verdana, Geneva, Tahoma, sans-serif;
-    font-size: 2.3rem;
-    color:rgb(32, 54, 72);
-    margin-top:40px;
-    margin-bottom: 25px;
-}
-
-h2{
-    color:rgb(22, 30, 37);
-    font-family: Arial, Helvetica, sans-serif;
-    text-transform: uppercase;
-    font-size: 15px;
-    letter-spacing: 1px;
-    margin-left: 2px;
-    margin-top:10px
-}
-
-.input, p{
-    border:0;
-    border-bottom: 1px solid #2c302f;
-    width: 80%;
-    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    font-size: .7em;
-    padding: 7px 0;
-    color: #070707;
-    outline: none;
-}
-
-.btn{
-    font-family: Arial, Helvetica, sans-serif;
-    text-transform: uppercase;
-    font-size: 15px;
-    border:0;
-    color:#fff;
-    background-color: #383e3c;
-    padding: 7px 15px;
-    box-shadow: 0px 2px 4px 0px rgba(0,0,0,.2);
-    cursor:pointer;
-    margin-top:15px
-}
-
-#contenitore{
-    font-size: 22px;
-}
-
-.btn:hover{
-    color: #fff;
-}
-
-section > h1{
-    color: white;
-    margin:2%;
-    padding:0;
-    background-color: #001C38;
-    width: 100%;
-}
-
-footer{
-    margin:0;
-    padding:0;
-}
-
-p{
-    font-size: 13px;
-}
-
+@import "../styles/user-profile-page.scss"
 </style>

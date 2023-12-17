@@ -34,7 +34,7 @@ export default defineComponent({
         <RouterLink to="/register" class="btn !bg-blue-500 text-white" id="bottone-reg">Registrati</RouterLink>
       </template>
     </div>
-    <RouterLink to="/" class="text-white font-bold" style="display: block; margin: 5%;">Indietro</RouterLink>
+    <RouterLink to="/" class="text-white font-bold" style="display: block; margin: 5%; font-size: large;">Indietro</RouterLink>
   </header>
   <main class="grow py-6 border-y border-slate-200 mx-6">
     <!-- Passa l'utente come prop a tutte le pagine del router -->

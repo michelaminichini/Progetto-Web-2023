@@ -8,10 +8,6 @@ export default defineComponent({
     }
   },
   mounted() {
-    // Set isMobileNavOpen to false initially
-    //this.isMobileNavOpen = false;
-    
-    // Check the screen width and update isMobileNavOpen
     this.updateMobileNavState();
     
     // Listen for window resize events to update isMobileNavOpen
@@ -128,6 +124,8 @@ export default defineComponent({
   nav{
     display: block;
     background-color: #333;
+    position: absolute;
+    z-index: 1;
   }
 
   ul {

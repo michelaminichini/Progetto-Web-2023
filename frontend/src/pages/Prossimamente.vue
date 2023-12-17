@@ -60,9 +60,9 @@ export default defineComponent({
 
 <style scoped>
 h1{
-    color:aliceblue;
-    margin-top:2%;
-    margin-bottom:3%;
+    color:white;
+    margin: 3%;
+    margin-left: 5%;
 }
 
 body > div > div > article > h2{

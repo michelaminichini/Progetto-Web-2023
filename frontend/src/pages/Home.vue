@@ -63,7 +63,7 @@ export default defineComponent({
                         </tr>
                     </table> 
                 </article>
-                <RouterLink :to="'/film/' + film.idfilm">Scheda Film</RouterLink>
+                <RouterLink :to="'/film/' + film.idfilm" style="color: white; font-size:large">Scheda Film</RouterLink>
 
             </div>
         </div>
