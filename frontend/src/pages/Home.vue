@@ -46,7 +46,7 @@ export default defineComponent({
                         </tr>
                         <tr>
                             <th>Durata</th>
-                            <td>{{ film.durata }} min</td>
+                            <td>{{ film.durata }}</td>
                         </tr>
                         <tr>
                             <th>Trama</th>

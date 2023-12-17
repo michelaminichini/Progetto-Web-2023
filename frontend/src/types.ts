@@ -3,7 +3,7 @@ export interface Film{
     titolo: string
     regista: string
     genere: string
-    durata: string
+    durata: number
     nazione: string
     anno: string
     descrizione: string
