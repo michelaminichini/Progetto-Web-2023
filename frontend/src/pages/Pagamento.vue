@@ -1,13 +1,14 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import axios from "axios"
-import { DatiUtente, User } from '../types';
+import { DatiUtente, User, Tpag } from '../types';
 
 export default defineComponent({
     data(){
         return{
             user: null as User | null,
             datiUtente: [] as DatiUtente [],
+            tipoPag: [] as Tpag [],
             nomeT: null,
             cognomeT: null,
             tipo_pagamenti: null,
@@ -72,10 +73,23 @@ export default defineComponent({
             //window.location.href ="/profilo"
             this.$router.push('/profilo');
         },
-    
+
+        getTipoPag() {
+            axios.get("/api/tipopag")
+            .then(response => {this.tipoPag = response.data
+                console.log(response.data)
+                console.log(this.tipoPag)
+            })
+        },
+
+        changePagamenti()
+        {
+            console.log(this.tipo_pagamenti)
+        }
     },
     mounted(){
         this.getDatiUtente()
+        this.getTipoPag()
     }
 })
 
@@ -100,12 +114,17 @@ export default defineComponent({
                     </div>
                     <div class="inputBox">
                         <span>Tipo di pagamento</span>
-                        <input 
+                        <select class="firstLastNames linkBox"  v-model="tipo_pagamenti" type="number" @change="changePagamenti()" >
+                            <option disabled >Scegli un tipo di pagamento</option>
+                            <option v-for="ttpag in tipoPag" :key="ttpag.idtipo_pagamento" :value="ttpag.idtipo_pagamento">{{ttpag.descrizione}} - {{ ttpag.circuito }}</option>
+                        </select>
+
+                        <!-- input 
                         v-model="tipo_pagamenti"
                         type="number" 
                         class="rounded-lg border-slate-200"
                         placeholder=""
-                        />
+                        / -->
                     </div>
                     <div class="inputBox">
                         <span>Nome titolare</span>

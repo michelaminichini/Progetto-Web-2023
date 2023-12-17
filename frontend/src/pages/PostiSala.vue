@@ -1,14 +1,18 @@
 <script lang="ts">
-import { defineComponent } from "vue"
+import { defineComponent} from "vue"
 import axios from "axios"
 import { IDsala } from "../types"
 import { postoF } from "../types"
+//import { Modifica } from "../types"
+//import { IdSala } from "../types"
+import { PostoL } from "../types"
 
-export default defineComponent({
+export default {
   data() {
     return {
-      sala: [] as IDsala[],
-      posti:[] as postoF[]
+      salaP: [] as IDsala[],
+      posti:[] as postoF[],
+      seatLayout: [] as PostoL[],
     }
   },
   computed:{
@@ -17,156 +21,152 @@ export default defineComponent({
   methods: {
     getSala() {
         axios.get("/api/sala/" + this.$route.params.idproiezione)
-        .then(response => {this.sala = response.data[0]; console.log(response.data)})
+        .then(response => {this.salaP = response.data; console.log(response.data)})
     },
     getPostiF(){
       axios.get("/api/postiF/" + this.$route.params.idproiezione)
       .then(response => {this.posti = response.data; console.log(response.data)})
     },
+        /* getSala() {
+        axios.get("/api/sala/" + this.$route.params.idproiezione)
+        .then(response => {this.sala = response.data[0]; console.log(response.data)})
+    }, */
+
+    toggleSeat(rowIndex, seatIndex) {
+      const seat = this.seatLayout[rowIndex][seatIndex];
+      if (!seat.reserved) {
+        seat.selected = !seat.selected;
+      }
+    },
+    bookSeats() {
+      const selectedSeats = [];
+      this.seatLayout.forEach(row => {
+        row.forEach(seat => {
+          if (seat.selected && !seat.reserved) {
+            seat.reserved = true;
+            seat.selected = false; // Reset selected state after booking
+            selectedSeats.push(seat.label);
+            const AggParam = {
+              idproiezione: this.$route.params.idproiezione,
+              label: seat.label
+            };            
+            axios.put("/api/aggiornaPF",AggParam)
+            .then(response => {console.log(response.data)})
+          }
+        });
+      });
+      this.$SeatList = selectedSeats;
+      console.log(this.$SeatList);
+      alert(`Booked seats: ${selectedSeats.join(', ')}`);
+      this.$router.push('/pagamento');
+    },
+    chunkArray(arr, chunkSize: number) {
+      const chunkedArr = [];
+      for (let i = 0; i < arr.length; i += chunkSize) {
+        chunkedArr.push(arr.slice(i, i + chunkSize));
+      }
+      return chunkedArr;
+    },
+
+    async getPostiL() {
+      const res1 = await axios.get("/api/sala/" + this.$route.params.idproiezione)
+      //const res = await axios.get("/api/postiL")
+      console.log(res1.data)
+
+      const paramfila = res1.data;
+      console.log(paramfila[0].posti_fila);
+
+      const ppf = paramfila[0].posti_fila;
+
+      const res = await axios.get("/api/postiF/" + this.$route.params.idproiezione)
+      //this.seatLayoutDB = res.data
+      console.log(res.data)
+
+      const dataArray = res.data;
+
+      // Displaying data in subarrays in the console
+      const subArrays = this.chunkArray(dataArray, ppf); 
+      subArrays.forEach((subArray, index) => {
+        console.log(`Subarray ${index + 1}:`, subArray);
+        this.seatLayout.push(subArray)
+      });
+    },
   },
   mounted() {
-    this.getSala()
+    //this.getSala()
     this.getPostiF()
+    //this.getSala()
+    this.getPostiL()
+    //console.log(this.seatLayout);
+    console.log('Risultati query');
+    //console.log(this.salaP[0]);
+    console.log(this.seatLayout);
   }
-})
+};
 </script>
 
-<!-- <template>
-  <h2>posti sala</h2>
-  <template v-if="sala">
-    <h2>{{sala.fila}}</h2>
-    <h2>{{ sala.posti_fila }}</h2>
-    
-  </template>
-</template> -->
-
 <template>
-  <h1>Posti sala:</h1>
-
-  <!--body>
-     <div id="app">
-      <div class="salaContainer">
-        <div v-for= "posto in posti " :key="posto.idproiezione" class="chair">
-            <div class="row">
-                <li class="seat">{{ posto.fila}}{{ posto.numero}}</li>
+    <div class="seat-booking">
+        <h2>Select Your Seats</h2>
+        <div class="seats">
+            <div
+                v-for="(row, rowIndex) in seatLayout"
+                :key="rowIndex"
+                class="seat-row"
+            >
+                <div
+                    v-for="(seat, seatIndex) in row"
+                    :key="seatIndex"
+                    class="seat"
+                    :class="{ selected: seat.selected, reserved: seat.reserved }"
+                    @click="toggleSeat(rowIndex, seatIndex)"
+                    >
+                    {{ seat.label }}
+                </div>
             </div>
-            <div class="row">
-                <li class="seat">{{ posto.fila}}{{ posto.numero}}</li>
-            </div>    
-        </div>        
-      </div>
-    </div> -->
-
-    <!--div id="app">
-    <table>
-      <tbody>
-        <tr v-for="(fila, rowIndex) in posti" :key="rowIndex">
-          <td v-for="(cell, cellIndex) in fila" :key="cellIndex" @click="editCell(rowIndex, cellIndex)">
-             <template v-if="editingCell === `${rowIndex}-${cellIndex}`">
-              <input
-                type="text"
-                :value="cell"
-                @input="updateCell(rowIndex, cellIndex, $event.target.value)"
-                @blur="finishEditing"
-              />
-            </template>
-            <template v-else>
-              {{ cell }}
-            </template>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+        </div>
+        <button @click="bookSeats">Book Selected Seats</button>
     </div>
-
-  </body-->
-
 </template>
 
-
-
 <style scoped>
-h1 {
-  color: aliceblue;
-  margin-left: 10%;
+.seat-booking {
+  color: aliceblue;  
+  text-align: center;
+  margin-top: 30px;
 }
 
-.salaContainer{
-    width: 92%;
-    height: 90%;
-    display: flex;
-    padding-left: 15%;
+.seats {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
 }
 
-/* .salaContainer  {
-    padding: 10px 40px;
-    background: unset;
-} */
-
-.salaContainer  .screen::before {
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 20px;
+.seat-row {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
 }
 
-.salaContainer .chair {
-    width: 95%;
-    margin: auto;
+.seat {
+  margin: 5px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  max-width: 50px;
+  text-align: center;
 }
 
-.salaContainer .chair .row {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+.seat.selected {
+  background-color: #6bd1e7;
 }
 
-.salaContainer .chair .row span {
-   color: #fff;
-   font-weight: 600;
-   font-size: 11px;
+.seat.reserved {
+  background-color: #e74c3c;
+  pointer-events: none; /* Disable click for reserved seats */
 }
 
-.salaContainer .chair .row li {
-    position: relative;
-    width: 20px;
-    height: 15px;
-    background: rgb(184, 184, 184, .3);
-    list-style: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: .3s linear;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 15px;
-    font-size: 12px;
-    color: aliceblue;
-}
-
-.salaContainer .chair .row li::before {
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 5px;
-    background:rgb(184, 184, 184, .3);
-    bottom: -8px;
-    border-radius: 10px;
-
-}
-
-.salaContainer  .chair .row li:hover {
-    background: greenyellow;
-    color: #000;
-}
-
-.salaContainer  .chair .row li:nth-child(6) {
-    margin-right: 20px;
-}
-
-.salaContainer  .chair .row li:nth-last-child(6) {
-    margin-left: 20px;
-    color: rgb(30, 30, 30);
-}
 </style>
+

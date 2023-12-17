@@ -9,7 +9,7 @@ import Prossimamente from "./pages/Prossimamente.vue"
 import InfoCinema from "./pages/Info.vue"
 import Login from "./pages/Login.vue"
 import SchedaFilm from "./pages/SchedaFilm.vue"
-//import PostiSala from "./pages/PostiSala.vue"
+import PostiSala from "./pages/PostiSala.vue"
 import Pagamento from "./pages/Pagamento.vue"
 import PaginaAdmin from "./pages/PaginaAdmin.vue"
 import SeatBooking from "./pages/SeatBooking.vue"
@@ -35,7 +35,8 @@ const router: Router = createRouter({
         //{ path: "/seatbooking", component: SeatBooking},
         { path: "/pagamento", component: Pagamento, meta: { requireLogin: true },},
         //{ path: "/paginaAdmin", component: PaginaAdmin},
-        //{ path: "/PostiSala/:idproiezione", component: PostiSala, meta: { requireLogin: true }},
+        { path: "/paginaAdmin", component: PaginaAdmin},
+        { path: "/PostiSala/:idproiezione", component: PostiSala, meta: { requireLogin: true }},
         { path: "/profiloutente", component: UserProfile, meta: { requireLogin: true },},
         { path: "/profilo", component: Profilo},
         { path: "/adminpage", component: Amministratore}
@@ -59,5 +60,13 @@ router.beforeEach(async (to) => {
     }
 })
 
+//interface AppConfig {
+//    globalProperties: Record<string, any>
+//}
 
-createApp(App).use(router).mount("#app")
+createApp(App).use(router).mount("#app");
+//definizione di variabili globali
+//app.config.globalProperties.$SeatList = 'ABCD';
+//app.config.globalProperties.$CurrentProj = 123;
+
+

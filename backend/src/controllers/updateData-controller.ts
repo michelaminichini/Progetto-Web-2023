@@ -53,5 +53,8 @@ export async function aggiornaDatiProfilo(req: Request, res: Response) {
     res.json({result})
 }
  
-
-
+export const leggiTipoPag = async (req: Request, res: Response) => {
+  const connection = await getConnection()
+  const [results] = await connection.execute(`SELECT * FROM tipo_pagamenti`)
+  res.json(results)   
+}  

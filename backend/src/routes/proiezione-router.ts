@@ -7,8 +7,9 @@ const router: Router = Router()
 router.get("/api/proiezione", proiezioneController.proiezioneX)
 router.get("/api/sala/:id", proiezioneController.salaX)
 //router.get("/api/posti/:id", proiezioneController.postiX)
-//router.get("/api/postiF/:id", proiezioneController.postiF)
+router.get("/api/postiF/:id", proiezioneController.postiF)
 router.get("/api/postiL", proiezioneController.getPostiL)
 router.put("/api/aggiornaP", proiezioneController.aggiornaPosto)
+router.put("/api/aggiornaPF", proiezioneController.aggiornaPostoPF)
 
 export default router

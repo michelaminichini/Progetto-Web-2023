@@ -1,6 +1,6 @@
 <script lang="ts">
 
-import {defineComponent} from "vue"
+import {defineComponent, getCurrentInstance} from "vue"
 import axios from "axios"
 import {Film} from "../types" // tipo di interfaccia creata nel file types.ts
 //import { Modifica } from "../types"
@@ -11,12 +11,17 @@ export default {
   data() {
     return {
       //sala: [] as IdSala[],
-      seatLayout: [] as PostoL[]
+      seatLayout: [] as PostoL[],
       /* seatLayout: [
         [{ label: 'A1', selected: false, reserved: false }, { label: 'A2', selected: false, reserved: false }, { label: 'A3', selected: false, reserved: false }, { label: 'A4', selected: false, reserved: false }, { label: 'A5', selected: false, reserved: false }],
         [{ label: 'B1', selected: false, reserved: false }, { label: 'B2', selected: false, reserved: false }, { label: 'B3', selected: false, reserved: false }, { label: 'B4', selected: false, reserved: false }]
         // Add more rows and seats as needed
       ], */
+      SeatList: 
+        getCurrentInstance().appContext.config.globalProperties.$SeatList,
+      CurrentProj:
+        getCurrentInstance().appContext.config.globalProperties.$CurrentProj,
+
     }
   },
   methods: {
@@ -44,6 +49,8 @@ export default {
           }
         });
       });
+      this.$SeatList = selectedSeats;
+      console.log(this.$SeatList);
       alert(`Booked seats: ${selectedSeats.join(', ')}`);
       this.$router.push('/pagamento');
     },
@@ -78,6 +85,8 @@ export default {
     this.getPostiL()
     //console.log(this.seatLayout);
     console.log(this.seatLayout);
+    console.log(this.SeatList);
+    console.log(this.CurrentProj)
   }
 };
 

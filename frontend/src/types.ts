@@ -133,7 +133,6 @@ export interface CronoUtente{
     descrizione: string
     Descrizione: string
     Circuito: string
-
 }
 
 export interface UpdateUser{
@@ -142,4 +141,10 @@ export interface UpdateUser{
     cognome:string
     telefono:number
     data_nascita:string
+}
+
+export interface Tpag{
+    idtipo_pagamento: number
+    descrizione: string
+    circuito: string
 }
