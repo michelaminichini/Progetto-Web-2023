@@ -68,21 +68,28 @@ Nella bash
 
 ## API Endpoints
 
+## GET
 - /api/films
 - /api/prossimi-film
 - /api/film/:id
 - /api/tuttifilm
-- /api/inserimento
-- /api/aggiornamento
-- /api/eliminazione/:id
 - /api/cronologia/:id
+- /api/auth/profile
+- /api/leggiutente/:id
+
+## POST
+- /api/inserimento
 - /api/auth/register
 - /api/auth/login
 - /api/auth/logout
-- /api/auth/profile
 - /api/aggiornapagamento
-- /api/leggiutente/:id
+
+## PUT
+- /api/aggiornamento
 - /api/aggiornautente
+
+## DELETE
+- /api/eliminazione/:id
 
 ## Database
 
