@@ -11,7 +11,7 @@ export default defineComponent({
             tipoPag: [] as Tpag [],
             nomeT: null,
             cognomeT: null,
-            tipo_pagamenti: null,
+            tipo_pagamenti: 0,
             Numero_carta: null,
             Data_scadenza:"",
             CVV: null,
@@ -56,13 +56,12 @@ export default defineComponent({
 
                 this.nomeT =null,
                 this.cognomeT= null,
-                this.tipo_pagamenti = null,           
+                this.tipo_pagamenti = 0,           
                 this.importo=0,
                 this.Numero_carta = null;
                 this.Data_scadenza = "";
                 this.CVV = null;
-
-                
+      
             } catch (e: any) {
                 if (e.response) {
                     alert(`${e.response.status} - ${e.response.statusText}\n${e.response.data}`)
@@ -71,6 +70,7 @@ export default defineComponent({
                 }
             } 
             //window.location.href ="/profilo"
+            alert('Pagamento effettuato');
             this.$router.push('/profilo');
         },
 
@@ -84,6 +84,9 @@ export default defineComponent({
 
         changePagamenti()
         {
+            if (!this.tipo_pagamenti){
+                this.tipo_pagamenti = 0
+            }
             console.log(this.tipo_pagamenti)
         }
     },
@@ -116,7 +119,7 @@ export default defineComponent({
                         <span>Tipo di pagamento</span>
                         <select class="firstLastNames linkBox"  v-model="tipo_pagamenti" type="number" @change="changePagamenti()" >
                             <option disabled >Scegli un tipo di pagamento</option>
-                            <option v-for="ttpag in tipoPag" :key="ttpag.idtipo_pagamento" :value="ttpag.idtipo_pagamento">{{ttpag.descrizione}} - {{ ttpag.circuito }}</option>
+                            <option v-for="ttpag in tipoPag" :key="ttpag.idtipo_pagamento" :value="ttpag.idtipo_pagamento">{{ttpag.Descrizione}} - {{ ttpag.Circuito }}</option>
                         </select>
 
                         <!-- input 
@@ -148,9 +151,11 @@ export default defineComponent({
                         <span>Numero Carta</span>
                         <input 
                         v-model="Numero_carta"
-                        type="number" 
+                        type="text" 
                         class="rounded-lg border-slate-200"
-                        placeholder="1111-2222-3333-4444"
+                        placeholder="0000 0000 0000 0000" 
+                        data-slots="0"
+                        data-accept="\d"
                         />
                     </div>
                     <div class="inputBox">

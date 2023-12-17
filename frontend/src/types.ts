@@ -3,7 +3,7 @@ export interface Film{
     titolo: string
     regista: string
     genere: string
-    durata: string
+    durata: number
     nazione: string
     anno: string
     descrizione: string
@@ -145,6 +145,6 @@ export interface UpdateUser{
 
 export interface Tpag{
     idtipo_pagamento: number
-    descrizione: string
-    circuito: string
+    Descrizione: string
+    Circuito: string
 }
