@@ -145,6 +145,6 @@ export interface UpdateUser{
 
 export interface Tpag{
     idtipo_pagamento: number
-    descrizione: string
-    circuito: string
+    Descrizione: string
+    Circuito: string
 }

@@ -70,7 +70,7 @@ export default defineComponent({
                     alert(e.message)
                 }
             } 
-            //window.location.href ="/profilo"
+            //utente rediretto alla pagina del proprio profilo
             this.$router.push('/profilo');
         },
 
@@ -116,7 +116,7 @@ export default defineComponent({
                         <span>Tipo di pagamento</span>
                         <select class="firstLastNames linkBox"  v-model="tipo_pagamenti" type="number" @change="changePagamenti()" >
                             <option disabled >Scegli un tipo di pagamento</option>
-                            <option v-for="ttpag in tipoPag" :key="ttpag.idtipo_pagamento" :value="ttpag.idtipo_pagamento">{{ttpag.descrizione}} - {{ ttpag.circuito }}</option>
+                            <option v-for="ttpag in tipoPag" :key="ttpag.idtipo_pagamento" :value="ttpag.idtipo_pagamento">{{ttpag.Descrizione}} - {{ ttpag.Circuito }}</option>
                         </select>
 
                         <!-- input 
