@@ -12,7 +12,7 @@ import SchedaFilm from "./pages/SchedaFilm.vue"
 import PostiSala from "./pages/PostiSala.vue"
 import Pagamento from "./pages/Pagamento.vue"
 import PaginaAdmin from "./pages/PaginaAdmin.vue"
-import SeatBooking from "./pages/SeatBooking.vue"
+//import SeatBooking from "./pages/SeatBooking.vue"
 import UserProfile from "./pages/UserProfile.vue"
 import Amministratore from "./pages/Amministratore.vue"
 
@@ -32,7 +32,7 @@ const router: Router = createRouter({
         { path: "/login", component: Login},
         { path: "/register", component: Register},
         { path: "/film/:idfilm", component: SchedaFilm },
-        { path: "/seatbooking", component: SeatBooking},
+        //{ path: "/seatbooking", component: SeatBooking},
         { path: "/pagamento", component: Pagamento, meta: { requireLogin: true },},
         { path: "/paginaAdmin", component: PaginaAdmin},
         { path: "/PostiSala/:idproiezione", component: PostiSala, meta: { requireLogin: true }},

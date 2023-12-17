@@ -55,8 +55,8 @@ export default {
           }
         });
       });
-      this.$SeatList = selectedSeats;
-      console.log(this.$SeatList);
+      //this.$SeatList = selectedSeats;
+      //console.log(this.$SeatList);
       alert(`Booked seats: ${selectedSeats.join(', ')}`);
       this.$router.push('/pagamento');
     },
