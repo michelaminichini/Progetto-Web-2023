@@ -133,9 +133,10 @@ INSERT INTO `film` (`idfilm`, `titolo`, `regista`, `genere`, `durata`, `nazione`
 CREATE TABLE `pagamenti` (
   `idpagamento` int(11) NOT NULL,
   `idtipo_pagamento1` int(11) NOT NULL,
-  `idbiglietto1` int(11) NOT NULL,
   `importo` float NOT NULL,
-  `Numero_carta` int(16) NOT NULL,
+  `Titolare_nome` varchar(100) NOT NULL,
+  `Titolare_cognome` varchar(100) NOT NULL,
+  `Numero_carta` varchar(20) NOT NULL,
   `Data_scadenza` date DEFAULT NULL,
   `CVV` int(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -144,10 +145,19 @@ CREATE TABLE `pagamenti` (
 -- Dump dei dati per la tabella `pagamenti`
 --
 
-INSERT INTO `pagamenti` (`idpagamento`, `idtipo_pagamento1`, `idbiglietto1`, `importo`, `Numero_carta`, `Data_scadenza`, `CVV`) VALUES
-(12, 1, 7, 8.5, 0, NULL, 0),
-(13, 4, 8, 6.5, 0, NULL, 0);
+INSERT INTO `pagamenti` (`idpagamento`, `idtipo_pagamento1`, `importo`, `Titolare_nome`, `Titolare_cognome`, `Numero_carta`, `Data_scadenza`, `CVV`) VALUES
+(12, 1, 8.5, '', '', '0', NULL, 0),
+(13, 4, 6.5, '', '', '0', NULL, 0),
+(18, 1, 10.5, '', '', '1234', '2024-01-01', 388),
+(23, 1, 10.5, 'aaa', 'bbb', '1234', '2024-01-01', 388),
+(25, 1, 10, 'paolino', 'paperino', '1234-5678-9012-1234', '2023-12-31', 332),
+(26, 2, 9, 'uncle', 'scrooge', '2147483647', '2023-12-31', 999),
+(27, 1, 8, 'uncle', 'scrooge', '2147483647', '2023-12-31', 253),
+(28, 3, 12, 'pippo', 'pluto', '4321-8765-0912-1234', '2023-12-31', 647),
+(29, 2, 11, 'paolino', 'paperino', '4.545676789891212e15', '2023-12-31', 789),
+(30, 4, 15, 'paolino', 'paperino', '1234432112344321', '2023-12-31', 123);
 
+--
 -- --------------------------------------------------------
 
 --
