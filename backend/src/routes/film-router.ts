@@ -11,5 +11,6 @@ router.post("/api/inserimento", filmController.nuovofilm)
 router.put("/api/aggiornamento", filmController.aggiornaFilm)
 router.delete("/api/eliminazione/:id", filmController.deleteFilm)
 router.get("/api/cronologia/:id", filmController.cronologiaUtente)
+router.get("/api/infoToUpdate", filmController.informazioni)
 
 export default router

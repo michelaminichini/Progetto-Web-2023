@@ -44,7 +44,7 @@ export async function currentFilm(req:Request, res: Response) {
     )
     res.json(results)
 }
-
+// Aggiorna le modifiche effettuate dall'amministratore nella pagina del pannello di controllo - dedicato all'admin
 export async function aggiornaFilm(req:Request, res: Response) {
     const {idfilm,titolo,regista,genere,durata,nazione,anno,descrizione,trailer,locandina,lingua,attori,stato} = req.body
     console.log(req.body)
@@ -55,7 +55,7 @@ export async function aggiornaFilm(req:Request, res: Response) {
     )
     res.json(results)
 }
-
+// Cancellazione riga di un film dalla tabella admin - operazione solo per amministratori
 export async function deleteFilm(req:Request, res: Response) {
     const connection = await getConnection()
     const [results] = await connection.execute(
@@ -79,4 +79,12 @@ export async function cronologiaUtente(req:Request, res: Response) {
     }
     
 }
-
+// Prendere informazioni dalla tabella proiezioni sul database per la tabella admin
+export async function informazioni(req:Request, res:Response) {
+    const connection = await getConnection()
+    const [results] = await connection.execute(
+        `SELECT film.idfilm, film.titolo, p.idproiezione, p.datap, p.orario FROM film JOIN proiezioni p ON film.idfilm = p.idfilm`, 
+        [],
+    )
+    res.json(results)
+}

@@ -2,7 +2,7 @@
 
 import {defineComponent} from "vue"
 import axios from "axios"
-import {FilmE} from "../types" // tipo di interfaccia creata nel file types.ts
+import {FilmE, SchedaF} from "../types" // tipo di interfaccia creata nel file types.ts
 //import { Modifica } from "../types"
 
 interface EditingCell{
@@ -15,6 +15,7 @@ export default defineComponent({
         return {
         ListaFilm: [] as FilmE [],
         //EditedFilm: [] as Film [],
+        listaInfo: [] as SchedaF[],
         editingCell: null,
         rowIndex: null,
         editmode: false,
@@ -22,23 +23,24 @@ export default defineComponent({
     }
     },
     methods: {
-        getLista() {
-            axios.get("/api/tuttifilm").then(response => this.ListaFilm = response.data)
+        // Prende e visualizza nella tabella tutti i dati
+        getInfo() {
+            axios.get("/api/infoToUpdate").then(response => this.listaInfo = response.data)
             
         },
-
+        // Aggiunge una riga in fondo alla tabella 
         addFilm() {
             axios.post("/api/inserimento")
             .then(response => {console.log(response.data)})
-            this.getLista()
+            this.getInfo()
             this.$forceUpdate()
         },
-        
+        // Elimina una riga dalla tabella
         deleteFilm(rowIndex: any){
             axios.delete("/api/eliminazione/"+this.ListaFilm[rowIndex].idfilm)
             .then(response => 
             console.log("deleting film "+this.ListaFilm[rowIndex].idfilm))
-            this.getLista()
+            this.getInfo()
             this.$forceUpdate()
         },
 
@@ -49,7 +51,7 @@ export default defineComponent({
         updateCell(rowI: number, cellI: number, v: string|number) {
             this.ListaFilm[rowI][cellI] = v;
         },
-
+        // Aggiorna i dati sul database terminando l'operazione di edit
         finishEditing(rowIndex: number) {
             let riga = this.ListaFilm[rowIndex];
             this.editingCell = null;            
@@ -62,14 +64,9 @@ export default defineComponent({
         edit: function() {
             this.editmode = !this.editmode;
         },
-
-        redirect(){
-            window.location.href = "/pannello2"
-        }
-       
     },
     mounted() {
-    this.getLista()
+    this.getInfo()
     
   }
 })
@@ -80,12 +77,12 @@ export default defineComponent({
 <template>
     
     <h1>
-        Pagina Amministratore - pannello di controllo
+        Secondo pannello di controllo
     </h1>
 
     <div class="card">
         <div class="card-header">
-            <h4>Lista films
+            <h4>Dettagli films
                 <button @click="addFilm()" type="button" class="btn btn-primary float-end">
                     Aggiungi
                 </button>
@@ -96,24 +93,16 @@ export default defineComponent({
             <table id="tabella" class="table table-striped table-bordered">
                     <thead>
                         <tr>
-                            <th>ID</th>
+                            <th>ID Film</th>
                             <th>Titolo</th>
-                            <th>Regista</th>
-                            <th>Genere</th>
-                            <th>Durata</th>
-                            <th>Nazione</th>
-                            <th>Anno</th>
-                            <th>Descrizione</th>
-                            <th>Trailer</th>
-                            <th>Locandina</th>
-                            <th>Lingua</th>
-                            <th>Attori</th>
-                            <th>Stato</th>
+                            <th>Idproiezione</th>
+                            <th>Data Proiezione</th>
+                            <th>Orario</th>
                             <th>Edita</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="(film, rowIndex) in ListaFilm" :key="rowIndex">
+                        <tr v-for="(film, rowIndex) in listaInfo" :key="rowIndex">
                             <td v-for="(cell, cellIndex) in film" :key="cellIndex">
                                 <template v-if="editingCell === `${rowIndex}-${cellIndex}`">
                                 <input
@@ -147,10 +136,6 @@ export default defineComponent({
                     </tbody>
             </table>
          </div>   
-    </div>
-
-    <div>
-        <button id="secondo-pannello" @click="redirect()">Passa a pannello 2</button>
     </div>
 </template>
 
