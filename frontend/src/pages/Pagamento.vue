@@ -17,6 +17,7 @@ export default defineComponent({
             CVV: null,
             importo:0,
             //idbiglietto:0,
+            isPopupOpen: false,
                  
         }
     },
@@ -69,10 +70,6 @@ export default defineComponent({
                     alert(e.message)
                 }
             } 
-            //window.location.href ="/profilo"
-            alert('Pagamento effettuato');
-            //utente rediretto alla pagina del proprio profilo
-            this.$router.push('/profilo');
         },
 
         getTipoPag() {
@@ -89,7 +86,14 @@ export default defineComponent({
                 this.tipo_pagamenti = 0
             }
             console.log(this.tipo_pagamenti)
-        }
+        },
+        openPopup() {
+            this.isPopupOpen = true;
+        },
+        closePopup() {
+            this.isPopupOpen = false;
+            window.location.href = "/profilo" // utente rediretto alla pagina del proprio profilo quando la popup window message viene chiusa
+        },
     },
     mounted(){
         this.getDatiUtente()
@@ -177,7 +181,14 @@ export default defineComponent({
                         />
                     </div>
                        
-            <button type="submit" style="background-color: blue; color: white; display: inline;">Procedi all'acquisto</button>
+            <button type="submit" style="background-color: blue; color: white; display: inline;" @click="openPopup">Procedi all'acquisto</button>
+            <dialog :open="isPopupOpen">
+                <p>Pagamento effettuato con successo! Grazie e buona visione</p>
+                <button @click="closePopup">
+                    Chiudi
+                </button>
+                
+            </dialog>
         </form>
     </div>
 
