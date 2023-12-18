@@ -123,15 +123,10 @@ export default defineComponent({
                     </a>
                     <a class="tab" @click="toggleDiv(1)">
                         <i>
-                           
-                        </i>
-                    </a>
-                    <a class="tab" @click="toggleDiv(2)">
-                        <i>
                             <img src="/setting-icon.png" alt="Logo" width="30" height="30">
                         </i> 
                     </a>
-                    <a class="tab" @click="toggleDiv(3)">
+                    <a class="tab" @click="toggleDiv(2)">
                         <i>
                             <img src="/clock-line-icon.png" alt="Logo" width="30" height="30">
                         </i> 
@@ -178,58 +173,40 @@ export default defineComponent({
             </div>
 
             <div v-show="activeDiv === 1" class="secondo">
-                <h1>Informazioni Pagamento</h1>
-                <h2>Metodo di pagamento</h2>
-                <input type="text" class="input" placeholder="MasterCard">
+                <h1>Informativa sulla privacy</h1>
+                <div id="testo" class="overflow-auto">
+                    <p>
+                        1. Raccogliamo informazioni personali quando utilizzi il nostro sito web di GalaxyCineVerse, acquisti biglietti o interagisci con i nostri servizi. 
+                        Queste informazioni possono includere:
 
-                <h2>Numero carta</h2>
-                <input type="text" class="input" placeholder="0000000000000000">
+                        Nome e ulteriori informazioni personali,
+                        Informazioni di contatto (email, numero di telefono),
+                        Dettagli di pagamento,
+                        Cronologia delle transazioni,
+                        Altre informazioni fornite volontariamente.
+                    </p>
+                    <p>
+                        2. Utilizziamo le informazioni raccolte per i seguenti scopi:
 
-                <h2>Data di scadenza</h2>
-                <input type="date" class="input" placeholder="00-0000">
-
-                <h2>Indirizzo</h2>
-                <input type="text" class="input" placeholder="via somestreet 0">
-
-                <h2>Città</h2>
-                <input type="text" class="input" placeholder="somecity">
-
-                <button class="btn">Salva</button>
+                        Elaborare acquisti e prenotazioni di biglietti,
+                        Migliorare il nostro sito web e i nostri servizi,
+                        Garantire la sicurezza del nostro sito web e prevenire frodi.
+                    </p>
+                    <p>
+                        3. Adottiamo misure ragionevoli per proteggere le tue informazioni personali da accessi non autorizzati, divulgazioni, alterazioni e distruzioni. 
+                    </p>
+                    <p>
+                        4. Utilizziamo cookie e tecnologie di tracciamento simili per migliorare la tua esperienza sul nostro sito web.
+                    </p>
+                    <p>
+                        5. Se hai domande su questa informativa sulla privacy o sulle nostre pratiche relative ai dati, contattaci all'indirizzo " galaxycineverse@cinema.com ".
+                        Utilizzando il nostro sito web, accetti i termini indicati in questa informativa sulla privacy.
+                    </p>
+                </div>
+                
             </div>
 
             <div v-show="activeDiv === 2" class="terzo">
-                <h1>Informativa sulla privacy</h1>
-                <p class="text-justify">
-                    1. Raccogliamo informazioni personali quando utilizzi il nostro sito web di GalaxyCineVerse, acquisti biglietti o interagisci con i nostri servizi. 
-                    Queste informazioni possono includere:
-
-                    Nome e ulteriori informazioni personali,
-                    Informazioni di contatto (email, numero di telefono),
-                    Dettagli di pagamento,
-                    Cronologia delle transazioni,
-                    Altre informazioni fornite volontariamente.
-                </p>
-                <p class="text-justify">
-                    2. Utilizziamo le informazioni raccolte per i seguenti scopi:
-
-                    Elaborare acquisti e prenotazioni di biglietti,
-                    Migliorare il nostro sito web e i nostri servizi,
-                    Garantire la sicurezza del nostro sito web e prevenire frodi.
-                </p>
-                <p class="text-justify">
-                    3. Adottiamo misure ragionevoli per proteggere le tue informazioni personali da accessi non autorizzati, divulgazioni, alterazioni e distruzioni. 
-                </p>
-                <p class="text-justify">
-                    4. Utilizziamo cookie e tecnologie di tracciamento simili per migliorare la tua esperienza sul nostro sito web.
-                </p>
-                <p class="text-justify">
-                    5. Se hai domande su questa informativa sulla privacy o sulle nostre pratiche relative ai dati, contattaci all'indirizzo " galaxycineverse@cinema.com ".
-                    Utilizzando il nostro sito web, accetti i termini indicati in questa informativa sulla privacy.
-
-                </p>
-            </div>
-
-            <div v-show="activeDiv === 3" class="quarto">
                 <h1>La tua cronologia di acquisti</h1>                
                 <table class="table table-striped table-bordered table-responsive border border-2 border border-dark">
                     <thead>
