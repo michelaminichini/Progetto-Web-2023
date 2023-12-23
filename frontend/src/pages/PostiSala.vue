@@ -1,22 +1,31 @@
 <script lang="ts">
-import { defineComponent} from "vue"
+import { defineComponent, PropType} from "vue"
 import axios from "axios"
-import { IDsala } from "../types"
+import { IDsala, posto, PostoL } from "../types"
 import { postoF } from "../types"
 //import { Modifica } from "../types"
 //import { IdSala } from "../types"
-import { PostoL } from "../types"
+//import Payment from "./Pagamento.vue"
 
-export default {
+export default defineComponent({
+  //components:{
+    //Payment
+  //},
+
   data() {
     return {
       salaP: [] as IDsala[],
       posti:[] as postoF[],
       seatLayout: [] as PostoL[],
+      costo: null as posto | null,
+      selectedSeat:null,
+      seatCost: 5
     }
   },
   computed:{
-
+    selectedSeatCost() {
+      return this.selectedSeat ? this.seatCost : 0;
+    },
   },
   methods: {
     getSala() {
@@ -37,24 +46,34 @@ export default {
       if (!seat.reserved) {
         seat.selected = !seat.selected;
       }
+      // if(seat.selected){
+      //   alert(seat.costo)
+      // }
     },
     bookSeats() {
-      const selectedSeats = [];
+      const selectedSeats: any[] = [];
+      let totalCost = 0
+
+      //sessionStorage.setItem("costo", "5");
       this.seatLayout.forEach(row => {
         row.forEach(seat => {
           if (seat.selected && !seat.reserved) {
             seat.reserved = true;
             seat.selected = false; // Reset selected state after booking
             selectedSeats.push(seat.label);
+            totalCost += seat.costo
+
             const AggParam = {
               idproiezione: this.$route.params.idproiezione,
               label: seat.label
             };            
-            axios.put("/api/aggiornaPF",AggParam)
+            axios.put("/api/aggiornaPF",AggParam) // aggiorna sul database lo stato del posto selezionato. Se selezionato, diventa occupato (=1)
             .then(response => {console.log(response.data)})
           }
         });
       });
+      sessionStorage.setItem('totalCost', totalCost.toString())
+      console.log('Final Total Cost:', totalCost)
       //this.$SeatList = selectedSeats;
       //console.log(this.$SeatList);
       alert(`Booked seats: ${selectedSeats.join(', ')}`);
@@ -67,14 +86,36 @@ export default {
       }
       return chunkedArr;
     },
-
+    
     async getPostiL() {
+
       const res1 = await axios.get("/api/sala/" + this.$route.params.idproiezione)
       //const res = await axios.get("/api/postiL")
-      console.log(res1.data)
-
+      console.log("ECCO I TUOI RISULTATI:", res1.data)
+      //if (res1.data && res1.data.length > 0 && res1.data[0].posti_fila) {
       const paramfila = res1.data;
-      console.log(paramfila[0].posti_fila);
+      console.log("RESULTS HERE:", paramfila[0].posti_fila);
+
+      const ppf = paramfila[0].posti_fila;
+
+      const res = await axios.get("/api/postiF/" + this.$route.params.idproiezione);
+      console.log(res.data);
+
+      const dataArray = res.data;
+
+      // Displaying data in subarrays in the console
+      const subArrays = this.chunkArray(dataArray, ppf);
+      subArrays.forEach((subArray, index) => {
+        console.log(`Subarray ${index + 1}:`, subArray);
+        this.seatLayout.push(subArray);
+      });
+    //} else {
+      //console.error("Invalid data structure or empty array in response.");
+    //}
+
+      /*
+      const paramfila = res1.data;
+      console.log("RESULTS HERE:", paramfila[0].posti_fila);
 
       const ppf = paramfila[0].posti_fila;
 
@@ -90,6 +131,10 @@ export default {
         console.log(`Subarray ${index + 1}:`, subArray);
         this.seatLayout.push(subArray)
       });
+      */
+    },
+    selectSeat(seat) {
+      this.selectedSeat = seat;
     },
   },
   mounted() {
@@ -98,16 +143,17 @@ export default {
     //this.getSala()
     this.getPostiL()
     //console.log(this.seatLayout);
-    console.log('Risultati query');
+    //console.log('Risultati query');
     //console.log(this.salaP[0]);
     console.log(this.seatLayout);
   }
-};
+});
 </script>
 
 <template>
     <div class="seat-booking">
         <h2>Select Your Seats</h2>
+        <div id="schermo"></div>
         <div class="seats">
             <div
                 v-for="(row, rowIndex) in seatLayout"
@@ -126,10 +172,23 @@ export default {
             </div>
         </div>
         <button @click="bookSeats">Book Selected Seats</button>
+        
     </div>
 </template>
 
 <style scoped>
+#schermo{
+  width:200px;
+  height: 120px;
+  border-width: 3%;
+  background-color: white;
+  border-color: black;
+  display: block;
+  margin: 0 auto;
+  transform: rotateX(45deg);
+  box-shadow: 0 3px 10px rgba(255,255,255,0.7);
+
+}
 .seat-booking {
   color: aliceblue;  
   text-align: center;
@@ -157,10 +216,13 @@ export default {
   cursor: pointer;
   max-width: 50px;
   text-align: center;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
 }
 
 .seat.selected {
-  background-color: #6bd1e7;
+  background-color: #aff0ff;
+  color:black;
 }
 
 .seat.reserved {

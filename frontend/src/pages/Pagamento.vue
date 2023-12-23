@@ -1,9 +1,14 @@
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { PropType, defineComponent } from 'vue';
 import axios from "axios"
-import { DatiUtente, User, Tpag } from '../types';
+import { DatiUtente, User, Tpag, Importo, PostoL } from '../types'
+//import PostiSala from "./PostiSala.vue"
 
 export default defineComponent({
+    //props:{
+      //  importo: Number
+    //},
+
     data(){
         return{
             user: null as User | null,
@@ -15,10 +20,12 @@ export default defineComponent({
             Numero_carta: null,
             Data_scadenza:"",
             CVV: null,
-            importo:0,
+            //importo:0,
             //idbiglietto:0,
             isPopupOpen: false,
-                 
+            costo: null as PostoL | null,
+            importo: "",
+            //importoTotale: 0,
         }
     },
     methods:{
@@ -44,8 +51,9 @@ export default defineComponent({
                 }
                 const paymentData = {
                     //idutente: idutente,
+                    //costo: data,
                     tipo_pagamenti: this.tipo_pagamenti,           
-                    importo: this.importo,
+                    //importo: this.importo,
                     nomeT: this.nomeT,
                     cognomeT: this.cognomeT,
                     Numero_carta: this.Numero_carta,
@@ -58,7 +66,7 @@ export default defineComponent({
                 this.nomeT =null,
                 this.cognomeT= null,
                 this.tipo_pagamenti = 0,           
-                this.importo=0,
+                //this.importo=0,
                 this.Numero_carta = null;
                 this.Data_scadenza = "";
                 this.CVV = null;
@@ -94,10 +102,26 @@ export default defineComponent({
             this.isPopupOpen = false;
             window.location.href = "/profilo" // utente rediretto alla pagina del proprio profilo quando la popup window message viene chiusa
         },
+        
+        getImporto(){
+            const storedImporto = sessionStorage.getItem('totalCost');
+            if (storedImporto !== null) {
+                this.importo = storedImporto;
+                console.log(this.importo);
+            } else {
+                 // Handle the case where storedImporto is null (optional)
+                console.error('Stored importo è null');
+            }
+            //this.importo = sessionStorage.getItem('totalCost')
+            //console.log(this.importo)
+        }
+        
     },
     mounted(){
         this.getDatiUtente()
         this.getTipoPag()
+        this.getImporto()
+        //console.log('selectedSeatCost:', this.selectedSeatCost);    }
     }
 })
 
@@ -111,14 +135,11 @@ export default defineComponent({
     <div class="container">
         <form @submit.prevent="aggiornaDatiPagamento">
             <h3 class="title">Inserire dati per effettuare il pagamento</h3>
-                    <div class="inputBox">
-                        <span>Importo</span>
-                        <input 
-                        v-model="importo"
-                        type="number" 
-                        class="rounded-lg border-slate-200"
-                        placeholder="0.00"
-                        />
+                    <div>
+                        <!--PostiSala v-if="costo" :costo="costo" /-->
+                        <p style="color:white">Costo del posto selezionato: $ {{ importo }}</p>
+                       
+                        
                     </div>
                     <div class="inputBox">
                         <span>Tipo di pagamento</span>
@@ -126,13 +147,6 @@ export default defineComponent({
                             <option disabled >Scegli un tipo di pagamento</option>
                             <option v-for="ttpag in tipoPag" :key="ttpag.idtipo_pagamento" :value="ttpag.idtipo_pagamento">{{ttpag.Descrizione}} - {{ ttpag.Circuito }}</option>
                         </select>
-
-                        <!-- input 
-                        v-model="tipo_pagamenti"
-                        type="number" 
-                        class="rounded-lg border-slate-200"
-                        placeholder=""
-                        / -->
                     </div>
                     <div class="inputBox">
                         <span>Nome titolare</span>
