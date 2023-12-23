@@ -1,5 +1,5 @@
 <template>
-    <h1>Benvenuti a GalaxyCineVerse: Dove i Sogni Cinematografici Prendono Vita!</h1>
+    <h1 style="display: block; margin-left: 5%;">Benvenuti a GalaxyCineVerse: Dove i Sogni Cinematografici Prendono Vita!</h1>
 
     <body>
         <div id="app" class="app">
@@ -41,7 +41,7 @@ article {
 
 #app{
     margin-left:4%;
-    margin-right:2%;
+    margin-right:4%;
 }
 
 

@@ -2,7 +2,7 @@
 
 import {defineComponent} from "vue"
 import axios from "axios"
-import {FilmE, SchedaF} from "../types" // tipo di interfaccia creata nel file types.ts
+import {FilmE, Proiezione, SchedaF} from "../types" // tipo di interfaccia creata nel file types.ts
 //import { Modifica } from "../types"
 
 interface EditingCell{
@@ -19,6 +19,7 @@ export default defineComponent({
         editingCell: null,
         rowIndex: null,
         editmode: false,
+        proiezioni: [] as Proiezione[],
         
     }
     },
@@ -29,17 +30,17 @@ export default defineComponent({
             
         },
         // Aggiunge una riga in fondo alla tabella 
-        addFilm() {
-            axios.post("/api/inserimento")
+        addDati() {
+            axios.post("/api/nuovi-dati")
             .then(response => {console.log(response.data)})
             this.getInfo()
             this.$forceUpdate()
         },
         // Elimina una riga dalla tabella
-        deleteFilm(rowIndex: any){
-            axios.delete("/api/eliminazione/"+this.ListaFilm[rowIndex].idfilm)
+        deleteData(rowIndex: any){
+            axios.delete("/api/cancella-dati"+this.proiezioni[rowIndex].idproiezione)
             .then(response => 
-            console.log("deleting film "+this.ListaFilm[rowIndex].idfilm))
+            console.log("deleting data "+this.proiezioni[rowIndex].idproiezione))
             this.getInfo()
             this.$forceUpdate()
         },
@@ -53,12 +54,12 @@ export default defineComponent({
         },
         // Aggiorna i dati sul database terminando l'operazione di edit
         finishEditing(rowIndex: number) {
-            let riga = this.ListaFilm[rowIndex];
+            let riga = this.proiezioni[rowIndex];
             this.editingCell = null;            
-            axios.put("/api/aggiornamento",riga)
+            axios.put("/api/aggiorna-dati",riga)
             .then(response => {console.log(response.data)})
-            console.log("/api/aggiornamento/"+ (rowIndex+1));
-            console.log(this.ListaFilm[rowIndex]);
+            console.log("/api/aggiorna-dati"+ (rowIndex+1));
+            console.log(this.proiezioni[rowIndex]);
         },
 
         edit: function() {
@@ -83,7 +84,7 @@ export default defineComponent({
     <div class="card">
         <div class="card-header">
             <h4>Dettagli films
-                <button @click="addFilm()" type="button" class="btn btn-primary float-end">
+                <button @click="addDati()" type="button" class="btn btn-primary float-end">
                     Aggiungi
                 </button>
             </h4>
@@ -96,6 +97,7 @@ export default defineComponent({
                             <th>ID Film</th>
                             <th>Titolo</th>
                             <th>Idproiezione</th>
+                            <th>IdSala</th>
                             <th>Data Proiezione</th>
                             <th>Orario</th>
                             <th>Edita</th>
@@ -128,7 +130,7 @@ export default defineComponent({
                             </td>
                             <td>
                                 
-                                <button @click="deleteFilm(rowIndex)" type="button" class="btn btn-danger">
+                                <button @click="deleteData(rowIndex)" type="button" class="btn btn-danger">
                                     Delete
                                 </button>
                             </td>
@@ -161,13 +163,5 @@ table{
 
 td{
     max-width: 100px;
-}
-
-#secondo-pannello{
-    display: block;
-    margin: 0 auto;
-    margin-top: 5%;
-    width:300px;
-    height: 50px;
 }
 </style>

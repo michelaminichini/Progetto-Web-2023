@@ -64,6 +64,26 @@ export async function deleteFilm(req:Request, res: Response) {
     )
     res.json(results)
 }
+export async function cancellaDati(req:Request, res: Response) {
+    const connection = await getConnection()
+    const [results] = await connection.execute(
+        `DELETE FROM proiezioni WHERE idproiezione=?`,
+        [req.params.id],
+    )
+    res.json(results)
+}
+
+export async function aggiornaDati(req:Request, res: Response) {
+    const {idfilm,idsala, datap, orario, idproiezione} = req.body
+    console.log(req.body)
+    const connection = await getConnection()
+    const [results] = await connection.execute(
+        `UPDATE proiezioni SET idfilm=?, idsala=?, datap=?, orario=? WHERE idproiezione=?`,
+        [idfilm, idsala, datap, orario, idproiezione],
+    )
+    res.json(results)
+}
+
 // Gestione cronologia dell'utente in base al suo ID
 export async function cronologiaUtente(req:Request, res: Response) {
     try {
@@ -83,8 +103,16 @@ export async function cronologiaUtente(req:Request, res: Response) {
 export async function informazioni(req:Request, res:Response) {
     const connection = await getConnection()
     const [results] = await connection.execute(
-        `SELECT film.idfilm, film.titolo, p.idproiezione, p.datap, p.orario FROM film JOIN proiezioni p ON film.idfilm = p.idfilm`, 
+        `SELECT film.idfilm, film.titolo, p.idproiezione, p.idsala, p.datap, p.orario FROM film JOIN proiezioni p ON film.idfilm = p.idfilm`, 
         [],
+    )
+    res.json(results)
+}
+
+export async function nuoviDati(req:Request, res: Response) {
+    const connection = await getConnection()
+    const [results] = await connection.execute(
+        `INSERT INTO proiezioni (idproiezione) VALUES (?)`,
     )
     res.json(results)
 }

@@ -85,9 +85,21 @@ export interface posto {
     idposto: number
     idproiezione: number
     fila: string
+    label: string
+    selected: boolean
     numero: number
     occupato: boolean
     speciale: boolean
+    costo: number
+}
+
+export interface Proiezione{
+    idproiezione: number
+    idfilm: number
+    titolo: string
+    idsala: number 
+    datap: string
+    orario: string
 }
 
 export interface postoF {
@@ -99,7 +111,8 @@ export interface PostoL {
     label: string,
     selected: boolean,
     reserved: boolean,
-  }
+    costo:number
+}
 
 export interface User{
     idutente: number
@@ -147,4 +160,8 @@ export interface Tpag{
     idtipo_pagamento: number
     Descrizione: string
     Circuito: string
+}
+
+export interface Importo{
+    costo: number
 }

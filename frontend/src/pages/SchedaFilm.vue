@@ -64,7 +64,7 @@ export default defineComponent({
         <option disabled >Scegli una proiezione</option>
         <option v-for="projection in ProjS" :key="projection.idproiezione" :value="projection.idproiezione">{{projection.datap.slice(0, 10)}} ore {{ projection.orario.slice(0, 5) }}</option>
       </select>
-      <RouterLink class="btn btn-primary" :to="'/postisala/' + currentProjection" role="button" id="button">Next</RouterLink>
+      <RouterLink class="btn btn-primary" :to="'/PostiSala/' + currentProjection" role="button" id="button">Next</RouterLink>
     </div>
     
     
