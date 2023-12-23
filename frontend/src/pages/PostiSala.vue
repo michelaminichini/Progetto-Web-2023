@@ -8,25 +8,22 @@ import { postoF } from "../types"
 //import Payment from "./Pagamento.vue"
 
 export default defineComponent({
-  //components:{
-    //Payment
-  //},
-
   data() {
     return {
       salaP: [] as IDsala[],
       posti:[] as postoF[],
-      seatLayout: [] as PostoL[],
+      seatLayout: [] as PostoL[][], // doppia [] perchè  seatLayout è un array bidimensionale in cui ogni elemento rappresenta una fila di sedili e ogni sedile è un oggetto con proprietà definite dall'interfaccia PostoL. 
+      //Le doppie parentesi quadre [][] indicano le due dimensioni dell'array.
       costo: null as posto | null,
-      selectedSeat:null,
-      seatCost: 5
+      // selectedSeat:null,
+      // seatCost: 5
     }
   },
-  computed:{
-    selectedSeatCost() {
-      return this.selectedSeat ? this.seatCost : 0;
-    },
-  },
+  // computed:{
+  //   selectedSeatCost() {
+  //     return this.selectedSeat ? this.seatCost : 0;
+  //   },
+  // },
   methods: {
     getSala() {
         axios.get("/api/sala/" + this.$route.params.idproiezione)
@@ -41,20 +38,17 @@ export default defineComponent({
         .then(response => {this.sala = response.data[0]; console.log(response.data)})
     }, */
 
-    toggleSeat(rowIndex, seatIndex) {
+    toggleSeat(rowIndex: number, seatIndex: number) {
       const seat = this.seatLayout[rowIndex][seatIndex];
       if (!seat.reserved) {
         seat.selected = !seat.selected;
       }
-      // if(seat.selected){
-      //   alert(seat.costo)
-      // }
     },
+
     bookSeats() {
       const selectedSeats: any[] = [];
       let totalCost = 0
-
-      //sessionStorage.setItem("costo", "5");
+      
       this.seatLayout.forEach(row => {
         row.forEach(seat => {
           if (seat.selected && !seat.reserved) {
@@ -72,14 +66,15 @@ export default defineComponent({
           }
         });
       });
-      sessionStorage.setItem('totalCost', totalCost.toString())
-      console.log('Final Total Cost:', totalCost)
+      sessionStorage.setItem('totalCost', totalCost.toString()) // settato un Item (totalCost) da passare nella pagina Pagamento.vue per poter visualizzare l'importo finale
+      console.log('Costo finale:', totalCost)
       //this.$SeatList = selectedSeats;
       //console.log(this.$SeatList);
       alert(`Booked seats: ${selectedSeats.join(', ')}`);
       this.$router.push('/pagamento');
     },
-    chunkArray(arr, chunkSize: number) {
+
+    chunkArray(arr: number[], chunkSize: number) {
       const chunkedArr = [];
       for (let i = 0; i < arr.length; i += chunkSize) {
         chunkedArr.push(arr.slice(i, i + chunkSize));
@@ -99,12 +94,14 @@ export default defineComponent({
       const ppf = paramfila[0].posti_fila;
 
       const res = await axios.get("/api/postiF/" + this.$route.params.idproiezione);
+      const dataArray: number[] = res.data;
+      const subArrays: number[][] = this.chunkArray(dataArray, ppf);
       console.log(res.data);
 
-      const dataArray = res.data;
+      //const dataArray = res.data;
 
       // Displaying data in subarrays in the console
-      const subArrays = this.chunkArray(dataArray, ppf);
+      //const subArrays = this.chunkArray(dataArray, ppf);
       subArrays.forEach((subArray, index) => {
         console.log(`Subarray ${index + 1}:`, subArray);
         this.seatLayout.push(subArray);
@@ -133,9 +130,9 @@ export default defineComponent({
       });
       */
     },
-    selectSeat(seat) {
-      this.selectedSeat = seat;
-    },
+    // selectSeat(seat) {
+    //   this.selectedSeat = seat;
+    // },
   },
   mounted() {
     //this.getSala()

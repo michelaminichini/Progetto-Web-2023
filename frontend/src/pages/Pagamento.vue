@@ -5,10 +5,6 @@ import { DatiUtente, User, Tpag, Importo, PostoL } from '../types'
 //import PostiSala from "./PostiSala.vue"
 
 export default defineComponent({
-    //props:{
-      //  importo: Number
-    //},
-
     data(){
         return{
             user: null as User | null,
