@@ -43,6 +43,7 @@ export default defineComponent({
         },
 
         editCell(rowIndex: any, cellIndex: string) {
+            console.log(this.editmode)
             this.editingCell = `${rowIndex}-${cellIndex}`;
         },
 
@@ -51,6 +52,8 @@ export default defineComponent({
         },
 
         finishEditing(rowIndex: number) {
+            //this.editmode = false;
+            console.log(this.editmode)
             let riga = this.ListaFilm[rowIndex];
             this.editingCell = null;            
             axios.put("/api/aggiornamento",riga)
@@ -61,10 +64,12 @@ export default defineComponent({
 
         edit: function() {
             this.editmode = !this.editmode;
+            console.log(this.editmode)
         },
 
         redirect(){
-            window.location.href = "/pannello2"
+            //window.location.href = "/pannello2"
+            this.$router.push('/pannello2')
         }
        
     },
@@ -89,6 +94,10 @@ export default defineComponent({
                 <button @click="addFilm()" type="button" class="btn btn-primary float-end">
                     Aggiungi
                 </button>
+                <button id="secondo-pannello-up" @click="redirect()" type="button" class="btn btn-primary float-end">
+                    Vai a pannello 2
+                </button>
+
             </h4>
         </div>
     
@@ -115,6 +124,13 @@ export default defineComponent({
                     <tbody>
                         <tr v-for="(film, rowIndex) in ListaFilm" :key="rowIndex">
                             <td v-for="(cell, cellIndex) in film" :key="cellIndex">
+                                <td>
+                                    <button @click="editCell(rowIndex, cellIndex)" v-on:click="edit()"  type="button" class="btn btn-success" style="display: block;">
+                                    Edit   
+                                    <!-- {{ editingCell === `${rowIndex}-${cellIndex}` ? "Save" : "Edit" }} TRASFORMA EDIT IN SAVE QUANDO VIENE PREMUTO, POI VICEVERSA-->
+                                    </button>
+                                    <!--button onclick="document.getElementById('myInput').value ='' ">Clear</button-->
+                                </td>
                                 <template v-if="editingCell === `${rowIndex}-${cellIndex}`">
                                 <input
                                     v-if="editmode"
@@ -126,19 +142,10 @@ export default defineComponent({
                                 />
                                 </template>
                                 <template v-else>
-                                {{ cell }}
+                                    {{ cell }}
                                 </template>
-
-                                <td>
-                                    <button @click="editCell(rowIndex, cellIndex)" v-on:click="edit()"  type="button" class="btn btn-success" style="display: block;">
-                                    Edit   
-                                    <!-- {{ editingCell === `${rowIndex}-${cellIndex}` ? "Save" : "Edit" }} TRASFORMA EDIT IN SAVE QUANDO VIENE PREMUTO, POI VICEVERSA-->
-                                    </button>
-                                    <!--button onclick="document.getElementById('myInput').value ='' ">Clear</button-->
-                                </td>
                             </td>
-                            <td>
-                                
+                            <td>       
                                 <button @click="deleteFilm(rowIndex)" type="button" class="btn btn-danger">
                                     Delete
                                 </button>
