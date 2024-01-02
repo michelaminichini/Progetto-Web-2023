@@ -4,7 +4,7 @@ import axios from "axios"
 import { IDsala } from "../types"
 import { postoF } from "../types"
 //import { Modifica } from "../types"
-//import { IdSala } from "../types"
+//import { DatiUtente } from "../types"
 import { PostoL } from "../types"
 
 export default {
@@ -13,6 +13,11 @@ export default {
       salaP: [] as IDsala[],
       posti:[] as postoF[],
       seatLayout: [] as PostoL[],
+      importo: 0.0,
+      isPopupOpen: false,
+      seatL : '',
+      //datiUtente: [] as DatiUtente [],
+      user: ''
     }
   },
   computed:{
@@ -46,20 +51,44 @@ export default {
             seat.reserved = true;
             seat.selected = false; // Reset selected state after booking
             selectedSeats.push(seat.label);
+            this.importo =this.importo + 8.5;
             const AggParam = {
               idproiezione: this.$route.params.idproiezione,
               label: seat.label
             };            
-            axios.put("/api/aggiornaPF",AggParam)
-            .then(response => {console.log(response.data)})
+            /* axios.put("/api/aggiornaPF",AggParam)
+            .then(response => {console.log(response.data)}) */
+            const imp = this.importo.toString()
+            localStorage.setItem("importo", imp);
+            const SSeats = selectedSeats.join(', ').toString()
+            localStorage.setItem("posti", SSeats)
           }
         });
       });
+      
+      const SSeats = selectedSeats.join(', ').toString()
+      const totale = this.importo.toString()
+      const idProiez = this.$route.params.idproiezione.toString()
+      const usr = this.user
+      localStorage.setItem("importo", totale);
+      localStorage.setItem("posti", SSeats);
+      localStorage.setItem("proiezione", idProiez);
+      localStorage.setItem("utente", usr);
+      this.seatL = SSeats;
+      // const TempP = {
+      //   idproiezione: this.$route.params.idproiezione,
+      //   importo: this.importo,
+      //   Seats: SSeats,
+      // }
+      // console.log(TempP)
+      // axios.put("/api/aggiornaParP", TempP)
+      // .then(response => {console.log(response.data)})
       //this.$SeatList = selectedSeats;
       //console.log(this.$SeatList);
-      alert(`Booked seats: ${selectedSeats.join(', ')}`);
-      this.$router.push('/pagamento');
+      //alert(`Booked seats: ${selectedSeats.join(', ')}, Importo: ${this.importo}`);
+      //this.$router.push('/pagamento');
     },
+
     chunkArray(arr, chunkSize: number) {
       const chunkedArr = [];
       for (let i = 0; i < arr.length; i += chunkSize) {
@@ -91,9 +120,25 @@ export default {
         this.seatLayout.push(subArray)
       });
     },
+    openPopup() {
+      this.bookSeats();
+      this.isPopupOpen = true;
+    },
+
+    closePopup() {
+      this.isPopupOpen = false;
+      this.$router.push('/pagamento');
+    },
+
+    async getIdUtente(){
+            const res = await axios.get("/api/auth/profile")
+            this.user = res.data.idutente
+            console.log(this.user)                    
+    },
   },
   mounted() {
     //this.getSala()
+    this.getIdUtente()
     this.getPostiF()
     //this.getSala()
     this.getPostiL()
@@ -125,7 +170,14 @@ export default {
                 </div>
             </div>
         </div>
-        <button @click="bookSeats">Book Selected Seats</button>
+        <!-- <button style="background-color: blue; color: white; display: inline;" @click="bookSeats">Book Selected Seats</button> -->
+        <button type="submit" style="background-color: blue; color: white; display: inline;" @click="openPopup">Procedi con l'acquisto</button>
+        <dialog :open="isPopupOpen">
+                <p>Posti prenotati: {{ seatL }} , Importo: {{importo}} €</p>
+                <button @click="closePopup">
+                    Chiudi
+                </button>               
+        </dialog>
     </div>
 </template>
 
