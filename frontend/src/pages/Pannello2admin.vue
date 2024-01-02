@@ -20,6 +20,7 @@ export default defineComponent({
         editingCell: null,
         rowIndex: null,
         editmode: false,
+        proiezioni: [] as Proiezione[],
         
     }
     },
@@ -37,10 +38,10 @@ export default defineComponent({
             this.$forceUpdate()
         },
         // Elimina una riga dalla tabella
-        deleteFilm(rowIndex: any){
-            axios.delete("/api/eliminazione/"+this.ListaFilm[rowIndex].idfilm)
+        deleteData(rowIndex: any){
+            axios.delete("/api/cancella-dati"+this.proiezioni[rowIndex].idproiezione)
             .then(response => 
-            console.log("deleting film "+this.ListaFilm[rowIndex].idfilm))
+            console.log("deleting data "+this.proiezioni[rowIndex].idproiezione))
             this.getInfo()
             this.$forceUpdate()
         },
@@ -54,15 +55,15 @@ export default defineComponent({
         },
         // Aggiorna i dati sul database terminando l'operazione di edit
         finishEditing(rowIndex: number) {
-            let riga = this.ListaFilm[rowIndex];
+            let riga = this.proiezioni[rowIndex];
             this.editingCell = null;            
-            axios.put("/api/aggiornamento",riga)
+            axios.put("/api/aggiorna-dati",riga)
             .then(response => {console.log(response.data)})
-            console.log("/api/aggiornamento/"+ (rowIndex+1));
-            console.log(this.ListaFilm[rowIndex]);
+            console.log("/api/aggiorna-dati"+ (rowIndex+1));
+            console.log(this.proiezioni[rowIndex]);
         },
 
-        edit: function() {
+        edit: function() {g
             this.editmode = !this.editmode;
         },
 
@@ -137,7 +138,7 @@ export default defineComponent({
                             </td>
                             <td>
                                 
-                                <button @click="deleteFilm(rowIndex)" type="button" class="btn btn-danger">
+                                <button @click="deleteData(rowIndex)" type="button" class="btn btn-danger">
                                     Delete
                                 </button>
                             </td>
@@ -170,13 +171,5 @@ table{
 
 td{
     max-width: 100px;
-}
-
-#secondo-pannello{
-    display: block;
-    margin: 0 auto;
-    margin-top: 5%;
-    width:300px;
-    height: 50px;
 }
 </style>

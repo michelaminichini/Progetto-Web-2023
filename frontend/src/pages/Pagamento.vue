@@ -1,5 +1,5 @@
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { PropType, defineComponent } from 'vue';
 import axios from "axios"
 import { DatiUtente, DatiPagamento, User, Tpag, TempPar } from '../types';
 
@@ -76,8 +76,9 @@ export default defineComponent({
                 // }
                 const paymentData = {
                     //idutente: idutente,
+                    //costo: data,
                     tipo_pagamenti: this.tipo_pagamenti,           
-                    importo: this.importo,
+                    //importo: this.importo,
                     nomeT: this.nomeT,
                     cognomeT: this.cognomeT,
                     Numero_carta: this.Numero_carta,
@@ -169,11 +170,27 @@ export default defineComponent({
             this.aggiornaBiglietti();
             this.$router.push("/profilo"); // utente rediretto alla pagina del proprio profilo quando la popup window message viene chiusa
         },
+        
+        getImporto(){
+            const storedImporto = sessionStorage.getItem('totalCost');
+            if (storedImporto !== null) {
+                this.importo = storedImporto;
+                console.log(this.importo);
+            } else {
+                 // Handle the case where storedImporto is null (optional)
+                console.error('Stored importo è null');
+            }
+            //this.importo = sessionStorage.getItem('totalCost')
+            //console.log(this.importo)
+        }
+        
     },
     mounted(){
         this.getParP()
         //this.getDatiUtente()
         this.getTipoPag()
+        this.getImporto()
+        //console.log('selectedSeatCost:', this.selectedSeatCost);    }
     }
 })
 
@@ -204,13 +221,6 @@ export default defineComponent({
                             <option disabled >Scegli un tipo di pagamento</option>
                             <option v-for="ttpag in tipoPag" :key="ttpag.idtipo_pagamento" :value="ttpag.idtipo_pagamento">{{ttpag.Descrizione}} - {{ ttpag.Circuito }}</option>
                         </select>
-
-                        <!-- input 
-                        v-model="tipo_pagamenti"
-                        type="number" 
-                        class="rounded-lg border-slate-200"
-                        placeholder=""
-                        / -->
                     </div>
                     <div class="inputBox">
                         <span>Nome titolare</span>
