@@ -10,6 +10,15 @@ export async function allFilms(req:Request, res: Response) {
     res.json(results)
 }
 
+export async function ActiveFilms(req:Request, res: Response) {
+    const connection = await getConnection()
+    const [results] = await connection.execute(
+        `SELECT idfilm, titolo, regista, genere, durata, nazione, anno, descrizione, trailer, locandina, lingua, attori, stato FROM film WHERE stato > 0`,
+    [],
+    )
+    res.json(results)
+}
+
 export async function prossimiFilm(req:Request, res: Response) {
     const connection = await getConnection()
     const [results] = await connection.execute(
@@ -44,9 +53,28 @@ export async function currentFilm(req:Request, res: Response) {
     )
     res.json(results)
 }
+
+export async function editFilm(req:Request, res:Response) {
+    const connection = await getConnection()
+    const [results] = await connection.execute(
+        `SELECT * FROM film WHERE idfilm=?`, 
+        [req.params.id],
+    )
+    res.json(results)
+}
+
+export async function ElencoSale(req:Request, res:Response) {
+    const connection = await getConnection()
+    const [results] = await connection.execute(
+        `SELECT * FROM sale`,
+    )
+    res.json(results)
+}
+
 // Aggiorna le modifiche effettuate dall'amministratore nella pagina del pannello di controllo - dedicato all'admin
 export async function aggiornaFilm(req:Request, res: Response) {
     const {idfilm,titolo,regista,genere,durata,nazione,anno,descrizione,trailer,locandina,lingua,attori,stato} = req.body
+    console.log('Query')
     console.log(req.body)
     const connection = await getConnection()
     const [results] = await connection.execute(
@@ -69,7 +97,7 @@ export async function cronologiaUtente(req:Request, res: Response) {
     try {
         const connection = await getConnection()
         const [results] = await connection.execute(
-            `SELECT idutente, film.idfilm, titolo, idbiglietto, idtipo_pagamento1, importo, proiezioni.idproiezione, proiezioni.idsala, datap, orario, sale.descrizione, tipo_pagamenti.Descrizione, tipo_pagamenti.circuito FROM biglietti JOIN pagamenti ON (biglietti.idbiglietto = pagamenti.idbiglietto1) JOIN tipo_pagamenti ON ( pagamenti.idtipo_pagamento1 = tipo_pagamenti.idtipo_pagamento) JOIN proiezioni ON (biglietti.idproiezione1 = proiezioni.idproiezione) JOIN sale ON (sale.idsala = proiezioni.idsala) JOIN film ON (proiezioni.idfilm = film.idfilm) WHERE idutente=?`,
+            `SELECT idutente, film.idfilm, titolo, idbiglietto, idtipo_pagamento1, importo, proiezioni.idproiezione, proiezioni.idsala, datap, orario, sale.descrizione, tipo_pagamenti.Descrizione, tipo_pagamenti.circuito FROM biglietti JOIN pagamenti ON (biglietti.idpagamento1 = pagamenti.idpagamento) JOIN tipo_pagamenti ON ( pagamenti.idtipo_pagamento1 = tipo_pagamenti.idtipo_pagamento) JOIN proiezioni ON (biglietti.idproiezione1 = proiezioni.idproiezione) JOIN sale ON (sale.idsala = proiezioni.idsala) JOIN film ON (proiezioni.idfilm = film.idfilm) WHERE idutente=?`,
             [req.params.id],
         );
         res.json(results)
@@ -83,8 +111,28 @@ export async function cronologiaUtente(req:Request, res: Response) {
 export async function informazioni(req:Request, res:Response) {
     const connection = await getConnection()
     const [results] = await connection.execute(
-        `SELECT film.idfilm, film.titolo, p.idproiezione, p.datap, p.orario FROM film JOIN proiezioni p ON film.idfilm = p.idfilm`, 
+        `SELECT film.idfilm, film.titolo, p.idproiezione, idsala, p.datap, p.orario FROM film JOIN proiezioni p ON film.idfilm = p.idfilm`, 
         [],
     )
     res.json(results)
+}
+
+export async function nuovaProiezione(req:Request, res: Response) {
+    const {idfilm,idsala,datap,orariop} = req.body
+    console.log(req.body)
+    const connection = await getConnection()
+    const [results] = await connection.execute(
+        `INSERT INTO proiezioni (idfilm, idsala, datap, orario) VALUES (?,?,?,?)`,
+        [idfilm,idsala,datap,orariop]
+    )
+    res.json(results)
+}
+
+// Cancellazione riga di una proiezione dalla tabella admin2 - operazione solo per amministratori
+export async function deleteProj(req:Request, res: Response) {
+    const connection = await getConnection()
+    const [results] = await connection.execute(
+        `DELETE FROM proiezioni WHERE idproiezione=?`,
+        [req.params.id],
+    )
 }

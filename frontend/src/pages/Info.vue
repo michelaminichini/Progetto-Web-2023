@@ -32,6 +32,7 @@ h1{
     color:aliceblue;
     margin-top:2%;
     margin-bottom: 0;
+    margin-left:4%;
 }
 
 article {

@@ -12,16 +12,17 @@ export const aggiornaDatiPagamentoUtente =async (req: Request, res: Response) =>
      res.json({ message: "Pagamento effettuato, dati salvati"})
 }  
 */
-export const aggiornaDatiPagamentoUtente =async (req: Request, res: Response) => {
+export const aggiornaDatiPagamentoUtente = async (req: Request, res: Response) => {
    try {
     const {tipo_pagamenti,importo,nomeT,cognomeT,Numero_carta, Data_scadenza, CVV} = req.body
     //const idutente = req.params.id
+    console.log(req.body)
     const connection = await getConnection()
 
     //const [userResult] = await connection.execute(`SELECT idutente FROM utente WHERE idutente = ?`, [req.params.id]);
     //if (Array.isArray(userResult) && userResult.length > 0){
 
-        await connection.execute(`INSERT INTO pagamenti (idtipo_pagamento1,Importo,titolare_nome,Titolare_cognome, Numero_carta, Data_scadenza, CVV) VALUES (?,?,?,?,?,?,?)`,
+        await connection.execute(`INSERT INTO pagamenti (idtipo_pagamento1,importo,Titolare_nome,Titolare_cognome, Numero_carta, Data_scadenza, CVV) VALUES (?,?,?,?,?,?,?)`,
         [tipo_pagamenti,importo,nomeT,cognomeT,Numero_carta, Data_scadenza, CVV]),
         res.json({ message: "Pagamento effettuato, dati salvati" });
 
@@ -35,11 +36,19 @@ export const aggiornaDatiPagamentoUtente =async (req: Request, res: Response) =>
     //res.json({ message: "Pagamento effettuato, dati salvati"})
 } 
  
+export const leggiDatiPagamento =async (req: Request, res: Response) => {
+  const connection = await getConnection()
+  const [results] = await connection.execute(`SELECT * FROM pagamenti WHERE idpagamento=(SELECT MAX(idpagamento) FROM pagamenti)`,
+     
+)
+  res.json(results)   
+}  
+
 export const leggiDatiProfiloPersonale =async (req: Request, res: Response) => {
     const connection = await getConnection()
     const [results] = await connection.execute(`SELECT * FROM utente WHERE idutente = ?`,
-    [req.params.id],   
-    )
+    [req.params.id],
+    ) 
     res.json(results)   
 }  
 
@@ -58,3 +67,13 @@ export const leggiTipoPag = async (req: Request, res: Response) => {
   const [results] = await connection.execute(`SELECT * FROM tipo_pagamenti`)
   res.json(results)   
 }  
+
+export async function aggiornaDatiTicket(req: Request, res: Response) {
+  const {idutenteT, idproj, idpag, posti} = req.body
+  console.log("QQQ")
+  console.log(req.body)
+  const connection = await getConnection()
+  const [result] = await connection.execute(`INSERT INTO biglietti  (idutente, idproiezione1, idpagamento1, idposto1) VALUES (?,?,?,?)`,
+  [idutenteT, idproj, idpag, posti],)
+  res.json({result})
+}

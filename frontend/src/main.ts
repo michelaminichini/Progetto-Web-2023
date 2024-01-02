@@ -14,11 +14,13 @@ import Pagamento from "./pages/Pagamento.vue"
 //import PaginaAdmin from "./pages/PaginaAdmin.vue"
 //import SeatBooking from "./pages/SeatBooking.vue"
 import UserProfile from "./pages/UserProfile.vue"
-import Amministratore from "./pages/Amministratore.vue"
-import Pannello2 from "./pages/Pannello2admin.vue"
+import Amministratore from "./pages/Amministratore_G.vue"
+//import Pannello2 from "./pages/Pannello2admin.vue"
+import Pannello2 from "./pages/Pannello2adminG.vue"
 import Register from "./pages/Registrazione.vue"
 import Profilo from "./pages/Profilo.vue"
-
+//import Amministratore from "./pages/ProvaGiulia.vue"
+import EditFilm from "./pages/EditFilm.vue"
 import axios from "axios"
 import { User } from "./types"
 
@@ -35,11 +37,11 @@ const router: Router = createRouter({
         //{ path: "/seatbooking", component: SeatBooking},
         { path: "/pagamento", component: Pagamento, meta: { requireLogin: true },},
         //{ path: "/paginaAdmin", component: PaginaAdmin},
-        //{ path: "/paginaAdmin", component: PaginaAdmin},
         { path: "/PostiSala/:idproiezione", component: PostiSala, meta: { requireLogin: true }},
         { path: "/profiloutente", component: UserProfile, meta: { requireLogin: true },},
         { path: "/profilo", component: Profilo},
         { path: "/adminpage", component: Amministratore},
+        { path: "/editfilm/:idfilm", component: EditFilm},
         { path: "/pannello2", component: Pannello2},
     ]
 })
@@ -51,9 +53,9 @@ router.beforeEach(async (to) => {
     const res = await axios.get("/api/auth/profile")
     const user = res.data as User | null
     console.log("User è:", res)
-    // Se la pagina richiede il login, ma l'utente non l'ha effettuato, lo rimanda alla pagina di login
+    // Se la pagina richiede il login, ma l'utente non l'ha effettuato, lo rimanda alla pagina profilo, in cui può scegliere se registrarsi o effetturare il login
     if (to.meta.requireLogin && !user) {
-      return { path: "/login" }
+      return { path: "/profilo" }
     }
     // Se la pagina richiede il logout, ma l'utente ha effettuato l'accesso, lo rimanda alla home
     if (to.meta.requireLogout && user) {

@@ -40,24 +40,7 @@ export async function postiF(req:Request, res:Response) {
     console.log(res)
 }
 
-export const getPostiL = async (req:Request, res:Response) => {
-    const connection = await getConnection()
-    const [results] = await connection.execute(
-        `SELECT label,selected,reserved FROM posti_proiezione WHERE idproiezione = 9`
-    )
-    res.json(results)
-}
 
-export async function aggiornaPosto(req:Request, res: Response) {
-    const {label} = req.body
-    console.log(req.body)
-    const connection = await getConnection()
-    const [results] = await connection.execute(
-        `UPDATE posti_proiezione SET reserved = 1 WHERE idproiezione = 9 AND label = ?`,
-        [label],
-    )
-    res.json(results)
-}
 
 export async function aggiornaPostoPF(req:Request, res: Response) {
     const {idproiezione, label} = req.body
@@ -66,6 +49,26 @@ export async function aggiornaPostoPF(req:Request, res: Response) {
     const [results] = await connection.execute(
         `UPDATE posti_proiezione SET reserved = 1 WHERE idproiezione = ? AND label = ?`,
         [idproiezione,label]
+    )
+    res.json(results)
+}
+
+export async function aggiornaParamP(req:Request, res: Response) {
+    const {idproiezione,importo,Seats} = req.body
+    console.log(req.body)
+    const connection = await getConnection()
+    const [results] = await connection.execute(
+        `UPDATE temp SET id_proiezione = ?,importo = ?, posti = ? WHERE id=1`,
+        [idproiezione,importo,Seats]
+    )
+    res.json(results)
+}
+
+export async function leggiParamP(req:Request, res:Response) {
+    const connection = await getConnection()
+    const [results] = await connection.execute(
+        `SELECT id_proiezione,importo,posti FROM temp WHERE id = 1`,
+        [],
     )
     res.json(results)
 }

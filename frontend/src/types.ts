@@ -14,6 +14,7 @@ export interface Film{
     stato: number
     editing: {[ key: string] : boolean}
 }
+
 export interface FilmE{
     idfilm: string
     titolo: string
@@ -28,12 +29,29 @@ export interface FilmE{
     lingua: string
     attori: string
     stato: string
-    editing: {[ key: string] : boolean}
+    editing: {[ key: string] : boolean} 
+    
+}
+
+export interface FilmEG{
+    idfilm: string
+    titolo: string
+    regista: string
+    genere: string
+    durata: string
+    nazione: string
+    anno: string
+    descrizione: string
+    trailer: string
+    locandina: string
+    lingua: string
+    attori: string
+    stato: string    
 }
 /* export interface Prox{
     id_film: number
     titolo_film: string
-    regista_film: string
+    regista_film : string
     genere_film: string
     anno_uscita: string
     descrizione: string
@@ -147,4 +165,31 @@ export interface Tpag{
     idtipo_pagamento: number
     Descrizione: string
     Circuito: string
+}
+
+export interface TempPar{
+    importo: number,
+    posti: string,
+    id_proiezione: number,
+}
+
+export interface DatiPagamento{
+    idpagamento: string,
+    tipo_pagamenti: string,           
+    importo: string,
+    nomeT :string,
+    cognomeT: string,
+    Numero_carta: string,
+    Data_scadenza: string,
+    CVV: string,
+}
+
+export interface Sale{
+    idsala: number,
+    descrizione: string,
+    posti: number,
+    posti_speciali: number,
+    file: number,
+    posti_fila: number,
+    tecnologia: string,
 }
