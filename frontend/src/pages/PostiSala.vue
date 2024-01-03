@@ -50,8 +50,8 @@ export default defineComponent({
 
     bookSeats() {
       const selectedSeats: any[] = [];
-      let totalCost = 0
-      
+      //let totalCost = 0
+      this.importo=0
       this.seatLayout.forEach(row => {
         row.forEach(seat => {
           if (seat.selected && !seat.reserved) {
@@ -68,12 +68,21 @@ export default defineComponent({
           }
         });
       });
-      sessionStorage.setItem('totalCost', totalCost.toString()) // settato un Item (totalCost) da passare nella pagina Pagamento.vue per poter visualizzare l'importo finale
-      console.log('Costo finale:', totalCost)
+      const SSeats = selectedSeats.join(', ').toString()
+      const totale = this.importo.toString()
+      const idProiez = this.$route.params.idproiezione.toString()
+      const usr = this.user
+      sessionStorage.setItem("importo", totale);
+      sessionStorage.setItem("posti", SSeats);
+      sessionStorage.setItem("proiezione", idProiez);
+      sessionStorage.setItem("utente", usr);
+      //this.seatL = SSeats;
+      //sessionStorage.setItem('totalCost', totalCost.toString()) // settato un Item (totalCost) da passare nella pagina Pagamento.vue per poter visualizzare l'importo finale
+      //console.log('Costo finale:', totalCost)
       //this.$SeatList = selectedSeats;
       //console.log(this.$SeatList);
       //alert(`Booked seats: ${selectedSeats.join(', ')}, Importo: ${this.importo}`);
-      //this.$router.push('/pagamento');
+      this.$router.push('/pagamento');
     },
 
     chunkArray(arr: number[], chunkSize: number) {

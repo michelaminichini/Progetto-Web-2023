@@ -35,19 +35,19 @@ export default defineComponent({
         // },
         
         getParP(){
-            const imp = localStorage.getItem("importo")
+            const imp = sessionStorage.getItem("importo")
             console.log(imp)
             this.importo = imp+""
             console.log(this.importo)
-            const posti = localStorage.getItem("posti")
+            const posti = sessionStorage.getItem("posti")
             console.log(posti)
             this.posti = posti+""
             console.log(this.posti)
-            const idP = localStorage.getItem("proiezione")
+            const idP = sessionStorage.getItem("proiezione")
             console.log(idP)
             this.IDproiez = idP+""
             console.log(this.IDproiez)
-            const user = localStorage.getItem("utente")
+            const user = sessionStorage.getItem("utente")
             console.log(user)
             this.user = user+""
             console.log(this.user)
@@ -189,7 +189,7 @@ export default defineComponent({
         this.getParP()
         //this.getDatiUtente()
         this.getTipoPag()
-        this.getImporto()
+        //this.getImporto()
         //console.log('selectedSeatCost:', this.selectedSeatCost);    }
     }
 })
