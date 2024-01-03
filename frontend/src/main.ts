@@ -37,7 +37,7 @@ const router: Router = createRouter({
         //{ path: "/seatbooking", component: SeatBooking},
         { path: "/pagamento", component: Pagamento, meta: { requireLogin: true },},
         //{ path: "/paginaAdmin", component: PaginaAdmin},
-        { path: "/PostiSala/:idproiezione", component: PostiSala, meta: { requireLogin: true }},
+        { path: "/PostiSala", component: PostiSala, meta: { requireLogin: true }},
         { path: "/profiloutente", component: UserProfile, meta: { requireLogin: true },},
         { path: "/profilo", component: Profilo},
         { path: "/adminpage", component: Amministratore, meta: { requireLogin: true }},

@@ -24,7 +24,7 @@ export default defineComponent({
         // Check the user role
         if (user) {
           if (user.ruolo === "acquirente") {
-            this.$router.push('/PostiSala/' + this.$route.params.idproiezione);
+            this.$router.push('/PostiSala');
           } else if (user.ruolo === "amministratore"){
             window.location.href = "/adminpage"; 
           }

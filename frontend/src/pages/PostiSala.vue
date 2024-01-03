@@ -94,17 +94,17 @@ export default defineComponent({
     },
     
     async getPostiL() {
-
-      const res1 = await axios.get("/api/sala/" + this.$route.params.idproiezione)
+      const idproj = sessionStorage.getItem("proiezione");
+      const res1 = await axios.get("/api/sala/" + idproj)
       //const res = await axios.get("/api/postiL")
       console.log("ECCO I TUOI RISULTATI:", res1.data)
       //if (res1.data && res1.data.length > 0 && res1.data[0].posti_fila) {
       const paramfila = res1.data;
       console.log("RESULTS HERE:", paramfila[0].posti_fila);
-      console.log("ID PROIEZIONE: ", this.$route.params.idproiezione)
+      console.log("ID PROIEZIONE: ", idproj)
       const ppf = paramfila[0].posti_fila;
 
-      const res = await axios.get("/api/postiF/" + this.$route.params.idproiezione);
+      const res = await axios.get("/api/postiF/" + idproj);
       const dataArray: number[] = res.data;
       const subArrays: number[][] = this.chunkArray(dataArray, ppf);
       console.log(res.data);
@@ -148,7 +148,7 @@ export default defineComponent({
   mounted() {
     //this.getSala()
     //this.getIdUtente()
-    this.getPostiF()
+    //this.getPostiF()
     //this.getSala()
     this.getPostiL()
     //console.log(this.seatLayout);
