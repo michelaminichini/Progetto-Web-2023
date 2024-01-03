@@ -34,7 +34,7 @@ export const aggiornaDatiPagamentoUtente =async (req: Request, res: Response) =>
   }
     //res.json({ message: "Pagamento effettuato, dati salvati"})
 } 
- 
+// Nella pagina del profilo dell'utente, premendo la prima icona, l'utente visualizza i propri dati personali e, successivamente, può scegliere se modificarli (query successiva)
 export const leggiDatiProfiloPersonale =async (req: Request, res: Response) => {
     const connection = await getConnection()
     const [results] = await connection.execute(`SELECT * FROM utente WHERE idutente = ?`,
@@ -42,7 +42,7 @@ export const leggiDatiProfiloPersonale =async (req: Request, res: Response) => {
     )
     res.json(results)   
 }  
-
+// Nella pagina del profilo dell'utente, premendo la prima icona, l'utente può decidere di modificare i campi presenti
 export async function aggiornaDatiProfilo(req: Request, res: Response) {
     const {idutente, email, password, nome, cognome, telefono, data_nascita, ruolo} = req.body[0]
     console.log(idutente)
@@ -52,7 +52,7 @@ export async function aggiornaDatiProfilo(req: Request, res: Response) {
     [nome, cognome, telefono, data_nascita, idutente],)
     res.json({result})
 }
- 
+// Nella pagina Pagamento, tutti i dati della tabella "tipo_pagamenti" vengono selezionati e visualizzati nel menù a tendina presente nella pagina 
 export const leggiTipoPag = async (req: Request, res: Response) => {
   const connection = await getConnection()
   const [results] = await connection.execute(`SELECT * FROM tipo_pagamenti`)

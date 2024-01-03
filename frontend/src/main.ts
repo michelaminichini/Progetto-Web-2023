@@ -39,8 +39,8 @@ const router: Router = createRouter({
         { path: "/PostiSala/:idproiezione", component: PostiSala, meta: { requireLogin: true }},
         { path: "/profiloutente", component: UserProfile, meta: { requireLogin: true },},
         { path: "/profilo", component: Profilo},
-        { path: "/adminpage", component: Amministratore},
-        { path: "/pannello2", component: Pannello2},
+        { path: "/adminpage", component: Amministratore, meta: { requireLogin: true }},
+        { path: "/pannello2", component: Pannello2, meta: { requireLogin: true }},
     ]
 })
 

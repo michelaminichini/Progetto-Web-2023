@@ -133,7 +133,7 @@ export default defineComponent({
             <h3 class="title">Inserire dati per effettuare il pagamento</h3>
                     <div>
                         <!--PostiSala v-if="costo" :costo="costo" /-->
-                        <p style="color:white">Costo del posto selezionato: $ {{ importo }}</p>
+                        <p style="color:white">Costo del posto selezionato: {{ importo }} €</p>
                        
                         
                     </div>

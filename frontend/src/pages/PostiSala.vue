@@ -149,7 +149,7 @@ export default defineComponent({
 
 <template>
     <div class="seat-booking">
-        <h2>Select Your Seats</h2>
+        <h2>Seleziona il tuo posto</h2>
         <div id="schermo"></div>
         <div class="seats">
             <div
@@ -168,7 +168,7 @@ export default defineComponent({
                 </div>
             </div>
         </div>
-        <button @click="bookSeats">Book Selected Seats</button>
+        <button @click="bookSeats">Prenota i posti selezionati</button>
         
     </div>
 </template>
