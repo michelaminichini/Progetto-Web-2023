@@ -1,9 +1,8 @@
 <script lang="ts">
 import axios from "axios"
 import { defineComponent, withModifiers } from "vue"
-import idproiezione from "./PostiSala.vue"
+
 export default defineComponent({
-  //components:{idproiezione},
   data() {
     return {
       email: "",
@@ -20,18 +19,16 @@ export default defineComponent({
 
         const user = response.data;
         console.log('User Object:', user);
-        let data = sessionStorage.getItem("key");
-        // Check the user role
+        //let data = sessionStorage.getItem("key");
         if (user) {
+          // Se l'utente che esegue il login è un acquirente, viene rediretto ad una determinata pagina
           if (user.ruolo === "acquirente") {
             this.$router.push('/PostiSala');
+            //se invece l'utente che esegue il login è un amministratore, viene rediretto ad un'altra pagina
           } else if (user.ruolo === "amministratore"){
             window.location.href = "/adminpage"; 
           }
         }
-          
-          
-        
       } catch (e:any) {
         if (e.response) {
           alert(`${e.response.status} - ${e.response.statusText}\n${e.response.data}`);
