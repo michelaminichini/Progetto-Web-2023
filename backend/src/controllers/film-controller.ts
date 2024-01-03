@@ -92,6 +92,7 @@ export async function deleteFilm(req:Request, res: Response) {
     )
     res.json(results)
 }
+
 export async function cancellaDati(req:Request, res: Response) {
     const connection = await getConnection()
     const [results] = await connection.execute(
@@ -112,7 +113,7 @@ export async function aggiornaDati(req:Request, res: Response) {
     res.json(results)
 }
 
-// Gestione cronologia dell'utente in base al suo ID
+// Gestione cronologia dell'utente in base al suo ID. Premendo la terza icona nel profilo personale dell'utente, si visualizza la cronologia 
 export async function cronologiaUtente(req:Request, res: Response) {
     try {
         const connection = await getConnection()
@@ -127,7 +128,7 @@ export async function cronologiaUtente(req:Request, res: Response) {
     }
     
 }
-// Prendere informazioni dalla tabella proiezioni sul database per la tabella admin
+// Prendere informazioni dalla tabella proiezioni sul database per la tabella admin - pannello 2
 export async function informazioni(req:Request, res:Response) {
     const connection = await getConnection()
     const [results] = await connection.execute(
@@ -140,10 +141,11 @@ export async function informazioni(req:Request, res:Response) {
 export async function nuoviDati(req:Request, res: Response) {
     const connection = await getConnection()
     const [results] = await connection.execute(
-        `INSERT INTO proiezioni (idproiezione) VALUES (?)`,
+        `INSERT INTO proiezioni (datap) VALUES (' ')`,
     )
     res.json(results)
 }
+
 export async function nuovaProiezione(req:Request, res: Response) {
     const {idfilm,idsala,datap,orariop} = req.body
     console.log(req.body)

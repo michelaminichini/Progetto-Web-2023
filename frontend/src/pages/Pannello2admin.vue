@@ -63,7 +63,7 @@ export default defineComponent({
             console.log(this.proiezioni[rowIndex]);
         },
 
-        edit: function() {g
+        edit: function() {
             this.editmode = !this.editmode;
         },
 

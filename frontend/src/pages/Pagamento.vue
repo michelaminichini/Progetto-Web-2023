@@ -206,6 +206,12 @@ export default defineComponent({
         <form>
             <h3 class="title">Totale € {{ importo }} Posti: {{ posti }}</h3>
             <h3 class="title">Inserire dati per effettuare il pagamento</h3>
+                    <div>
+                        <!--PostiSala v-if="costo" :costo="costo" /-->
+                        <p style="color:white">Costo del posto selezionato: {{ importo }} €</p>
+                       
+                        
+                    </div>
                     <!-- <div class="inputBox">
                         <span>Importo</span>
                         <input 
