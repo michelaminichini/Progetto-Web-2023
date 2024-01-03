@@ -70,3 +70,23 @@ export async function aggiornaPostoPF(req:Request, res: Response) {
     )
     res.json(results)
 }
+
+export async function aggiornaParamP(req:Request, res: Response) {
+    const {idproiezione,importo,Seats} = req.body
+    console.log(req.body)
+    const connection = await getConnection()
+    const [results] = await connection.execute(
+        `UPDATE temp SET id_proiezione = ?,importo = ?, posti = ? WHERE id=1`,
+        [idproiezione,importo,Seats]
+    )
+    res.json(results)
+}
+
+export async function leggiParamP(req:Request, res:Response) {
+    const connection = await getConnection()
+    const [results] = await connection.execute(
+        `SELECT id_proiezione,importo,posti FROM temp WHERE id = 1`,
+        [],
+    )
+    res.json(results)
+}

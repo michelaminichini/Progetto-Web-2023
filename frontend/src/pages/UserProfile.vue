@@ -149,11 +149,23 @@ export default defineComponent({
                         <input v-model="utente.cognome">
                     </div>
                     <div v-else>Cognome: {{utente.cognome}}</div>
-                    <div v-if="editmode">
+                    <div class="inputBox">
+                        <div v-if="editmode">
+                            <span>Data di nascita</span>
+                            <input 
+                            v-model="utente.data_nascita"
+                            type="date"
+                            class="rounded-lg border-slate-200"
+                            placeholder="data di nascita"
+                            />
+                        </div>
+                        <div v-else>Data di nascita: {{formatDateTime(utente.data_nascita)}}</div>
+                    </div>
+                    <!-- <div v-if="editmode">
                         Data di nascita:
                         <input v-model="dataE" placeholder="data di nascita">
                     </div>
-                    <div v-else>Data di nascita: {{formatDateTime(utente.data_nascita)}}</div>
+                    <div v-else>Data di nascita: {{formatDateTime(utente.data_nascita)}}</div> -->
                     <div v-if="editmode">
                         Telefono: 
                         <input v-model="utente.telefono" placeholder="numero di telefono">

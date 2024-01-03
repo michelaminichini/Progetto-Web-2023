@@ -4,6 +4,8 @@ import axios from "axios"
 import { IDsala, posto, PostoL } from "../types"
 import { postoF } from "../types"
 //import { Modifica } from "../types"
+//import { DatiUtente } from "../types"
+import { PostoL } from "../types"
 //import { IdSala } from "../types"
 //import Payment from "./Pagamento.vue"
 
@@ -12,11 +14,12 @@ export default defineComponent({
     return {
       salaP: [] as IDsala[],
       posti:[] as postoF[],
-      seatLayout: [] as PostoL[][], // doppia [] perchè  seatLayout è un array bidimensionale in cui ogni elemento rappresenta una fila di sedili e ogni sedile è un oggetto con proprietà definite dall'interfaccia PostoL. 
-      //Le doppie parentesi quadre [][] indicano le due dimensioni dell'array.
-      costo: null as posto | null,
-      // selectedSeat:null,
-      // seatCost: 5
+      seatLayout: [] as PostoL[],
+      importo: 0.0,
+      isPopupOpen: false,
+      seatL : '',
+      //datiUtente: [] as DatiUtente [],
+      user: ''
     }
   },
   // computed:{
@@ -55,8 +58,7 @@ export default defineComponent({
             seat.reserved = true;
             seat.selected = false; // Reset selected state after booking
             selectedSeats.push(seat.label);
-            totalCost += seat.costo
-
+            this.importo =this.importo + 8.5;
             const AggParam = {
               idproiezione: this.$route.params.idproiezione,
               label: seat.label
@@ -70,8 +72,8 @@ export default defineComponent({
       console.log('Costo finale:', totalCost)
       //this.$SeatList = selectedSeats;
       //console.log(this.$SeatList);
-      alert(`Booked seats: ${selectedSeats.join(', ')}`);
-      this.$router.push('/pagamento');
+      //alert(`Booked seats: ${selectedSeats.join(', ')}, Importo: ${this.importo}`);
+      //this.$router.push('/pagamento');
     },
 
     chunkArray(arr: number[], chunkSize: number) {
@@ -136,6 +138,7 @@ export default defineComponent({
   },
   mounted() {
     //this.getSala()
+    this.getIdUtente()
     this.getPostiF()
     //this.getSala()
     this.getPostiL()

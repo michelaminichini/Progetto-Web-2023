@@ -2,7 +2,7 @@
 
 import {defineComponent} from "vue"
 import axios from "axios"
-import {FilmE, Proiezione, SchedaF} from "../types" // tipo di interfaccia creata nel file types.ts
+import {FilmE, SchedaF, IDsala} from "../types" // tipo di interfaccia creata nel file types.ts
 //import { Modifica } from "../types"
 
 interface EditingCell{
@@ -16,6 +16,7 @@ export default defineComponent({
         ListaFilm: [] as FilmE [],
         //EditedFilm: [] as Film [],
         listaInfo: [] as SchedaF[],
+        sala: [] as IDsala[],
         editingCell: null,
         rowIndex: null,
         editmode: false,
@@ -27,11 +28,11 @@ export default defineComponent({
         // Prende e visualizza nella tabella tutti i dati
         getInfo() {
             axios.get("/api/infoToUpdate").then(response => this.listaInfo = response.data)
-            
+            console.log(this.listaInfo)
         },
         // Aggiunge una riga in fondo alla tabella 
-        addDati() {
-            axios.post("/api/nuovi-dati")
+        addProj() {
+            axios.post("/api/nuovaproj")
             .then(response => {console.log(response.data)})
             this.getInfo()
             this.$forceUpdate()
@@ -65,6 +66,10 @@ export default defineComponent({
         edit: function() {
             this.editmode = !this.editmode;
         },
+
+        redirect(){
+            this.$router.push('/adminpage')
+        }
     },
     mounted() {
     this.getInfo()
@@ -84,8 +89,11 @@ export default defineComponent({
     <div class="card">
         <div class="card-header">
             <h4>Dettagli films
-                <button @click="addDati()" type="button" class="btn btn-primary float-end">
+                <button @click="addProj()" type="button" class="btn btn-primary float-end">
                     Aggiungi
+                </button>
+                <button id="primo-pannello-up" @click="redirect()" type="button" class="btn btn-primary float-end">
+                    Vai a pannello 1
                 </button>
             </h4>
         </div>
@@ -97,7 +105,7 @@ export default defineComponent({
                             <th>ID Film</th>
                             <th>Titolo</th>
                             <th>Idproiezione</th>
-                            <th>IdSala</th>
+                            <th>Idsala</th>
                             <th>Data Proiezione</th>
                             <th>Orario</th>
                             <th>Edita</th>

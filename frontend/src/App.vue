@@ -63,6 +63,8 @@ export default defineComponent({
       referrerpolicy="no-referrer"
     />
 
+    <link href='https://fonts.googleapis.com/css?family=Monoton' rel='stylesheet'>
+
     <h1>GalaxyCineVerse</h1>
   </header>
   
@@ -70,7 +72,7 @@ export default defineComponent({
     <nav class="navbar navbar-expand-lg bg-transparent">
       <div id="nav" class="container-fluid">
         <a title="GalaxyCineverse" class="navbar-brand" href="http://localhost:5173/">
-          <img src="/ImmLogo.png" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
+          <img src="/logocinema3.png" alt="Logo" id="logo" width="30px" height="20" class="d-inline-block align-text-bottom">
         </a>
         <div id="navbarNav" class="d-flex" style="margin-right: 50%;">
           <i class="fas fa-bars mobile-nav-icon" @click="toggleMobileNav" style="font-size:36px; color:white"></i>
@@ -101,7 +103,7 @@ export default defineComponent({
             <form class="d-flex" style="margin-right: 5%;">
                 <router-link to="/profilo"><button class="btn btn-lg btn-primary">LOGIN</button></router-link>
             </form>
-      </div>
+        </div>
     </nav> 
 
     <main>
@@ -139,6 +141,18 @@ export default defineComponent({
 
   li {
     margin: 10px 0;
+  }
+
+}
+
+@media screen and (min-width: 800px) {
+  header > h1 {
+    font-size: 80px;
+  }
+
+  #logo {
+    width: 100px ;
+    height: 80px;
   }
 }
 

@@ -50,71 +50,102 @@ export default defineComponent({
 </script>
 
 <template>
-  <div class="prose">
+  
     <h1>Crea un account</h1>
-    <form class="not-prose flex flex-col gap-3" @submit.prevent="onSubmit">
-      <input
-        id="primo"
-        type="text"
-        v-model="email"
-        class="rounded-lg border-slate-200"
-        placeholder="Email"
-        required
-      />
-      <input
-        id="secondo"
-        type="password"
-        v-model="password"
-        class="rounded-lg border-slate-200"
-        placeholder="Password"
-        required
-      />
-      <input
-        id="terzo"
-        type="password"
-        v-model="confirmPassword"
-        class="rounded-lg border-slate-200"
-        placeholder="Conferma password"
-        required
-      />
-      <input
-        id="quarto"
-        type="text"
-        v-model="nome"
-        class="rounded-lg border-slate-200"
-        placeholder="Nome"
-        required
-      />
-      <input
-        id="quinto"
-        type="text"
-        v-model="cognome"
-        class="rounded-lg border-slate-200"
-        placeholder="Cognome"
-        required
-      />
-      <input
-        id="sesto"
-        type="number"
-        v-model="telefono"
-        class="rounded-lg border-slate-200"
-        placeholder="Numero di telefono"
-        required
-      />
-      <input
-        id="settimo"
-        type="date"
-        v-model="data_nascita"
-        class="rounded-lg border-slate-200"
-        placeholder="Data di nascita"
-        required
-      />
-      <button id="btn-crea-utente" type="submit" class="btn !bg-blue-500 text-white w-1/2 mx-auto mt-3" :disabled="isSubmitDisabled">
+    <form class="flex flex-col gap-3" @submit.prevent="onSubmit">
+      <div class="row">
+        <p>Email:
+          <input
+            id="primo"
+            type="text"
+            v-model="email"
+            class="rounded-lg border-slate-200"
+            placeholder="Email"
+            required
+          />
+        </p>
+      </div>
+      <div class="row">
+        <p>Password:
+          <input
+            id="secondo"
+            type="password"
+            v-model="password"
+            class="rounded-lg border-slate-200"
+            placeholder="Password"
+            required
+          />
+        </p>
+      </div>
+      <div class="row">
+        <p>Conferma :
+          <input
+            id="terzo"
+            type="password"
+            v-model="confirmPassword"
+            class="rounded-lg border-slate-200"
+            placeholder="Conferma password"
+            required
+          />
+        </p>
+      </div>
+      <div class="row">
+        <p>Nome :
+          <input
+            id="quarto"
+            type="text"
+            v-model="nome"
+            class="rounded-lg border-slate-200"
+            placeholder="Nome"
+            required
+          />
+        </p>
+      </div>
+      <div class="row">
+        <p>Cognome:
+          <input
+            id="quinto"
+            type="text"
+            v-model="cognome"
+            class="rounded-lg border-slate-200"
+            placeholder="Cognome"
+            required
+          />
+        </p>
+      </div>
+      <div class="row">
+        <p>Telefono:
+          <input
+            id="sesto"
+            type="number"
+            v-model="telefono"
+            class="rounded-lg border-slate-200"
+            placeholder="Numero di telefono"
+            required
+          />
+        </p>
+      </div>
+      <div class="row">
+        <p>Data di nascita:
+        <input
+          id="settimo"
+          type="date"
+          v-model="data_nascita"
+          class="rounded-lg border-slate-200"
+          placeholder="Data di nascita"
+          required
+        />
+        </p>
+      </div>
+      <div class="row">
+        <button id="btn-crea-utente" type="submit" class="btn !bg-blue-500 text-white w-1/2 mx-auto mt-3" :disabled="isSubmitDisabled">
         Registrati
-      </button>
-      <RouterLink to="/profilo" class="text-white font-bold" style="display: block; margin: 5%;">Indietro</RouterLink>
+        </button>
+        <p>
+          <RouterLink to="/profilo" class="text-white font-bold" style="margin: 5%;">Indietro</RouterLink>
+        </p>
+      </div>
     </form>
-  </div>
 </template>
 
 <style scoped>
@@ -124,12 +155,17 @@ h1{
   color:white;
 }
 
+p{
+  color:aliceblue;
+  margin-left: 5%;
+}
+
 input{
   display: inline;
   height: 50px;
   width:220px;
   margin-right: 1%;
-  margin-left: 5%;
+  margin-left: 1%;
   margin-bottom: 2%;
 }
 
@@ -139,7 +175,9 @@ input{
   font-size: large;
   background-color: rgb(36, 91, 255);
   width:150px;
+  margin-left: 5%;
 }
+
 
 
 
