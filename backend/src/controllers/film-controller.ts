@@ -132,7 +132,6 @@ export async function informazioni(req:Request, res:Response) {
     const connection = await getConnection()
     const [results] = await connection.execute(
         `SELECT film.idfilm, film.titolo, p.idproiezione, p.idsala, p.datap, p.orario FROM film JOIN proiezioni p ON film.idfilm = p.idfilm`, 
-        `SELECT film.idfilm, film.titolo, p.idproiezione, idsala, p.datap, p.orario FROM film JOIN proiezioni p ON film.idfilm = p.idfilm`, 
         [],
     )
     res.json(results)
@@ -164,3 +163,4 @@ export async function deleteProj(req:Request, res: Response) {
         [req.params.id],
     )
 }
+
