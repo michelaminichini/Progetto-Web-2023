@@ -128,7 +128,7 @@ export interface postoF {
 export interface PostoL {
     label: string,
     selected: boolean,
-    reserved: boolean,
+    occupato: boolean,
     costo:number
 }
 
