@@ -5,7 +5,6 @@ import { IDsala, posto, PostoL } from "../types"
 import { postoF } from "../types"
 //import { Modifica } from "../types"
 //import { DatiUtente } from "../types"
-import { PostoL } from "../types"
 //import { IdSala } from "../types"
 //import Payment from "./Pagamento.vue"
 
@@ -14,8 +13,12 @@ export default defineComponent({
     return {
       salaP: [] as IDsala[],
       posti:[] as postoF[],
-      seatLayout: [] as PostoL[],
-      importo: 0.0,
+      seatLayout: [] as PostoL[][], // doppia [] perchè  seatLayout è un array bidimensionale in cui ogni elemento rappresenta una fila di sedili e ogni sedile è un oggetto con proprietà definite dall'interfaccia PostoL. 
+      //Le doppie parentesi quadre [][] indicano le due dimensioni dell'array.
+      costo: null as posto | null,
+      //selectedSeat: null,
+      //seatCost: 5,
+      //importo: 0.0,
       isPopupOpen: false,
       seatL : '',
       //datiUtente: [] as DatiUtente [],
@@ -58,7 +61,8 @@ export default defineComponent({
             seat.reserved = true;
             seat.selected = false; // Reset selected state after booking
             selectedSeats.push(seat.label);
-            this.importo =this.importo + 8.5;
+            totalCost += seat.costo
+            //this.importo =this.importo + 8.5;
             const AggParam = {
               idproiezione: this.$route.params.idproiezione,
               label: seat.label
@@ -138,7 +142,7 @@ export default defineComponent({
   },
   mounted() {
     //this.getSala()
-    this.getIdUtente()
+    //this.getIdUtente()
     this.getPostiF()
     //this.getSala()
     this.getPostiL()
