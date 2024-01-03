@@ -5,7 +5,7 @@ import { IDsala, posto, PostoL } from "../types"
 import { postoF } from "../types"
 //import { Modifica } from "../types"
 //import { DatiUtente } from "../types"
-import { PostoL } from "../types"
+//import { PostoL } from "../types"
 //import { IdSala } from "../types"
 //import Payment from "./Pagamento.vue"
 
@@ -92,7 +92,7 @@ export default defineComponent({
       //if (res1.data && res1.data.length > 0 && res1.data[0].posti_fila) {
       const paramfila = res1.data;
       console.log("RESULTS HERE:", paramfila[0].posti_fila);
-
+      console.log("ID PROIEZIONE: ", this.$route.params.idproiezione)
       const ppf = paramfila[0].posti_fila;
 
       const res = await axios.get("/api/postiF/" + this.$route.params.idproiezione);
@@ -138,7 +138,7 @@ export default defineComponent({
   },
   mounted() {
     //this.getSala()
-    this.getIdUtente()
+    //this.getIdUtente()
     this.getPostiF()
     //this.getSala()
     this.getPostiL()
@@ -164,7 +164,7 @@ export default defineComponent({
                     v-for="(seat, seatIndex) in row"
                     :key="seatIndex"
                     class="seat"
-                    :class="{ selected: seat.selected, reserved: seat.reserved }"
+                    :class="{ selected: seat.selected, occupato: seat.occupato }"
                     @click="toggleSeat(rowIndex, seatIndex)"
                     >
                     {{ seat.label }}
@@ -225,7 +225,7 @@ export default defineComponent({
   color:black;
 }
 
-.seat.reserved {
+.seat.occupato {
   background-color: #e74c3c;
   pointer-events: none; /* Disable click for reserved seats */
 }
