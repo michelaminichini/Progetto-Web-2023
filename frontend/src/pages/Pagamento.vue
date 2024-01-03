@@ -1,7 +1,7 @@
 <script lang="ts">
 import { PropType, defineComponent } from 'vue';
 import axios from "axios"
-import { DatiUtente, DatiPagamento, User, Tpag, TempPar } from '../types';
+import { DatiUtente, DatiPagamento, User, Tpag, Importo, PostoL, TempPar } from '../types';
 
 export default defineComponent({
     data(){
@@ -20,6 +20,7 @@ export default defineComponent({
             posti: "",
             //idbiglietto:0,
             isPopupOpen: false,
+            costo: null as PostoL | null,
             // tempP: [] as TempPar [], 
             IDpag: null,
             datiPag: [] as DatiPagamento [],
@@ -204,11 +205,11 @@ export default defineComponent({
         <h1>Pagamento: </h1>        
         <!-- form @submit.prevent="aggiornaDatiPagamento" -->
         <form>
-            <h3 class="title">Totale € {{ importo }} Posti: {{ posti }}</h3>
+            <h3 class="title">Totale {{ importo }}€ Posti: {{ posti }}</h3>
             <h3 class="title">Inserire dati per effettuare il pagamento</h3>
                     <div>
                         <!--PostiSala v-if="costo" :costo="costo" /-->
-                        <p style="color:white">Costo del posto selezionato: {{ importo }} €</p>
+                        <!--p style="color:white">Costo del posto selezionato: {{ importo }} €</p>-->
                        
                         
                     </div>

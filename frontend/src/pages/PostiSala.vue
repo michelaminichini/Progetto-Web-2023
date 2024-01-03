@@ -14,7 +14,11 @@ export default defineComponent({
     return {
       salaP: [] as IDsala[],
       posti:[] as postoF[],
-      seatLayout: [] as PostoL[],
+      seatLayout: [] as PostoL[][], // doppia [] perchè  seatLayout è un array bidimensionale in cui ogni elemento rappresenta una fila di sedili e ogni sedile è un oggetto con proprietà definite dall'interfaccia PostoL. 
+      //Le doppie parentesi quadre [][] indicano le due dimensioni dell'array.
+      costo: null as posto | null,
+      //selectedSeat: null,
+      //seatCost: 5,
       importo: 0.0,
       isPopupOpen: false,
       seatL : '',
@@ -58,6 +62,7 @@ export default defineComponent({
             seat.reserved = true;
             seat.selected = false; // Reset selected state after booking
             selectedSeats.push(seat.label);
+            //totalCost += seat.costo
             this.importo =this.importo + 8.5;
             const AggParam = {
               idproiezione: this.$route.params.idproiezione,
@@ -173,7 +178,7 @@ export default defineComponent({
                     v-for="(seat, seatIndex) in row"
                     :key="seatIndex"
                     class="seat"
-                    :class="{ selected: seat.selected, occupato: seat.occupato }"
+                    :class="{ selected: seat.selected, occupato: seat.reserved }"
                     @click="toggleSeat(rowIndex, seatIndex)"
                     >
                     {{ seat.label }}

@@ -67,6 +67,13 @@ export default defineComponent({
             console.log(this.editmode)
         },
 
+        editFilm(rowIndex: any){
+            console.log(rowIndex)
+            const idfilm = this.ListaFilm[rowIndex].idfilm;
+            this.$router.push('/editfilm/'+idfilm)
+
+        },
+
         redirect(){
             //window.location.href = "/pannello2"
             this.$router.push('/pannello2')
@@ -112,52 +119,49 @@ export default defineComponent({
                             <th>Durata</th>
                             <th>Nazione</th>
                             <th>Anno</th>
-                            <th>Descrizione</th>
-                            <th>Trailer</th>
-                            <th>Locandina</th>
-                            <th>Lingua</th>
-                            <th>Attori</th>
                             <th>Stato</th>
-                            <th>Edita</th>
+                            <th>Funzione</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr v-for="(film, rowIndex) in ListaFilm" :key="rowIndex">
-                            <td v-for="(cell, cellIndex) in film" :key="cellIndex">
-                                <td>
-                                    <button @click="editCell(rowIndex, cellIndex)" v-on:click="edit()"  type="button" class="btn btn-success" style="display: block;">
-                                    Edit   
-                                    <!-- {{ editingCell === `${rowIndex}-${cellIndex}` ? "Save" : "Edit" }} TRASFORMA EDIT IN SAVE QUANDO VIENE PREMUTO, POI VICEVERSA-->
-                                    </button>
-                                    <!--button onclick="document.getElementById('myInput').value ='' ">Clear</button-->
-                                </td>
-                                <template v-if="editingCell === `${rowIndex}-${cellIndex}`">
-                                <input
-                                    v-if="editmode"
-                                    id="myInput"
-                                    type="text"
-                                    :value="cell"
-                                    @input="updateCell(rowIndex, cellIndex, $event.target.value)"
-                                    @blur="finishEditing(rowIndex)"
-                                />
-                                </template>
-                                <template v-else>
-                                    {{ cell }}
-                                </template>
+                            <td>
+	                            {{ film.idfilm }}
                             </td>
+                            <td>
+                                {{ film.titolo }}
+                            </td>
+                            <td>
+                                {{ film.regista }}
+                            </td>
+                            <td>
+                                {{ film.genere }}
+                            </td>
+                            <td>
+                                {{ film.durata }}
+                            </td>
+                            <td>
+                                {{ film.nazione }}
+                            </td>
+                            <td>
+                                {{ film.anno }}
+                            </td>
+                            <td>
+                                {{ film.stato }}
+                            </td>
+
                             <td>       
+                                <button @click="editFilm(rowIndex)" type="button" class="btn btn-success" style="display: block;">
+                                Edit   
+                                </button>
                                 <button @click="deleteFilm(rowIndex)" type="button" class="btn btn-danger">
-                                    Delete
+                                Delete
                                 </button>
                             </td>
                         </tr>
                     </tbody>
             </table>
          </div>   
-    </div>
-
-    <div>
-        <button id="secondo-pannello" @click="redirect()">Passa a pannello 2</button>
     </div>
 </template>
 

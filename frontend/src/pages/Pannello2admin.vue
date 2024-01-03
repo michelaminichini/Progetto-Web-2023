@@ -2,7 +2,8 @@
 
 import {defineComponent} from "vue"
 import axios from "axios"
-import {FilmE, SchedaF, IDsala} from "../types" // tipo di interfaccia creata nel file types.ts
+import {FilmE, SchedaF, IDsala, Sale} from "../types" // tipo di interfaccia creata nel file types.ts
+import { AsyncLocalStorage } from "async_hooks"
 //import { Modifica } from "../types"
 
 interface EditingCell{
@@ -14,14 +15,19 @@ export default defineComponent({
     data(){
         return {
         ListaFilm: [] as FilmE [],
+        ActiveFilm: [] as FilmE[],
+        ListaSale: [] as Sale[],
         //EditedFilm: [] as Film [],
         listaInfo: [] as SchedaF[],
         sala: [] as IDsala[],
         editingCell: null,
         rowIndex: null,
         editmode: false,
-        proiezioni: [] as Proiezione[],
-        
+        idFilm: 0,
+        idSala: 0,
+        idOrario: 0,
+        Orario_Proiezione: null,
+        Data_proiezione: null,
     }
     },
     methods: {
@@ -30,18 +36,58 @@ export default defineComponent({
             axios.get("/api/infoToUpdate").then(response => this.listaInfo = response.data)
             console.log(this.listaInfo)
         },
+
+        getActiveFilms()
+        {
+            axios.get("/api/activefilms").then(response => this.ActiveFilm = response.data)
+            console.log(this.ActiveFilm)
+  
+        },
+
+        getSala()
+        {
+            axios.get("/api/listasale").then(response => this.ListaSale = response.data)
+            console.log(this.ListaSale)
+  
+        },
+
         // Aggiunge una riga in fondo alla tabella 
         addProj() {
-            axios.post("/api/nuovaproj")
-            .then(response => {console.log(response.data)})
-            this.getInfo()
-            this.$forceUpdate()
+            console.log('ADD PROJ')
+            console.log(this.idFilm)
+            console.log(this.idSala)
+            console.log(this.Data_proiezione)
+            console.log(this.Orario_Proiezione)
+            //test su validita' parametri
+            if (this.idFilm == 0 || this.idSala == 0 || this.Data_proiezione == null || this.Orario_Proiezione == null )
+            {
+                alert('Dati non corretti!')
+            }
+            else
+            {
+                let idf = Number(this.idFilm)
+                let ids = Number(this.idSala)
+                let dp = String(this.Data_proiezione)
+                let op = String(this.Orario_Proiezione)
+
+                const projData = {
+                    idfilm: idf,
+                    idsala: ids,
+                    datap:  dp, 
+                    orariop: op,    
+                }
+                console.log(projData);
+                axios.post("/api/nuovaproj", projData)
+                .then(response => {console.log(response.data)})
+                this.getInfo()
+                this.$forceUpdate()
+            }
         },
+
         // Elimina una riga dalla tabella
-        deleteData(rowIndex: any){
-            axios.delete("/api/cancella-dati"+this.proiezioni[rowIndex].idproiezione)
-            .then(response => 
-            console.log("deleting data "+this.proiezioni[rowIndex].idproiezione))
+        deleteProj(rowIndex: any){
+            axios.delete("/api/eliminaproj/"+this.listaInfo[rowIndex].idproiezione)
+            .then(response => {console.log("deleting proiezione: "+this.listaInfo[rowIndex].idproiezione)})
             this.getInfo()
             this.$forceUpdate()
         },
@@ -53,14 +99,15 @@ export default defineComponent({
         updateCell(rowI: number, cellI: number, v: string|number) {
             this.ListaFilm[rowI][cellI] = v;
         },
+        
         // Aggiorna i dati sul database terminando l'operazione di edit
         finishEditing(rowIndex: number) {
-            let riga = this.proiezioni[rowIndex];
+            let riga = this.ListaFilm[rowIndex];
             this.editingCell = null;            
-            axios.put("/api/aggiorna-dati",riga)
+            axios.put("/api/aggiornamento",riga)
             .then(response => {console.log(response.data)})
-            console.log("/api/aggiorna-dati"+ (rowIndex+1));
-            console.log(this.proiezioni[rowIndex]);
+            console.log("/api/aggiornamento/"+ (rowIndex+1));
+            console.log(this.ListaFilm[rowIndex]);
         },
 
         edit: function() {
@@ -69,21 +116,44 @@ export default defineComponent({
 
         redirect(){
             this.$router.push('/adminpage')
-        }
+        },
+
+        changeFilm()
+        {
+            if (!this.idFilm){
+                this.idFilm = 0
+            }
+            console.log(this.idFilm)
+        },
+
+        changeSala()
+        {
+            if (!this.idSala){
+                this.idSala = 0
+            }
+            console.log(this.idSala)
+        },
+
+        changeOrario()
+        {
+            if (!this.Orario_Proiezione){
+                this.Orario_Proiezione = null
+            }
+            console.log(this.Orario_Proiezione)
+        },
     },
     mounted() {
     this.getInfo()
-    
+    this.getActiveFilms()
+    this.getSala()
   }
 })
-
-
 </script>
 
 <template>
     
     <h1>
-        Secondo pannello di controllo
+        Secondo pannello di controllo: Gestione Proiezioni
     </h1>
 
     <div class="card">
@@ -96,6 +166,39 @@ export default defineComponent({
                     Vai a pannello 1
                 </button>
             </h4>
+        </div>
+        <div>
+            Nuova proiezione:
+            <div class="inputBox">
+                <span>Film    </span>
+                <select class="firstLastNames linkBox"  v-model="idFilm" type="number" @change="changeFilm()" >
+                    <option disabled >Scegli il titolo del film</option>
+                    <option v-for="aFilm in ActiveFilm" :key="aFilm.idfilm" :value="aFilm.idfilm">{{aFilm.titolo}}</option>
+                </select>
+            </div>
+            <div class="inputBox">
+                <span> Sala    </span>
+                <select class="firstLastNames linkBox"  v-model="idSala" type="number" @change="changeSala()" >
+                    <option disabled >Scegli la sala</option>
+                    <option v-for="aSala in ListaSale" :key="aSala.idsala" :value="aSala.idsala">{{aSala.descrizione}} - {{ aSala.posti }} posti - {{ aSala.tecnologia }}</option>
+                </select>
+            </div>
+            <div class="inputBox">
+                        <span>Data    </span>
+                        <input 
+                        v-model="Data_proiezione"
+                        type="date"
+                        class="rounded-lg border-slate-200"
+                        />
+            </div>
+            <div class="inputBox">
+                <span> Orario </span>
+                <select class="firstLastNames linkBox"  v-model="Orario_Proiezione" type="text" @change="changeOrario()" >
+                    <option disabled >Scegli l'orario</option>
+                    <option> 17:00 </option>
+                    <option> 21:00 </option>
+                </select>
+            </div>
         </div>
     
         <div class="card-body">
@@ -127,18 +230,14 @@ export default defineComponent({
                                 <template v-else>
                                 {{ cell }}
                                 </template>
-
-                                <td>
+                                <!-- <td>
                                     <button @click="editCell(rowIndex, cellIndex)" v-on:click="edit()"  type="button" class="btn btn-success" style="display: block;">
                                     Edit   
-                                    <!-- {{ editingCell === `${rowIndex}-${cellIndex}` ? "Save" : "Edit" }} TRASFORMA EDIT IN SAVE QUANDO VIENE PREMUTO, POI VICEVERSA-->
-                                    </button>
-                                    <!--button onclick="document.getElementById('myInput').value ='' ">Clear</button-->
-                                </td>
+                                    </button>                                    
+                                </td> -->
                             </td>
-                            <td>
-                                
-                                <button @click="deleteData(rowIndex)" type="button" class="btn btn-danger">
+                            <td>   
+                                <button @click="deleteProj(rowIndex)" type="button" class="btn btn-danger">
                                     Delete
                                 </button>
                             </td>
@@ -165,11 +264,19 @@ table{
     display: block;
     border-collapse: collapse;
     border-spacing: 0;
-    table-layout: fixed;
+    table-layout: auto;
     width: 100%;
 }
 
 td{
     max-width: 100px;
+}
+
+#secondo-pannello{
+    display: block;
+    margin: 0 auto;
+    margin-top: 5%;
+    width:300px;
+    height: 50px;
 }
 </style>
