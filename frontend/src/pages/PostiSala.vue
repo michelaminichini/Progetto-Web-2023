@@ -47,25 +47,26 @@ export default defineComponent({
 
     toggleSeat(rowIndex: number, seatIndex: number) {
       const seat = this.seatLayout[rowIndex][seatIndex];
-      if (!seat.reserved) {
+      if (!seat.occupato) {
         seat.selected = !seat.selected;
       }
     },
 
     bookSeats() {
       const selectedSeats: any[] = [];
+      const idproj = sessionStorage.getItem("proiezione");
       //let totalCost = 0
       this.importo=0
       this.seatLayout.forEach(row => {
         row.forEach(seat => {
-          if (seat.selected && !seat.reserved) {
-            seat.reserved = true;
+          if (seat.selected && !seat.occupato) {
+            seat.occupato = true;
             seat.selected = false; // Reset selected state after booking
             selectedSeats.push(seat.label);
             //totalCost += seat.costo
             this.importo =this.importo + 8.5;
             const AggParam = {
-              idproiezione: this.$route.params.idproiezione,
+              idproiezione: idproj,
               label: seat.label
             };            
             axios.put("/api/aggiornaPF",AggParam) // aggiorna sul database lo stato del posto selezionato. Se selezionato, diventa occupato (=1)
@@ -75,7 +76,7 @@ export default defineComponent({
       });
       const SSeats = selectedSeats.join(', ').toString()
       const totale = this.importo.toString()
-      const idProiez = this.$route.params.idproiezione.toString()
+      const idProiez = ''
       const usr = this.user
       sessionStorage.setItem("importo", totale);
       sessionStorage.setItem("posti", SSeats);
@@ -178,7 +179,7 @@ export default defineComponent({
                     v-for="(seat, seatIndex) in row"
                     :key="seatIndex"
                     class="seat"
-                    :class="{ selected: seat.selected, occupato: seat.reserved }"
+                    :class="{ selected: seat.selected, occupato: seat.occupato }"
                     @click="toggleSeat(rowIndex, seatIndex)"
                     >
                     {{ seat.label }}
