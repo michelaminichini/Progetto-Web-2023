@@ -92,7 +92,7 @@ export async function deleteFilm(req:Request, res: Response) {
     )
     res.json(results)
 }
-
+// Cancellazione riga di una proiezione dal secondo pannello admin - operazione solo per amministratori
 export async function cancellaDati(req:Request, res: Response) {
     const connection = await getConnection()
     const [results] = await connection.execute(
@@ -137,7 +137,7 @@ export async function informazioni(req:Request, res:Response) {
     )
     res.json(results)
 }
-
+/*
 export async function nuoviDati(req:Request, res: Response) {
     const connection = await getConnection()
     const [results] = await connection.execute(
@@ -145,7 +145,14 @@ export async function nuoviDati(req:Request, res: Response) {
     )
     res.json(results)
 }
+*/
 
+/*
+interface ProjectionIdResult {
+    newProjectionID: number;
+ }
+
+*/
 export async function nuovaProiezione(req:Request, res: Response) {
     const {idfilm,idsala,datap,orariop} = req.body
     console.log(req.body)
@@ -153,7 +160,35 @@ export async function nuovaProiezione(req:Request, res: Response) {
     const [results] = await connection.execute(
         `INSERT INTO proiezioni (idfilm, idsala, datap, orario) VALUES (?,?,?,?)`,
         [idfilm,idsala,datap,orariop]
-    )
+    );
+    /*
+    const [projectionIdResult] = await connection.execute<
+      [{ newProjectionID: number }]
+    >('SELECT LAST_INSERT_ID() as newProjectionID');
+
+    const newProjectionID = projectionIdResult[0]?.newProjectionID;
+    // Generate rows and seat numbers
+    const rows = ['A', 'B', 'C', 'D'];
+    const seatNumbers = [1, 2, 3, 4, 5];
+
+    const seatsToInsert = [];
+    for (const row of rows) {
+        for (const number of seatNumbers) {
+          const seat = {
+            projectionID: newProjectionID,
+            seatNumber: `${row}${number}`,
+          };
+          seatsToInsert.push(seat);
+        }
+    }
+    const insertSeatsQuery =
+      'INSERT INTO posti_proiezione (projectionID, seatNumber) VALUES ?';
+    const seatValues = seatsToInsert.map(
+      (seat) => [seat.projectionID, seat.seatNumber] // Adjust based on your column names
+    );
+    await connection.query(insertSeatsQuery, [seatValues]);
+    res.json({ message: 'Projection and seats created successfully!' });
+    */
     res.json(results)
 }
 
@@ -164,5 +199,6 @@ export async function deleteProj(req:Request, res: Response) {
         `DELETE FROM proiezioni WHERE idproiezione=?`,
         [req.params.id],
     )
+    res.json(results)
 }
 

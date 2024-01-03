@@ -75,7 +75,6 @@ export default defineComponent({
         },
 
         redirect(){
-            //window.location.href = "/pannello2"
             this.$router.push('/pannello2')
         }
        

@@ -48,18 +48,8 @@ export const getPostiL = async (req:Request, res:Response) => {
     res.json(results)
 }
 */
-/*
-export async function aggiornaPosto(req:Request, res: Response) {
-    const {label} = req.body
-    console.log(req.body)
-    const connection = await getConnection()
-    const [results] = await connection.execute(
-        `UPDATE posti_proiezione SET occupato = 1 WHERE idproiezione = 9 AND label = ?`,
-        [label],
-    )
-    res.json(results)
-}
-*/
+
+
 export async function aggiornaPostoPF(req:Request, res: Response) {
     const {idproiezione, label} = req.body
     console.log(req.body)
