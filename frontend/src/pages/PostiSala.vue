@@ -5,6 +5,7 @@ import { IDsala, posto, PostoL } from "../types"
 import { postoF } from "../types"
 //import { Modifica } from "../types"
 //import { DatiUtente } from "../types"
+//import { PostoL } from "../types"
 //import { IdSala } from "../types"
 //import Payment from "./Pagamento.vue"
 
@@ -18,7 +19,7 @@ export default defineComponent({
       costo: null as posto | null,
       //selectedSeat: null,
       //seatCost: 5,
-      //importo: 0.0,
+      importo: 0.0,
       isPopupOpen: false,
       seatL : '',
       //datiUtente: [] as DatiUtente [],
@@ -53,16 +54,16 @@ export default defineComponent({
 
     bookSeats() {
       const selectedSeats: any[] = [];
-      let totalCost = 0
-      
+      //let totalCost = 0
+      this.importo=0
       this.seatLayout.forEach(row => {
         row.forEach(seat => {
           if (seat.selected && !seat.reserved) {
             seat.reserved = true;
             seat.selected = false; // Reset selected state after booking
             selectedSeats.push(seat.label);
-            totalCost += seat.costo
-            //this.importo =this.importo + 8.5;
+            //totalCost += seat.costo
+            this.importo =this.importo + 8.5;
             const AggParam = {
               idproiezione: this.$route.params.idproiezione,
               label: seat.label
@@ -72,12 +73,21 @@ export default defineComponent({
           }
         });
       });
-      sessionStorage.setItem('totalCost', totalCost.toString()) // settato un Item (totalCost) da passare nella pagina Pagamento.vue per poter visualizzare l'importo finale
-      console.log('Costo finale:', totalCost)
+      const SSeats = selectedSeats.join(', ').toString()
+      const totale = this.importo.toString()
+      const idProiez = this.$route.params.idproiezione.toString()
+      const usr = this.user
+      sessionStorage.setItem("importo", totale);
+      sessionStorage.setItem("posti", SSeats);
+      sessionStorage.setItem("proiezione", idProiez);
+      sessionStorage.setItem("utente", usr);
+      //this.seatL = SSeats;
+      //sessionStorage.setItem('totalCost', totalCost.toString()) // settato un Item (totalCost) da passare nella pagina Pagamento.vue per poter visualizzare l'importo finale
+      //console.log('Costo finale:', totalCost)
       //this.$SeatList = selectedSeats;
       //console.log(this.$SeatList);
       //alert(`Booked seats: ${selectedSeats.join(', ')}, Importo: ${this.importo}`);
-      //this.$router.push('/pagamento');
+      this.$router.push('/pagamento');
     },
 
     chunkArray(arr: number[], chunkSize: number) {
@@ -96,7 +106,7 @@ export default defineComponent({
       //if (res1.data && res1.data.length > 0 && res1.data[0].posti_fila) {
       const paramfila = res1.data;
       console.log("RESULTS HERE:", paramfila[0].posti_fila);
-
+      console.log("ID PROIEZIONE: ", this.$route.params.idproiezione)
       const ppf = paramfila[0].posti_fila;
 
       const res = await axios.get("/api/postiF/" + this.$route.params.idproiezione);
@@ -168,7 +178,7 @@ export default defineComponent({
                     v-for="(seat, seatIndex) in row"
                     :key="seatIndex"
                     class="seat"
-                    :class="{ selected: seat.selected, reserved: seat.reserved }"
+                    :class="{ selected: seat.selected, occupato: seat.reserved }"
                     @click="toggleSeat(rowIndex, seatIndex)"
                     >
                     {{ seat.label }}
@@ -229,7 +239,7 @@ export default defineComponent({
   color:black;
 }
 
-.seat.reserved {
+.seat.occupato {
   background-color: #e74c3c;
   pointer-events: none; /* Disable click for reserved seats */
 }
