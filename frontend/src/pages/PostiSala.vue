@@ -47,7 +47,7 @@ export default defineComponent({
 
     toggleSeat(rowIndex: number, seatIndex: number) {
       const seat = this.seatLayout[rowIndex][seatIndex];
-      if (!seat.reserved) {
+      if (!seat.occupato) {
         seat.selected = !seat.selected;
       }
     },
@@ -58,8 +58,8 @@ export default defineComponent({
       this.importo=0
       this.seatLayout.forEach(row => {
         row.forEach(seat => {
-          if (seat.selected && !seat.reserved) {
-            seat.reserved = true;
+          if (seat.selected && !seat.occupato) {
+            seat.occupato = true;
             seat.selected = false; // Reset selected state after booking
             selectedSeats.push(seat.label);
             //totalCost += seat.costo
@@ -178,7 +178,7 @@ export default defineComponent({
                     v-for="(seat, seatIndex) in row"
                     :key="seatIndex"
                     class="seat"
-                    :class="{ selected: seat.selected, occupato: seat.reserved }"
+                    :class="{ selected: seat.selected, occupato: seat.occupato }"
                     @click="toggleSeat(rowIndex, seatIndex)"
                     >
                     {{ seat.label }}
