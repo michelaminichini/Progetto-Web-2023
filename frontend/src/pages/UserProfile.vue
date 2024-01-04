@@ -220,7 +220,7 @@ export default defineComponent({
 
             <div v-show="activeDiv === 2" class="terzo">
                 <h1>La tua cronologia di acquisti</h1>                
-                <table class="table table-striped table-bordered table-responsive border border-2 border border-dark">
+                <table id="cronologia" class="table table-striped table-bordered table-responsive border border-2 border border-dark overflow-auto">
                     <thead>
                         <tr>
                             <th>Titolo Film</th>
