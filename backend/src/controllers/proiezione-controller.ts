@@ -72,11 +72,11 @@ export async function aggiornaParamP(req:Request, res: Response) {
     res.json(results)
 }
 
-export async function leggiParamP(req:Request, res:Response) {
-    const connection = await getConnection()
-    const [results] = await connection.execute(
-        `SELECT id_proiezione,importo,posti FROM temp WHERE id = 1`,
-        [],
-    )
-    res.json(results)
-}
+// export async function leggiParamP(req:Request, res:Response) {
+//     const connection = await getConnection()
+//     const [results] = await connection.execute(
+//         `SELECT id_proiezione,importo,posti FROM temp WHERE id = 1`,
+//         [],
+//     )
+//     res.json(results)
+// }
