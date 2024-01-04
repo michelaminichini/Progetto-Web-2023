@@ -10,5 +10,12 @@ router.get("/api/sala/:id", proiezioneController.salaX)
 router.get("/api/postiF/:id", proiezioneController.postiF)
 router.put("/api/aggiornaPF", proiezioneController.aggiornaPostoPF)
 router.put("/api/aggiornaParP", proiezioneController.aggiornaParamP)
+router.get("/api/leggiproj", proiezioneController.idnuovaproj)
+router.post("/api/aggiornaPP/:ids", proiezioneController.aggiornaPostiProj)
+router.post("/api/aggiornaIdP/:idp", proiezioneController.aggiornaIdProj)
 //router.get("/api/leggiParP", proiezioneController.leggiParamP)
+router.post("/api/nuovaproj", proiezioneController.nuovaProiezione)
+router.delete("/api/eliminaproj/:id", proiezioneController.deleteProj)
+router.delete("/api/cancella-dati/:id", proiezioneController.cancellaDati)
+
 export default router

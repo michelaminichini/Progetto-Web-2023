@@ -69,6 +69,7 @@ export default defineComponent({
                 let ids = Number(this.idSala)
                 let dp = String(this.Data_proiezione)
                 let op = String(this.Orario_Proiezione)
+                let idproj = ""
 
                 const projData = {
                     idfilm: idf,
@@ -76,9 +77,24 @@ export default defineComponent({
                     datap:  dp, 
                     orariop: op,    
                 }
-                console.log(projData);
+                console.log("Nuova P: ",projData);
                 axios.post("/api/nuovaproj", projData)
-                .then(response => {console.log(response.data)})
+                .then(response => {console.log(response.data)
+                    axios.get("/api/leggiproj")
+                    .then(response => {idproj = response.data[0].idproiezione,
+                        console.log("Id last P: ",response.data)
+                        console.log("idproj: ",idproj)
+                        console.log("Sala: ",ids)
+                        //copio layout sala vuota
+                        axios.post("/api/aggiornaPP/"+ids)
+                        .then(response => {console.log(response.data)
+                            //aggiorno id proiezione 
+                            axios.post("/api/aggiornaIdP/"+idproj)
+                            .then(response => {console.log(response.data)})
+                        })
+                        
+                    })
+                })
                 this.getInfo()
                 this.$forceUpdate()
             }
