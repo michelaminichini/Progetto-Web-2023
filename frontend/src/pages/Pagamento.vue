@@ -79,14 +79,14 @@ export default defineComponent({
                     //idutente: idutente,
                     //costo: data,
                     tipo_pagamenti: this.tipo_pagamenti,           
-                    //importo: this.importo,
+                    importo: this.importo,
                     nomeT: this.nomeT,
                     cognomeT: this.cognomeT,
                     Numero_carta: this.Numero_carta,
                     Data_scadenza: this.Data_scadenza,
                     CVV: this.CVV,
                 };
-                console.log(paymentData);
+                console.log('Dati pag: ',paymentData);
                 await axios.post("/api/aggiornapagamento", paymentData);
 
                 // this.nomeT =null,
