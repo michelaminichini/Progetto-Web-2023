@@ -80,7 +80,7 @@ export default defineComponent({
       const usr = this.user
       sessionStorage.setItem("importo", totale);
       sessionStorage.setItem("posti", SSeats);
-      sessionStorage.setItem("proiezione", idProiez);
+      //sessionStorage.setItem("proiezione", idProiez);
       sessionStorage.setItem("utente", usr);
       //this.seatL = SSeats;
       //sessionStorage.setItem('totalCost', totalCost.toString()) // settato un Item (totalCost) da passare nella pagina Pagamento.vue per poter visualizzare l'importo finale
@@ -150,10 +150,15 @@ export default defineComponent({
     // selectSeat(seat) {
     //   this.selectedSeat = seat;
     // },
+    async getIdUtente(){
+            const res = await axios.get("/api/auth/profile")
+            this.user = res.data.idutente
+            console.log(this.user)                    
+    },
   },
   mounted() {
     //this.getSala()
-    //this.getIdUtente()
+    this.getIdUtente()
     //this.getPostiF()
     //this.getSala()
     this.getPostiL()
