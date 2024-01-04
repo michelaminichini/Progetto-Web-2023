@@ -726,14 +726,7 @@ ALTER TABLE `pagamenti`
 -- AUTO_INCREMENT per la tabella `posti_proiezione`
 --
 ALTER TABLE `posti_proiezione`
-  MODIFY `idposto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1791;
-
---
--- AUTO_INCREMENT per la tabella `posti_proiezione_old`
---
-ALTER TABLE `posti_proiezione_old`
-  MODIFY `idposto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1791;
-
+  MODIFY `idposto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1596;
 --
 -- AUTO_INCREMENT per la tabella `proiezioni`
 --
@@ -789,12 +782,11 @@ ALTER TABLE `pagamenti`
   ADD CONSTRAINT `fk_cinema_idbiglietto1` FOREIGN KEY (`idbiglietto1`) REFERENCES `biglietti` (`idbiglietto`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_cinema_idtipo_pagamento1` FOREIGN KEY (`idtipo_pagamento1`) REFERENCES `tipo_pagamenti` (`idtipo_pagamento`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
+-- Limiti per la tabella `posti_proiezione`
 --
--- Limiti per la tabella `posti_proiezione_old`
---
-ALTER TABLE `posti_proiezione_old`
+ALTER TABLE `posti_proiezione`
   ADD CONSTRAINT `fk_cinema_idproiezione` FOREIGN KEY (`idproiezione`) REFERENCES `proiezioni` (`idproiezione`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
+COMMIT;
 --
 -- Limiti per la tabella `proiezioni`
 --

@@ -2,8 +2,7 @@
 
 import {defineComponent} from "vue"
 import axios from "axios"
-import {Film} from "../types" //qui Film si riferisce al tipo di interfaccia creata nel file types.ts
-
+import {Film} from "../types"
 export default defineComponent({
     data(){
         return {

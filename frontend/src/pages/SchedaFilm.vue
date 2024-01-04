@@ -2,7 +2,7 @@
 
 import {defineComponent} from "vue"
 import axios from "axios"
-import {SchedaF} from "../types" // tipo di interfaccia creata nel file types.ts
+import {SchedaF} from "../types"
 
 export default defineComponent({
   data(){
@@ -58,7 +58,7 @@ export default defineComponent({
         </table>
       </article>
     </template>
-    <!-- <div v-for="film in filmS"> -->
+
     <div>
       <h2>Date di programmazione: </h2>
       <select class="firstLastNames linkBox"  v-model="currentProjection" @change="changeProjection()" >

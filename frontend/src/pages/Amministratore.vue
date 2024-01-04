@@ -3,18 +3,11 @@
 import {defineComponent} from "vue"
 import axios from "axios"
 import {FilmE} from "../types" // tipo di interfaccia creata nel file types.ts
-//import { Modifica } from "../types"
-
-interface EditingCell{
-    rowIndex: number
-    field: keyof FilmE
-}
 
 export default defineComponent({
     data(){
         return {
         ListaFilm: [] as FilmE [],
-        //EditedFilm: [] as Film [],
         editingCell: null,
         rowIndex: null,
         editmode: false,
@@ -42,17 +35,16 @@ export default defineComponent({
             this.$forceUpdate()
         },
 
-        editCell(rowIndex: any, cellIndex: string) {
+        editCell(rowIndex: any, cellIndex: string){
             console.log(this.editmode)
             this.editingCell = `${rowIndex}-${cellIndex}`;
         },
 
-        updateCell(rowI: number, cellI: number, v: string|number) {
+        updateCell(rowI: number, cellI: number, v: string|number): void {
             this.ListaFilm[rowI][cellI] = v;
         },
 
         finishEditing(rowIndex: number) {
-            //this.editmode = false;
             console.log(this.editmode)
             let riga = this.ListaFilm[rowIndex];
             this.editingCell = null;            

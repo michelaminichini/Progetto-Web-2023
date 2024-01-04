@@ -122,7 +122,7 @@ export default defineComponent({
   ul {
     flex-direction: column;
     position: absolute;
-    top: 60px; /* Adjust as needed */
+    top: 60px;
     left: 0;
     background-color: #333;
     width: 100%;

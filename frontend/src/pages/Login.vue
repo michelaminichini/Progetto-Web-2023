@@ -1,6 +1,6 @@
 <script lang="ts">
 import axios from "axios"
-import { defineComponent, withModifiers } from "vue"
+import { defineComponent } from "vue"
 
 export default defineComponent({
   data() {
@@ -19,7 +19,7 @@ export default defineComponent({
 
         const user = response.data;
         console.log('User Object:', user);
-        //let data = sessionStorage.getItem("key");
+        
         if (user) {
           // Se l'utente che esegue il login è un acquirente, viene rediretto ad una determinata pagina
           if (user.ruolo === "acquirente") {

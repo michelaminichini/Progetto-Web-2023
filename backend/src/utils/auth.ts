@@ -3,7 +3,7 @@ import jwt from "jsonwebtoken"
 
 interface User{
     idutente: number
-    email: string // detto anche username
+    email: string // vale come username
     ruolo: "amministratore" | "acquirente"
 }
 
