@@ -1,12 +1,11 @@
 <script lang="ts">
-import { PropType, defineComponent } from 'vue';
+import { defineComponent } from 'vue';
 import axios from "axios"
-import { DatiUtente, DatiPagamento, User, Tpag, Importo, PostoL, TempPar } from '../types';
+import { DatiUtente, DatiPagamento, Tpag, PostoL } from '../types';
 
 export default defineComponent({
     data(){
         return{
-            //user: null as User | null,
             user: '',
             datiUtente: [] as DatiUtente [],
             tipoPag: [] as Tpag [],
@@ -18,23 +17,14 @@ export default defineComponent({
             CVV: null,
             importo: "",
             posti: "",
-            //idbiglietto:0,
             isPopupOpen: false,
             costo: null as PostoL | null,
-            // tempP: [] as TempPar [], 
             IDpag: null,
             datiPag: [] as DatiPagamento [],
             IDproiez: "",
         }
     },
     methods:{
-        // async getParP(){
-        //     const res = await axios.get("/api/leggiParP")
-        //     this.tempP = res.data
-        //     console.log(res.data)
-        //     console.log(this.tempP[0].importo)
-        // },
-        
         getParP(){
             const imp = sessionStorage.getItem("importo")
             console.log(imp)
@@ -54,30 +44,9 @@ export default defineComponent({
             console.log(this.user)
  
         },
-
-        // async getDatiUtente(){
-        //     const res = await axios.get("/api/auth/profile")
-        //     this.user = res.data
-        //     console.log(this.user) 
-        //     const id = this.user?.idutente                    
-        //     console.log("Id "+id)
-        //     const res1 = await axios.get("/api/leggiutente/"+ id)
-        //     this.datiUtente = res1.data
-        //     console.log(this.datiUtente)
-        //     //const datann = dayjs(this.datiUtente[0].data_nascita).format('DD-MM-YYYY')
-        //     //this.datan = this.datiUtente[0].data_nascita
-        // },
-
         async aggiornaDatiPagamento(){
             try {
-                // const idutente = this.user;
-                // if (!idutente) {
-                //     console.error("User ID not available");
-                //     return;
-                // }
                 const paymentData = {
-                    //idutente: idutente,
-                    //costo: data,
                     tipo_pagamenti: this.tipo_pagamenti,           
                     importo: this.importo,
                     nomeT: this.nomeT,
@@ -89,14 +58,6 @@ export default defineComponent({
                 console.log('Dati pag: ',paymentData);
                 await axios.post("/api/aggiornapagamento", paymentData);
 
-                // this.nomeT =null,
-                // this.cognomeT= null,
-                // this.tipo_pagamenti = 0,           
-                // this.importo=0,
-                // this.Numero_carta = null;
-                // this.Data_scadenza = "";
-                // this.CVV = null;
-      
             } catch (e: any) {
                 if (e.response) {
                     alert(`${e.response.status} - ${e.response.statusText}\n${e.response.data}`)
@@ -134,7 +95,6 @@ export default defineComponent({
         async aggiornaBiglietti()
         {
             console.log('Biglietti')
-            //const idut = this.datiUtente[0].idutente
             let idpg = this.datiPag[0].idpagamento
             idpg = idpg.toString()
             console.log(this.IDproiez)
@@ -181,20 +141,14 @@ export default defineComponent({
                  // Handle the case where storedImporto is null (optional)
                 console.error('Stored importo è null');
             }
-            //this.importo = sessionStorage.getItem('totalCost')
-            //console.log(this.importo)
         }
         
     },
     mounted(){
         this.getParP()
-        //this.getDatiUtente()
         this.getTipoPag()
-        //this.getImporto()
-        //console.log('selectedSeatCost:', this.selectedSeatCost);    }
     }
 })
-
 </script>
 
 
@@ -203,25 +157,9 @@ export default defineComponent({
 <body>    
     <div class="container">
         <h1>Pagamento: </h1>        
-        <!-- form @submit.prevent="aggiornaDatiPagamento" -->
         <form>
             <h3 class="title">Totale {{ importo }}€ Posti: {{ posti }}</h3>
             <h3 class="title">Inserire dati per effettuare il pagamento</h3>
-                    <div>
-                        <!--PostiSala v-if="costo" :costo="costo" /-->
-                        <!--p style="color:white">Costo del posto selezionato: {{ importo }} €</p>-->
-                       
-                        
-                    </div>
-                    <!-- <div class="inputBox">
-                        <span>Importo</span>
-                        <input 
-                        v-model="importo"
-                        type="number" 
-                        class="rounded-lg border-slate-200"
-                        placeholder="0.00"
-                        />
-                    </div> -->
                     <div class="inputBox">
                         <span>Tipo di pagamento</span>
                         <select class="firstLastNames linkBox"  v-model="tipo_pagamenti" type="number" @change="changePagamenti()" >

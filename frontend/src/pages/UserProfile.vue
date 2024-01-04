@@ -25,21 +25,9 @@ export default defineComponent({
     
     methods:{
         formatDateTime(data: string): string{
-            //this.dataE=dayjs(data).format('DD-MM-YYYY');
             console.log(this.dataE)
             return dayjs(data).format('DD-MM-YYYY'); // Example: Formatting date using Day.js
         },
-        // dateToYYYYMMDD(d: { getTime: () => number; getTimezoneOffset: () => number; }) {
-        //     return d && new Date(d.getTime()-(d.getTimezoneOffset()*60*1000)).toISOString().split('T')[0];
-        // },
-        
-        //updateValue(event: Event) {
-        //    if (event instanceof InputEvent) {
-        //        const target = event.target as HTMLInputElement;
-        //        this.$emit('input', target.valueAsDate);
-        //    }
-        //},
-
         selectAll: function (event: Event) {
             setTimeout(function () {
                 const target = event.target as HTMLInputElement;
@@ -77,9 +65,6 @@ export default defineComponent({
             console.log(this.datiUtente)
             this.dataE = dayjs(this.datiUtente[0].data_nascita).format('DD-MM-YYYY')
             console.log(this.dataE)
-            //const datann = dayjs(this.datiUtente[0].data_nascita).format('DD-MM-YYYY')
-            //this.datan = this.datiUtente[0].data_nascita
-    
         },
 
         async updateDatiUtente(){
@@ -90,8 +75,8 @@ export default defineComponent({
             .then(response => {console.log(response.data)})
             this.dataE=dayjs(datiU[0].data_nascita).format('DD-MM-YYYY');
             this.editmode = false
-            //alert("Dati aggiornati")
         },
+
         // Pop-up window viene aperta o chiusa in base allo stato della variabile isPopupOpen
         openPopup() {
             this.isPopupOpen = true;
@@ -161,11 +146,6 @@ export default defineComponent({
                         </div>
                         <div v-else>Data di nascita: {{formatDateTime(utente.data_nascita)}}</div>
                     </div>
-                    <!-- <div v-if="editmode">
-                        Data di nascita:
-                        <input v-model="dataE" placeholder="data di nascita">
-                    </div>
-                    <div v-else>Data di nascita: {{formatDateTime(utente.data_nascita)}}</div> -->
                     <div v-if="editmode">
                         Telefono: 
                         <input v-model="utente.telefono" placeholder="numero di telefono">

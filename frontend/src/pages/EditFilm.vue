@@ -113,7 +113,7 @@ export default defineComponent({
                     <div v-else>Stato: {{film.stato}}</div>              
                     <div>
                         <button v-on:click="edit()" class="btn btn-danger">edit</button>
-                        <button type="button" v-on:click="updateDatiFilm()" class="btn btn-danger"  @click="openPopup">save</button>
+                        <button type="button" v-on:click="updateDatiFilm()" class="btn btn-danger"  @click="openPopup">Salva</button>
                         <dialog :open="isPopupOpen">
                             <p>Modifiche effettuate con successo!</p>
                             <button @click="closePopup">Chiudi</button>

@@ -1,13 +1,8 @@
 <script lang="ts">
-import { defineComponent, PropType} from "vue"
+import { defineComponent } from "vue"
 import axios from "axios"
 import { IDsala, posto, PostoL } from "../types"
 import { postoF } from "../types"
-//import { Modifica } from "../types"
-//import { DatiUtente } from "../types"
-//import { PostoL } from "../types"
-//import { IdSala } from "../types"
-//import Payment from "./Pagamento.vue"
 
 export default defineComponent({
   data() {
@@ -17,20 +12,12 @@ export default defineComponent({
       seatLayout: [] as PostoL[][], // doppia [] perchè  seatLayout è un array bidimensionale in cui ogni elemento rappresenta una fila di sedili e ogni sedile è un oggetto con proprietà definite dall'interfaccia PostoL. 
       //Le doppie parentesi quadre [][] indicano le due dimensioni dell'array.
       costo: null as posto | null,
-      //selectedSeat: null,
-      //seatCost: 5,
       importo: 0.0,
       isPopupOpen: false,
       seatL : '',
-      //datiUtente: [] as DatiUtente [],
       user: ''
     }
   },
-  // computed:{
-  //   selectedSeatCost() {
-  //     return this.selectedSeat ? this.seatCost : 0;
-  //   },
-  // },
   methods: {
     getSala() {
         axios.get("/api/sala/" + this.$route.params.idproiezione)
@@ -40,11 +27,6 @@ export default defineComponent({
       axios.get("/api/postiF/" + this.$route.params.idproiezione)
       .then(response => {this.posti = response.data; console.log(response.data)})
     },
-        /* getSala() {
-        axios.get("/api/sala/" + this.$route.params.idproiezione)
-        .then(response => {this.sala = response.data[0]; console.log(response.data)})
-    }, */
-
     toggleSeat(rowIndex: number, seatIndex: number) {
       const seat = this.seatLayout[rowIndex][seatIndex];
       if (!seat.occupato) {
@@ -55,7 +37,6 @@ export default defineComponent({
     bookSeats() {
       const selectedSeats: any[] = [];
       const idproj = sessionStorage.getItem("proiezione");
-      //let totalCost = 0
       this.importo=0
       this.seatLayout.forEach(row => {
         row.forEach(seat => {
@@ -63,7 +44,6 @@ export default defineComponent({
             seat.occupato = true;
             seat.selected = false; // Reset selected state after booking
             selectedSeats.push(seat.label);
-            //totalCost += seat.costo
             this.importo =this.importo + 8.5;
             const AggParam = {
               idproiezione: idproj,
@@ -80,14 +60,7 @@ export default defineComponent({
       const usr = this.user
       sessionStorage.setItem("importo", totale);
       sessionStorage.setItem("posti", SSeats);
-      //sessionStorage.setItem("proiezione", idProiez);
-      sessionStorage.setItem("utente", usr);
-      //this.seatL = SSeats;
-      //sessionStorage.setItem('totalCost', totalCost.toString()) // settato un Item (totalCost) da passare nella pagina Pagamento.vue per poter visualizzare l'importo finale
-      //console.log('Costo finale:', totalCost)
-      //this.$SeatList = selectedSeats;
-      //console.log(this.$SeatList);
-      //alert(`Booked seats: ${selectedSeats.join(', ')}, Importo: ${this.importo}`);
+      sessionStorage.setItem("utente", usr); 
       this.$router.push('/pagamento');
     },
 
@@ -102,9 +75,9 @@ export default defineComponent({
     async getPostiL() {
       const idproj = sessionStorage.getItem("proiezione");
       const res1 = await axios.get("/api/sala/" + idproj)
-      //const res = await axios.get("/api/postiL")
+      
       console.log("ECCO I TUOI RISULTATI:", res1.data)
-      //if (res1.data && res1.data.length > 0 && res1.data[0].posti_fila) {
+      
       const paramfila = res1.data;
       console.log("RESULTS HERE:", paramfila[0].posti_fila);
       console.log("ID PROIEZIONE: ", idproj)
@@ -115,41 +88,13 @@ export default defineComponent({
       const subArrays: number[][] = this.chunkArray(dataArray, ppf);
       console.log(res.data);
 
-      //const dataArray = res.data;
-
-      // Displaying data in subarrays in the console
-      //const subArrays = this.chunkArray(dataArray, ppf);
       subArrays.forEach((subArray, index) => {
         console.log(`Subarray ${index + 1}:`, subArray);
         this.seatLayout.push(subArray);
       });
-    //} else {
-      //console.error("Invalid data structure or empty array in response.");
-    //}
 
-      /*
-      const paramfila = res1.data;
-      console.log("RESULTS HERE:", paramfila[0].posti_fila);
-
-      const ppf = paramfila[0].posti_fila;
-
-      const res = await axios.get("/api/postiF/" + this.$route.params.idproiezione)
-      //this.seatLayoutDB = res.data
-      console.log(res.data)
-
-      const dataArray = res.data;
-
-      // Displaying data in subarrays in the console
-      const subArrays = this.chunkArray(dataArray, ppf); 
-      subArrays.forEach((subArray, index) => {
-        console.log(`Subarray ${index + 1}:`, subArray);
-        this.seatLayout.push(subArray)
-      });
-      */
     },
-    // selectSeat(seat) {
-    //   this.selectedSeat = seat;
-    // },
+    
     async getIdUtente(){
             const res = await axios.get("/api/auth/profile")
             this.user = res.data.idutente
@@ -157,14 +102,8 @@ export default defineComponent({
     },
   },
   mounted() {
-    //this.getSala()
     this.getIdUtente()
-    //this.getPostiF()
-    //this.getSala()
     this.getPostiL()
-    //console.log(this.seatLayout);
-    //console.log('Risultati query');
-    //console.log(this.salaP[0]);
     console.log(this.seatLayout);
   }
 });
