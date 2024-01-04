@@ -19,17 +19,7 @@ export async function salaX(req:Request, res:Response) {
     )
     res.json(results)
 }
-/*
-export async function postiX(req:Request, res:Response) {
-    const connection = await getConnection()
-    const [results] = await connection.execute(
-        `SELECT idposto, idproiezione, fila, numero, occupato, speciale FROM posti_proiezione WHERE idproiezione = ?`, 
-        [req.params.id],
-    )
-    res.json(results)
-    console.log(res)
-}
-*/
+
 export async function postiF(req:Request, res:Response) {
     const connection = await getConnection()
     const [results] = await connection.execute(
@@ -37,19 +27,8 @@ export async function postiF(req:Request, res:Response) {
         [req.params.id],
     )
     res.json(results)
-    //console.log(res)
 }
-/*
-export const getPostiL = async (req:Request, res:Response) => {
-    const connection = await getConnection()
-    const [results] = await connection.execute(
-        `SELECT label,selected,occupato FROM posti_proiezione WHERE idproiezione = 9`
-    )
-    res.json(results)
-}
-*/
-
-
+// Aggiorna lo stato del sedile prenotato dall'utente
 export async function aggiornaPostoPF(req:Request, res: Response) {
     const {idproiezione, label} = req.body
     console.log(req.body)
@@ -61,22 +40,3 @@ export async function aggiornaPostoPF(req:Request, res: Response) {
     res.json(results)
 }
 
-export async function aggiornaParamP(req:Request, res: Response) {
-    const {idproiezione,importo,Seats} = req.body
-    console.log(req.body)
-    const connection = await getConnection()
-    const [results] = await connection.execute(
-        `UPDATE temp SET id_proiezione = ?,importo = ?, posti = ? WHERE id=1`,
-        [idproiezione,importo,Seats]
-    )
-    res.json(results)
-}
-
-// export async function leggiParamP(req:Request, res:Response) {
-//     const connection = await getConnection()
-//     const [results] = await connection.execute(
-//         `SELECT id_proiezione,importo,posti FROM temp WHERE id = 1`,
-//         [],
-//     )
-//     res.json(results)
-// }

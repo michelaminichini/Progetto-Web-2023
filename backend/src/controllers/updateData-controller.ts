@@ -5,28 +5,22 @@ import {getConnection} from "../utils/db"
 export const aggiornaDatiPagamentoUtente = async (req: Request, res: Response) => {
    try {
     const {tipo_pagamenti,importo,nomeT,cognomeT,Numero_carta, Data_scadenza, CVV} = req.body
-    //const idutente = req.params.id
+    
     console.log(req.body)
     const connection = await getConnection()
-
-    //const [userResult] = await connection.execute(`SELECT idutente FROM utente WHERE idutente = ?`, [req.params.id]);
-    //if (Array.isArray(userResult) && userResult.length > 0){
 
         await connection.execute(`INSERT INTO pagamenti (idtipo_pagamento1,importo,Titolare_nome,Titolare_cognome, Numero_carta, Data_scadenza, CVV) VALUES (?,?,?,?,?,?,?)`,
         [tipo_pagamenti,importo,nomeT,cognomeT,Numero_carta, Data_scadenza, CVV]),
         res.json({ message: "Pagamento effettuato, dati salvati" });
 
-    //} else {
-      //res.status(404).json({ error: "User not found or condition not met" });
-    //}
+    
    } catch (error) {
     console.error('Error inserting payment:', error);
     res.status(500).json({ error: 'Internal Server Error' });
   }
-    //res.json({ message: "Pagamento effettuato, dati salvati"})
+    
 } 
-// Nella pagina del profilo dell'utente, premendo la prima icona, l'utente visualizza i propri dati personali e, successivamente, può scegliere se modificarli (query successiva)
- 
+
 export const leggiDatiPagamento =async (req: Request, res: Response) => {
   const connection = await getConnection()
   const [results] = await connection.execute(`SELECT * FROM pagamenti WHERE idpagamento=(SELECT MAX(idpagamento) FROM pagamenti)`,
