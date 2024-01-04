@@ -93,15 +93,6 @@ export async function deleteFilm(req:Request, res: Response) {
     )
     res.json(results)
 }
-// Cancellazione riga di una proiezione dal secondo pannello admin - operazione solo per amministratori
-export async function cancellaDati(req:Request, res: Response) {
-    const connection = await getConnection()
-    const [results] = await connection.execute(
-        `DELETE FROM proiezioni WHERE idproiezione=?`,
-        [req.params.id],
-    )
-    res.json(results)
-}
 
 export async function aggiornaDati(req:Request, res: Response) {
     const {idfilm,idsala, datap, orario, idproiezione} = req.body
@@ -159,14 +150,7 @@ interface ProjectionIdResult {
     newProjectionID: number;
 }
 */
-export async function nuovaProiezione(req:Request, res: Response) {
-    const {idfilm,idsala,datap,orariop} = req.body
-    console.log(req.body)
-    const connection = await getConnection()
-    const [results] = await connection.execute(
-        `INSERT INTO proiezioni (idfilm, idsala, datap, orario) VALUES (?,?,?,?)`,
-        [idfilm,idsala,datap,orariop]
-    );
+
     /*
     const [projectionIdResult] = await connection.execute(
         'SELECT LAST_INSERT_ID() as newProjectionID'
@@ -203,16 +187,6 @@ export async function nuovaProiezione(req:Request, res: Response) {
     console.log(executeResult);
     res.json({ message: 'Projection and seats created successfully!' });
     */
-    res.json(results)
-}
 
-// Cancellazione riga di una proiezione dalla tabella admin2 - operazione solo per amministratori
-export async function deleteProj(req:Request, res: Response) {
-    const connection = await getConnection()
-    const [results] = await connection.execute(
-        `DELETE FROM proiezioni WHERE idproiezione=?`,
-        [req.params.id],
-    )
-    res.json(results)
-}
+
 
