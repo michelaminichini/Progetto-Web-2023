@@ -51,7 +51,7 @@ export default defineComponent({
     
                     <div v-if="editmode">
                         Titolo: 
-                        <input v-model="film.titolo">
+                        <input size="50" v-model="film.titolo">
                     </div>
                     <div v-else>Titolo: {{film.titolo}}</div>
                     <div v-if="editmode">
@@ -80,18 +80,20 @@ export default defineComponent({
                     </div>
                     <div v-else>Anno: {{film.anno}}</div>
                     <div v-if="editmode">
-                        Descrizione: 
-                        <textarea v-model="film.descrizione" placeholder="descrizione film"></textarea>
+                        <label for="descrizione">Descrizione:</label> 
+                        <br>
+                        <textarea v-model="film.descrizione" id="descrizione" rows="3" cols="60" placeholder="descrizione film"></textarea>
+                        <br/>
                     </div>
                     <div v-else>Descrizione: {{film.descrizione}}</div>
                     <div v-if="editmode">
                         Url trailer: 
-                        <input v-model="film.trailer" placeholder="trailer film">
+                        <input v-model="film.trailer" size="40" placeholder="trailer film">
                     </div>
                     <div v-else>Url trailer: {{film.trailer}}</div>
                     <div v-if="editmode">
                         Url locandina: 
-                        <input v-model="film.locandina" placeholder="locandina film">
+                        <input v-model="film.locandina" size="40" placeholder="locandina film">
                     </div>
                     <div v-else>Url locandina: {{film.locandina}}</div>
                     <div v-if="editmode">
@@ -101,7 +103,7 @@ export default defineComponent({
                     <div v-else>Lingua: {{film.lingua}}</div>  
                     <div v-if="editmode">
                         Attori: 
-                        <input v-model="film.attori" placeholder="attori film">
+                        <input v-model="film.attori" size="50" placeholder="attori film">
                     </div>
                     <div v-else>Attori: {{film.attori}}</div>    
                     <div v-if="editmode">
