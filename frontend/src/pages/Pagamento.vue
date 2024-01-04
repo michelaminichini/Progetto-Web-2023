@@ -79,7 +79,7 @@ export default defineComponent({
                     //idutente: idutente,
                     //costo: data,
                     tipo_pagamenti: this.tipo_pagamenti,           
-                    //importo: this.importo,
+                    importo: this.importo,
                     nomeT: this.nomeT,
                     cognomeT: this.cognomeT,
                     Numero_carta: this.Numero_carta,

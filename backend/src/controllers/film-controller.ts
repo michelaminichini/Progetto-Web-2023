@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import {getConnection} from "../utils/db"
 
+
 export async function allFilms(req:Request, res: Response) {
     const connection = await getConnection()
     const [results] = await connection.execute(
@@ -148,10 +149,15 @@ export async function nuoviDati(req:Request, res: Response) {
 */
 
 /*
+interface Seat {
+    idproiezione: number;
+    fila: string;
+    numero: number;
+    label: string,
+}
 interface ProjectionIdResult {
     newProjectionID: number;
- }
-
+}
 */
 export async function nuovaProiezione(req:Request, res: Response) {
     const {idfilm,idsala,datap,orariop} = req.body
@@ -162,31 +168,39 @@ export async function nuovaProiezione(req:Request, res: Response) {
         [idfilm,idsala,datap,orariop]
     );
     /*
-    const [projectionIdResult] = await connection.execute<
-      [{ newProjectionID: number }]
-    >('SELECT LAST_INSERT_ID() as newProjectionID');
-
-    const newProjectionID = projectionIdResult[0]?.newProjectionID;
-    // Generate rows and seat numbers
+    const [projectionIdResult] = await connection.execute(
+        'SELECT LAST_INSERT_ID() as newProjectionID'
+    );
+    console.log(projectionIdResult);
+    const customProjectionIdResult = projectionIdResult as { newProjectionID: number }[];
+    const newProjectionID = customProjectionIdResult[0]?.newProjectionID;
+   
+    
+    //if (newProjectionID !== undefined && newProjectionID !== null) {
+    // Genero file e numeri per poi combinarli e creare le labels dei sedili
     const rows = ['A', 'B', 'C', 'D'];
     const seatNumbers = [1, 2, 3, 4, 5];
 
     const seatsToInsert = [];
-    for (const row of rows) {
-        for (const number of seatNumbers) {
-          const seat = {
-            projectionID: newProjectionID,
-            seatNumber: `${row}${number}`,
-          };
+    for (const fila of rows) {
+        for (const numero of seatNumbers) {
+            const seat: Seat = {
+                idproiezione: newProjectionID,
+                fila,
+                numero,
+                label: `${fila}${numero}`,
+              };
           seatsToInsert.push(seat);
         }
     }
+    
     const insertSeatsQuery =
-      'INSERT INTO posti_proiezione (projectionID, seatNumber) VALUES ?';
+    'INSERT INTO posti_proiezione (idproiezione, fila, label, numero) VALUES (?, ?, ?, ?)';
     const seatValues = seatsToInsert.map(
-      (seat) => [seat.projectionID, seat.seatNumber] // Adjust based on your column names
+      (seat) => [seat.idproiezione, seat.fila, seat.label, seat.numero] 
     );
-    await connection.query(insertSeatsQuery, [seatValues]);
+    const [executeResult] = await connection.execute(insertSeatsQuery, seatValues);
+    console.log(executeResult);
     res.json({ message: 'Projection and seats created successfully!' });
     */
     res.json(results)

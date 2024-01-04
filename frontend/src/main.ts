@@ -1,8 +1,9 @@
 import { createApp } from "vue"
 import {createRouter, createWebHistory, Router} from "vue-router"
-//import './style.css'
 import "bootstrap"
 import "bootstrap/dist/css/bootstrap.min.css"
+import axios from "axios"
+
 import App from "./App.vue"
 import Home from "./pages/Home.vue"
 import Prossimamente from "./pages/Prossimamente.vue"
@@ -11,17 +12,13 @@ import Login from "./pages/Login.vue"
 import SchedaFilm from "./pages/SchedaFilm.vue"
 import PostiSala from "./pages/PostiSala.vue"
 import Pagamento from "./pages/Pagamento.vue"
-//import PaginaAdmin from "./pages/PaginaAdmin.vue"
-//import SeatBooking from "./pages/SeatBooking.vue"
 import UserProfile from "./pages/UserProfile.vue"
 import Amministratore from "./pages/Amministratore.vue"
-//import Pannello2 from "./pages/Pannello2admin.vue"
 import Pannello2 from "./pages/Pannello2admin.vue"
-import Register from "./pages/Registrazione.vue"
+import Registrazione from "./pages/Registrazione.vue"
 import Profilo from "./pages/Profilo.vue"
-//import Amministratore from "./pages/ProvaGiulia.vue"
 import EditFilm from "./pages/EditFilm.vue"
-import axios from "axios"
+
 import { User } from "./types"
 
 
@@ -32,19 +29,15 @@ const router: Router = createRouter({
         { path: "/prossimamente", component: Prossimamente },
         { path: "/info", component: InfoCinema },
         { path: "/login", component: Login},
-        { path: "/register", component: Register},
+        { path: "/register", component: Registrazione},
         { path: "/film/:idfilm", component: SchedaFilm },
-        //{ path: "/seatbooking", component: SeatBooking},
-        { path: "/pagamento", component: Pagamento, meta: { requireLogin: true },},
-        //{ path: "/paginaAdmin", component: PaginaAdmin},
-        { path: "/PostiSala", component: PostiSala, meta: { requireLogin: true }},
-        { path: "/profiloutente", component: UserProfile, meta: { requireLogin: true },},
+        { path: "/pagamento", component: Pagamento, meta: { requireLogin: true },}, // per accedervi, è necessario effettuare prima il login
+        { path: "/PostiSala", component: PostiSala, meta: { requireLogin: true }}, // per accedervi, è necessario effettuare prima il login
+        { path: "/profiloutente", component: UserProfile, meta: { requireLogin: true },}, // per accedervi, è necessario effettuare prima il login
         { path: "/profilo", component: Profilo},
-        { path: "/adminpage", component: Amministratore, meta: { requireLogin: true }},
-        { path: "/pannello2", component: Pannello2, meta: { requireLogin: true }},
-        //{ path: "/adminpage", component: Amministratore},
+        { path: "/adminpage", component: Amministratore, meta: { requireLogin: true }}, // per accedervi, è necessario effettuare prima il login
+        { path: "/pannello2", component: Pannello2, meta: { requireLogin: true }}, // per accedervi, è necessario effettuare prima il login
         { path: "/editfilm/:idfilm", component: EditFilm},
-        //{ path: "/pannello2", component: Pannello2},
     ]
 })
 
@@ -65,13 +58,7 @@ router.beforeEach(async (to) => {
     }
 })
 
-//interface AppConfig {
-//    globalProperties: Record<string, any>
-//}
-
 createApp(App).use(router).mount("#app");
-//definizione di variabili globali
-//app.config.globalProperties.$SeatList = 'ABCD';
-//app.config.globalProperties.$CurrentProj = 123;
+
 
 

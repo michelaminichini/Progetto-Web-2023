@@ -48,16 +48,6 @@ export interface FilmEG{
     attori: string
     stato: string    
 }
-/* export interface Prox{
-    id_film: number
-    titolo_film: string
-    regista_film : string
-    genere_film: string
-    anno_uscita: string
-    descrizione: string
-    trailer: string
-    locandina: string
-} */
 
 export interface SchedaF{
     idfilm: number
@@ -78,16 +68,11 @@ export interface DataOra {
 }
 
 export interface Film_admin {
-    //locandina:;
     titolo: string
     genere: string
     regista: string
     anno: number
-  }
-  
-/*   export interface FilmResponse {
-    data: Film_admin[];
-  } */
+}
   
 export interface IDproiezioneSB {
     idproiezione: number

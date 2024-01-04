@@ -4,29 +4,28 @@ import { defineComponent } from 'vue';
 export default defineComponent({
   data() {
     return {
-      isMobileNavOpen: true,
+      isMobileNavOpen: true, // inizialmente settato a true
     }
   },
   mounted() {
     this.updateMobileNavState();
-    
-    // Listen for window resize events to update isMobileNavOpen
+
+    // Ascolto i window resize events per aggiornare isMobileNavOpen
     window.addEventListener('resize', this.updateMobileNavState);
 
-    //this.isMobileNavOpen = window.innerWidth <= 600;
-    // Check if the media query is active initially
+    // Controllo se la media query è inizialmente attiva
     this.logMediaQueryStatus();
 
-    // Listen for window resize events to log changes in media query status
+    // Ascolto i window resize events per registrare le modifiche dello stato delle media query 
     window.addEventListener('resize', this.logMediaQueryStatus);
   },
   beforeDestroy() {
-    // Remove the resize event listener to avoid memory leaks
+    // Rimuovo il resize event listener per evitare perdite di memoria
     window.removeEventListener('resize', this.updateMobileNavState);
   },
   methods: {
     updateMobileNavState() {
-      // Check the screen width and update isMobileNavOpen
+      // Controllo la grandezza della window e aggiorno il valore di isMobileNavOpen
      
       if (window.innerWidth <= 600){
         this.isMobileNavOpen = false
@@ -35,18 +34,17 @@ export default defineComponent({
       }
     },
     toggleMobileNav() {
-      //console.log('Clicked');
       this.isMobileNavOpen = !this.isMobileNavOpen;
       console.log('isMobileNavOpen:', this.isMobileNavOpen);
     },
-    // Checks for errors in the console log
+    // Controllo errori nella console log
     logMediaQueryStatus() {
     const isMediaQueryActive = window.matchMedia('(max-width: 600px)').matches;
 
     if (isMediaQueryActive) {
-      console.log('Media query is active');
+      console.log('Media query è attiva');
     } else {
-      console.log('Media query is not active');// if it is more than 600
+      console.log('Media query non è attiva');// Se la window è più grande di 600
     }
   },
   },
@@ -86,15 +84,6 @@ export default defineComponent({
             <li class="nav-item" style="margin-right: 5%;">
               <router-link class="nav-link" to="/info">Info</router-link>
             </li>
-            <!-- li class="nav-item" style="margin-right: 5%;">
-              <router-link class="nav-link" to="/seatbooking">SeatBooking</router-link>
-            </li --> 
-            <!--li class="nav-item">
-              <router-link class="nav-link" to="/pagamento">Pagamento</router-link>
-            </li-->
-            <!--li class="nav-item" style="margin-right: 5%;">
-              <router-link class="nav-link" to="/paginaAdmin">Pagina Admin</router-link>
-            </li-->
             <li class="nav-item" style="margin-right: 5%;">
               <router-link class="nav-link" to="/adminpage">Pagina Amministratore</router-link>
             </li>
