@@ -86,7 +86,7 @@ export default defineComponent({
                     Data_scadenza: this.Data_scadenza,
                     CVV: this.CVV,
                 };
-                console.log(paymentData);
+                console.log('Dati pag: ',paymentData);
                 await axios.post("/api/aggiornapagamento", paymentData);
 
                 // this.nomeT =null,
