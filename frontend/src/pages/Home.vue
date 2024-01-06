@@ -3,6 +3,7 @@
 import {defineComponent} from "vue"
 import axios from "axios"
 import {Film} from "../types"
+
 export default defineComponent({
     data(){
         return {

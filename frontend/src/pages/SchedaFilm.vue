@@ -52,7 +52,7 @@ export default defineComponent({
             <td>{{filmS.genere}}</td>
           </tr>
           <tr>
-            <th>Descrizione</th>
+            <th>Trama</th>
             <td>{{filmS.descrizione}}</td>
           </tr>
         </table>
