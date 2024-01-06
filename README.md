@@ -3,7 +3,8 @@
 ## Table of Contents
 
 - [Introduzione](#introduzione)
-- [Features](#features)
+- [Features per utenti](#features-per-utenti)
+- [Features per amministratori](#features-per-amministratori)
 - [Tecnologie utilizzate](#tecnologie-utilizzate)
 - [Pacchetti Installati](#pacchetti-installati)
 - [Struttura del progetto](#struttura-del-progetto)
@@ -21,13 +22,20 @@ Una volta scelto, l'utente può procedere ad effettuare il login al suo account 
 
 Se invece ad effettuare il login è l'amministratore, allora sarà disponibile una seconda versione dell'applicazione in cui sarà possibile modificare i campi presenti, come per esempio i film disponibili, gli orari e le date.
 
-## Features
+## Features per utenti
 
-- Esplora il sito alla ricerca di un film. Una volta deciso quale si preferisce, clicca su "scheda film" per selezionare una data e un orario.
+- Esplora il sito alla ricerca di un film. Una volta scelto, clicca su "scheda film" per selezionare una data e un orario.
 - Scegli un posto a sedere e acquista un biglietto una volta effettuato il login al tuo account personale
-- Puoi verificare il tuo profilo nell'apposita sezione. Premi su "login" una volta effettuato l'accesso
-- Non hai ancora un account? Crealo in pochi e semplici passi riempiendo le caselle presenti nella sezione "registrati"
-- Responsive design per tutti i devices
+- Puoi verificare il tuo profilo nell'apposita sezione. Premi su "login" una volta effettuato l'accesso e poi su "vedi profilo"
+- Non hai ancora un account? Crealo in pochi e semplici passi nella sezione "registrati"
+- Responsive design
+
+## Features per amministratori
+
+- Accedi con il tuo account nella sezione "Login"
+- Utilizza i pannelli di controllo per gestire l'intera applicazione
+- Potrai modificare, aggiungere o togliere informazioni che verranno poi visualizzate dagli utenti
+- Responsive design
 
 ## Tecnologie utilizzate
 
@@ -76,6 +84,16 @@ Nella bash
 - /api/cronologia/:id
 - /api/auth/profile
 - /api/leggiutente/:id
+- /api/infoToUpdate
+- /api/activefilms
+- /api/listasale
+- /api/editfilm/:id
+- /api/proiezione
+- /api/sala/:id
+- /api/postiF/:id
+- /api/leggiproj
+- /api/tipopag
+- /api/leggipag
 
 ## POST
 - /api/inserimento
@@ -83,13 +101,20 @@ Nella bash
 - /api/auth/login
 - /api/auth/logout
 - /api/aggiornapagamento
+- /api/aggiornaPP/:ids
+- /api/aggiornaIdP/:idp
+- /api/nuovaproj
+- /api/aggiornaticket
 
 ## PUT
 - /api/aggiornamento
 - /api/aggiornautente
+- /api/aggiornaPF
 
 ## DELETE
 - /api/eliminazione/:id
+- /api/eliminaproj/:id
+- /api/cancella-dati/:id
 
 ## Database
 
@@ -99,8 +124,8 @@ I dati vengono letti dal database e visualizzati correttamente grazie alla conne
 Esso è composto di 9 diverse tabelle ciascuna con i propri attributi e collegate tra loro mediante "foreign key". Infine, è usato per immagazzinare tutti i dati degli utenti in totale sicurezza.
 
 ## Color accessibility
-Particolare attenzione all'uso dei colori. Utilizzo del contrasto sfondo scuro - scritte chiare.
 
+Particolare attenzione all'uso dei colori. Utilizzo del contrasto. Uso di sfondi di colore più scuro (background) e uso di colori più chiari per parti testuali (foreground).
 
 ## Documentazione
 
