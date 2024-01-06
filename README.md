@@ -3,7 +3,8 @@
 ## Table of Contents
 
 - [Introduzione](#introduzione)
-- [Features](#features)
+- [Features per utenti](#features-per-utenti)
+- [Features per amministratori](#features-per-amministratori)
 - [Tecnologie utilizzate](#tecnologie-utilizzate)
 - [Pacchetti Installati](#pacchetti-installati)
 - [Struttura del progetto](#struttura-del-progetto)
@@ -21,13 +22,19 @@ Una volta scelto, l'utente può procedere ad effettuare il login al suo account 
 
 Se invece ad effettuare il login è l'amministratore, allora sarà disponibile una seconda versione dell'applicazione in cui sarà possibile modificare i campi presenti, come per esempio i film disponibili, gli orari e le date.
 
-## Features 
+## Features per utenti
 
 - Esplora il sito alla ricerca di un film. Una volta scelto, clicca su "scheda film" per selezionare una data e un orario.
 - Scegli un posto a sedere e acquista un biglietto una volta effettuato il login al tuo account personale
 - Puoi verificare il tuo profilo nell'apposita sezione. Premi su "login" una volta effettuato l'accesso e poi su "vedi profilo"
 - Non hai ancora un account? Crealo in pochi e semplici passi nella sezione "registrati"
 - Responsive design
+
+## Features per amministratori
+
+- Accedi con il tuo account nella sezione "Login"
+- Utilizza i pannelli di controllo per gestire l'intera applicazione
+- Potrai modificare, aggiungere o togliere informazioni che verranno poi visualizzate dagli utenti
 
 ## Tecnologie utilizzate
 
