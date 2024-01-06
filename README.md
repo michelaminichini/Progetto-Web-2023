@@ -35,6 +35,7 @@ Se invece ad effettuare il login è l'amministratore, allora sarà disponibile u
 - Accedi con il tuo account nella sezione "Login"
 - Utilizza i pannelli di controllo per gestire l'intera applicazione
 - Potrai modificare, aggiungere o togliere informazioni che verranno poi visualizzate dagli utenti
+- Responsive design
 
 ## Tecnologie utilizzate
 
