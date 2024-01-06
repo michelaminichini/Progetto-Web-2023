@@ -92,9 +92,9 @@ export default defineComponent({
                 <button @click="addFilm()" type="button" class="btn btn-primary float-end">
                     Aggiungi
                 </button>
-                <button id="secondo-pannello-up" @click="redirect()" type="button" class="btn btn-primary float-end">
+                <!-- <button id="secondo-pannello-up" @click="redirect()" type="button" class="btn btn-primary float-end">
                     Vai a pannello 2
-                </button>
+                </button> -->
 
             </h4>
         </div>

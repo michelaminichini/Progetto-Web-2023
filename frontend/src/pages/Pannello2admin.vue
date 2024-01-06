@@ -223,9 +223,9 @@ export default defineComponent({
                 <button @click="addProj()" type="button" class="btn btn-primary float-end">
                     Aggiungi
                 </button>
-                <button id="primo-pannello-up" @click="redirect()" type="button" class="btn btn-primary float-end">
+                <!-- <button id="primo-pannello-up" @click="redirect()" type="button" class="btn btn-primary float-end">
                     Vai a pannello 1
-                </button>
+                </button> -->
             </h4>
         </div>
         <div>

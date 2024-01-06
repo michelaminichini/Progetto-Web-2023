@@ -10,6 +10,8 @@ export default defineComponent({
   methods: {
     async logout() {
       await axios.post("/api/auth/logout")
+      sessionStorage.setItem('isAdmin','')
+      sessionStorage.setItem('utente','')
       window.location.reload()
     },
   },

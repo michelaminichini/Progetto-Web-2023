@@ -1,6 +1,7 @@
 <script lang="ts">
 import axios from "axios"
 import { defineComponent } from "vue"
+import Amministratore from "./Amministratore.vue"
 
 export default defineComponent({
   data() {
@@ -30,12 +31,13 @@ export default defineComponent({
             }
             else {
               this.$router.push('/PostiSala');
-            }       
-            //se invece l'utente che esegue il login è un amministratore, viene rediretto ad un'altra pagina
-          } else if (user.ruolo === "amministratore"){
+            }
+          }       
+          //se invece l'utente che esegue il login è un amministratore, viene rediretto ad un'altra pagina
+          if (user.ruolo === "amministratore"){
             sessionStorage.setItem("isAdmin","1")
-            window.location.href = "/adminpage"; 
-          }
+            this.$router.push('/adminpage'); 
+          } 
         }
       } catch (e:any) {
         if (e.response) {

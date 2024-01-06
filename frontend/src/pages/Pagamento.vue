@@ -57,7 +57,6 @@ export default defineComponent({
                 };
                 console.log('Dati pag: ',paymentData);
                 await axios.post("/api/aggiornapagamento", paymentData);
-
             } catch (e: any) {
                 if (e.response) {
                     alert(`${e.response.status} - ${e.response.statusText}\n${e.response.data}`)
@@ -111,13 +110,16 @@ export default defineComponent({
             console.log(ticketData);
             try {
                 await axios.post("/api/aggiornaticket", ticketData); 
+                
             } catch (e: any) {
                 if (e.response) {
                     alert(`${e.response.status} - ${e.response.statusText}\n${e.response.data}`)
                 } else {
                     alert(e.message)
                 }
-            }          
+            } 
+            //azzero dati transizione
+            sessionStorage.setItem("proiezione","")         
         },
 
         openPopup() {

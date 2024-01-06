@@ -5,6 +5,7 @@ export default defineComponent({
   data() {
     return {
       isMobileNavOpen: true, // inizialmente settato a true
+      admin: '',
     }
   },
   mounted() {
@@ -18,6 +19,9 @@ export default defineComponent({
 
     // Ascolto i window resize events per registrare le modifiche dello stato delle media query 
     window.addEventListener('resize', this.logMediaQueryStatus);
+
+    this.admin = sessionStorage.getItem('isAdmin')+""
+    console.log("flag:",this.admin)
   },
   beforeDestroy() {
     // Rimuovo il resize event listener per evitare perdite di memoria
@@ -39,17 +43,24 @@ export default defineComponent({
     },
     // Controllo errori nella console log
     logMediaQueryStatus() {
-    const isMediaQueryActive = window.matchMedia('(max-width: 600px)').matches;
+      const isMediaQueryActive = window.matchMedia('(max-width: 600px)').matches;
 
-    if (isMediaQueryActive) {
-      console.log('Media query è attiva');
-    } else {
-      console.log('Media query non è attiva');// Se la window è più grande di 600
+      if (isMediaQueryActive) {
+        console.log('Media query è attiva');
+      } else {
+        console.log('Media query non è attiva');// Se la window è più grande di 600
+      }
+    },
+  
+  },
+  //aggiorno la variabile locale admin dal session storage ad ogni cambio di rotta
+  watch: { '$route' () {
+      this.admin = sessionStorage.getItem('isAdmin')+"" 
+      console.log("Admin :", this.admin)
     }
   },
-  },
-
 })
+
 </script>
 
 <template>
@@ -84,9 +95,13 @@ export default defineComponent({
             <li class="nav-item" style="margin-right: 5%;">
               <router-link class="nav-link" to="/info">Info</router-link>
             </li>
-            <!--li class="nav-item" style="margin-right: 5%;">
-              <router-link class="nav-link" to="/adminpage">Pagina Amministratore</router-link>
-            </li-->
+            <li class="nav-item" style="margin-right: 5%;">
+              <router-link class="nav-link" to="/adminpage" v-if="admin" >Pannello1</router-link>
+            </li>
+            <li class="nav-item" style="margin-right: 5%;">
+              <router-link class="nav-link" to="/pannello2" v-if="admin" >Pannello2</router-link>
+            </li>
+            
           </ul>
         </div>
             <form class="d-flex" style="margin-right: 5%;">
