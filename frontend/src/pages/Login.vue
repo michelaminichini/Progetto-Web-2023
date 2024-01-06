@@ -23,9 +23,17 @@ export default defineComponent({
         if (user) {
           // Se l'utente che esegue il login è un acquirente, viene rediretto ad una determinata pagina
           if (user.ruolo === "acquirente") {
-            this.$router.push('/PostiSala');
+            sessionStorage.setItem("isAdmin","")
+            if (sessionStorage.getItem("proiezione") == '')
+            {
+              this.$router.push('/')
+            }
+            else {
+              this.$router.push('/PostiSala');
+            }       
             //se invece l'utente che esegue il login è un amministratore, viene rediretto ad un'altra pagina
           } else if (user.ruolo === "amministratore"){
+            sessionStorage.setItem("isAdmin","1")
             window.location.href = "/adminpage"; 
           }
         }
