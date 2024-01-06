@@ -124,9 +124,17 @@ export async function cronologiaUtente(req:Request, res: Response) {
 export async function informazioni(req:Request, res:Response) {
     const connection = await getConnection()
     const [results] = await connection.execute(
-        `SELECT film.idfilm, film.titolo, p.idproiezione, p.idsala, p.datap, p.orario FROM film JOIN proiezioni p ON film.idfilm = p.idfilm`, 
+        `SELECT film.idfilm, film.titolo, p.idproiezione, p.idsala, CONCAT(p.datap,' ') as dataorap, p.orario FROM film JOIN proiezioni p ON film.idfilm = p.idfilm`, 
         [],
     )
     res.json(results)
 }
 
+export async function elencoP(req:Request, res:Response) {
+    const connection = await getConnection()
+    const [results] = await connection.execute(
+        `SELECT film.idfilm, film.titolo, film.locandina, film.regista, film.genere, film.anno, film.descrizione, p.idproiezione, p.datap, p.orario, CONCAT(p.datap,' ',p.orario) as dataorap FROM film JOIN proiezioni p ON film.idfilm = p.idfilm  WHERE film.idfilm=? ORDER BY datap,orario`, 
+        [req.params.id],
+    )
+    res.json(results)
+}

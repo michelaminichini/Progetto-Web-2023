@@ -40,8 +40,6 @@ export async function aggiornaPostoPF(req:Request, res: Response) {
     res.json(results)
 }
 
-
-
 export const idnuovaproj =async (req: Request, res: Response) => {
     const connection = await getConnection()
     const [results] = await connection.execute(`SELECT idproiezione FROM proiezioni WHERE idproiezione=(SELECT MAX(idproiezione) FROM proiezioni)`,
@@ -97,3 +95,11 @@ export async function cancellaDati(req:Request, res: Response) {
     res.json(results)
 }
 
+export async function CheckPostiP(req:Request, res:Response) {
+    const connection = await getConnection()
+    const [results] = await connection.execute(
+        `SELECT count(occupato) AS nposti FROM posti_proiezione  WHERE idproiezione = ? AND occupato = 1`, 
+        [req.params.id],
+    )
+    res.json(results)
+}

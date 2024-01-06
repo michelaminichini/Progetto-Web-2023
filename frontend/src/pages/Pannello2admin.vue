@@ -20,7 +20,7 @@ export default defineComponent({
         //EditedFilm: [] as Film [],
         listaInfo: [] as SchedaF[],
         sala: [] as IDsala[],
-        editingCell: null,
+        editingCell: "",
         rowIndex: null,
         editmode: false,
         idFilm: 0,
@@ -28,6 +28,7 @@ export default defineComponent({
         idOrario: 0,
         Orario_Proiezione: null,
         Data_proiezione: null,
+        PostiOccupati: 0,
     }
     },
     methods: {
@@ -49,6 +50,17 @@ export default defineComponent({
             axios.get("/api/listasale").then(response => this.ListaSale = response.data)
             console.log(this.ListaSale)
   
+        },
+
+        async getPostiP(ndx: any)
+        {
+            console.log("NDX:",ndx)
+            console.log("Proj:",this.listaInfo[ndx].idproiezione)
+            const idp = this.listaInfo[ndx].idproiezione
+            let np = ""
+            await axios.get("/api/checkpp/"+idp).then(response => {np = response.data[0].nposti,console.log(response.data[0].nposti)})
+            console.log("Posti: ",np)
+            //this.PostiOccupati = posti
         },
 
         // Aggiunge una riga in fondo alla tabella 
@@ -100,6 +112,39 @@ export default defineComponent({
             }
         },
 
+        deleteCheck(rowIndex: any) {
+            this.getPostiP(rowIndex)
+            let ndx = rowIndex
+            console.log("NDX:",ndx)
+            console.log("Proj:",this.listaInfo[ndx].idproiezione)
+            const idp = this.listaInfo[ndx].idproiezione
+            let np = 0
+            axios.get("/api/checkpp/"+idp).then(response => {
+                np = response.data[0].nposti,console.log(response.data[0].nposti)
+                if (np == 0)
+                {
+                    alert ("CANCELLATA proiezione: "+idp)
+                    console.log("Delete"+idp) 
+                    this.deleteProj(rowIndex)
+                }
+                else{
+                    alert ("ATTENZIONE: ci sono biglietti già venduti!")
+                }
+            })
+            console.log("Posti: ",np)
+
+
+            console.log("Posti: ",this.PostiOccupati)
+            if (this.PostiOccupati == 0)
+            {
+                //this.deleteProj(rowIndex)
+                console.log("Delete") 
+            }
+            else{
+                alert ("ATTENZIONE: ci sono biglietti già venduti!")
+            }
+        },
+
         // Elimina una riga dalla tabella
         deleteProj(rowIndex: any){
             axios.delete("/api/eliminaproj/"+this.listaInfo[rowIndex].idproiezione)
@@ -108,18 +153,18 @@ export default defineComponent({
             this.$forceUpdate()
         },
 
-        editCell(rowIndex: any, cellIndex: string) {
-            this.editingCell = `${rowIndex}-${cellIndex}`;
-        },
+        //editCell(rowIndex: any, cellIndex: string) {
+        //    this.editingCell = `${rowIndex}-${cellIndex}`;
+        //},
 
-        updateCell(rowI: number, cellI: number, v: string|number) {
-            this.ListaFilm[rowI][cellI] = v;
-        },
+        //updateCell(rowI: number, cellI: number, v: string|number) {
+        //    this.ListaFilm[rowI][cellI] = v;
+        //},
         
         // Aggiorna i dati sul database terminando l'operazione di edit
         finishEditing(rowIndex: number) {
             let riga = this.ListaFilm[rowIndex];
-            this.editingCell = null;            
+            this.editingCell = "";            
             axios.put("/api/aggiornamento",riga)
             .then(response => {console.log(response.data)})
             console.log("/api/aggiornamento/"+ (rowIndex+1));
@@ -234,14 +279,14 @@ export default defineComponent({
                         <tr v-for="(film, rowIndex) in listaInfo" :key="rowIndex">
                             <td v-for="(cell, cellIndex) in film" :key="cellIndex">
                                 <template v-if="editingCell === `${rowIndex}-${cellIndex}`">
-                                <input
+                                <!-- <input
                                     v-if="editmode"
                                     id="myInput"
                                     type="text"
                                     :value="cell"
                                     @input="updateCell(rowIndex, cellIndex, $event.target.value)"
                                     @blur="finishEditing(rowIndex)"
-                                />
+                                /> -->
                                 </template>
                                 <template v-else>
                                 {{ cell }}
@@ -253,7 +298,7 @@ export default defineComponent({
                                 </td> -->
                             </td>
                             <td>   
-                                <button @click="deleteProj(rowIndex)" type="button" class="btn btn-danger">
+                                <button @click="deleteCheck(rowIndex)" type="button" class="btn btn-danger">
                                     Delete
                                 </button>
                             </td>

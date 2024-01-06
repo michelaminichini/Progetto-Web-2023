@@ -14,5 +14,6 @@ router.post("/api/aggiornaIdP/:idp", proiezioneController.aggiornaIdProj)
 router.post("/api/nuovaproj", proiezioneController.nuovaProiezione)
 router.delete("/api/eliminaproj/:id", proiezioneController.deleteProj)
 router.delete("/api/cancella-dati/:id", proiezioneController.cancellaDati)
+router.get("/api/checkpp/:id", proiezioneController.CheckPostiP)
 
 export default router

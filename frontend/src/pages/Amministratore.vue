@@ -8,7 +8,7 @@ export default defineComponent({
     data(){
         return {
         ListaFilm: [] as FilmE [],
-        editingCell: null,
+        editingCell: "",
         rowIndex: null,
         editmode: false,
         
@@ -40,14 +40,14 @@ export default defineComponent({
             this.editingCell = `${rowIndex}-${cellIndex}`;
         },
 
-        updateCell(rowI: number, cellI: number, v: string|number): void {
-            this.ListaFilm[rowI][cellI] = v;
-        },
+        //updateCell(rowI: number, cellI: number, v: string|number): void {
+        //   this.ListaFilm[rowI][cellI] = v;
+        //},
 
         finishEditing(rowIndex: number) {
             console.log(this.editmode)
             let riga = this.ListaFilm[rowIndex];
-            this.editingCell = null;            
+            this.editingCell = "";            
             axios.put("/api/aggiornamento",riga)
             .then(response => {console.log(response.data)})
             console.log("/api/aggiornamento/"+ (rowIndex+1));

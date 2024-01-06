@@ -16,5 +16,6 @@ router.get("/api/infoToUpdate", filmController.informazioni)
 router.get("/api/activefilms", filmController.ActiveFilms)
 router.get("/api/listasale", filmController.ElencoSale)
 router.get("/api/editfilm/:id", filmController.editFilm)
+router.get("/api/elenco/:id", filmController.elencoP)
 
 export default router

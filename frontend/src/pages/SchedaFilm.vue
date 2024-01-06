@@ -2,14 +2,14 @@
 
 import {defineComponent} from "vue"
 import axios from "axios"
-import {SchedaF} from "../types"
+import {SchedaF,SchedaEP} from "../types"
 
 export default defineComponent({
   data(){
       return {
       currentProjection: -1,
       filmS:  null as SchedaF | null,
-      ProjS: [] as SchedaF[]
+      ProjS: [] as SchedaEP[]
       }
   },
   methods: {
@@ -18,7 +18,7 @@ export default defineComponent({
         .then(response => {this.filmS = response.data[0]; console.log(response.data)})
     },
     getProj() {
-        axios.get("/api/film/" + this.$route.params.idfilm)
+        axios.get("/api/elenco/" + this.$route.params.idfilm)
         .then(response => {this.ProjS = response.data; console.log(response.data)})
     },
     changeProjection() {
@@ -63,13 +63,12 @@ export default defineComponent({
       <h2>Date di programmazione: </h2>
       <select class="firstLastNames linkBox"  v-model="currentProjection" @change="changeProjection()" >
         <option disabled >Scegli una proiezione</option>
-        <option v-for="projection in ProjS" :key="projection.idproiezione" :value="projection.idproiezione">{{projection.datap.slice(0, 10)}} ore {{ projection.orario.slice(0, 5) }}</option>
+        <option v-for="projection in ProjS" :key="projection.idproiezione" :value="projection.idproiezione">{{projection.dataorap.slice(0,10)}} ore {{ projection.orario.slice(0, 5) }}</option>
       </select>
       <RouterLink class="btn btn-primary" :to="'/PostiSala'" role="button" id="button">Next</RouterLink>
     </div>
     
-    
-  </template>
+</template>
  
 
 <style scoped>

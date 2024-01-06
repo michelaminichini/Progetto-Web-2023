@@ -62,6 +62,20 @@ export interface SchedaF{
     orario: string
 }
 
+export interface SchedaEP{
+    idfilm: number
+    titolo: string
+    regista: string
+    genere: string
+    anno: string
+    descrizione: string
+    locandina: string
+    idproiezione: number
+    datap: string
+    orario: string
+    dataorap: string
+}
+
 export interface DataOra {
     datap: string
     orario: string
