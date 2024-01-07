@@ -170,11 +170,29 @@ export default defineComponent({
     font-size: 80px;
   }
 
+  header > h1::before {
+    line-height: 1.1;
+  }
+
   #logo {
     width: 100px ;
     height: 80px;
   }
 }
+
+@media screen and (max-width: 799px){
+  header > h1::before{
+    line-height: 1.1;
+  }
+}
+
+@media screen and (min-width: 1000px){
+  header > h1::before{
+    line-height: 1.2;
+  }
+}
+
+
 
 
 

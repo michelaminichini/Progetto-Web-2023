@@ -10,14 +10,14 @@ header > h1{
 
 }
 
-header > h1:before{
+header > h1::before{
   content:attr(data-text);
   position:absolute;
   top: 0;
   left: 50;
   transform-origin: bottom;
   transform:rotateX(180deg);
-  line-height: 1.25em;
+  //line-height: 1.25;
   background: linear-gradient(0deg, aliceblue 0, transparent 70%);
   -webkit-background-clip: text;
   color: transparent;
