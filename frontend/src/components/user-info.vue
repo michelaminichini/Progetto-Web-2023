@@ -12,6 +12,7 @@ export default defineComponent({
       await axios.post("/api/auth/logout")
       sessionStorage.setItem('isAdmin','')
       sessionStorage.setItem('utente','')
+      sessionStorage.setItem('proiezione','')
       window.location.reload()
     },
   },
