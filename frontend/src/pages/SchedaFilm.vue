@@ -53,7 +53,7 @@ export default defineComponent({
         </tr>
         <tr>
           <th>Durata</th>
-          <td>{{filmS.durata}}</td>
+          <td>{{filmS.durata}}'</td>
         </tr>
         <tr>
           <th>Attori principali</th>
