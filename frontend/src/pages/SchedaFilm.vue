@@ -34,58 +34,49 @@ export default defineComponent({
 </script>
 
 <template>
-    <template v-if =filmS>
-      <article>
-        <h2>{{filmS.titolo}}</h2>
-        <img style="height: 400px; width: 300px;" :src="'/img/' + filmS.locandina" alt=""/>
-        <table>
-          <tr>
-            <th>Regista</th>
-            <td>{{filmS.regista}}</td>
-          </tr>
-          <tr>
-            <th>Anno uscita</th>
-            <td>{{filmS.anno}}</td>
-          </tr>
-          <tr>
-            <th>Genere</th>
-            <td>{{filmS.genere}}</td>
-          </tr>
-          <tr>
-            <th>Durata</th>
-            <td>{{filmS.durata}}'</td>
-          </tr>
-          <tr>
-            <th>Nazione</th>
-            <td>{{filmS.nazione}}</td>
-          </tr>
-          <tr>
-            <th>Lingua</th>
-            <td>{{filmS.lingua}}</td>
-          </tr>
-          <tr>
-            <th>Attori principali</th>
-            <td>{{filmS.attori}}</td>
-          </tr>
-          <tr>
-            <th>Trama</th>
-            <td>{{filmS.descrizione}}</td>
-          </tr>
-        </table>
-      </article>
-    </template>
-    <br><br>
-    <div>
-      <h2>Date di programmazione: </h2>
-      <select class="firstLastNames linkBox"  v-model="currentProjection" @change="changeProjection()" >
-        <option disabled >Scegli una proiezione</option>
-        <option v-for="projection in ProjS" :key="projection.idproiezione" :value="projection.idproiezione">{{projection.dataorap.slice(0,10)}} ore {{ projection.orario.slice(0, 5) }}</option>
-      </select>
-      <RouterLink class="btn btn-primary" :to="'/PostiSala'" role="button" id="button">Next</RouterLink>
-    </div>
-    
+  <template v-if =filmS>
+    <article>
+      <h2>{{filmS.titolo}}</h2>
+      <img style="height: 400px; width: 300px;" :src="'/img/' + filmS.locandina" alt=""/>
+      <table>
+        <tr>
+          <th>Regista</th>
+          <td>{{filmS.regista}}</td>
+        </tr>
+        <tr>
+          <th>Anno uscita</th>
+          <td>{{filmS.anno}}</td>
+        </tr>
+        <tr>
+          <th>Genere</th>
+          <td>{{filmS.genere}}</td>
+        </tr>
+        <tr>
+          <th>Durata</th>
+          <td>{{filmS.durata}}</td>
+        </tr>
+        <tr>
+          <th>Attori principali</th>
+          <td>{{filmS.attori}}</td>
+        </tr>
+        <tr>
+          <th>Trama</th>
+          <td>{{filmS.descrizione}}</td>
+        </tr>
+      </table>
+    </article>
+  </template>
+  <br><br>
+  <div>
+    <h2>Date di programmazione: </h2>
+    <select class="firstLastNames linkBox"  v-model="currentProjection" @change="changeProjection()" >
+      <option disabled >Scegli una proiezione</option>
+      <option v-for="projection in ProjS" :key="projection.idproiezione" :value="projection.idproiezione">{{projection.dataorap.slice(0,10)}} ore {{ projection.orario.slice(0, 5) }}</option>
+    </select>
+    <RouterLink class="btn btn-primary" :to="'/PostiSala'" role="button" id="button">Next</RouterLink>
+  </div>
+
 </template>
- 
 
 <style scoped>
 article{
