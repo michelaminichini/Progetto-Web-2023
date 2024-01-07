@@ -2,13 +2,13 @@
 
 import {defineComponent} from "vue"
 import axios from "axios"
-import {SchedaF,SchedaEP} from "../types"
+import {FilmEG,SchedaEP} from "../types"
 
 export default defineComponent({
   data(){
       return {
       currentProjection: -1,
-      filmS:  null as SchedaF | null,
+      filmS:  null as FilmEG | null,
       ProjS: [] as SchedaEP[]
       }
   },
@@ -52,13 +52,25 @@ export default defineComponent({
             <td>{{filmS.genere}}</td>
           </tr>
           <tr>
+            <th>Durata</th>
+            <td>{{filmS.durata}}'</td>
+          </tr>
+          <tr>
+            <th>Nazione</th>
+            <td>{{filmS.nazione}}</td>
+          </tr>
+          <tr>
+            <th>Attori principali</th>
+            <td>{{filmS.attori}}</td>
+          </tr>
+          <tr>
             <th>Trama</th>
             <td>{{filmS.descrizione}}</td>
           </tr>
         </table>
       </article>
     </template>
-
+    <br><br>
     <div>
       <h2>Date di programmazione: </h2>
       <select class="firstLastNames linkBox"  v-model="currentProjection" @change="changeProjection()" >
