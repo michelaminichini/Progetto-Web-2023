@@ -128,8 +128,8 @@ export default defineComponent({
                     
                     <br><br>          
                     <div>
-                        <button v-on:click="edit()" class="btn btn-danger">edit</button>
-                        <button type="button" v-on:click="updateDatiFilm()" class="btn btn-danger"  @click="openPopup">Salva</button>
+                        <button v-on:click="edit()" id="modifica" class="btn btn-danger">Edit</button>
+                        <button id="salva" type="button" v-on:click="updateDatiFilm()" class="btn btn-danger"  @click="openPopup">Salva</button>
                         <dialog :open="isPopupOpen">
                             <p>Modifiche effettuate con successo!</p>
                             <button @click="closePopup">Chiudi</button>
@@ -206,6 +206,17 @@ th {
 #button{
   margin-top: 1%;
   margin-left: 10%;
+}
+
+#modifica, #salva{
+  background-color: rgb(66, 65, 65);
+  color: white;
+  border-color: black;
+}
+
+#modifica:hover, #salva:hover{
+  color:black;
+  background-color: rgb(255, 255, 71);
 }
 
 </style>

@@ -152,14 +152,6 @@ export default defineComponent({
             this.getInfo()
             this.$forceUpdate()
         },
-
-        //editCell(rowIndex: any, cellIndex: string) {
-        //    this.editingCell = `${rowIndex}-${cellIndex}`;
-        //},
-
-        //updateCell(rowI: number, cellI: number, v: string|number) {
-        //    this.ListaFilm[rowI][cellI] = v;
-        //},
         
         // Aggiorna i dati sul database terminando l'operazione di edit
         finishEditing(rowIndex: number) {
@@ -223,9 +215,6 @@ export default defineComponent({
                 <button @click="addProj()" type="button" class="btn btn-primary float-end">
                     Aggiungi
                 </button>
-                <!-- <button id="primo-pannello-up" @click="redirect()" type="button" class="btn btn-primary float-end">
-                    Vai a pannello 1
-                </button> -->
             </h4>
         </div>
         <div>
@@ -291,14 +280,9 @@ export default defineComponent({
                                 <template v-else>
                                 {{ cell }}
                                 </template>
-                                <!-- <td>
-                                    <button @click="editCell(rowIndex, cellIndex)" v-on:click="edit()"  type="button" class="btn btn-success" style="display: block;">
-                                    Edit   
-                                    </button>                                    
-                                </td> -->
                             </td>
                             <td>   
-                                <button @click="deleteCheck(rowIndex)" type="button" class="btn btn-danger">
+                                <button @click="deleteCheck(rowIndex)" id="elimina" type="button" class="btn">
                                     Delete
                                 </button>
                             </td>
@@ -339,5 +323,16 @@ td{
     margin-top: 5%;
     width:300px;
     height: 50px;
+}
+
+#elimina{
+    background-color: rgb(66, 65, 65);
+    color: white;
+    border-color: black;
+}
+
+#elimina:hover{
+    color:black;
+    background-color: rgb(255, 255, 71);
 }
 </style>
