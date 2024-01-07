@@ -1,11 +1,12 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
+import axios from "axios"
 
 export default defineComponent({
   data() {
     return {
       isMobileNavOpen: true, // inizialmente settato a true
-      admin: '',
+      admin: false,
     }
   },
   mounted() {
@@ -20,12 +21,23 @@ export default defineComponent({
     // Ascolto i window resize events per registrare le modifiche dello stato delle media query 
     window.addEventListener('resize', this.logMediaQueryStatus);
 
-    this.admin = sessionStorage.getItem('isAdmin')+""
-    console.log("flag:",this.admin)
+    //this.admin = sessionStorage.getItem('isAdmin')+""
+    if (sessionStorage.getItem('isAdmin') == null)
+    {
+      this.admin = false;
+    } else{
+      this.admin = true;
+    }
+
+    console.log("Admin M:",this.admin)
   },
   beforeDestroy() {
     // Rimuovo il resize event listener per evitare perdite di memoria
     window.removeEventListener('resize', this.updateMobileNavState);
+    axios.post("/api/auth/logout")
+    sessionStorage.setItem('isAdmin','')
+    sessionStorage.setItem('utente','')
+    sessionStorage.setItem('proiezione','')
   },
   methods: {
     updateMobileNavState() {
@@ -55,8 +67,13 @@ export default defineComponent({
   },
   //aggiorno la variabile locale admin dal session storage ad ogni cambio di rotta
   watch: { '$route' () {
-      this.admin = sessionStorage.getItem('isAdmin')+"" 
-      console.log("Admin :", this.admin)
+      if (sessionStorage.getItem('isAdmin') == null)
+      {
+        this.admin = false;
+      } else{
+        this.admin = true;
+      }
+        console.log("Admin :", this.admin)
     }
   },
 })
