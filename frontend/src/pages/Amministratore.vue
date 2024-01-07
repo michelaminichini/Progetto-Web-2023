@@ -44,10 +44,6 @@ export default defineComponent({
             this.editingCell = `${rowIndex}-${cellIndex}`;
         },
 
-        //updateCell(rowI: number, cellI: number, v: string|number): void {
-        //   this.ListaFilm[rowI][cellI] = v;
-        //},
-
         finishEditing(rowIndex: number) {
             console.log(this.editmode)
             let riga = this.ListaFilm[rowIndex];
@@ -96,10 +92,6 @@ export default defineComponent({
                 <button @click="addFilm()" type="button" class="btn btn-primary float-end">
                     Aggiungi
                 </button>
-                <!-- <button id="secondo-pannello-up" @click="redirect()" type="button" class="btn btn-primary float-end">
-                    Vai a pannello 2
-                </button> -->
-
             </h4>
         </div>
     
@@ -146,10 +138,10 @@ export default defineComponent({
                             </td>
 
                             <td>       
-                                <button @click="editFilm(rowIndex)" type="button" class="btn btn-success" style="display: block;">
+                                <button @click="editFilm(rowIndex)" id="edit" type="button" class="btn btn-success" style="display: block;">
                                 Edit   
                                 </button>
-                                <button @click="deleteFilm(rowIndex)" type="button" class="btn btn-danger">
+                                <button @click="deleteFilm(rowIndex)" id="delete" type="button" class="btn btn-danger">
                                 Delete
                                 </button>
                             </td>
@@ -184,11 +176,8 @@ td{
     max-width: 100px;
 }
 
-#secondo-pannello{
-    display: block;
-    margin: 0 auto;
-    margin-top: 5%;
-    width:300px;
-    height: 50px;
+#edit{
+    background-color: rgb(66, 65, 65);
+    
 }
 </style>
