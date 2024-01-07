@@ -42,7 +42,7 @@ export default defineComponent({
         row.forEach(seat => {
           if (seat.selected && !seat.occupato) {
             seat.occupato = true;
-            seat.selected = false; // Reset selected state after booking
+            seat.selected = false; // Resetto "selected" dopo la prenotazione
             selectedSeats.push(seat.label);
             this.importo =this.importo + 8.5;
             const AggParam = {
