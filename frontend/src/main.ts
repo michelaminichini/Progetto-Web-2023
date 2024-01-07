@@ -56,9 +56,6 @@ router.beforeEach(async (to) => {
     if (to.meta.requireLogout && user) {
         return { path: "/" }
     }
-    //if (to.meta.requireAdmin && user?.ruolo == "acquirente") {
-    //   return { path: "/"}
-    //}
 })
 
 createApp(App).use(router).mount("#app");
