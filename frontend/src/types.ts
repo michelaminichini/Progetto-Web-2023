@@ -46,7 +46,7 @@ export interface FilmEG{
     locandina: string
     lingua: string
     attori: string
-    stato: string    
+    stato: number   
 }
 
 export interface SchedaF{

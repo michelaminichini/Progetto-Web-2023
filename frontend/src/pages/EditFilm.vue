@@ -10,6 +10,11 @@ export default defineComponent({
       datiFilm:  [] as FilmEG [],
       editmode: false,
       isPopupOpen: false,
+      options: [
+        { text: 'N/D', value: 0 },
+        { text: 'Attivo', value: 1 },
+        { text: 'Prossimamente', value: 2 }
+      ]
     }
   },
   methods: {
@@ -37,6 +42,9 @@ export default defineComponent({
     },
     edit: function() {
       this.editmode = !this.editmode;
+    },
+    changeStato(stato: number){
+      console.log('Stato:',stato)
     },
   },
   mounted() {
@@ -106,11 +114,19 @@ export default defineComponent({
                         <input v-model="film.attori" size="50" placeholder="attori film">
                     </div>
                     <div v-else>Attori: {{film.attori}}</div>    
-                    <div v-if="editmode">
-                        Stato: 
-                        <input v-model="film.stato" placeholder="stato film">
+                    <div v-if="editmode"> 
+                        <!-- <input v-model="film.stato" placeholder="stato film"> -->
+                        <!-- <div class="inputBox"> -->
+                      <span> Stato: </span>
+                      <select class="firstLastNames linkBox"  v-model="film.stato" type="text" @change="changeStato(film.stato)" >
+                        <option v-for="option in options" :value="option.value">
+                            {{ option.text }}
+                        </option>
+                      </select>
                     </div>
-                    <div v-else>Stato: {{film.stato}}</div>              
+                    <div v-else>Stato: {{options[film.stato].text}}</div>
+                    
+                    <br><br>          
                     <div>
                         <button v-on:click="edit()" class="btn btn-danger">edit</button>
                         <button type="button" v-on:click="updateDatiFilm()" class="btn btn-danger"  @click="openPopup">Salva</button>

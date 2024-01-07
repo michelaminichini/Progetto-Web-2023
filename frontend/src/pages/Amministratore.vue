@@ -2,17 +2,21 @@
 
 import {defineComponent} from "vue"
 import axios from "axios"
-import {FilmE} from "../types" // tipo di interfaccia creata nel file types.ts
+import {Film} from "../types" // tipo di interfaccia creata nel file types.ts
 
 export default defineComponent({
     data(){
         return {
-        ListaFilm: [] as FilmE [],
+        ListaFilm: [] as Film [],
         editingCell: "",
         rowIndex: null,
         editmode: false,
-        
-    }
+        statoFilm:[
+            'nd',
+            'attivo',
+            'prox'
+        ],        
+        }
     },
     methods: {
         getLista() {
@@ -138,7 +142,7 @@ export default defineComponent({
                                 {{ film.anno }}
                             </td>
                             <td>
-                                {{ film.stato }}
+                                {{ statoFilm[film.stato] }}
                             </td>
 
                             <td>       
