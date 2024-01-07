@@ -182,11 +182,20 @@ export default defineComponent({
 .seat.selected {
   background-color: #aff0ff;
   color:black;
+  font-weight: bold;
 }
 
 .seat.occupato {
-  background-color: #e74c3c;
+  color: black;
+  font-weight: bold;
   pointer-events: none; /* Disable click for reserved seats */
+  background: repeating-linear-gradient(
+    45deg,
+    #e74c3c,
+    #e74c3c 10px,
+    #F6EAEA 10px,
+    #F6EAEA 20px
+  );
 }
 
 </style>
