@@ -25,8 +25,11 @@ export default defineComponent({
           // Se l'utente che esegue il login è un acquirente, viene rediretto ad una determinata pagina
           if (user.ruolo === "acquirente") {
             sessionStorage.removeItem("isAdmin")
-            if (sessionStorage.getItem("proiezione") == '')
+            const proiezioneValue = sessionStorage.getItem("proiezione")
+            if (proiezioneValue === '')
+              
             {
+              console.log("proiezioneValue:", proiezioneValue)
               this.$router.push('/')
             }
             else {
