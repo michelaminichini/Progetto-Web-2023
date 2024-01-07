@@ -74,7 +74,7 @@ export default defineComponent({
 
     <link href='https://fonts.googleapis.com/css?family=Monoton' rel='stylesheet'>
 
-    <h1>GalaxyCineVerse</h1>
+    <h1 data-text="GalaxyCineVerse">GalaxyCineVerse</h1>
   </header>
   
   <body> 
