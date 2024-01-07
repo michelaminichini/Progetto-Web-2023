@@ -138,10 +138,10 @@ export default defineComponent({
                             </td>
 
                             <td>       
-                                <button @click="editFilm(rowIndex)" id="edit" type="button" class="btn btn-success" style="display: block;">
+                                <button @click="editFilm(rowIndex)" id="edit" type="button" class="btn" style="display: block;">
                                 Edit   
                                 </button>
-                                <button @click="deleteFilm(rowIndex)" id="delete" type="button" class="btn btn-danger">
+                                <button @click="deleteFilm(rowIndex)" id="delete" type="button" class="btn">
                                 Delete
                                 </button>
                             </td>
@@ -176,8 +176,15 @@ td{
     max-width: 100px;
 }
 
-#edit{
+#edit, #delete{
     background-color: rgb(66, 65, 65);
-    
+    color: white;
+    border-color: black;
 }
+
+#edit:hover, #delete:hover{
+    color:black;
+    background-color: rgb(255, 255, 71);
+}
+
 </style>

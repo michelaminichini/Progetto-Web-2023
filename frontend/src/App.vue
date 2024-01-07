@@ -101,7 +101,6 @@ export default defineComponent({
             <li class="nav-item" style="margin-right: 5%;">
               <router-link class="nav-link" to="/pannello2" v-if="admin" >Pannello2</router-link>
             </li>
-            
           </ul>
         </div>
             <form class="d-flex" style="margin-right: 20%;">
