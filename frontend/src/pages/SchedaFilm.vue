@@ -60,6 +60,10 @@ export default defineComponent({
             <td>{{filmS.nazione}}</td>
           </tr>
           <tr>
+            <th>Lingua</th>
+            <td>{{filmS.lingua}}</td>
+          </tr>
+          <tr>
             <th>Attori principali</th>
             <td>{{filmS.attori}}</td>
           </tr>
