@@ -22,6 +22,11 @@ SET time_zone = "+00:00";
 
 -- --------------------------------------------------------
 
+
+CREATE SCHEMA IF NOT EXISTS `cinema` DEFAULT CHARACTER SET utf8 ;
+USE `cinema` ;
+
+
 --
 -- Struttura della tabella `biglietti`
 --
@@ -109,11 +114,11 @@ CREATE TABLE `pagamenti` (
   `idpagamento` int(11) NOT NULL,
   `idtipo_pagamento1` int(11) NOT NULL,
   `importo` float NOT NULL,
-  `Titolare_nome` varchar(100) NOT NULL,
-  `Titolare_cognome` varchar(100) NOT NULL,
-  `Numero_carta` varchar(20) NOT NULL,
-  `Data_scadenza` date DEFAULT NULL,
-  `CVV` int(3) NOT NULL
+  `Titolare_nome` varchar(100) DEFAULT NULL,
+  `Titolare_cognome` varchar(100) DEFAULT NULL,
+  `Numero_carta` varchar(20) DEFAULT NULL,
+  `Data_scadenza` varchar(10) DEFAULT NULL,
+  `CVV` int(3) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
