@@ -108,12 +108,12 @@ export default defineComponent({
                     </a>
                     <a class="tab" @click="toggleDiv(1)">
                         <i>
-                            <img src="/setting-icon.png" alt="Logo" width="30" height="30">
+                            <img src="/shield-lock-line-icon.png" alt="Logo" width="30" height="30">
                         </i> 
                     </a>
                     <a class="tab" @click="toggleDiv(2)">
                         <i>
-                            <img src="/clock-line-icon.png" alt="Logo" width="30" height="30">
+                            <img src="/clock-rotate-left-icon.png" alt="Logo" width="30" height="30">
                         </i> 
                     </a>
                 </nav>
