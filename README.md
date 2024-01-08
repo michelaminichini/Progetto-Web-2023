@@ -17,10 +17,11 @@
 ## Introduzione
 
 Benvenuti nel sito ufficiale GalaxyCineVerse! 
-Questa applicazione web permette agli utenti di visionare una lista di film disponibili, selezionare quello che più interessa visionando i relativi dettagli come data e orario, per poi proseguire con la prenotazione di un posto e l'acquisto di un biglietto.
+Questa applicazione web permette agli utenti di visionare una lista di film disponibili, selezionare quello che più interessa visualizzando i relativi dettagli come data e orario, per poi proseguire con la prenotazione di un posto e l'acquisto di un biglietto.
 Una volta scelto, l'utente può procedere ad effettuare il login al suo account personale per poter finalizzare il pagamento e acquistare definitivamente un biglietto.
+Inoltre, nell'apposita sezione, è possibile visualizzare il proprio profilo, eventualmente modificare i dati presenti o controllare la propria cronologia di acquisto. 
 
-Se invece ad effettuare il login è l'amministratore, allora sarà disponibile una seconda versione dell'applicazione in cui sarà possibile modificare i campi presenti, come per esempio i film disponibili, gli orari e le date.
+Se invece ad effettuare il login è l'amministratore, allora saranno disponibili dei pannelli di controllo da cui poter effettuare diverse operazioni, come per esempio modificare i film disponibili, gli orari e le date.
 
 ## Features per utenti
 
@@ -121,11 +122,11 @@ Nella bash
 Per realizzare questa applicazione web abbiamo creato un database denominato "cinema" su https://www.phpmyadmin.net/ .
 Il database consente di visualizzare tutti i dati relativi ai film disponibili come il titolo, la locandina e molto altro.
 I dati vengono letti dal database e visualizzati correttamente grazie alla connessione stabilita nel file "db.ts" collocato all'interno della cartella "utils" nella cartella "src" del backend.
-Esso è composto di 9 diverse tabelle ciascuna con i propri attributi e collegate tra loro mediante "foreign key". Infine, è usato per immagazzinare tutti i dati degli utenti in totale sicurezza.
+Esso è composto di 11 diverse tabelle ciascuna con i propri attributi e collegate tra loro mediante "foreign key". Infine, è usato per immagazzinare tutti i dati degli utenti in totale sicurezza.
 
 ## Color accessibility
 
-Particolare attenzione all'uso dei colori. Utilizzo del contrasto. Uso di sfondi di colore più scuro (background) e uso di colori più chiari per parti testuali (foreground).
+Particolare attenzione all'uso dei colori. Utilizzo del contrasto. Uso di sfondi di colore più scuro (background) e uso di colori più chiari per parti testuali (foreground). Utilizzo inoltre di altre componenti visive per non limitarsi al semplice uso del colore.
 
 ## Documentazione
 
