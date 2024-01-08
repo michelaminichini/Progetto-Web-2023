@@ -202,15 +202,16 @@ export default defineComponent({
                         <span>Data scadenza</span>
                         <input 
                         v-model="Data_scadenza"
-                        type="date"
+                        type="text"
                         class="rounded-lg border-slate-200"
+                        placeholder="MM/YY"
                         />
                     </div>
                     <div class="inputBox">
                         <span>CVV</span>
                         <input 
                         v-model="CVV"
-                        type="number" 
+                        type="text" 
                         class="rounded-lg border-slate-200"
                         placeholder="123"
                         />
