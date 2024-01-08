@@ -139,10 +139,6 @@ INSERT INTO `pagamenti` (`idpagamento`, `idtipo_pagamento1`, `importo`, `Titolar
 -- Struttura della tabella `posti_proiezione`
 --
 
---
--- Struttura della tabella `posti_proiezione`
---
-
 CREATE TABLE `posti_proiezione` (
   `idposto` int(11) NOT NULL,
   `idproiezione` int(11) NOT NULL,
