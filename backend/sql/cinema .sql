@@ -703,7 +703,7 @@ INSERT INTO `utente` (`idutente`, `email`, `password`, `nome`, `cognome`, `telef
 ALTER TABLE `biglietti`
   ADD PRIMARY KEY (`idbiglietto`),
   ADD KEY `fk_cinema_idproizione1_idx` (`idproiezione1`),
-  ADD KEY `fk_cinema_idutente_idx` (`idutente`),
+  ADD KEY `fk_cinema_idutente_idx` (`idutente`);
 
 --
 -- Indici per le tabelle `film`
