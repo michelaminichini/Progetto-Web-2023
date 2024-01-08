@@ -19,43 +19,6 @@ SET time_zone = "+00:00";
 
 --
 -- Database: `cinema`
---
-
-DELIMITER $$
---
--- Procedure
---
-CREATE DEFINER=`root`@`localhost` PROCEDURE `CREA_PPS` (IN `param1` INT(6))  MODIFIES  DATA BEGIN
-DECLARE filecnt, colcnt, fc INT;
-DECLARE numpro, numsala, dummysala, maxfile, maxposti INT;
-DECLARE cc CHAR(1);
-
-SELECT idproiezione, idsala INTO numpro, numsala FROM proiezioni WHERE idproiezione = param1 LIMIT 1;
-
-SELECT idsala, fila, posti_fila
-INTO dummysala,maxfile,maxposti
-FROM sale
-WHERE idsala = numsala LIMIT 1;
-
-#set maxposti = 5;
-#set maxfile=8;
-
-SET filecnt = 1; 
-fc: WHILE filecnt <= maxfile DO
-      SET colcnt = 1;
-      SET fc = filecnt + 64;
-      SET cc = CHAR(fc);
-rc:   WHILE colcnt <= maxposti DO       
-      INSERT INTO posti_proiezione (idposto,idproiezione,fila,numero) VALUES (NULL,param1, cc, colcnt);
-      #INSERT INTO posti_proiezione (idposto,idproiezione,fila,numero) VALUES (0,1,2,3);
-
-      SET colcnt = colcnt + 1;
-   END WHILE rc;
-   SET filecnt=filecnt+1;
-END WHILE fc;
-END$$
-
-DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -77,19 +40,23 @@ CREATE TABLE `biglietti` (
 --
 
 INSERT INTO `biglietti` (`idbiglietto`, `idpagamento1`, `idproiezione1`, `idutente`, `idposto1`, `rating`) VALUES
-(1, 57, 3, 9, 'A5', 0),
+(1, 57, 3, 6, 'A5', 0),
 (7, 42, 1, 5, 'A1', 5),
 (8, 43, 1, 6, 'B2', 3),
-(9, 45, 1, 9, 'C1, C2', 4),
-(11, 64, 9, 9, 'D2, D3', 3),
-(12, 76, 2, 9, 'B4, B5', 4),
-(13, 77, 1, 9, 'C5', 5),
-(14, 78, 1, 9, 'B5', 3),
-(15, 78, 4, 0, 'D1', 4),
-(16, 80, 5, 0, 'D1, D2', 5),
-(17, 81, 6, 0, 'B4, B5', 4),
-(18, 82, 4, 9, 'B3, B4', 5),
-(19, 83, 3, 9, 'C4, C5', 3);
+(9, 45, 1, 6, 'C1, C2', 4),
+(11, 64, 9, 8, 'D2, D3', 3),
+(12, 76, 2, 6, 'B4, B5', 4),
+(13, 77, 1, 5, 'C5', 5),
+(14, 78, 1, 4, 'B5', 3),
+(15, 78, 4, 7, 'D1', 4),
+(16, 80, 5, 8, 'D1, D2', 5),
+(17, 81, 6, 7, 'B4, B5', 4),
+(18, 82, 4, 6, 'B3, B4', 5),
+(19, 83, 3, 8, 'C4, C5', 3),
+(21, 37, 5, 4, 'C1', 3),
+(22, 38, 7, 5, 'B2', 4),
+(23, 39, 3, 5, 'D5', 5),
+(24, 40, 25, 5, 'B2, B3', 2);
 
 -- --------------------------------------------------------
 
@@ -540,35 +507,6 @@ INSERT INTO `proiezioni` (`idproiezione`, `idfilm`, `idsala`, `datap`, `orario`)
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `prossimamente`
---
-
-CREATE TABLE `prossimamente` (
-  `id_film` int(6) NOT NULL,
-  `titolo_film` varchar(100) NOT NULL,
-  `regista_film` varchar(100) NOT NULL,
-  `genere_film` varchar(100) DEFAULT NULL,
-  `anno_uscita` varchar(10) DEFAULT NULL,
-  `descrizione` varchar(300) DEFAULT NULL,
-  `trailer` varchar(100) DEFAULT NULL,
-  `locandina` varchar(100) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dump dei dati per la tabella `prossimamente`
---
-
-INSERT INTO `prossimamente` (`id_film`, `titolo_film`, `regista_film`, `genere_film`, `anno_uscita`, `descrizione`, `trailer`, `locandina`) VALUES
-(1, 'Garfield: Una Missione Gustosa', 'Mark Dindal', 'animazione', '2024', 'In questa nuova avventura, dopo un inaspettato incontro con il padre perduto da tempo, il trasandato gatto di strada Vic, Garfield e il suo amico canino Odie sono costretti a lasciare la loro vita piena di comodità per unirsi a Vic in una rapina ad alto rischio.', 'https://youtu.be/FiTUp0SU1f0?si=ZBhh0CJk_p9_V0WZ', 'Garfield.png'),
-(2, 'Mean Girls', 'Arturo Perez Jr. and Samantha Jayne', 'commedia, musicale', '2024', 'Cady Heron riesce a integrarsi nel suo nuovo liceo ed entra a far parte della cricca di ragazze di prima qualità, le Plastics. Poi, però, commette il tragico errore di innamorarsi di Aaron Samuels, ex fidanzato di Regina George.', 'https://youtu.be/fFtdbEgnUOk?si=L6MItsJwSYWo6ZxJ', 'mean-girls.png'),
-(3, 'Argylle', 'Matthew Vaughn', 'spionaggio, azione', '2024', 'Elly Conway, una solitaria scrittrice di best-seller di spionaggio, gradisce passare le serate davanti al computer in compagnia del suo gatto Alfie. Si ritroverà catapultata nel vero mondo dello spionaggio quando le trame dei suoi libri, incentrati su Argylle, un agente segreto, inizieranno a divent', 'https://youtu.be/7mgu9mNZ8Hk?si=qBKDZ0Jbrle9wYeL', 'Argylle.png'),
-(4, 'Arthur the King', 'Simon Cellan Jones', 'drama, azione', '2024', 'Un campione di raid - le cui gare prevedono un viaggio avventuroso con destinazione prefissata che comporta la percorrenza di una lunga distanza - adotta un cane randagio di nome Arthur, che si unisce a lui in una gara di resistenza.', 'https://youtu.be/wjDJNEPghNY?si=rNm9ubF8iudZ1W4B', 'arthur-the-king.png'),
-(5, 'Joker: Folie à Deux', 'Todd Phillips', 'thriller psicologico musicale', '2024', 'Sequel di Joker; un musical ambientato principalmente all’Arkham Asylum e si concentrerà sul tempo trascorso da Joker nell’iconico manicomio criminale.', 'https://youtu.be/03ymBj144ng?si=64Qni2C8o1RFj_zF', 'joker-2.png'),
-(6, 'Beetlejuice 2', 'Tim Burton', 'thriller, fantasy', '2024', NULL, 'https://youtu.be/llnuyh1wo8A?si=4c_ibI70GMIMhlRK', 'beetlejuice-2.png');
-
--- --------------------------------------------------------
-
---
 -- Struttura della tabella `sale`
 --
 
@@ -796,12 +734,6 @@ ALTER TABLE `proiezioni`
   ADD KEY `fk_cinema_idsala_idx` (`idsala`) USING BTREE;
 
 --
--- Indici per le tabelle `prossimamente`
---
-ALTER TABLE `prossimamente`
-  ADD PRIMARY KEY (`id_film`);
-
---
 -- Indici per le tabelle `sale`
 --
 ALTER TABLE `sale`
@@ -857,12 +789,6 @@ ALTER TABLE `posti_proiezione`
 --
 ALTER TABLE `proiezioni`
   MODIFY `idproiezione` int(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
-
---
--- AUTO_INCREMENT per la tabella `prossimamente`
---
-ALTER TABLE `prossimamente`
-  MODIFY `id_film` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT per la tabella `sale`
