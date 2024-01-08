@@ -114,11 +114,11 @@ CREATE TABLE `pagamenti` (
   `idpagamento` int(11) NOT NULL,
   `idtipo_pagamento1` int(11) NOT NULL,
   `importo` float NOT NULL,
-  `Titolare_nome` varchar(100) DEFAULT NULL,
-  `Titolare_cognome` varchar(100) DEFAULT NULL,
-  `Numero_carta` varchar(20) DEFAULT NULL,
-  `Data_scadenza` varchar(10) DEFAULT NULL,
-  `CVV` int(3) DEFAULT NULL
+  `Titolare_nome` varchar(100) NOT NULL,
+  `Titolare_cognome` varchar(100) NOT NULL,
+  `Numero_carta` varchar(20) NOT NULL,
+  `Data_scadenza` varchar(10) NOT NULL,
+  `CVV` int(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -126,8 +126,8 @@ CREATE TABLE `pagamenti` (
 --
 
 INSERT INTO `pagamenti` (`idpagamento`, `idtipo_pagamento1`, `importo`, `Titolare_nome`, `Titolare_cognome`, `Numero_carta`, `Data_scadenza`, `CVV`) VALUES
-(12, 1, 8.5, '', '', '0', NULL, 0),
-(13, 4, 6.5, '', '', '0', NULL, 0),
+(12, 1, 8.5, '', '', '0', '', 0),
+(13, 4, 6.5, '', '', '0', '', 0),
 (18, 1, 10.5, '', '', '1234', '2024-01-01', 388),
 (23, 1, 10.5, 'aaa', 'bbb', '1234', '2024-01-01', 388),
 (25, 1, 10, 'paolino', 'paperino', '1234-5678-9012-1234', '2023-12-31', 332),
@@ -716,7 +716,6 @@ ALTER TABLE `film`
 --
 ALTER TABLE `pagamenti`
   ADD PRIMARY KEY (`idpagamento`),
-  ADD KEY `fk_cinema_idbiglietto1_idx` (`idbiglietto1`),
   ADD KEY `fk_cinema_idtipo_pagamento1_idx` (`idtipo_pagamento1`);
 
 --
@@ -813,39 +812,9 @@ ALTER TABLE `tipo_pagamenti`
 -- AUTO_INCREMENT per la tabella `utente`
 --
 ALTER TABLE `utente`
-  MODIFY `idutente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
---
--- Limiti per le tabelle scaricate
---
-
---
--- Limiti per la tabella `biglietti`
---
-ALTER TABLE `biglietti`
-  ADD CONSTRAINT `fk_cinema_idposto1` FOREIGN KEY (`idposto1`) REFERENCES `posti_proiezione_old` (`idposto`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_cinema_idproiezione1` FOREIGN KEY (`idproiezione1`) REFERENCES `proiezioni` (`idproiezione`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_cinema_idutente` FOREIGN KEY (`idutente`) REFERENCES `utente` (`idutente`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Limiti per la tabella `pagamenti`
---
-ALTER TABLE `pagamenti`
-  ADD CONSTRAINT `fk_cinema_idbiglietto1` FOREIGN KEY (`idbiglietto1`) REFERENCES `biglietti` (`idbiglietto`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_cinema_idtipo_pagamento1` FOREIGN KEY (`idtipo_pagamento1`) REFERENCES `tipo_pagamenti` (`idtipo_pagamento`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
--- Limiti per la tabella `posti_proiezione`
---
-ALTER TABLE `posti_proiezione`
-  ADD CONSTRAINT `fk_cinema_idproiezione` FOREIGN KEY (`idproiezione`) REFERENCES `proiezioni` (`idproiezione`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  MODIFY `idutente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 COMMIT;
---
--- Limiti per la tabella `proiezioni`
---
-ALTER TABLE `proiezioni`
-  ADD CONSTRAINT `fk_cinema_idfilm` FOREIGN KEY (`idfilm`) REFERENCES `film` (`idfilm`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_cinema_idsala` FOREIGN KEY (`idsala`) REFERENCES `sale` (`idsala`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-COMMIT;
+
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
